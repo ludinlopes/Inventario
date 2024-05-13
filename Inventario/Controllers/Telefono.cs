@@ -39,7 +39,7 @@ namespace Inventario.Controllers
             ImTelefono compu = new ImTelefono();
             MTelefono c = new MTelefono();
             c = b;
-            c.RespuestaSql = compu.insert(b); ;
+            c.RespuestaSql = compu.insert(b);
 
             return RedirectToAction("Nuevo", "Telefono", c);
 

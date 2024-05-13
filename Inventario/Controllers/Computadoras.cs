@@ -24,5 +24,25 @@ namespace Inventario.Controllers
             resp.respuesta = a;
             return View(resp);
         }
+
+
+        public IActionResult Nuevo(MComputadora b)
+        {
+
+            return View(b);
+        }
+
+
+        public IActionResult Insert(MComputadora b)
+        {
+
+            ImComputadora compu = new ImComputadora();
+            MComputadora c = new MComputadora();
+            c = b;
+            c.RespuestaSql = compu.insert(b);
+
+            return RedirectToAction("Nuevo", "Computadora", c);
+
+        }
     }
 }

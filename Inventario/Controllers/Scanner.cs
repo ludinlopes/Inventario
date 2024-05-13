@@ -25,5 +25,24 @@ namespace Inventario.Controllers
             resp.respuesta = a;
             return View(resp);
         }
+
+        public IActionResult Nuevo(MScanner b)
+        {
+
+            return View(b);
+        }
+
+
+        public IActionResult Insert(MScanner b)
+        {
+
+            ImScanner compu = new ImScanner();
+            MScanner c = new MScanner();
+            c = b;
+            c.RespuestaSql = compu.insert(b);
+
+            return RedirectToAction("Nuevo", "Scanner", c);
+
+        }
     }
 }

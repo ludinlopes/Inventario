@@ -26,5 +26,24 @@ namespace Inventario.Controllers
             return View(resp);
         }
 
+        public IActionResult Nuevo(MCelular b)
+        {
+
+            return View(b);
+        }
+
+
+        public IActionResult Insert(MCelular b)
+        {
+
+            ImCelular compu = new ImCelular();
+            MCelular c = new MCelular();
+            c = b;
+            c.RespuestaSql = compu.insert(b); ;
+
+            return RedirectToAction("Nuevo", "Celular", c);
+
+        }
+
     }
 }

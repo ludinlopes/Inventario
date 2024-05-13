@@ -25,5 +25,24 @@ namespace Inventario.Controllers
             resp.respuesta = a;
             return View(resp);
         }
+
+        public IActionResult Nuevo(MEmpleado b)
+        {
+
+            return View(b);
+        }
+
+
+        public IActionResult Insert(MEmpleado b)
+        {
+
+            ImEmpleado compu = new ImEmpleado();
+            MEmpleado c = new MEmpleado();
+            c = b;
+            c.RespuestaSql = compu.insert(b);
+
+            return RedirectToAction("Nuevo", "Empleado", c);
+
+        }
     }
 }

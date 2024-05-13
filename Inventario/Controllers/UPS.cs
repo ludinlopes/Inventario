@@ -39,7 +39,7 @@ namespace Inventario.Controllers
             ImUps compu = new ImUps();
             MUps c = new MUps();
             c = b;
-            c.RespuestaSql = compu.insert(b); ;
+            c.RespuestaSql = compu.insert(b);
             
             return RedirectToAction("Nuevo", "UPS",c);
 
