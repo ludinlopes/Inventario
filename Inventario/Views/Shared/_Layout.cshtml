@@ -1,0 +1,51 @@
+﻿
+@RenderBody()
+<!DOCTYPE html>
+<html>
+<body>
+
+    <h2>Radio Buttons</h2>
+
+    <p>The <strong>input type="radio"</strong> defines a radio button:</p>
+
+    <p>Favor seleccione el tipo de busqueda e ingrese el valor buscado:</p>
+    <form class=factura-form action=@Url.Action("Consulta","Home") method="post">
+        <input type="radio" id="InvGeneral" name="fav_language" value="Inventario General">
+        <label for="InvGeneral">Inventario General</label><br>
+
+        <input type="radio" id="Empleado" name="fav_language" value="Empleado">
+        <label for="Empleado">Empleado</label><br>
+
+        <input type="radio" id="Computadora" name="fav_language" value="Computadora">
+        <label for="Computadora">Computadora / Laptop</label><br>
+
+        <input type="radio" id="Monitor" name="fav_language" value="Monitor">
+        <label for="Computadora">Monitor</label><br>
+
+        <input type="radio" id="Impresora" name="fav_language" value="Impresora">
+        <label for="Impresora">Impresora</label><br>
+
+        <input type="radio" id="Scanner" name="fav_language" value="Scanner">
+        <label for="Scanner">Scanner</label><br>
+
+        <input type="radio" id="UPS" name="fav_language" value="UPS">
+        <label for="Scanner">UPS</label><br>
+
+        <input type="radio" id="Telefono" name="fav_language" value="Telefono">
+        <label for="Scanner">Telefono</label><br>
+
+        <input type="radio" id="Celular" name="fav_language" value="Celular">
+        <label for="Scanner">Celular</label><br><br>
+
+        <input type="text" id="Texto" class="Texto" name="Texto">
+        
+        <input type="submit" value="Submit">
+    </form>
+
+
+</body>
+</html>
+
+
+
+

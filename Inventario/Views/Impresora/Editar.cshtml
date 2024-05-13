@@ -1,0 +1,61 @@
+﻿@model MImpresora
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form class=factura-form action=@Url.Action("Actualizar","Impresora") method="post">
+
+    <label for="">Codigo Empleado</label>
+        <input type="text" value="@Model.Cod_Emple" name="Cod_Emple">
+    <br />
+
+    <label for="">Nombre</label>
+        <input type="text" value="@Model.Nombre" name="Nombre">
+    <br />
+
+    <label for="">No Inventario</label>
+        <input type="text" value="@Model.NoInventario" name="NoInventario">
+    <br />
+
+    <label for="">Marca</label>
+        <input type="text" value="@Model.Marca" name="Marca">
+    <br />
+
+    <label for="">Modelo</label>
+        <input type="text" value="@Model.Modelo" name="Modelo">
+    <br />
+    <label for="">Serie</label>
+        <input type="text" value="@Model.Serie" name="Serie">
+    <br />
+    <label for="">Tipo</label>
+        <input type="text" value="@Model.Tipo" name="Tipo">
+    <br />
+    <label for="">Estado</label>
+        <select name="Estado">
+            @if (Model.Estado == "A")
+            {
+                    <option value="A" selected>Activo</option>
+                        <option value="I">Inactivo</option>
+            }
+            else
+            {
+                        <option value="A">Activo</option>
+                    <option value="I" selected>Inactivo</option>
+            }
+        </select>
+    <br />
+    <label for="">Condicion</label>
+        <input type="text" value="@Model.Condicion" name="Condicion">
+    <br />
+    <br />
+    <br />
+    <button type="submit">Guardar</a></button>
+    <button type="button" id="cancelar"><a href=@Url.Action("Home_","Home")>Cancelar</a></button>
+    </form>
+</body>
+</html>
