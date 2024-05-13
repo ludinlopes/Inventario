@@ -8,5 +8,6 @@
         public string Estado { get; set; }
         public string Sucursal { get; set; }
         public string Texto { get; set; }
+        public string RespuestaSql { get; set; }
     }
 }

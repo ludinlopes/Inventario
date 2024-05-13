@@ -10,5 +10,6 @@
         public string Estado { get; set; }
         public string Condicion { get; set; }
         public string Texto { get; set; }
+        public string RespuestaSql { get; set; }
     }
 }
