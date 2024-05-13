@@ -105,6 +105,60 @@ namespace Inventario.Implement
                 return $"Error: {ex.Message}           "+consulta;
             }
         }
+
+        public string insert(MComputadora modelo)
+        {
+            cn = new Conexion();
+            string consulta = $"INSERT INTO Computadoras  VALUES (" +
+                    $" '{modelo.cod_Emple}'" +
+                    $", '{modelo.Estado}'" +
+                    $", '{modelo.NoInmentario}'" +
+                    $", '{modelo.Tipo}'" +
+                    $", '{modelo.Dominio}'" +
+                    $", '{modelo.Usuario}'" +
+                    $", '{modelo.Marca}'" +
+                    $", '{modelo.Modelo}'" +
+                    $", '{modelo.Serie}'" +
+                    $", '{modelo.Procesador}'" +
+                    $", '{modelo.Generacion}'" +
+                    $", '{modelo.TipoDisco}'" +
+                    $", '{modelo.CapacidadDisco}'" +
+                    $", '{modelo.Ram}'" +
+                    $", '{modelo.MacAddress}'" +
+                    $", '{modelo.NoIp}'" +
+                    $", '{modelo.Mouse}'" +
+                    $", '{modelo.Teclado}'" +
+                    $", '{modelo.Condicion}'" +
+                    $", CURDATE() )";
+
+
+            Console.WriteLine(consulta);
+            try
+            {
+                if (cn.OpenConnection() != null)
+                {
+                    MySqlCommand mySqlCommand = new MySqlCommand(consulta, cn.OpenConnection());
+                    mySqlCommand.Connection.Open();
+                    // Ejecutar la consulta de actualización
+                    int rowsAffected = mySqlCommand.ExecuteNonQuery();
+
+                    // Cerrar la conexión
+                    cn.CloseConnection();
+
+                    // Devolver el resultado
+                    return $"Filas afectadas: {rowsAffected}";
+                }
+                else
+                {
+                    return "No se pudo abrir la conexión a la base de datos";
+                }
+            }
+            //catch (Exception ex)
+            catch (MySqlException ex)
+            {
+                return $"Error: {ex.Message} " + ex.Number;
+            }
+        }
     }
 
 }
