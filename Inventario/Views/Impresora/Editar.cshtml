@@ -10,52 +10,64 @@
 <body>
     <form class=factura-form action=@Url.Action("Actualizar","Impresora") method="post">
 
-    <label for="">Codigo Empleado</label>
+        <label for="">Codigo Empleado</label>
         <input type="text" value="@Model.Cod_Emple" name="Cod_Emple">
-    <br />
+        <br />
 
-    <label for="">Nombre</label>
+        <label for="">Nombre</label>
         <input type="text" value="@Model.Nombre" name="Nombre">
-    <br />
+        <br />
 
-    <label for="">No Inventario</label>
+        <label for="">No Inventario</label>
         <input type="text" value="@Model.NoInventario" name="NoInventario">
-    <br />
+        <br />
 
-    <label for="">Marca</label>
+        <label for="">Marca</label>
         <input type="text" value="@Model.Marca" name="Marca">
-    <br />
+        <br />
 
-    <label for="">Modelo</label>
+        <label for="">Modelo</label>
         <input type="text" value="@Model.Modelo" name="Modelo">
-    <br />
-    <label for="">Serie</label>
+        <br />
+        <label for="">Serie</label>
         <input type="text" value="@Model.Serie" name="Serie">
-    <br />
-    <label for="">Tipo</label>
+        <br />
+        <label for="">Tipo</label>
         <input type="text" value="@Model.Tipo" name="Tipo">
-    <br />
-    <label for="">Estado</label>
+        <br />
+        <label for="">Estado</label>
         <select name="Estado">
             @if (Model.Estado == "A")
             {
-                    <option value="A" selected>Activo</option>
-                        <option value="I">Inactivo</option>
+                <option value="A" selected>Activo</option>
+                <option value="I">Inactivo</option>
             }
             else
             {
-                        <option value="A">Activo</option>
-                    <option value="I" selected>Inactivo</option>
+                <option value="A">Activo</option>
+                <option value="I" selected>Inactivo</option>
             }
         </select>
-    <br />
-    <label for="">Condicion</label>
-        <input type="text" value="@Model.Condicion" name="Condicion">
-    <br />
-    <br />
-    <br />
-    <button type="submit">Guardar</a></button>
-    <button type="button" id="cancelar"><a href=@Url.Action("Home_","Home")>Cancelar</a></button>
+        <br />
+        <label for="">Condicion</label>
+        <select name="Condicion">
+            @if (Model.Condicion == "B")
+            {
+                <option value="B" selected>Buen estado</option>
+                <option value="M">Mal Estado</option>
+            }
+            else
+            {
+                <option value="B">Buen estado</option>
+                <option value="M" selected>Mal Estado</option>
+            }
+        </select>
+
+        <br />
+        <br />
+        <br />
+        <button type="submit">Guardar</a></button>
+        <button type="button" id="cancelar"><a href=@Url.Action("Home_","Home")>Cancelar</a></button>
         <button type="button" id="Nuevo"><a href=@Url.Action("Nuevo","Impresora")>Nuevo</a></button>
     </form>
 </body>

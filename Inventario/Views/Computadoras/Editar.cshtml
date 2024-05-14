@@ -10,21 +10,21 @@
 <body>
 
     <form class=factura-form action=@Url.Action("Actualizar","Computadoras") method="post">
-    
+
         <label for="">Codigo Empleado</label>
-    
+
         <input type="text" value="@Model.cod_Emple" name="cod_Emple">
-    
+
         <br />
 
-    
+
         <label for="">Nombre</label>
-    
-        <input type="text"value="@Model.Nombre">
+
+        <input type="text" value="@Model.Nombre">
         <br />
 
         <label for="">No. Inventario</label>
-        <input type="text" value="@Model.NoInmentario" name="NoInmentario" >
+        <input type="text" value="@Model.NoInmentario" name="NoInmentario">
         <br />
 
         <label for="">Tipo</label>
@@ -44,7 +44,7 @@
         <input type="text" value="@Model.Procesador" name="Procesador">
         <br />
         <label for="">Generacion</label>
-        <input type="text"value="@Model.Generacion" name="Generacion">
+        <input type="text" value="@Model.Generacion" name="Generacion">
         <br />
         <label for="">Tipo de disco</label>
         <input type="text" value="@Model.TipoDisco" name="TipoDisco">
@@ -68,7 +68,7 @@
         <input type="text" value="@Model.Mouse" name="Mouse">
         <br />
         <label for="">Dominio</label>
-        <input type="text"value="@Model.Dominio" name="Dominio">
+        <input type="text" value="@Model.Dominio" name="Dominio">
         <br />
         <label for="">Usuario</label>
         <input type="text" value="@Model.Usuario" name="Usuario">
@@ -89,19 +89,31 @@
         @*<input type="text" value="@Model.Estado" name="Estado">*@
         <br />
         <label for="">Condicion</label>
-        <input type="text" value="@Model.Condicion" name="Condicion">
+        <select name="Condicion">
+            @if (Model.Condicion == "B")
+            {
+                <option value="B" selected>Buen estado</option>
+                <option value="M">Mal Estado</option>
+            }
+            else
+            {
+                <option value="B">Buen estado</option>
+                <option value="M" selected>Mal Estado</option>
+            }
+        </select>
+
         <br />
-    
+
 
         <br />
         <br />
         <button type="submit" id="Editar"></button>
-    
-    
+
+
         <button type="button" id="cancelar"><a href=@Url.Action("Home_","Home")>Cancelar</a></button>
         <button type="button" id="Nuevo"><a href=@Url.Action("Nuevo","Computadoras")>Nuevo</a></button>
     </form>
 
-    
+
 </body>
 </html>

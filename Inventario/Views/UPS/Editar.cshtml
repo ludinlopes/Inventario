@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1>Actualizar</h1>
-    
+
     <form class=factura-form action=@Url.Action("Actualizar","UPS") method="post">
     <label for="">Codigo Empleado</label>
         <input type="text" value="@Model.Cod_Emple" name="Cod_Emple">
@@ -32,20 +32,20 @@
         <select name="Estado">
             @if (Model.Estado == "A")
             {
-                    <option value="A" selected>Activo</option>
-                        <option value="I">Inactivo</option>
+                        <option value="A" selected>Activo</option>
+                            <option value="I">Inactivo</option>
             }
             else
             {
-                        <option value="A">Activo</option>
-                    <option value="I" selected>Inactivo</option>
+                            <option value="A">Activo</option>
+                        <option value="I" selected>Inactivo</option>
             }
         </select>
     <br />
     <label for="">Condicion</label>
         <input type="text" value="@Model.Condicion" name="Condicion">
     <br />
-    <br />
+        <br />
     <br />
     <button type="submit">Guardar</a></button>
     <button type="button" id="cancelar"><a href=@Url.Action("Home_","Home")>Cancelar</a></button>

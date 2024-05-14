@@ -52,13 +52,25 @@
         </select>
         <br />
         <label for="">Condicion</label>
-        <input type="text" value="@Model.Condicion" name="Condicion">
+        <select name="Condicion">
+            @if (Model.Condicion == "B")
+            {
+                <option value="B" selected>Buen estado</option>
+                <option value="M">Mal Estado</option>
+            }
+            else
+            {
+                <option value="B">Buen estado</option>
+                <option value="M" selected>Mal Estado</option>
+            }
+        </select>
+
         <br />
         <br />
         <br />
         <button type="submit">Guardar</a></button>
         <button type="button" id="cancelar"><a href=@Url.Action("Home_","Home")>Cancelar</a></button>
-        
+
     </form>
 </body>
 </html>
