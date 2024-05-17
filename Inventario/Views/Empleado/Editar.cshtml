@@ -8,8 +8,12 @@
     <title>Document</title>
 </head>
 <body>
+    <div class="encabezado">
+        <h2>Editar Empleado</h2>
+    </div>
 
-    <form class=factura-form action=@Url.Action("Actualizar","Empleado") method="post">
+    <div class="contenido-mvc">
+        <form class=factura-form action=@Url.Action("Actualizar","Empleado") method="post">
 
         <label for="">Codigo Empleado</label>
         <input type="text" id="Cod_Emple" value="@Model.Cod_Emple" name="Cod_Emple">
@@ -48,5 +52,7 @@
         <button type="button" id="cancelar"><a href=@Url.Action("Home_","Home")>Cancelar</a></button>
         <button type="button" id="Nuevo"><a href=@Url.Action("Nuevo","Empleado")>Nuevo</a></button>
     </form>
+    </div>
+    
 </body>
 </html>

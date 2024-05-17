@@ -9,112 +9,119 @@
 </head>
 <body>
 
-    <h1>Nuevo</h1>
-    <h2>@Model.RespuestaSql</h2>
-    <form class=factura-form action=@Url.Action("Insert","Computadoras") method="post">
+    <div class="encabezado">
+        <h1>Nuevo</h1>
+        <h2>@Model.RespuestaSql</h2>
+    </div>
 
-        <label for="">Codigo Empleado</label>
+    <div class="contenido-mvc">
+        <form class=factura-form action=@Url.Action("Insert","Computadoras") method="post">
 
-        <input type="text" value="@Model.cod_Emple" name="cod_Emple">
+            <label for="">Codigo Empleado</label>
 
-        <br />
+            <input type="text" value="@Model.cod_Emple" name="cod_Emple">
 
-
-        <label for="">Nombre</label>
-
-        <input type="text" value="@Model.Nombre">
-        <br />
-
-        <label for="">No. Inventario</label>
-        <input type="text" value="@Model.NoInmentario" name="NoInmentario">
-        <br />
-
-        <label for="">Tipo</label>
-        <input type="text" value="@Model.Tipo" name="Tipo">
-        <br />
-
-        <label for="">Marca</label>
-        <input type="text" value="@Model.Marca" name="Marca">
-        <br />
-        <label for="">Modelo</label>
-        <input type="text" value="@Model.Modelo" name="Modelo">
-        <br />
-        <label for="">Serie</label>
-        <input type="text" value="@Model.Serie" name="Serie">
-        <br />
-        <label for="">Procesador</label>
-        <input type="text" value="@Model.Procesador" name="Procesador">
-        <br />
-        <label for="">Generacion</label>
-        <input type="text" value="@Model.Generacion" name="Generacion">
-        <br />
-        <label for="">Tipo de disco</label>
-        <input type="text" value="@Model.TipoDisco" name="TipoDisco">
-        <br />
-        <label for="">Capacidad de disco</label>
-        <input type="text" value="@Model.CapacidadDisco" name="CapacidadDisco">
-        <br />
-        <label for="">Ram</label>
-        <input type="text" value="@Model.Ram" name="Ram">
-        <br />
-        <label for="">Mac Address</label>
-        <input type="text" value="@Model.MacAddress" name="MacAddress">
-        <br />
-        <label for="">No IP</label>
-        <input type="text" value="@Model.NoIp" name="NoIp">
-        <br />
-        <label for="">Teclado</label>
-        <input type="text" value="@Model.Teclado" name="Teclado">
-        <br />
-        <label for="">Mouse</label>
-        <input type="text" value="@Model.Mouse" name="Mouse">
-        <br />
-        <label for="">Dominio</label>
-        <input type="text" value="@Model.Dominio" name="Dominio">
-        <br />
-        <label for="">Usuario</label>
-        <input type="text" value="@Model.Usuario" name="Usuario">
-        <br />
-        <label for="">Estado</label>
-        <select name="Estado">
-            @if (Model.Estado == "A")
-            {
-                <option value="A" selected>Activo</option>
-                <option value="I">Inactivo</option>
-            }
-            else
-            {
-                <option value="A">Activo</option>
-                <option value="I" selected>Inactivo</option>
-            }
-        </select>
-        @*<input type="text" value="@Model.Estado" name="Estado">*@
-        <br />
-        <label for="">Condicion</label>
-        <select name="Condicion">
-            @if (Model.Condicion == "B")
-            {
-                <option value="B" selected>Buen estado</option>
-                <option value="M">Mal Estado</option>
-            }
-            else
-            {
-                <option value="B">Buen estado</option>
-                <option value="M" selected>Mal Estado</option>
-            }
-        </select>
-
-        <br />
+            <br />
 
 
-        <br />
-        <br />
-        <button type="submit" id="Editar"></button>
+            <label for="">Nombre</label>
+
+            <input type="text" value="@Model.Nombre">
+            <br />
+
+            <label for="">No. Inventario</label>
+            <input type="text" value="@Model.NoInmentario" name="NoInmentario">
+            <br />
+
+            <label for="">Tipo</label>
+            <input type="text" value="@Model.Tipo" name="Tipo">
+            <br />
+
+            <label for="">Marca</label>
+            <input type="text" value="@Model.Marca" name="Marca">
+            <br />
+            <label for="">Modelo</label>
+            <input type="text" value="@Model.Modelo" name="Modelo">
+            <br />
+            <label for="">Serie</label>
+            <input type="text" value="@Model.Serie" name="Serie">
+            <br />
+            <label for="">Procesador</label>
+            <input type="text" value="@Model.Procesador" name="Procesador">
+            <br />
+            <label for="">Generacion</label>
+            <input type="text" value="@Model.Generacion" name="Generacion">
+            <br />
+            <label for="">Tipo de disco</label>
+            <input type="text" value="@Model.TipoDisco" name="TipoDisco">
+            <br />
+            <label for="">Capacidad de disco</label>
+            <input type="text" value="@Model.CapacidadDisco" name="CapacidadDisco">
+            <br />
+            <label for="">Ram</label>
+            <input type="text" value="@Model.Ram" name="Ram">
+            <br />
+            <label for="">Mac Address</label>
+            <input type="text" value="@Model.MacAddress" name="MacAddress">
+            <br />
+            <label for="">No IP</label>
+            <input type="text" value="@Model.NoIp" name="NoIp">
+            <br />
+            <label for="">Teclado</label>
+            <input type="text" value="@Model.Teclado" name="Teclado">
+            <br />
+            <label for="">Mouse</label>
+            <input type="text" value="@Model.Mouse" name="Mouse">
+            <br />
+            <label for="">Dominio</label>
+            <input type="text" value="@Model.Dominio" name="Dominio">
+            <br />
+            <label for="">Usuario</label>
+            <input type="text" value="@Model.Usuario" name="Usuario">
+            <br />
+            <label for="">Estado</label>
+            <select name="Estado">
+                @if (Model.Estado == "A")
+                {
+                    <option value="A" selected>Activo</option>
+                    <option value="I">Inactivo</option>
+                }
+                else
+                {
+                    <option value="A">Activo</option>
+                    <option value="I" selected>Inactivo</option>
+                }
+            </select>
+            @*<input type="text" value="@Model.Estado" name="Estado">*@
+            <br />
+            <label for="">Condicion</label>
+            <select name="Condicion">
+                @if (Model.Condicion == "B")
+                {
+                    <option value="B" selected>Buen estado</option>
+                    <option value="M">Mal Estado</option>
+                }
+                else
+                {
+                    <option value="B">Buen estado</option>
+                    <option value="M" selected>Mal Estado</option>
+                }
+            </select>
+
+            <br />
 
 
-        <button type="button" id="cancelar"><a href=@Url.Action("Home_","Home")>Cancelar</a></button>
+            <br />
+            <br />
+            <button type="submit" id="Editar"></button>
 
-    </form>
+
+            <button type="button" id="cancelar"><a href=@Url.Action("Home_","Home")>Cancelar</a></button>
+
+        </form>
+    </div>
+    
+    
 
 
 </body>

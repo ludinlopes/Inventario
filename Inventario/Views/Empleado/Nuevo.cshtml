@@ -8,10 +8,13 @@
     <title>Document</title>
 </head>
 <body>
+    <div class="encabezado">
+        <h1>Nuevo</h1>
+        <h2>@Model.RespuestaSql</h2>
+    </div>
 
-    <h1>Nuevo</h1>
-    <h2>@Model.RespuestaSql</h2>
-    <form class=factura-form action=@Url.Action("Insert","Empleado") method="post">
+    <div class="contenido-mvc">
+        <form class=factura-form action=@Url.Action("Insert","Empleado") method="post">
 
         <label for="">Codigo Empleado</label>
         <input type="text" id="Cod_Emple" value="@Model.Cod_Emple" name="Cod_Emple">
@@ -50,5 +53,8 @@
         <button type="button" id="cancelar"><a href=@Url.Action("Home_","Home")>Cancelar</a></button>
 
     </form>
+    </div>
+    
+    
 </body>
 </html>

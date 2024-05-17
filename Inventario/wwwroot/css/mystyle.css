@@ -1,0 +1,57 @@
+﻿
+.encabezado {
+    margin: auto;
+    width: 40%;
+    text-align: center;
+}
+
+    .encabezado .error {
+        color:red;
+    }
+
+    .contenido {
+        background-color: #F1F3F4;
+        margin: auto;
+        width: 350px;
+        border: 2px groove;
+        padding: 2%
+    }
+
+.boton {
+    border-radius:5px;
+    background-color:dodgerblue;
+    border:none;
+    color:white;
+}
+
+
+.contenido-mvc {
+    display: grid;
+    grid-template-columns: 100% 50%;
+    background-color: #F1F3F4;
+    margin: auto;
+    width: 200px;
+    border: 2px groove;
+    padding: 2%
+}
+.button-container {
+    display: flex;
+    gap: 10px;
+}
+
+.contenido-mvc input {
+    margin: 2%
+}
+.contenido-mvc select {
+    display: flex;
+    margin: 1%;
+}
+
+
+
+.btn {
+    display: inline-block;
+    margin-left:10%;
+    
+}
+
