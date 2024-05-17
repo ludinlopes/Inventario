@@ -20,14 +20,6 @@ namespace Inventario.Controllers
         }
 
 
-
-
-
-
-
-
-
-
         [HttpPost]
         public ActionResult Consulta(string fav_language, string Texto)
         {
