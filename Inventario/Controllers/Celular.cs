@@ -1,4 +1,5 @@
-﻿using Inventario.Implement;
+﻿
+using Inventario.Implement;
 using Inventario.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,7 +15,7 @@ namespace Inventario.Controllers
             return View(a);
         }
 
-
+        
         public IActionResult Actualizar(MCelular b)
         {
 
