@@ -9,19 +9,31 @@
     <title>Inventario de Equipos</title>
     <style>
         table {
-            border-collapse: collapse;
             width: 100%;
+            table-layout: auto; 
+            border-collapse: collapse;
         }
 
         th, td {
-            border: 1px solid #dddddd;
-            text-align: left;
+            border: 1px solid black;
             padding: 8px;
+            text-align: left; /* Align text to the left */
+            white-space: nowrap;
+            overflow: hidden; /* Hide overflow content */
+            text-overflow: ellipsis;
         }
 
         th {
             background-color: #f2f2f2;
         }
+
+        tbody tr:nth-child(odd) {
+            background-color: white; /* White for odd rows */
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
     </style>
 </head>
 <body>
@@ -29,43 +41,110 @@
 
     <table id="tabla-inventario">
         <thead>
+
+
+        <tr>
+                <th colspan="5">Empleado</th>
+                <th colspan="21">COMPUTADORA / LAPTOP</th> 
+                <th colspan="7">MONITOR</th>
+                <th colspan="8">IMPRESORA</th>
+                <th colspan="7">ESCANER</th>
+                <th colspan="5">UPS</th>
+                <th colspan="6">TELEFONO</th>
+                <th colspan="6">CELULAR</th>
+                <th colspan="6">TABLET</th>
+
+            </tr>
             <tr>
+                @*EMPLEADO*@
                 <th>CODIGO_EMPLEADO</th>
                 <th>NOMBRE</th>
-                <th>PUESTO</th>
-                <th>TIPO</th>
+                <th>AREA</th>
+                <th>ESTADO</th>
+                <th>SUCURSAL</th>
+
+                @*COMPUTADORA*@
+                <th>NO INVENTARIO</th>
+                <th>NOMBRE PC</th>
                 <th>DOMINIO</th>
                 <th>USUARIO</th>
+                <th>CONTRASEÑA</th>
+                <th>TIPO</th>
                 <th>MARCA</th>
                 <th>MODELO</th>
                 <th>SERIE</th>
                 <th>PROCESADOR</th>
                 <th>GENERACION</th>
-                <th>TIPO_DISCO</th>
-                <th>TAMAÑO_DISCO</th>
                 <th>RAM</th>
-                <th>MAC_ADRESS</th>
-                <th>CODIGO_EMPLEADO</th>
+                <th>TIPO DE DISCO</th>
+                <th>CAPACIDAD DE DISCO</th>
                 <th>IP</th>
+                <th>MAC ADDRESS</th>
                 <th>MOUSE</th>
                 <th>TECLADO</th>
-                <th>MARCA_MONITOR</th>
-                <th>MODELO_MONITOR</th>
-                <th>SERIE_MONITOR</th>
-                <th>MARCA_IMPRESORA</th>
-                <th>MODELO_IMPRESORA</th>
-                <th>SERIE_IMPRESORA</th>
-                <th>MARCA_ESCANER</th>
-                <th>MODELO_ESCANER</th>
-                <th>SERIE_ESCANER</th>
-                <th>MARCA_UPS</th>
-                <th>ESTADO_UPS</th>
-                <th>MARCA_PLANTA_TELEFONICA</th>
-                <th>MARCA_CELULAR</th>
-                <th>MODELO_CELULAR</th>
+                <th>ESTADO</th>
+                <th>CONDICION</th>
+                <th>FECHA DE ACTUALIZACION</th>
+
+                @*MONITOR*@
+                <th>NO INVENTARIO</th>
+                <th>MARCA</th>
+                <th>MODELO</th>
+                <th>SERIE</th>
+                <th>ESTADO</th>
+                <th>CONDICION</th>
+                <th>FECHA DE ACTUALIZACION</th>
+
+                @*IMPRESORA*@
+                <th>NO INVENTARIO</th>
+                <th>MARCA</th>
+                <th>MODELO</th>
+                <th>SERIE</th>
+                <th>TIPO</th>
+                <th>ESTADO</th>
+                <th>CONDICION</th>
+                <th>FECHA DE ACTUALIZACION</th>
+
+                @*ESCANER*@
+                <th>NO INVENTARIO</th>
+                <th>MARCA</th>
+                <th>MODELO</th>
+                <th>SERIE</th>
+                <th>ESTADO</th>
+                <th>CONDICION</th>
+                <th>FECHA DE ACTUALIZACION</th>
+
+                @*UPS*@
+                <th>NO INVENTARIO</th>
+                <th>MARCA</th>
+                <th>ESTADO</th>
+                <th>CONDICION</th>
+                <th>FECHA DE ACTUALIZACION</th>
+
+                @*TELEFONO*@
+                <th>MARCA</th>
+                <th>MODELO</th>
+                <th>TIPO</th>
+                <th>ESTADO</th>
+                <th>CONDICION</th>
+                <th>FECHA DE ACTUALIZACION</th>
+
+                @*CELULAR*@
+                <th>MARCA</th>
+                <th>MODELO</th>
                 <th>IMEI</th>
-                <th>FECHA_ULTIMO_FORMATO</th>
-                <th>CORREO</th>
+                <th>ESTADO</th>
+                <th>CONDICION</th>
+                <th>FECHA DE ACTUALIZACION</th>
+
+                @*TABLET*@
+                <th>MARCA</th>
+                <th>MODELO</th>
+                <th>IMEI</th>
+                <th>ESTADO</th>
+                <th>CONDICION</th>
+                <th>FECHA DE ACTUALIZACION</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -77,29 +156,31 @@
                     <td contenteditable="false">@computadora.Cod_Empleado</td>
                     <td contenteditable="false">@computadora.Nombre</td>
                     <td contenteditable="false">@computadora.Area</td>
-                    <td contenteditable="false">@computadora.Tipo_Com</td>
+                    <td contenteditable="false">@computadora.Estado</td>
+                    <td contenteditable="false">@computadora.Sucursal</td>
+
+                    <td contenteditable="false">@computadora.No_Inventario_Com</td>
+                    <td contenteditable="false">nombre pc</td>
                     <td contenteditable="false">@computadora.Dominio_Com</td>
                     <td contenteditable="false">@computadora.Usuario_Com</td>
+                    <td contenteditable="false">contraseña</td>
+                    <td contenteditable="false">@computadora.Tipo_Com</td>
                     <td contenteditable="false">@computadora.Marca_Com</td>
                     <td contenteditable="false">@computadora.Modelo_Com</td>
                     <td contenteditable="false">@computadora.Serie_Com</td>
                     <td contenteditable="false">@computadora.Procesador_Com</td>
                     <td contenteditable="false">@computadora.Generacion_Com</td>
+                    <td contenteditable="false">@computadora.Ram_Com</td>
                     <td contenteditable="false">@computadora.Tipo_Disco_Com</td>
                     <td contenteditable="false">@computadora.Capacidad_Disco_Com</td>
-                    <td contenteditable="false">@computadora.Ram_Com</td>
-                    <td contenteditable="false">@computadora.Mac_Address_Com</td>
-                    <td contenteditable="false">@computadora.Cod_Empleado</td>
                     <td contenteditable="false">@computadora.No_IP_Com</td>
+                    <td contenteditable="false">@computadora.Mac_Address_Com</td>
                     <td contenteditable="false">@computadora.Mouse_Com</td>
                     <td contenteditable="false">@computadora.Teclado_Com</td>
-                    <td contenteditable="false">@computadora.Marca_Mon</td>
-                    <td contenteditable="false">@computadora.Modelo_Mon</td>
-                    <td contenteditable="false">@computadora.Serie_Mon</td>
-                    <td contenteditable="false">@computadora.Marca_Imp</td>
-                    <td contenteditable="false">@computadora.Modelo_Imp</td>
-                    <td contenteditable="false">@computadora.Serie_Mon</td>
-                    <td contenteditable="false">@computadora.Marca_Scn</td>
+                    <td contenteditable="false">@computadora.Estado_Com</td>
+                    <td contenteditable="false">@computadora.Condicion_Com</td>
+                    <td contenteditable="false">@computadora.Fecha_Actualizacion_Com</td>
+
                     <td contenteditable="false">@computadora.Modelo_Scn</td>
                     <td contenteditable="false">@computadora.Serie_Scn</td>
                     <td contenteditable="false">@computadora.Marca_Ups</td>
