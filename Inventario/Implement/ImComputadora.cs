@@ -15,7 +15,7 @@ namespace Inventario.Implement
             MySqlDataReader mySqlDataReader;
             MComputadora compu = new MComputadora();
             MySqlDataReader DR = null;
-            string consulta = $"CALL getInventario('{noInv}');";
+            string consulta = $"CALL getComputadora('{noInv}');";
                 //SELECT * FROM Computadoras WHERE No_Inventario = '{noInv}'";
             if (cn.OpenConnection() != null)
             {

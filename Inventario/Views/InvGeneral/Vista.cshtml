@@ -1,0 +1,125 @@
+﻿@model IEnumerable<Inventario.Models.MInvGeneral>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario de Equipos</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Inventario de Equipos</h1>
+
+    <table id="tabla-inventario">
+        <thead>
+            <tr>
+                <th>CODIGO_EMPLEADO</th>
+                <th>NOMBRE</th>
+                <th>PUESTO</th>
+                <th>TIPO</th>
+                <th>DOMINIO</th>
+                <th>USUARIO</th>
+                <th>MARCA</th>
+                <th>MODELO</th>
+                <th>SERIE</th>
+                <th>PROCESADOR</th>
+                <th>GENERACION</th>
+                <th>TIPO_DISCO</th>
+                <th>TAMAÑO_DISCO</th>
+                <th>RAM</th>
+                <th>MAC_ADRESS</th>
+                <th>CODIGO_EMPLEADO</th>
+                <th>IP</th>
+                <th>MOUSE</th>
+                <th>TECLADO</th>
+                <th>MARCA_MONITOR</th>
+                <th>MODELO_MONITOR</th>
+                <th>SERIE_MONITOR</th>
+                <th>MARCA_IMPRESORA</th>
+                <th>MODELO_IMPRESORA</th>
+                <th>SERIE_IMPRESORA</th>
+                <th>MARCA_ESCANER</th>
+                <th>MODELO_ESCANER</th>
+                <th>SERIE_ESCANER</th>
+                <th>MARCA_UPS</th>
+                <th>ESTADO_UPS</th>
+                <th>MARCA_PLANTA_TELEFONICA</th>
+                <th>MARCA_CELULAR</th>
+                <th>MODELO_CELULAR</th>
+                <th>IMEI</th>
+                <th>FECHA_ULTIMO_FORMATO</th>
+                <th>CORREO</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+
+                @foreach (var computadora in Model)
+                {
+                <tr>
+                    <td contenteditable="false">@computadora.Cod_Empleado</td>
+                    <td contenteditable="false">@computadora.Nombre</td>
+                    <td contenteditable="false">@computadora.Area</td>
+                    <td contenteditable="false">@computadora.Tipo_Com</td>
+                    <td contenteditable="false">@computadora.Dominio_Com</td>
+                    <td contenteditable="false">@computadora.Usuario_Com</td>
+                    <td contenteditable="false">@computadora.Marca_Com</td>
+                    <td contenteditable="false">@computadora.Modelo_Com</td>
+                    <td contenteditable="false">@computadora.Serie_Com</td>
+                    <td contenteditable="false">@computadora.Procesador_Com</td>
+                    <td contenteditable="false">@computadora.Generacion_Com</td>
+                    <td contenteditable="false">@computadora.Tipo_Disco_Com</td>
+                    <td contenteditable="false">@computadora.Capacidad_Disco_Com</td>
+                    <td contenteditable="false">@computadora.Ram_Com</td>
+                    <td contenteditable="false">@computadora.Mac_Address_Com</td>
+                    <td contenteditable="false">@computadora.Cod_Empleado</td>
+                    <td contenteditable="false">@computadora.No_IP_Com</td>
+                    <td contenteditable="false">@computadora.Mouse_Com</td>
+                    <td contenteditable="false">@computadora.Teclado_Com</td>
+                    <td contenteditable="false">@computadora.Marca_Mon</td>
+                    <td contenteditable="false">@computadora.Modelo_Mon</td>
+                    <td contenteditable="false">@computadora.Serie_Mon</td>
+                    <td contenteditable="false">@computadora.Marca_Imp</td>
+                    <td contenteditable="false">@computadora.Modelo_Imp</td>
+                    <td contenteditable="false">@computadora.Serie_Mon</td>
+                    <td contenteditable="false">@computadora.Marca_Scn</td>
+                    <td contenteditable="false">@computadora.Modelo_Scn</td>
+                    <td contenteditable="false">@computadora.Serie_Scn</td>
+                    <td contenteditable="false">@computadora.Marca_Ups</td>
+                    <td contenteditable="false">@computadora.Estado_Ups</td>
+                    <td contenteditable="false">@computadora.Marca_Tel</td>
+                    <td contenteditable="false">@computadora.Marca_Cel</td>
+                    <td contenteditable="false">@computadora.Modelo_Cel</td>
+                    <td contenteditable="false">@computadora.IMEI_Cel</td>
+                    <td contenteditable="false"></td>
+                    <td contenteditable="false"></td>
+                    </tr>
+                }
+                
+            
+            <!-- Repite este bloque para cada equipo -->
+        </tbody>
+    </table>
+
+    <button onclick="agregarFila()">Agregar Fila</button>
+    <button onclick="eliminarFila()">Eliminar Última Fila</button>
+
+</body>
+</html>

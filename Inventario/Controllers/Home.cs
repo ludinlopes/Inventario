@@ -33,13 +33,17 @@ namespace Inventario.Controllers
 
             } else if (fav_language == "Inventario General")
             {
-                return View("Home_",c);
+                return RedirectToAction("Vista", "InvGeneral");
             }
+
+
             else if (fav_language == "Computadora")
             {
                 
                 return RedirectToAction("editar", "Computadoras", new { b = Texto });
             }
+
+
             else if (fav_language == "Monitor")
             {
                 Monitor mon = new Monitor();
@@ -47,26 +51,38 @@ namespace Inventario.Controllers
                 return RedirectToAction("editar", "Monitor", new { b = Texto });
                 //return RedirectToAction();
             }
+
+
             else if (fav_language == "Impresora")
             {
                 return RedirectToAction("editar", "Impresora", new { b = Texto });
             }
+
+
             else if (fav_language == "Scanner")
             {
                 return RedirectToAction("editar", "Scanner", new { b = Texto });
             }
+
+
             else if (fav_language == "UPS")
             {
                 return RedirectToAction("editar", "UPS", new { b = Texto });
             }
+
+
             else if (fav_language == "Telefono")
             {
                 return RedirectToAction("editar", "Telefono", new { b = Texto });
             }
+
+
             else if (fav_language == "Celular")
             {
                 return RedirectToAction("editar", "Celular", new { b = Texto });
             }
+
+
             else
             {
                 return View("Home_", c);
