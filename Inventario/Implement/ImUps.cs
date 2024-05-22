@@ -27,6 +27,8 @@ namespace Inventario.Implement
                     ups.Nombre = "Nombre";
                     ups.NoInventario = mySqlDataReader.GetString("No_Inventario");
                     ups.Marca = mySqlDataReader.GetString("Marca");
+                    ups.Modelo = mySqlDataReader.GetString("Modelo");
+                    ups.Serie = mySqlDataReader.GetString("Serie");
                     ups.Estado = mySqlDataReader.GetString("Estado");
 
                     ups.Condicion = mySqlDataReader.GetString("Condicion");
@@ -47,6 +49,8 @@ namespace Inventario.Implement
             string consulta = $"UPDATE UPS set " +
                 $"  Cod_Empleado = '{modelo.Cod_Emple}'" +
                 $", Marca = '{modelo.Marca}'" +
+                $", Modelo = '{modelo.Modelo}'" +
+                $", Serie = '{modelo.Serie}'" +
                 $", Estado = '{modelo.Estado}'" +
                 $", Condicion = '{modelo.Condicion}'" +
                 $", Fecha_Actualizacion = CURDATE() " +
@@ -88,6 +92,8 @@ namespace Inventario.Implement
                      $"'{modelo.Cod_Emple}', " +
                      $"'{modelo.NoInventario}', " +
                      $"'{modelo.Marca}', " +
+                     $"'{modelo.Modelo}', " +
+                     $"'{modelo.Serie}', " +
                      $"'{modelo.Estado}', " +
                      $"'{modelo.Condicion}', " +
                      $"CURDATE())";

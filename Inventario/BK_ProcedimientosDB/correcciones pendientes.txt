@@ -24,5 +24,11 @@ Listo	2. Arreglar la creacion de articulo. no hace match con el numero de column
 
 ***************Impresora****************
 
-	1. Arreglar la creacion de articulo. no hace match con el numero de columnas en la consulta
-	2. Bloquear en la vista de busqueda el poder modificar el numero de inventario
+Listo	1. Arreglar la creacion de articulo. no hace match con el numero de columnas en la consulta
+Listo	2. Bloquear en la vista de busqueda el poder modificar el numero de inventario
+
+
+
+	3. Agregar automaticamente el numero de inventario en todas las vistas de nuevo
+	4. Agregar en home la opcion de Tablet
+

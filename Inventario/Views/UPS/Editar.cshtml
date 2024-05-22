@@ -26,11 +26,17 @@
             <br />
 
             <label for="">No Inventario</label>
-            <input type="text" value="@Model.NoInventario" name="NoInventario">
+            <input type="text" value="@Model.NoInventario" name="NoInventario" readonly>
             <br />
 
             <label for="">Marca</label>
             <input type="text" value="@Model.Marca" name="Marca">
+            <br />
+            <label for="">Modelo</label>
+            <input type="text" value="@Model.Modelo" name="Modelo">
+            <br />
+            <label for="">Serie</label>
+            <input type="text" value="@Model.Serie" name="Serie" readonly>
             <br />
 
 
@@ -49,7 +55,18 @@
             </select>
             <br />
             <label for="">Condicion</label>
-            <input type="text" value="@Model.Condicion" name="Condicion">
+            <select name="Condicion">
+                @if (Model.Condicion == "B")
+                {
+                        <option value="B" selected>Buen estado</option>
+                        <option value="M">Mal Estado</option>
+                }
+                else
+                {
+                        <option value="B">Buen estado</option>
+                        <option value="M" selected>Mal Estado</option>
+                }
+            </select>
             <br />
             <br />
             <br />
