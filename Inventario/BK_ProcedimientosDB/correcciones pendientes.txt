@@ -1,0 +1,28 @@
+**********Inventario General****************
+	1. Arreglar Fechas de actualizacion en la base de datos y en c#
+	2. Agregar campo "Contraseña" en tabla computadora. alli se guardara la contraseña de la pc
+	3. Agregar campo "Nombre pc" en tabla computadora. alli se guardara el nombre de la pc
+	4. En los campos estados y condiciones de la vista configurar un if para que tome el valor 
+		por ejemplo en condicion buen estado o mal estado y en estado activo o inactivo.
+	
+
+	***************Empleado**************
+
+	1. Arreglar la busqueda con el campo vacio. da error al buscar
+	2. crear una busqueda que liste la busqueda por nombre. que pueda seleccionar 
+	   la linea y al presionar el boton de seleccionar que realize la busqueda con el codigo de empleado de la linea que selecciono.
+	   Tiene que llenar el formulario con esa seleccion.
+
+****************Computadora*************
+	1. Bloquear en la vista de busqueda el poder modificar el numero de inventario
+	2. Arreglar en la creacion el redireccionamiento de la vista. si crea el articulo pero la vista de retorno se pierde
+	3. Agregar campo "Nombre pc" en tabla computadora. alli se guardara el nombre de la pc
+
+***************Monitor******************
+	1. Bloquear en la vista de busqueda el poder modificar el numero de inventario
+	2. Arreglar la creacion de articulo. no hace match con el numero de columnas en la consulta
+
+***************Impresora****************
+
+	1. Arreglar la creacion de articulo. no hace match con el numero de columnas en la consulta
+	2. Bloquear en la vista de busqueda el poder modificar el numero de inventario
