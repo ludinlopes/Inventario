@@ -13,8 +13,10 @@
         public string Estado_Com { get; set; }
         public string No_Inventario_Com { get; set; }
         public string Tipo_Com { get; set; }
+        public string NombrePc_Com { get; set; }
         public string Dominio_Com { get; set; }
         public string Usuario_Com { get; set; }
+        public string Contra_Com { get; set; }
         public string Marca_Com { get; set; }
         public string Modelo_Com { get; set; }
         public string Serie_Com { get; set; }
@@ -38,6 +40,7 @@
         public string Condicion_Mon { get; set; }
         public string Fecha_Actualizacion_Mon { get; set; }
         public string Cod_Empleado_Imp { get; set; }
+
         public string No_Inventario_Imp { get; set; }
         public string Marca_Imp { get; set; }
         public string Modelo_Imp { get; set; }
@@ -57,12 +60,16 @@
         public string Cod_Empleado_Ups { get; set; }
         public string No_Inventario_Ups { get; set; }
         public string Marca_Ups { get; set; }
+        public string Modelo_Ups { get; set; }
+        public string Serie_Ups { get; set; }
         public string Estado_Ups { get; set; }
         public string Condicion_Ups { get; set; }
         public string Fecha_Actualizacion_Ups { get; set; }
         public string Cod_Empleado_Tel { get; set; }
+        public string No_Inventario_Tel { get; set; }
         public string Marca_Tel { get; set; }
         public string Modelo_Tel { get; set; }
+        public string Serie_Tel { get; set; }
         public string Tipo_Tel { get; set; }
         public string Estado_Tel { get; set; }
         public string Condicion_Tel { get; set; }

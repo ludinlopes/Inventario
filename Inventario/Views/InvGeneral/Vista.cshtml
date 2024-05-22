@@ -72,8 +72,8 @@
                     <th colspan="7">MONITOR</th>
                     <th colspan="8">IMPRESORA</th>
                     <th colspan="7">ESCANER</th>
-                    <th colspan="5">UPS</th>
-                    <th colspan="6">TELEFONO</th>
+                    <th colspan="7">UPS</th>
+                    <th colspan="8">TELEFONO</th>
                     <th colspan="6">CELULAR</th>
                     <th colspan="6">TABLET</th>
 
@@ -140,13 +140,17 @@
                     @*UPS*@
                     <th>NO INVENTARIO</th>
                     <th>MARCA</th>
+                    <th>MODELO</th>
+                    <th>SERIE</th>
                     <th>ESTADO</th>
                     <th>CONDICION</th>
                     <th>FECHA DE ACTUALIZACION</th>
 
                     @*TELEFONO*@
+                    <th>NO INVENTARIO</th>
                     <th>MARCA</th>
                     <th>MODELO</th>
+                    <th>SERIE</th>
                     <th>TIPO</th>
                     <th>ESTADO</th>
                     <th>CONDICION</th>
@@ -183,10 +187,10 @@
                         <td contenteditable="false">@computadora.Sucursal</td>
 
                         <td contenteditable="false">@computadora.No_Inventario_Com</td>
-                        <td contenteditable="false">nombre pc</td>
+                        <td contenteditable="false">@computadora.NombrePc_Com</td>
                         <td contenteditable="false">@computadora.Dominio_Com</td>
                         <td contenteditable="false">@computadora.Usuario_Com</td>
-                        <td contenteditable="false">contraseña</td>
+                        <td contenteditable="false">@computadora.Contra_Com</td>
                         <td contenteditable="false">@computadora.Tipo_Com</td>
                         <td contenteditable="false">@computadora.Marca_Com</td>
                         <td contenteditable="false">@computadora.Modelo_Com</td>
@@ -202,7 +206,12 @@
                         <td contenteditable="false">@computadora.Teclado_Com</td>
                         <td contenteditable="false">@computadora.Estado_Com</td>
                         <td contenteditable="false">@computadora.Condicion_Com</td>
-                        <td contenteditable="false">@computadora.Fecha_Actualizacion_Com</td>
+                        <td contenteditable="false">
+                            @if (@computadora.Fecha_Actualizacion_Com != "1/01/2000 00:00:00")
+                            {
+                                @computadora.Fecha_Actualizacion_Com
+                            }
+                        </td>
 
                         <td contenteditable="false">@computadora.No_Inventario_Mon</td>
                         <td contenteditable="false">@computadora.Marca_Mon</td>
@@ -210,7 +219,12 @@
                         <td contenteditable="false">@computadora.Serie_Mon</td>
                         <td contenteditable="false">@computadora.Estado_Mon</td>
                         <td contenteditable="false">@computadora.Condicion_Mon</td>
-                        <td contenteditable="false">@computadora.Fecha_Actualizacion_Mon</td>
+                        <td contenteditable="false">
+                            @if (@computadora.Fecha_Actualizacion_Mon != "1/01/2000 00:00:00")
+                            {
+                                @computadora.Fecha_Actualizacion_Mon
+                            }
+                        </td>
 
                         <td contenteditable="false">@computadora.No_Inventario_Imp</td>
                         <td contenteditable="false">@computadora.Marca_Imp</td>
@@ -219,7 +233,12 @@
                         <td contenteditable="false">@computadora.Tipo_Imp</td>
                         <td contenteditable="false">@computadora.Estado_Imp</td>
                         <td contenteditable="false">@computadora.Condicion_Imp</td>
-                        <td contenteditable="false">@computadora.Fecha_Actualizacion_Imp</td>
+                        <td contenteditable="false">
+                            @if (@computadora.Fecha_Actualizacion_Imp != "1/01/2000 00:00:00")
+                            {
+                                @computadora.Fecha_Actualizacion_Imp
+                            }
+                        </td>
 
                         <td contenteditable="false">@computadora.No_Inventario_Scn</td>
                         <td contenteditable="false">@computadora.Marca_Scn</td>
@@ -227,34 +246,63 @@
                         <td contenteditable="false">@computadora.Serie_Scn</td>
                         <td contenteditable="false">@computadora.Estado_Scn</td>
                         <td contenteditable="false">@computadora.Condicion_Scn</td>
-                        <td contenteditable="false">@computadora.Fecha_Actualizacion_Scn</td>
+                        <td contenteditable="false">
+                            @if (@computadora.Fecha_Actualizacion_Scn != "1/01/2000 00:00:00")
+                            {
+                                @computadora.Fecha_Actualizacion_Scn
+                            }
+                        </td>
 
                         <td contenteditable="false">@computadora.No_Inventario_Ups</td>
                         <td contenteditable="false">@computadora.Marca_Ups</td>
+                        <td contenteditable="false">@computadora.Modelo_Ups</td>
+                        <td contenteditable="false">@computadora.Serie_Ups</td>
                         <td contenteditable="false">@computadora.Estado_Ups</td>
                         <td contenteditable="false">@computadora.Condicion_Ups</td>
-                        <td contenteditable="false">@computadora.Fecha_Actualizacion_Ups</td>
+                        <td contenteditable="false">
+                            @if (@computadora.Fecha_Actualizacion_Ups != "1/01/2000 00:00:00")
+                            {
+                                @computadora.Fecha_Actualizacion_Ups
+                            }
+                        </td>
 
+                        <td contenteditable="false">@computadora.No_Inventario_Tel</td>
                         <td contenteditable="false">@computadora.Marca_Tel</td>
                         <td contenteditable="false">@computadora.Modelo_Tel</td>
+                        <td contenteditable="false">@computadora.Serie_Tel</td>
                         <td contenteditable="false">@computadora.Tipo_Tel</td>
                         <td contenteditable="false">@computadora.Estado_Tel</td>
                         <td contenteditable="false">@computadora.Condicion_Tel</td>
-                        <td contenteditable="false">@computadora.Fecha_Actualizacion_Tel</td>
+                        <td contenteditable="false">
+                            @if (@computadora.Fecha_Actualizacion_Tel != "1/01/2000 00:00:00")
+                            {
+                                @computadora.Fecha_Actualizacion_Tel
+                            }
+                        </td>
 
                         <td contenteditable="false">@computadora.Marca_Cel</td>
                         <td contenteditable="false">@computadora.Modelo_Cel</td>
                         <td contenteditable="false">@computadora.IMEI_Cel</td>
                         <td contenteditable="false">@computadora.Estado_Cel</td>
                         <td contenteditable="false">@computadora.Condicion_Cel</td>
-                        <td contenteditable="false">@computadora.Fecha_Actualizacion_Cel</td>
+                        <td contenteditable="false">
+                            @if (@computadora.Fecha_Actualizacion_Cel != "1/01/2000 00:00:00")
+                            {
+                                @computadora.Fecha_Actualizacion_Cel
+                            }
+                        </td>
 
-                        <td contenteditable="false">@computadora.Marca_Cel</td>
-                        <td contenteditable="false">@computadora.Modelo_Cel</td>
-                        <td contenteditable="false">@computadora.IMEI_Cel</td>
-                        <td contenteditable="false">@computadora.Estado_Cel</td>
-                        <td contenteditable="false">@computadora.Condicion_Cel</td>
-                        <td contenteditable="false">@computadora.Fecha_Actualizacion_Cel</td>
+                        <td contenteditable="false">@computadora.Marca_Tab</td>
+                        <td contenteditable="false">@computadora.Modelo_Tab</td>
+                        <td contenteditable="false">@computadora.IMEI_Tab</td>
+                        <td contenteditable="false">@computadora.Estado_Tab</td>
+                        <td contenteditable="false">@computadora.Condicion_Tab</td>
+                        <td contenteditable="false">
+                            @if (@computadora.Fecha_Actualizacion_Tab != "1/01/2000 00:00:00")
+                            {
+                                @computadora.Fecha_Actualizacion_Tab
+                            }
+                        </td>
 
                     </tr>
                 }

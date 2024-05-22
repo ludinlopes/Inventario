@@ -1,8 +1,8 @@
 **********Inventario General****************
-	1. Arreglar Fechas de actualizacion en la base de datos y en c#
-	2. Agregar campo "Contraseña" en tabla computadora. alli se guardara la contraseña de la pc
-	3. Agregar campo "Nombre pc" en tabla computadora. alli se guardara el nombre de la pc
-	4. En los campos estados y condiciones de la vista configurar un if para que tome el valor 
+Listo	1. Arreglar Fechas de actualizacion en la base de datos y en c#
+Listo	2. Agregar campo "Contraseña" en tabla computadora. alli se guardara la contraseña de la pc
+Listo	3. Agregar campo "Nombre pc" en tabla computadora. alli se guardara el nombre de la pc
+Listo	4. En los campos estados y condiciones de la vista configurar un if para que tome el valor 
 		por ejemplo en condicion buen estado o mal estado y en estado activo o inactivo.
 	
 
