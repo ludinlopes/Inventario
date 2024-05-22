@@ -41,7 +41,7 @@ namespace Inventario.Controllers
             c = b;
             c.RespuestaSql = compu.insert(b);
 
-            return RedirectToAction("Nuevo", "Computadora", c);
+            return RedirectToAction("Nuevo", "Computadoras", c);
 
         }
     }

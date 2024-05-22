@@ -18,8 +18,10 @@
         public string NoIp { get; set; }
         public string Teclado { get; set; }
         public string Mouse { get; set; }
+        public string NombrePc { get; set; }
         public string Dominio { get; set; }
         public string Usuario { get; set; }
+        public string Contra { get; set; }
         public string Estado { get; set; }
         public string Condicion { get; set; }
         public string RespuestaSql { get; set; }

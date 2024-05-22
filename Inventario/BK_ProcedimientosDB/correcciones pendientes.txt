@@ -14,13 +14,13 @@ Listo	4. En los campos estados y condiciones de la vista configurar un if para q
 	   Tiene que llenar el formulario con esa seleccion.
 
 ****************Computadora*************
-	1. Bloquear en la vista de busqueda el poder modificar el numero de inventario
-	2. Arreglar en la creacion el redireccionamiento de la vista. si crea el articulo pero la vista de retorno se pierde
-	3. Agregar campo "Nombre pc" en tabla computadora. alli se guardara el nombre de la pc
+Listo	1. Bloquear en la vista de busqueda el poder modificar el numero de inventario y Serie
+Listo	2. Arreglar en la creacion el redireccionamiento de la vista. si crea el articulo pero la vista de retorno se pierde
+Listo	3. Agregar campo "Nombre pc" en tabla computadora. alli se guardara el nombre de la pc
 
 ***************Monitor******************
-	1. Bloquear en la vista de busqueda el poder modificar el numero de inventario
-	2. Arreglar la creacion de articulo. no hace match con el numero de columnas en la consulta
+Listo	1. Bloquear en la vista de busqueda el poder modificar el numero de inventario
+Listo	2. Arreglar la creacion de articulo. no hace match con el numero de columnas en la consulta
 
 ***************Impresora****************
 

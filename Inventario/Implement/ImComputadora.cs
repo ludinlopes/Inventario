@@ -44,8 +44,10 @@ namespace Inventario.Implement
                     compu.NoIp = mySqlDataReader.GetString("No_IP");
                     compu.Teclado = mySqlDataReader.GetString("Teclado");
                     compu.Mouse = mySqlDataReader.GetString("Mouse");
+                    compu.NombrePc = mySqlDataReader.GetString("NombrePc");
                     compu.Dominio = mySqlDataReader.GetString("Dominio");
                     compu.Usuario = mySqlDataReader.GetString("Usuario");
+                    compu.Contra = mySqlDataReader.GetString("Contra");
                     compu.Estado = mySqlDataReader.GetString("Estado");
                     compu.Condicion = mySqlDataReader.GetString("Condicion");
 
@@ -63,8 +65,10 @@ namespace Inventario.Implement
                 $"  Cod_Empleado = '{compu.cod_Emple}'" +
                 $", Estado = '{compu.Estado}'" +
                 $", Tipo = '{compu.Tipo}'" +
+                $", NombrePc = '{compu.NombrePc}'" +
                 $", Dominio = '{compu.Dominio}'" +
                 $", Usuario = '{compu.Usuario}'" +
+                $", Contra = '{compu.Contra}'" +
                 $", Marca = '{compu.Marca}'" +
                 $", Modelo = '{compu.Modelo}'" +
                 $", Serie = '{compu.Serie}'" +
@@ -115,8 +119,10 @@ namespace Inventario.Implement
                     $", '{modelo.Estado}'" +
                     $", '{modelo.NoInmentario}'" +
                     $", '{modelo.Tipo}'" +
+                    $", '{modelo.NombrePc}'" +
                     $", '{modelo.Dominio}'" +
                     $", '{modelo.Usuario}'" +
+                    $", '{modelo.Contra}'" +
                     $", '{modelo.Marca}'" +
                     $", '{modelo.Modelo}'" +
                     $", '{modelo.Serie}'" +

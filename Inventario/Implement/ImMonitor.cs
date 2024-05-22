@@ -87,7 +87,7 @@ namespace Inventario.Implement
             cn = new Conexion();
             string consulta = $"INSERT INTO Monitores  VALUES (" +
                     $" '{modelo.Cod_Emple}'" +
-                    $" '{modelo.NoInventario}'" +
+                    $", '{modelo.NoInventario}'" +
                     $", '{modelo.Marca}'" +
                     $", '{modelo.Modelo}'" +
                     $", '{modelo.Serie}'" +
