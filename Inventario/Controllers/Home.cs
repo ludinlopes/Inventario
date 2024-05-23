@@ -28,7 +28,7 @@ namespace Inventario.Controllers
             if (fav_language == "Empleado") 
             {
                 a.Texto = "unchecked";
-                return RedirectToAction("editar", "Empleado", new { b = int.Parse(Texto) });
+                return RedirectToAction("editar", "Empleado", new { b = Texto });
 
 
             } else if (fav_language == "Inventario General")

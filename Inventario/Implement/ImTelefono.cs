@@ -1,4 +1,5 @@
-﻿using Inventario.Models;
+﻿using Inventario.Controllers;
+using Inventario.Models;
 using MySql.Data.MySqlClient;
 
 namespace Inventario.Implement
@@ -12,7 +13,7 @@ namespace Inventario.Implement
             MySqlDataReader mySqlDataReader;
             MTelefono tel = new MTelefono();
             MySqlDataReader DR = null;
-            string consulta = $"SELECT * FROM Telefono WHERE Cod_Empleado = '{CodEmple}'";
+            string consulta = $"CALL getTelefono('{CodEmple}')";
             if (cn.OpenConnection() != null)
             {
                 MySqlCommand mySqlCommand = new MySqlCommand(consulta);
@@ -24,10 +25,11 @@ namespace Inventario.Implement
                 {
                     int cod = mySqlDataReader.GetInt32("Cod_Empleado");
                     tel.Cod_Emple = cod.ToString();
-                    tel.Nombre = "Nombre";
-                    
+                    tel.Nombre = mySqlDataReader.GetString("Nombre");
+                    tel.NoInventario = mySqlDataReader.GetString("No_Inventario");
                     tel.Marca = mySqlDataReader.GetString("Marca");
                     tel.Modelo = mySqlDataReader.GetString("Modelo");
+                    tel.Serie = mySqlDataReader.GetString("Serie");
                     tel.Tipo = mySqlDataReader.GetString("Tipo");
                     tel.Estado = mySqlDataReader.GetString("Estado");
                     
@@ -47,13 +49,15 @@ namespace Inventario.Implement
         {
             cn = new Conexion();
             string consulta = $"UPDATE Telefono set " +
-                $" Marca = '{modelo.Marca}'" +
+                $" No_Inventario = '{modelo.NoInventario}'" +
+                $", Marca = '{modelo.Marca}'" +
                 $", Modelo = '{modelo.Modelo}'" +
+                $", Serie = '{modelo.Serie}'" +
                 $", Tipo = '{modelo.Tipo}'" +
                 $", Estado = '{modelo.Estado}'" +
                 $", Condicion = '{modelo.Condicion}'" +
                 $", Fecha_Actualizacion = CURDATE() " +
-                $"WHERE Cod_Empleado = '{modelo.Cod_Emple}'";
+                $"WHERE No_Inventario = '{modelo.NoInventario}'";
 
 
             Console.WriteLine(consulta);
@@ -89,8 +93,10 @@ namespace Inventario.Implement
             cn = new Conexion();
             string consulta = $"INSERT INTO Telefono  VALUES (" +
                     $" '{modelo.Cod_Emple}'" +
+                    $", '{modelo.NoInventario}'" +
                     $", '{modelo.Marca}'" +
                     $", '{modelo.Modelo}'" +
+                    $", '{modelo.Serie}'" +
                     $", '{modelo.Tipo}'" +
                     $", '{modelo.Estado}'" +
                     $", '{modelo.Condicion}'" +

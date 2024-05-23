@@ -12,7 +12,7 @@ namespace Inventario.Implement
             MySqlDataReader mySqlDataReader;
             MUps ups = new MUps();
             MySqlDataReader DR = null;
-            string consulta = $"SELECT * FROM UPS WHERE No_Inventario = '{NoInv}'";
+            string consulta = $"CALL getUPS('{NoInv}')";
             if (cn.OpenConnection() != null)
             {
                 MySqlCommand mySqlCommand = new MySqlCommand(consulta);
@@ -24,7 +24,7 @@ namespace Inventario.Implement
                 {
                     int cod = mySqlDataReader.GetInt32("Cod_Empleado");
                     ups.Cod_Emple = cod.ToString();
-                    ups.Nombre = "Nombre";
+                    ups.Nombre = mySqlDataReader.GetString("Nombre");
                     ups.NoInventario = mySqlDataReader.GetString("No_Inventario");
                     ups.Marca = mySqlDataReader.GetString("Marca");
                     ups.Modelo = mySqlDataReader.GetString("Modelo");

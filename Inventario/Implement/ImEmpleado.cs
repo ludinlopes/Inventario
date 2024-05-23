@@ -11,13 +11,13 @@ namespace Inventario.Implement
            
         }
 
-        public MEmpleado getEmple(int codEmple) 
+        public MEmpleado getEmple(string codEmple) 
         {
             cn = new Conexion();
             MySqlDataReader mySqlDataReader;
             MEmpleado emple = new MEmpleado();
             MySqlDataReader DR = null;
-            string consulta = $"SELECT * FROM Empleado WHERE Cod_Empleado = {codEmple}";
+            string consulta = $"SELECT * FROM Empleado WHERE Cod_Empleado = '{codEmple}'";
             if (cn.OpenConnection() != null)
             {
                 MySqlCommand mySqlCommand = new MySqlCommand(consulta);

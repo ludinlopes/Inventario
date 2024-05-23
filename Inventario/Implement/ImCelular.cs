@@ -12,7 +12,7 @@ namespace Inventario.Implement
             MySqlDataReader mySqlDataReader;
             MCelular cel = new MCelular();
             MySqlDataReader DR = null;
-            string consulta = $"SELECT * FROM Celulares WHERE IMEI = '{IMEI}'";
+            string consulta = $"CALL getCelulares('{IMEI}')";
             if (cn.OpenConnection() != null)
             {
                 MySqlCommand mySqlCommand = new MySqlCommand(consulta);
@@ -24,7 +24,7 @@ namespace Inventario.Implement
                 {
                     int cod = mySqlDataReader.GetInt32("Cod_Empleado");
                     cel.Cod_Emple = cod.ToString();
-                    cel.Nombre = "Nombre";
+                    cel.Nombre = mySqlDataReader.GetString("Nombre");
                     cel.Marca = mySqlDataReader.GetString("Marca");
                     cel.Modelo = mySqlDataReader.GetString("Modelo");
                     cel.Imei = mySqlDataReader.GetString("IMEI");

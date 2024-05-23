@@ -13,7 +13,7 @@ namespace Inventario.Implement
             MySqlDataReader mySqlDataReader;
             MImpresora imp = new MImpresora();
             MySqlDataReader DR = null;
-            string consulta = $"SELECT * FROM Impresoras WHERE No_Inventario = '{NoInv}'";
+            string consulta = $"CALL getImpresoras('{NoInv}')";
             if (cn.OpenConnection() != null)
             {
                 MySqlCommand mySqlCommand = new MySqlCommand(consulta);
@@ -25,7 +25,7 @@ namespace Inventario.Implement
                 {
                     int cod = mySqlDataReader.GetInt32("Cod_Empleado");
                     imp.Cod_Emple = cod.ToString();
-                    imp.Nombre = "Nombre";
+                    imp.Nombre = mySqlDataReader.GetString("Nombre");
                     imp.NoInventario = mySqlDataReader.GetString("No_Inventario");
                     imp.Marca = mySqlDataReader.GetString("Marca");
                     imp.Modelo = mySqlDataReader.GetString("Modelo");

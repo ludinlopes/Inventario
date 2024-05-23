@@ -12,7 +12,7 @@ namespace Inventario.Implement
             MySqlDataReader mySqlDataReader;
             MMonitor mon = new MMonitor();
             MySqlDataReader DR = null;
-            string consulta = $"SELECT * FROM Monitores WHERE No_Inventario = '{NoInv}'";
+            string consulta = $"CALL getMonitores('{NoInv}')";
             if (cn.OpenConnection() != null)
             {
                 MySqlCommand mySqlCommand = new MySqlCommand(consulta);
@@ -24,7 +24,7 @@ namespace Inventario.Implement
                 {
                     int cod = mySqlDataReader.GetInt32("Cod_Empleado");
                     mon.Cod_Emple = cod.ToString();
-                    mon.Nombre = "Nombre";
+                    mon.Nombre = mySqlDataReader.GetString("Nombre");
                     mon.NoInventario = mySqlDataReader.GetString("No_Inventario");
                     mon.Marca = mySqlDataReader.GetString("Marca");
                     mon.Modelo = mySqlDataReader.GetString("Modelo");

@@ -6,7 +6,7 @@ namespace Inventario.Controllers
 {
     public class Empleado : Controller
     {
-        public IActionResult Editar(int b)
+        public IActionResult Editar(string b)
         {
             ImEmpleado emple = new ImEmpleado();
             
