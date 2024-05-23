@@ -1,0 +1,122 @@
+﻿@model EmpleadosViewModel
+@{
+    var CEmple = new Empleado();
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar Empleado</title>
+    <style>
+        /* Estilos básicos para el popup */
+        .modal {
+            display: none; /* Oculto por defecto */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+    </style>
+</head>
+<body>
+
+    <h2>Formulario Principal</h2>
+
+    <label for="empleado">Empleado Seleccionado:</label>
+    <input type="text" id="empleado" readonly>
+    <button id="seleccionarEmpleadoBtn">Seleccionar Empleado</button>
+
+    <!-- El Popup -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Seleccionar Empleado</h2>
+            <table id="empleadosTable">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Acción</th>
+                </tr>
+                <!-- Iterar sobre los empleados del modelo -->
+                @foreach (var empleado in Model.Empleados)
+                {
+                    <tr>
+                        <td>@empleado.ID</td>
+                        <td>@empleado.Nombre</td>
+                        <td><button class="selectEmpleadoBtn" data-id="@empleado.ID" data-nombre="@empleado.Nombre">Seleccionar</button></td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Obtener el modal
+        var modal = document.getElementById("myModal");
+
+        // Obtener el botón que abre el modal
+        var btn = document.getElementById("seleccionarEmpleadoBtn");
+
+        // Obtener el elemento <span> que cierra el modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // Cuando el usuario hace clic en el botón, abre el modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // Cuando el usuario hace clic en <span> (x), cierra el modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Cuando el usuario hace clic en cualquier parte fuera del modal, cierra el modal
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Manejar la selección de empleado
+        var selectBtns = document.getElementsByClassName("selectEmpleadoBtn");
+        for (var i = 0; i < selectBtns.length; i++) {
+            selectBtns[i].onclick = function() {
+                var empleadoNombre = this.getAttribute("data-nombre");
+                document.getElementById("empleado").value = empleadoNombre;
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>

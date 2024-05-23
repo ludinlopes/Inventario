@@ -8,6 +8,7 @@ namespace Inventario.Controllers
     {
         public IActionResult Editar(string b)
         {
+
             ImTelefono ups = new ImTelefono();
 
             MTelefono a = ups.getEmple(b);

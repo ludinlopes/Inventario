@@ -1,5 +1,9 @@
 ﻿@model MTelefono
 
+@{
+    var CEmple = new Empleado();
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +25,7 @@
 
             <label for="">Nombre</label>
             <input type="text" value="@Model.Nombre" name="Nombre">
+            <button type="button" id="Buscar" action=""></button>
             <br />
 
             <label for="">No Inventario</label>

@@ -30,7 +30,9 @@
         /// </summary>
         public string Texto { get; set; }
 
-       
+        public List<MEmpleado> Empleados { get; set; }
+
+
 
     }
 }
