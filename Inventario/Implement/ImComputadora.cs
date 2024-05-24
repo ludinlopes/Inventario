@@ -107,7 +107,9 @@ namespace Inventario.Implement
             }
             catch (Exception ex)
             {
+                cn.CloseConnection();
                 return $"Error: {ex.Message}           "+consulta;
+
             }
         }
 
@@ -163,6 +165,7 @@ namespace Inventario.Implement
             //catch (Exception ex)
             catch (MySqlException ex)
             {
+                cn.CloseConnection();
                 return $"Error: {ex.Message} " + ex.Number;
             }
         }

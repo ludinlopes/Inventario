@@ -6,6 +6,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .text {
+            text-transform: uppercase;
+        }
+    </style>
 </head>
 <body>
 
@@ -18,69 +23,69 @@
         <form class=factura-form action=@Url.Action("Insert","Computadoras") method="post">
 
             <label for="">Codigo Empleado</label>
-            <input type="text" value="@Model.Cod_Emple" name="Cod_Emple" id="CodEmple">
+            <input class="text" type="text" value="@Model.Cod_Emple" name="Cod_Emple" id="CodEmple">
             <br />
 
             <label for="empleado">Nombre</label>
-            <input type="text" value="@Model.Nombre" name="Nombre" id="empleado">
+            <input class="text" type="text" value="@Model.Nombre" name="Nombre" id="empleado">
             <button type="button" id="seleccionarEmpleadoBtn">Seleccionar Empleado</button>
             <br />
 
             <label for="">No. Inventario</label>
-            <input type="text" value="@Model.NoInmentario" name="NoInmentario">
+            <input class="text" type="text" value="@Model.NoInmentario" name="NoInmentario">
             <br />
 
             <label for="">Tipo</label>
-            <input type="text" value="@Model.Tipo" name="Tipo">
+            <input class="text" type="text" value="@Model.Tipo" name="Tipo">
             <br />
 
             <label for="">Marca</label>
-            <input type="text" value="@Model.Marca" name="Marca">
+            <input class="text" type="text" value="@Model.Marca" name="Marca">
             <br />
             <label for="">Modelo</label>
-            <input type="text" value="@Model.Modelo" name="Modelo">
+            <input class="text" type="text" value="@Model.Modelo" name="Modelo">
             <br />
             <label for="">Serie</label>
-            <input type="text" value="@Model.Serie" name="Serie">
+            <input class="text" type="text" value="@Model.Serie" name="Serie">
             <br />
             <label for="">Procesador</label>
-            <input type="text" value="@Model.Procesador" name="Procesador">
+            <input class="text" type="text" value="@Model.Procesador" name="Procesador">
             <br />
             <label for="">Generacion</label>
-            <input type="text" value="@Model.Generacion" name="Generacion">
+            <input class="text" type="text" value="@Model.Generacion" name="Generacion">
             <br />
             <label for="">Tipo de disco</label>
-            <input type="text" value="@Model.TipoDisco" name="TipoDisco">
+            <input class="text" type="text" value="@Model.TipoDisco" name="TipoDisco">
             <br />
             <label for="">Capacidad de disco</label>
-            <input type="text" value="@Model.CapacidadDisco" name="CapacidadDisco">
+            <input class="text" type="text" value="@Model.CapacidadDisco" name="CapacidadDisco">
             <br />
             <label for="">Ram</label>
-            <input type="text" value="@Model.Ram" name="Ram">
+            <input class="text" type="text" value="@Model.Ram" name="Ram">
             <br />
             <label for="">Mac Address</label>
-            <input type="text" value="@Model.MacAddress" name="MacAddress">
+            <input class="text" type="text" value="@Model.MacAddress" name="MacAddress">
             <br />
             <label for="">No IP</label>
-            <input type="text" value="@Model.NoIp" name="NoIp">
+            <input class="text" type="text" value="@Model.NoIp" name="NoIp">
             <br />
             <label for="">Teclado</label>
-            <input type="text" value="@Model.Teclado" name="Teclado">
+            <input class="text" type="text" value="@Model.Teclado" name="Teclado">
             <br />
             <label for="">Mouse</label>
-            <input type="text" value="@Model.Mouse" name="Mouse">
+            <input class="text" type="text" value="@Model.Mouse" name="Mouse">
             <br />
             <label for="">Nombre Pc</label>
-            <input type="text" value="@Model.NombrePc" name="NombrePc">
+            <input class="text" type="text" value="@Model.NombrePc" name="NombrePc">
             <br />
             <label for="">Dominio</label>
-            <input type="text" value="@Model.Dominio" name="Dominio">
+            <input class="text" type="text" value="@Model.Dominio" name="Dominio">
             <br />
             <label for="">Usuario</label>
-            <input type="text" value="@Model.Usuario" name="Usuario">
+            <input class="text" type="text" value="@Model.Usuario" name="Usuario">
             <br />
             <label for="">Contraseña</label>
-            <input type="text" value="@Model.Contra" name="Contra">
+            <input class="Contraseña" type="text" value="@Model.Contra" name="Contra" oninput="this.value = this.value">
             <br />
 
             <label for="">Estado</label>
@@ -96,7 +101,7 @@
                     <option value="I" selected>Inactivo</option>
                 }
             </select>
-            @*<input type="text" value="@Model.Estado" name="Estado">*@
+            @*<input class="text" type="text" value="@Model.Estado" name="Estado">*@
             <br />
             <label for="">Condicion</label>
             <select name="Condicion">

@@ -3,16 +3,17 @@ using MySql.Data.MySqlClient;
 
 namespace Inventario.Implement
 {
-    public class ImUps
+    public class ImTablet
     {
+
         private Conexion cn;
-        public MUps getEmple(string NoInv)
+        public MTablet getEmple(string IMEI)
         {
             cn = new Conexion();
             MySqlDataReader mySqlDataReader;
-            MUps ups = new MUps();
+            MTablet cel = new MTablet();
             MySqlDataReader DR = null;
-            string consulta = $"CALL getUPS('{NoInv}')";
+            string consulta = $"CALL getTablet('{IMEI}')";
             if (cn.OpenConnection() != null)
             {
                 MySqlCommand mySqlCommand = new MySqlCommand(consulta);
@@ -23,39 +24,43 @@ namespace Inventario.Implement
                 while (mySqlDataReader.Read())
                 {
                     int cod = mySqlDataReader.GetInt32("Cod_Empleado");
-                    ups.Cod_Emple = cod.ToString();
-                    ups.Nombre = mySqlDataReader.GetString("Nombre");
-                    ups.NoInventario = mySqlDataReader.GetString("No_Inventario");
-                    ups.Marca = mySqlDataReader.GetString("Marca");
-                    ups.Modelo = mySqlDataReader.GetString("Modelo");
-                    ups.Serie = mySqlDataReader.GetString("Serie");
-                    ups.Estado = mySqlDataReader.GetString("Estado");
+                    cel.Cod_Emple = cod.ToString();
+                    cel.Nombre = mySqlDataReader.GetString("Nombre");
+                    cel.Marca = mySqlDataReader.GetString("Marca");
+                    cel.Modelo = mySqlDataReader.GetString("Modelo");
+                    cel.Imei = mySqlDataReader.GetString("IMEI");
+                    cel.Estado = mySqlDataReader.GetString("Estado");
+                    cel.Condicion = mySqlDataReader.GetString("Condicion");
+                    //if (mySqlDataReader.GetString("Estado") == "A")
+                    //{
+                    //    cel.Estado = "Activo";
+                    //}
+                    //else
+                    //{
+                    //    cel.Estado = "Inactivo";
+                    //}
 
-                    ups.Condicion = mySqlDataReader.GetString("Condicion");
+                    //cel.Condicion = mySqlDataReader.GetString("Condicion");
+
                 }
                 mySqlCommand.Connection.Close();
             }
-            return ups;
+            return cel;
         }
 
 
-
-
-
-
-        public string setUps(MUps modelo)
+        public string setCelular(MTablet modelo)
         {
             cn = new Conexion();
-            string consulta = $"UPDATE UPS set " +
+            string consulta = $"UPDATE Tablet set " +
                 $"  Cod_Empleado = '{modelo.Cod_Emple}'" +
                 $", Marca = '{modelo.Marca}'" +
                 $", Modelo = '{modelo.Modelo}'" +
-                $", Serie = '{modelo.Serie}'" +
+                $", IMEI = '{modelo.Imei}'" +
                 $", Estado = '{modelo.Estado}'" +
                 $", Condicion = '{modelo.Condicion}'" +
                 $", Fecha_Actualizacion = CURDATE() " +
-                $"WHERE No_Inventario = '{modelo.NoInventario}'";
-
+                $"WHERE IMEI = '{modelo.Imei}'";
 
             Console.WriteLine(consulta);
             try
@@ -85,19 +90,17 @@ namespace Inventario.Implement
             }
         }
 
-
-        public string insert(MUps modelo)
+        public string insert(MTablet modelo)
         {
             cn = new Conexion();
-            string consulta = $"INSERT INTO UPS  VALUES (" +
-                     $"'{modelo.Cod_Emple}', " +
-                     $"'{modelo.NoInventario}', " +
-                     $"'{modelo.Marca}', " +
-                     $"'{modelo.Modelo}', " +
-                     $"'{modelo.Serie}', " +
-                     $"'{modelo.Estado}', " +
-                     $"'{modelo.Condicion}', " +
-                     $"CURDATE())";
+            string consulta = $"INSERT INTO Tablet  VALUES (" +
+                    $" '{modelo.Cod_Emple}'" +
+                    $", '{modelo.Marca}'" +
+                    $", '{modelo.Modelo}'" +
+                    $", '{modelo.Imei}'" +
+                    $", '{modelo.Estado}'" +
+                    $", '{modelo.Condicion}'" +
+                    $", CURDATE() )";
 
 
             Console.WriteLine(consulta);
@@ -128,5 +131,6 @@ namespace Inventario.Implement
                 return $"Error: {ex.Message} " + ex.Number;
             }
         }
+
     }
 }

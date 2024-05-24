@@ -1,4 +1,4 @@
-﻿@model MMonitor
+﻿@model MTablet
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,13 +13,14 @@
     </style>
 </head>
 <body>
+
     <div class="encabezado">
         <h1>Nuevo</h1>
         <h2>@Model.RespuestaSql</h2>
     </div>
 
     <div class="contenido-mvc">
-        <form class=factura-form action=@Url.Action("Insert","Monitor") method="post">
+        <form class=factura-form action=@Url.Action("Insert","Tablet") method="post">
             <label for="">Codigo Empleado</label>
             <input type="text" value="@Model.Cod_Emple" name="Cod_Emple" id="CodEmple">
             <br />
@@ -29,9 +30,6 @@
             <button type="button" id="seleccionarEmpleadoBtn">Seleccionar Empleado</button>
             <br />
 
-            <label for="">No Inventario</label>
-            <input type="text" value="@Model.NoInventario" name="NoInventario">
-            <br />
 
             <label for="">Marca</label>
             <input type="text" value="@Model.Marca" name="Marca">
@@ -40,8 +38,8 @@
             <label for="">Modelo</label>
             <input type="text" value="@Model.Modelo" name="Modelo">
             <br />
-            <label for="">Serie</label>
-            <input type="text" value="@Model.Serie" name="Serie">
+            <label for="">IMEI</label>
+            <input type="text" value="@Model.Imei" name="Imei">
             <br />
             <label for="">Estado</label>
             <select name="Estado">
@@ -56,6 +54,11 @@
                     <option value="I" selected>Inactivo</option>
                 }
             </select>
+
+
+
+
+            @*<input type="text" value="@Model.Estado" name="Estado">*@
             <br />
             <label for="">Condicion</label>
             <select name="Condicion">
@@ -79,10 +82,9 @@
 
         </form>
     </div>
-    
 
 
-     <!-- El Popup -->
+    <!-- El Popup -->
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -110,8 +112,5 @@
 
     <script src="~/js/customScript.js"></script>
 
-
-
-    
 </body>
 </html>

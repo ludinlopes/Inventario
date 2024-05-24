@@ -85,6 +85,11 @@ namespace Inventario.Controllers
                 return RedirectToAction("editar", "Celular", new { b = Texto });
             }
 
+            else if (fav_language == "Tablet")
+            {
+                return RedirectToAction("Editar", "Tablet", new { b = Texto });
+            }
+
 
             else
             {
