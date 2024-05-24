@@ -2,7 +2,7 @@
 {
     public class MScanner
     {
-        public string CodEmple { get; set; }
+        public string Cod_Emple { get; set; }
         public string Nombre { get; set; }
         public string NoImventario { get; set; }
         public string Marca { get; set; }
@@ -12,6 +12,7 @@
         public string Condicion { get; set; }
         public string Texto { get; set; }
         public string RespuestaSql { get; set; }
+        public List<MEmpleado> Empleados { get; set; }
 
     }
 }

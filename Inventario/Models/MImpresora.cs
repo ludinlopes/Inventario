@@ -13,6 +13,7 @@
         public string Condicion { get; set; }
         public string Texto { get; set; }
         public string RespuestaSql { get; set; }
+        public List<MEmpleado> Empleados { get; set; }
 
 
     }

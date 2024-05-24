@@ -11,6 +11,46 @@ namespace Inventario.Implement
            
         }
 
+        public List<MEmpleado> getEmpleados()
+        {
+            cn = new Conexion();
+            var emple = new List<MEmpleado>();
+
+
+            MySqlDataReader mySqlDataReader;
+
+            string consulta = $"SELECT * FROM Empleado";
+            if (cn.OpenConnection() != null)
+            {
+                MySqlCommand mySqlCommand = new MySqlCommand(consulta);
+                mySqlCommand.Connection = cn.OpenConnection();
+                mySqlCommand.Connection.Open();
+                mySqlDataReader = mySqlCommand.ExecuteReader();
+
+                while (mySqlDataReader.Read())
+                {
+                    var g = new MEmpleado();
+
+
+                    
+                    
+                    int no = mySqlDataReader.GetInt32("Cod_Empleado");
+                    g.Cod_Emple = no.ToString();
+                    g.Nombre = mySqlDataReader.GetString("Nombre");
+                    g.Area = mySqlDataReader.GetString("Area");
+                    g.Estado = mySqlDataReader.GetString("Estado");
+                    g.Sucursal = mySqlDataReader.GetString("Sucursal");
+                   
+
+
+                    emple.Add(g);
+
+                }
+                mySqlCommand.Connection.Close();
+            }
+            return emple;
+
+        }
         public MEmpleado getEmple(string codEmple) 
         {
             cn = new Conexion();

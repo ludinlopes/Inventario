@@ -12,6 +12,8 @@ namespace Inventario.Controllers
             ImCelular mon = new ImCelular();
 
             MCelular a = mon.getEmple(b);
+            var c = new ImEmpleado();
+            a.Empleados = c.getEmpleados();
             return View(a);
         }
 

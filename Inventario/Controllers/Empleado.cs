@@ -11,6 +11,8 @@ namespace Inventario.Controllers
             ImEmpleado emple = new ImEmpleado();
             
             MEmpleado a = emple.getEmple(b);
+            var c = new ImEmpleado();
+            a.Empleados = c.getEmpleados();
             return View(a);
         }
 

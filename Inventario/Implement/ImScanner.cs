@@ -24,7 +24,7 @@ namespace Inventario.Implement
                 while (mySqlDataReader.Read())
                 {
                     int cod = mySqlDataReader.GetInt32("Cod_Empleado");
-                    scn.CodEmple = cod.ToString();
+                    scn.Cod_Emple = cod.ToString();
                     scn.Nombre = mySqlDataReader.GetString("Nombre");
                     scn.NoImventario = mySqlDataReader.GetString("No_Inventario");
                     scn.Marca = mySqlDataReader.GetString("Marca");
@@ -47,7 +47,7 @@ namespace Inventario.Implement
         {
             cn = new Conexion();
             string consulta = $"UPDATE Scanner set " +
-                $"Cod_Empleado = {modelo.CodEmple}" +
+                $"Cod_Empleado = {modelo.Cod_Emple}" +
                 $",Marca = '{modelo.Marca}'" +
                 $",Modelo = '{modelo.Modelo}'" +
                 $",Serie = '{modelo.Serie}'" +
@@ -89,7 +89,7 @@ namespace Inventario.Implement
         {
             cn = new Conexion();
             string consulta = $"INSERT INTO Scanner VALUES (" +
-                    $" '{modelo.CodEmple}'" +
+                    $" '{modelo.Cod_Emple}'" +
                     $", '{modelo.NoImventario}'" +
                     $", '{modelo.Marca}'" +
                     $", '{modelo.Modelo}'" +

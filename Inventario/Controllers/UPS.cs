@@ -11,6 +11,8 @@ namespace Inventario.Controllers
             ImUps ups = new ImUps();
 
             MUps a = ups.getEmple(b);
+            var c = new ImEmpleado();
+            a.Empleados = c.getEmpleados();
             return View(a);
         }
 

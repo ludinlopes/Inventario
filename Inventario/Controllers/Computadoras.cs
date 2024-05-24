@@ -11,6 +11,8 @@ namespace Inventario.Controllers
             ImComputadora emple = new ImComputadora();
 
             MComputadora a = emple.getEmple(b);
+            var c = new ImEmpleado();
+            a.Empleados = c.getEmpleados();
             return View(a);
         }
 

@@ -11,6 +11,8 @@ namespace Inventario.Controllers
             ImMonitor mon = new ImMonitor();
 
             MMonitor a = mon.getEmple(b);
+            var c = new ImEmpleado();
+            a.Empleados = c.getEmpleados();
             return View(a);
         }
 

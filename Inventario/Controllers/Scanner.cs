@@ -11,6 +11,8 @@ namespace Inventario.Controllers
             ImScanner mon = new ImScanner();
 
             MScanner a = mon.getEmple(b);
+            var c = new ImEmpleado();
+            a.Empleados = c.getEmpleados();
             return View(a);
         }
 

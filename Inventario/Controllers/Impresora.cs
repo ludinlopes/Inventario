@@ -11,6 +11,8 @@ namespace Inventario.Controllers
             ImImpresora imp = new ImImpresora();
 
             MImpresora a = imp.getEmple(b);
+            var c = new ImEmpleado();
+            a.Empleados = c.getEmpleados();
             return View(a);
         }
 
