@@ -30,7 +30,8 @@ namespace Inventario.Controllers
 
         public IActionResult Nuevo(MComputadora b)
         {
-
+            var c = new ImEmpleado();
+            b.Empleados = c.getEmpleados();
             return View(b);
         }
 

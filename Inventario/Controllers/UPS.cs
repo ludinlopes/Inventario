@@ -31,6 +31,8 @@ namespace Inventario.Controllers
         public IActionResult Nuevo(MUps b)
         {
             
+            var c = new ImEmpleado();
+            b.Empleados = c.getEmpleados();
             return View(b);
         }
 

@@ -2,7 +2,7 @@
 {
     public class MComputadora
     {
-        public string cod_Emple { get; set; }
+        public string Cod_Emple { get; set; }
         public string Nombre { get; set; }
         public string NoInmentario { get; set; }
         public string Tipo { get; set; }

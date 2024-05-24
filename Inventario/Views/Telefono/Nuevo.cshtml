@@ -18,17 +18,17 @@
     <div class="contenido-mvc">
         <form class=factura-form action=@Url.Action("Insert","Telefono") method="post">
             <label for="">Codigo Empleado</label>
-            <input type="text" value="@Model.Cod_Emple" name="Cod_Emple">
+            <input type="text" value="@Model.Cod_Emple" name="Cod_Emple" id="CodEmple">
+            <br />
+
+            <label for="empleado">Nombre</label>
+            <input type="text" value="@Model.Nombre" name="Nombre" id="empleado">
+            <button type="button" id="seleccionarEmpleadoBtn">Seleccionar Empleado</button>
             <br />
 
             <label for="">No Inventario</label>
             <input type="text" value="@Model.NoInventario" name="NoInventario">
             <br />
-
-            <label for="">Nombre</label>
-            <input type="text" value="@Model.Nombre" name="Nombre">
-            <br />
-
 
             <label for="">Marca</label>
             <input type="text" value="@Model.Marca" name="Marca">
@@ -81,7 +81,35 @@
             <button type="button" id="cancelar"><a href=@Url.Action("Home_","Home")>Cancelar</a></button>
         </form>
     </div>
-    
+
+
+    <!-- El Popup -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Seleccionar Empleado</h2>
+            <table id="empleadosTable">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Acción</th>
+                </tr>
+                <!-- Iterar sobre los empleados del modelo -->
+                @foreach (var empleado in Model.Empleados)
+                {
+                    <tr>
+                        <td>@empleado.Cod_Emple</td>
+                        <td>@empleado.Nombre</td>
+                        <td><button class="selectEmpleadoBtn" data-cod-emple="@empleado.Cod_Emple" data-nombre="@empleado.Nombre">Seleccionar</button></td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+
+
+
+    <script src="~/js/customScript.js"></script>
     
 </body>
 </html>

@@ -28,7 +28,7 @@ namespace Inventario.Implement
                 {
                     /////////////////////llenado de modelo/////////////////////////////////////////////
                     int no = mySqlDataReader.GetInt32("Cod_Empleado");
-                    compu.cod_Emple = no.ToString();
+                    compu.Cod_Emple = no.ToString();
                     compu.Nombre = mySqlDataReader.GetString("Nombre");
                     compu.NoInmentario = mySqlDataReader.GetString("No_Inventario");
                     compu.Tipo = mySqlDataReader.GetString("Tipo");
@@ -62,7 +62,7 @@ namespace Inventario.Implement
         {
             cn = new Conexion();
             string consulta = $"UPDATE Computadoras set " +
-                $"  Cod_Empleado = '{compu.cod_Emple}'" +
+                $"  Cod_Empleado = '{compu.Cod_Emple}'" +
                 $", Estado = '{compu.Estado}'" +
                 $", Tipo = '{compu.Tipo}'" +
                 $", NombrePc = '{compu.NombrePc}'" +
@@ -115,7 +115,7 @@ namespace Inventario.Implement
         {
             cn = new Conexion();
             string consulta = $"INSERT INTO Computadoras  VALUES (" +
-                    $" '{modelo.cod_Emple}'" +
+                    $" '{modelo.Cod_Emple}'" +
                     $", '{modelo.Estado}'" +
                     $", '{modelo.NoInmentario}'" +
                     $", '{modelo.Tipo}'" +
