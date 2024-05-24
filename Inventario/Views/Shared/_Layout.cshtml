@@ -1,5 +1,4 @@
-﻿
-@RenderBody()
+﻿@RenderBody()
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,12 +12,22 @@
         <p>Favor seleccione el tipo de busqueda e ingrese el valor buscado:</p>
 
     </div>
-    
-    
-    
+
+
+
     <div class="contenido">
 
         <form class=factura-form action=@Url.Action("Consulta","Home") method="post">
+
+            <select name="Sucursal">
+
+                <option value="RZ">Ricza</option>
+                <option value="INM">Inmepro</option>
+                <option value="SC">Servicocinas</option>
+                <option value="FES">Food Equipment Solution</option>
+
+            </select>
+            <br>
             <input type="radio" id="InvGeneral" name="fav_language" value="Inventario General">
             <label for="InvGeneral">Inventario General</label><br>
 
@@ -52,7 +61,7 @@
         </form>
 
     </div>
-    
+
 
 
 </body>

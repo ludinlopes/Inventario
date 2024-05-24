@@ -1,4 +1,5 @@
-﻿using Inventario.Models;
+﻿
+using Inventario.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inventario.Controllers
@@ -21,8 +22,10 @@ namespace Inventario.Controllers
 
 
         [HttpPost]
-        public ActionResult Consulta(string fav_language, string Texto)
+        public ActionResult Consulta(string fav_language,string Sucursal, string Texto)
         {
+
+            HttpContext.Session.SetString("Sucursal", Sucursal);
             MDocument a = new MDocument();
             MDocument c= new MDocument();
             if (fav_language == "Empleado") 

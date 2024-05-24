@@ -1,4 +1,5 @@
-﻿using Inventario.Implement;
+﻿using Inventario.ConexionDB.Consultas;
+using Inventario.Implement;
 using Inventario.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,7 +31,11 @@ namespace Inventario.Controllers
 
         public IActionResult Nuevo(MComputadora b)
         {
+            var h = new ConsultasDB();
+            b.NoInmentario = h.getNewNoInv("CPU", HttpContext.Session.GetString("Sucursal"));
+
             var c = new ImEmpleado();
+            
             b.Empleados = c.getEmpleados();
             return View(b);
         }
