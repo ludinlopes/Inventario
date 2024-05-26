@@ -49,7 +49,8 @@ namespace Inventario.Implement
         {
             cn = new Conexion();
             string consulta = $"UPDATE Telefono set " +
-                $" No_Inventario = '{modelo.NoInventario}'" +
+                $"Cod_Empleado = {modelo.Cod_Emple}" +
+                $", No_Inventario = '{modelo.NoInventario}'" +
                 $", Marca = '{modelo.Marca}'" +
                 $", Modelo = '{modelo.Modelo}'" +
                 $", Serie = '{modelo.Serie}'" +
