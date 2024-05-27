@@ -1,0 +1,438 @@
+﻿@media (max-width: 768px) {
+    #fondo {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: arial;
+        background-color: black;
+        background-repeat: no-repeat;
+        background-position: 55% 10rem;
+        background-size: 200px;
+    }
+
+    /* Estilos para pantallas más pequeñas, como dispositivos móviles */
+}
+
+#fondo {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: arial;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: 55% 10rem;
+    background-size: 200px;
+}
+
+body {
+    margin: auto;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: arial;
+    /*background-image: url('fondo.jpg');*/
+    
+    background-image: url("https://skepp.com/assets/Uploads/_resampled/ScaleWidthWyIxODAwIl0/BarcelonaOficina.jpg");
+    /*background-image: url("https://fotografias.lasexta.com/clipping/cmsimages02/2023/06/12/2D1E1A88-3CCB-4EF5-BFAC-65A34B6706F3/fondos-pantalla-clasicos-windows-calidad_98.jpg?crop=1300,731,x0,y0&width=1900&height=1069&optimize=high&format=webply");*/
+    background-position: bottom;
+    background-size: auto;
+}
+
+.form_login {
+    width: 400px;
+    height: auto
+    /*340px*/
+    ;
+    background: #4e4d4d;
+    margin: auto;
+    margin-top: 130px;
+    box-shadow: 7px 13px 37px #000000;
+    padding: 20px 30px;
+    border-top: 4px solid #017bab;
+    color: white;
+}
+
+    .form_login h5 {
+        margin: 0;
+        text-align: center;
+        height: 40px;
+        margin-bottom: 30px;
+        border-bottom: 1px solid;
+        font-size: 20px;
+    }
+
+.controls {
+    width: 95%;
+    border: 1px solid #017bab;
+    margin-bottom: 15px;
+    padding: 11px 10px;
+    background: #252323;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+}
+
+#mensaje p {
+    color: red;
+    border-bottom: none;
+    margin: 0;
+}
+
+.contraseña {
+    width: 100%;
+    height: 40px;
+    border: none;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.buttons {
+    width: 100%;
+    height: 40px;
+    background: #017bab;
+    border: none;
+    color: white;
+    margin-bottom: 15px;
+}
+
+    .buttons:hover {
+        width: 100%;
+        height: 40px;
+        background: #017bab;
+        border: solid 1px;
+        color: white;
+        margin-bottom: 15px;
+    }
+
+
+
+.form_login p {
+    height: 40px;
+    text-align: center;
+    border-bottom: 1px solid white;
+}
+
+.form_login a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+    .form_login a:hover {
+        text-decoration: underline;
+    }
+
+/*///////////////////////////////////////////////////////////////////////////////////*/
+/*************************************Menu********************************************/
+
+.sidebar {
+    position: absolute;
+    margin-left: 0;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #646363f8;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .menu li {
+        position: relative;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.185);
+    }
+
+    .menu a {
+        display: block;
+        padding: 10px 20px;
+        text-decoration: none;
+        color: white;
+    }
+
+
+.submenu {
+    display: none;
+    background-color: #8b8b8b8c;
+    list-style: none;
+}
+
+    .submenu.active {
+        display: block;
+    }
+
+
+
+
+/*/////////////////////////////////////////////////////////////*/
+/******************  VENTANAS  *************************************/
+/*.movable {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background-color: lightblue;
+    cursor: move;
+    display: none;
+    cursor: default;
+    background-color:blue;
+}
+
+#closeButton {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+
+
+
+.window {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 500px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.795);
+}
+
+.window-header {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  border-radius: 5px 5px 0 0;
+  position: relative;
+  height: 15px;
+}
+
+.window-title {
+  margin: 0;
+}
+
+.window-close {
+  position: relative;
+  top: 5px;
+  right: 5px;
+  border: none;
+  background: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.window-content {
+  padding: 10px;
+
+}
+
+.window-encabezado {
+  background-color: #4e4d4d;
+  height: 200px;
+}*/
+
+/***********************/
+/*#spinner {
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 2s linear infinite;
+  margin-top: 19%;
+  margin-left: 45%;
+  display: none;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}*/
+
+
+/****************************************  CONTRASEÑA **************************************************/
+/*.datos1 {
+  position: fixed;
+  left: 0;
+  height: 35%;
+  width: 45%;
+  margin-top: 1%;
+  margin-left: 2%;
+  display: inline-block;
+}
+
+.datos2 {
+  position: fixed;
+  right: 0;
+  height: 35%;
+  width: 45%;
+  margin-top: 1%;
+  margin-right: 2%;
+  display: inline-block;
+}
+
+.datos1 .cont,
+.datos2 .cont {
+  padding: 3px;
+  margin: 2px;
+  width: 35%;
+  font-size: 10pt;
+  display: inline-block;
+}
+
+.datos1 .texto,
+.datos2 .texto {
+  border-radius: 5px;
+  border: 1px solid rgb(209, 209, 209);
+  background-color: #f3f2f2;
+  width: 160px;
+}
+
+
+
+.detalle {
+  position: fixed;
+  left: 2%;
+  bottom: 3%;
+  height: 50%;
+  width: 96%;
+  display: inline-block;
+  
+}
+
+.detalle table {
+  width: 74%;
+  margin-left: 0px;
+  margin-top: 0;
+  margin-left: 80px;
+}
+
+
+.detalle tr:nth-child(even) {
+  background-color: #f2f2f2;*/
+/* Color de fondo para las filas pares */
+/*}
+
+.detalle tr:nth-child(odd) {
+  background-color: #ffffff;*/
+/*Color de fondo para las filas impares */
+/*}
+
+.detalle th {
+
+  height: 20px;
+  font-size: 10pt;
+  display: inline-block;
+  border-bottom: 2px solid black;
+  padding: 4px;
+  display: inline-block;
+  
+}
+
+.detalle td {
+
+  height: 20px;
+  font-size: 10pt;
+  display: inline-block;
+  border-bottom: 1px solid rgb(133, 132, 132);
+  padding: 4px;
+  display: inline-block;
+}
+
+.detalle .id {
+  text-align: left;
+  margin-top: 3px;
+  width: 60px;
+  display: inline-block;
+
+}
+
+.detalle .no_fac {
+  text-align: left;
+  margin-top: 3px;
+  width: 120px;
+  display: inline-block;
+}
+
+.detalle .fecha {
+  text-align: left;
+  margin-top: 3px;
+  width: 90px;
+  display: inline-block;
+}
+
+.detalle .monto {
+  text-align: left;
+  margin-top: 3px;
+  width: 80px;
+  display: inline-block;
+}
+
+.detalle .agregar {
+  border-bottom: none;
+  width: 100px;
+  display: inline-block;
+}
+
+.detalle .boton1 {
+  background-color: rgb(69, 205, 230);
+  border-radius: 4px;
+  border-style: none;
+  height: 23px;
+  display: inline-block;
+}
+
+.detalle .boton1:hover {
+  background-color: rgb(59, 176, 197);
+  border-radius: 4px;
+  border-style: none;
+  height: 23px;
+}
+
+.detalle .boton2 {
+  background-color: rgb(252, 6, 6);
+  color: white;
+  border-radius: 4px;
+  border-style: none;
+  height: 23px;
+  display: inline-block;
+  
+}
+
+.detalle .boton2:hover {
+  background-color: rgb(204, 2, 2);
+  border-radius: 4px;
+  border-style: none;
+  height: 23px;
+}
+
+.piedoc {
+  background-color: red;
+  position: fixed;
+  left: 5%;
+  bottom: 3%;
+  height: 8%;
+  width: 90%;
+  display: inline-block;
+}
+
+.guardar,
+.buscar {
+  display: none;
+}*/

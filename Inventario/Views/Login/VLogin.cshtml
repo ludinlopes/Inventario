@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<link href="~/css/style.css" rel="stylesheet" />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planilla</title>
+    <script src="Script/login.js" defer></script>
+</head>
+<body>
+    <form class=form_login action=@Url.Action("Home_","Home") method="post">
+        <h5>Formulario Login</h5>
+        <input class=controls type="text" name="Usuario" id="Usuario" placeholder="Usuario">
+        <input class=controls type="password" name="Contraseña" id="Contraseña" placeholder="Contraseña">
+        <div id="mensaje"></div>
+        <input class=buttons type="submit" name="" value="Ingresar" id="ingresar">
+        <p><a href="#">¿Olvidaste su contraseña?</a></p>
+    </form>
+</body>
+
+</html>

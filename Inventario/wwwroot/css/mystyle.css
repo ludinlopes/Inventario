@@ -10,13 +10,14 @@
         color:red;
     }
 
-    .contenido {
-        background-color: #F1F3F4;
-        margin: auto;
-        width: 350px;
-        border: 2px groove;
-        padding: 2%
-    }
+.contenido {
+    background-color: #F1F3F4;
+    
+    margin: auto;
+    width: 250px;
+    border: 2px groove;
+    padding: 2%
+}
 
 .boton {
     border-radius:5px;
