@@ -46,11 +46,11 @@ namespace Inventario.Implement
             cn = new Conexion();
             string consulta = $"UPDATE Monitores set " +
                 $"  Cod_Empleado = '{modelo.Cod_Emple}'" +
-                $", Marca = '{modelo.Marca}'" +
-                $", Modelo = '{modelo.Modelo}'" +
-                $", Serie = '{modelo.Serie}'" +
-                $", Estado = '{modelo.Estado}'" +
-                $", Condicion = '{modelo.Condicion}'" +
+                $", Marca = '{modelo.Marca.ToUpper()}'" +
+                $", Modelo = '{modelo.Modelo.ToUpper()}'" +
+                $", Serie = '{modelo.Serie.ToUpper()}'" +
+                $", Estado = '{modelo.Estado.ToUpper()}'" +
+                $", Condicion = '{modelo.Condicion.ToUpper()}'" +
                 $", Fecha_Actualizacion = CURDATE() " +
                 $"WHERE No_Inventario = '{modelo.NoInventario}'";
 
@@ -88,12 +88,12 @@ namespace Inventario.Implement
             cn = new Conexion();
             string consulta = $"INSERT INTO Monitores  VALUES (" +
                     $" '{modelo.Cod_Emple}'" +
-                    $", '{modelo.NoInventario}'" +
-                    $", '{modelo.Marca}'" +
-                    $", '{modelo.Modelo}'" +
-                    $", '{modelo.Serie}'" +
-                    $", '{modelo.Estado}'" +
-                    $", '{modelo.Condicion}'" +
+                    $", '{modelo.NoInventario.ToUpper()}'" +
+                    $", '{modelo.Marca.ToUpper()}'" +
+                    $", '{modelo.Modelo.ToUpper()}'" +
+                    $", '{modelo.Serie.ToUpper()}'" +
+                    $", '{modelo.Estado.ToUpper()}'" +
+                    $", '{modelo.Condicion.ToUpper()}'" +
                     $", CURDATE() )";
 
 

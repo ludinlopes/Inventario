@@ -86,10 +86,10 @@ namespace Inventario.Implement
         {
             cn = new Conexion();
             string consulta = $"UPDATE Empleado set " +
-                $"Nombre = '{modelo.Nombre}'" +
-                $", AREA = '{modelo.Area}'" +
-                $", Estado = '{modelo.Estado}'" +
-                $", Sucursal = '{modelo.Sucursal}'" +
+                $"Nombre = '{modelo.Nombre.ToUpper()}'" +
+                $", AREA = '{modelo.Area.ToUpper()}'" +
+                $", Estado = '{modelo.Estado.ToUpper()}'" +
+                $", Sucursal = '{modelo.Sucursal.ToUpper()}'" +
                 $", Fecha_Actualizacion = CURDATE() " +
                 $" WHERE Cod_Empleado = '{modelo.Cod_Emple}'";
                 
@@ -126,10 +126,10 @@ namespace Inventario.Implement
             cn = new Conexion();
             string consulta = $"INSERT INTO Empleado  VALUES (" +
                     $" '{modelo.Cod_Emple}'" +
-                    $", '{modelo.Nombre}'" +
-                    $", '{modelo.Area}'" +
-                    $", '{modelo.Estado}'" +
-                    $", '{modelo.Sucursal}'" +
+                    $", '{modelo.Nombre.ToUpper()}'" +
+                    $", '{modelo.Area.ToUpper()}'" +
+                    $", '{modelo.Estado.ToUpper()}'" +
+                    $", '{modelo.Sucursal.ToUpper()}'" +
                     $", CURDATE() )";
 
 

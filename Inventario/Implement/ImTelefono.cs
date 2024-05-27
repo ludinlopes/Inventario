@@ -50,13 +50,13 @@ namespace Inventario.Implement
             cn = new Conexion();
             string consulta = $"UPDATE Telefono set " +
                 $"Cod_Empleado = {modelo.Cod_Emple}" +
-                $", No_Inventario = '{modelo.NoInventario}'" +
-                $", Marca = '{modelo.Marca}'" +
-                $", Modelo = '{modelo.Modelo}'" +
-                $", Serie = '{modelo.Serie}'" +
-                $", Tipo = '{modelo.Tipo}'" +
-                $", Estado = '{modelo.Estado}'" +
-                $", Condicion = '{modelo.Condicion}'" +
+                $", No_Inventario = '{modelo.NoInventario.ToUpper()}'" +
+                $", Marca = '{modelo.Marca.ToUpper()}'" +
+                $", Modelo = '{modelo.Modelo.ToUpper()}'" +
+                $", Serie = '{modelo.Serie.ToUpper()}'" +
+                $", Tipo = '{modelo.Tipo.ToUpper()}'" +
+                $", Estado = '{modelo.Estado.ToUpper()}'" +
+                $", Condicion = '{modelo.Condicion.ToUpper()}'" +
                 $", Fecha_Actualizacion = CURDATE() " +
                 $"WHERE No_Inventario = '{modelo.NoInventario}'";
 
@@ -95,13 +95,13 @@ namespace Inventario.Implement
             cn = new Conexion();
             string consulta = $"INSERT INTO Telefono  VALUES (" +
                     $" '{modelo.Cod_Emple}'" +
-                    $", '{modelo.NoInventario}'" +
-                    $", '{modelo.Marca}'" +
-                    $", '{modelo.Modelo}'" +
-                    $", '{modelo.Serie}'" +
-                    $", '{modelo.Tipo}'" +
-                    $", '{modelo.Estado}'" +
-                    $", '{modelo.Condicion}'" +
+                    $", '{modelo.NoInventario.ToUpper()}'" +
+                    $", '{modelo.Marca.ToUpper()}'" +
+                    $", '{modelo.Modelo.ToUpper()}'" +
+                    $", '{modelo.Serie.ToUpper()}'" +
+                    $", '{modelo.Tipo.ToUpper()}'" +
+                    $", '{modelo.Estado.ToUpper()}'" +
+                    $", '{modelo.Condicion.ToUpper()}'" +
                     $", CURDATE() )";
 
 

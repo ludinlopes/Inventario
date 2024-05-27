@@ -54,11 +54,11 @@ namespace Inventario.Implement
             cn = new Conexion();
             string consulta = $"UPDATE Tablet set " +
                 $"  Cod_Empleado = '{modelo.Cod_Emple}'" +
-                $", Marca = '{modelo.Marca}'" +
-                $", Modelo = '{modelo.Modelo}'" +
-                $", IMEI = '{modelo.Imei}'" +
-                $", Estado = '{modelo.Estado}'" +
-                $", Condicion = '{modelo.Condicion}'" +
+                $", Marca = '{modelo.Marca.ToUpper()}'" +
+                $", Modelo = '{modelo.Modelo.ToUpper()}'" +
+                $", IMEI = '{modelo.Imei.ToUpper()}'" +
+                $", Estado = '{modelo.Estado.ToUpper()}'" +
+                $", Condicion = '{modelo.Condicion.ToUpper()}'" +
                 $", Fecha_Actualizacion = CURDATE() " +
                 $"WHERE IMEI = '{modelo.Imei}'";
 
@@ -95,11 +95,11 @@ namespace Inventario.Implement
             cn = new Conexion();
             string consulta = $"INSERT INTO Tablet  VALUES (" +
                     $" '{modelo.Cod_Emple}'" +
-                    $", '{modelo.Marca}'" +
-                    $", '{modelo.Modelo}'" +
-                    $", '{modelo.Imei}'" +
-                    $", '{modelo.Estado}'" +
-                    $", '{modelo.Condicion}'" +
+                    $", '{modelo.Marca.ToUpper()}'" +
+                    $", '{modelo.Modelo.ToUpper()}'" +
+                    $", '{modelo.Imei.ToUpper()}'" +
+                    $", '{modelo.Estado.ToUpper()}'" +
+                    $", '{modelo.Condicion.ToUpper()}'" +
                     $", CURDATE() )";
 
 

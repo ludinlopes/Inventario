@@ -48,12 +48,12 @@ namespace Inventario.Implement
             cn = new Conexion();
             string consulta = $"UPDATE Impresoras set " +
                 $"  Cod_Empleado = '{modelo.Cod_Emple}'" +
-                $", Marca = '{modelo.Marca}'" +
-                $", Modelo = '{modelo.Modelo}'" +
-                $", Serie = '{modelo.Serie}'" +
-                $", Tipo = '{modelo.Tipo}'" +
-                $", Estado = '{modelo.Estado}'" +
-                $", Condicion = '{modelo.Condicion}'" +
+                $", Marca = '{modelo.Marca.ToUpper()}'" +
+                $", Modelo = '{modelo.Modelo.ToUpper()}'" +
+                $", Serie = '{modelo.Serie.ToUpper()}'" +
+                $", Tipo = '{modelo.Tipo.ToUpper()}'" +
+                $", Estado = '{modelo.Estado.ToUpper()}'" +
+                $", Condicion = '{modelo.Condicion.ToUpper()}'" +
                 $", Fecha_Actualizacion = CURDATE() " +
                 $"WHERE No_Inventario = '{modelo.NoInventario}'";
 
@@ -91,13 +91,13 @@ namespace Inventario.Implement
             cn = new Conexion();
             string consulta = $"INSERT INTO Impresoras  VALUES (" +
                     $" '{modelo.Cod_Emple}'" +
-                    $", '{modelo.NoInventario}'" +
-                    $", '{modelo.Marca}'" +
-                    $", '{modelo.Modelo}'" +
-                    $", '{modelo.Serie}'" +
-                    $", '{modelo.Tipo}'" +
-                    $", '{modelo.Estado}'" +
-                    $", '{modelo.Condicion}'" +
+                    $", '{modelo.NoInventario.ToUpper()}'" +
+                    $", '{modelo.Marca.ToUpper()}'" +
+                    $", '{modelo.Modelo.ToUpper()}'" +
+                    $", '{modelo.Serie.ToUpper()}'" +
+                    $", '{modelo.Tipo.ToUpper()}'" +
+                    $", '{modelo.Estado.ToUpper()}'" +
+                    $", '{modelo.Condicion.ToUpper()}'" +
                     $", CURDATE() )";
 
 
