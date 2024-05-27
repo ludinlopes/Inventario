@@ -1,4 +1,5 @@
 ﻿using Inventario.Implement;
+using Inventario.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inventario.Controllers
@@ -7,7 +8,7 @@ namespace Inventario.Controllers
     {
         public IActionResult VLogin()
         {
-
+            
             return View();
         }
 
@@ -21,7 +22,9 @@ namespace Inventario.Controllers
                 return RedirectToAction("Home_", "Home");
             } else
             {
+                Console.WriteLine("Hola");
                 return RedirectToAction("VLogin", "Login");
+                
             }
             
         }
