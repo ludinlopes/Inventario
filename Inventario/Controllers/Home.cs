@@ -12,20 +12,38 @@ namespace Inventario.Controllers
         }
         public IActionResult Home_()
         {
+            string sucursal = HttpContext.Session.GetString("Sucursal");
             MDocument a = new MDocument();
             a.controlador = "Home";
             a.metodo = "Consulta";
             a.Empleado = "chequed";
             a.Texto = "prueba";
+            
+            if (sucursal == "RZ")
+            {
+                a.Sucursal = "Ricza";
+            }else if (sucursal == "INM")
+            {
+                a.Sucursal = "Inmepro";
+            }
+            else if (sucursal == "SC")
+            {
+                a.Sucursal = "Servicocinas";
+            }
+            else if (sucursal == "FES")
+            {
+                a.Sucursal = "FES";
+            }
+
             return View(a);
         }
 
 
         [HttpPost]
-        public ActionResult Consulta(string fav_language,string Sucursal, string Texto)
+        public ActionResult Consulta(string fav_language/*,string Sucursal*/, string Texto)
         {
 
-            HttpContext.Session.SetString("Sucursal", Sucursal);
+            //HttpContext.Session.SetString("Sucursal", Sucursal);
             MDocument a = new MDocument();
             MDocument c= new MDocument();
             if (fav_language == "Empleado") 
