@@ -10,6 +10,10 @@ namespace Inventario.Controllers
         {
             return View();
         }
+
+        public IActionResult Menu() { 
+            return View(); 
+        }
         public IActionResult Home_()
         {
             string sucursal = HttpContext.Session.GetString("Sucursal");

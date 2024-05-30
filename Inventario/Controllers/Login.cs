@@ -8,7 +8,9 @@ namespace Inventario.Controllers
     {
         public IActionResult VLogin()
         {
-            
+            //var a = new MLogin();
+            //var b = new ImLogin();
+            //a.Usuario = b.ConvertToMD5("Clipp3r##");
             return View();
         }
 

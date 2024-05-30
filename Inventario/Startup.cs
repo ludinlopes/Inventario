@@ -49,6 +49,7 @@ public class Startup
             endpoints.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Login}/{action=VLogin}/{id?}");
+            //pattern: "{controller=Home}/{action=Menu}/{id?}");
         });
     }
 }
