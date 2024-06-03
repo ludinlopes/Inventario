@@ -19,7 +19,7 @@
 </head>
 <body>
     @{
-        
+
         var httpContext = HttpContextAccessor.HttpContext;
         string sucursal = httpContext?.Session?.GetString("Sucursal");
 
@@ -92,25 +92,28 @@
                                     </ul>
 
                                 <li><a class="dropdown-item" href="#">SAP</a></li>
+                            </ul>
                         </li>
 
                         <li><hr class="dropdown-divider"></li>
 
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Configuracion
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" href="#">Usuario</a></li>
+                                <li><a class="dropdown-item" href="#">Parametrizaciones</a></li>
+                                <li><a class="dropdown-item" href="#">SAP</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Parametizacion</a></li>
+                            </ul>
+                        </li>
+
+
                     </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Configuracion
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="#">Usuario</a></li>
-                            <li><a class="dropdown-item" href="#">Parametrizaciones</a></li>
-                            <li><a class="dropdown-item" href="#">SAP</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Parametizacion</a></li>
-                        </ul>
-                    </li>
-                    </ul>
+
 
 
                 </div>
