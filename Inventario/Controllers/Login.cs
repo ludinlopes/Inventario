@@ -21,7 +21,7 @@ namespace Inventario.Controllers
             var b = a.getUsuario(Usuario,Contraseña);
             if(b == true)
             {
-                return RedirectToAction("Home_", "Home");
+                return RedirectToAction("Menu", "Home");
             } else
             {
                 Console.WriteLine("Hola");

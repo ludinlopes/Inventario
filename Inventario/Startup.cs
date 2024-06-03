@@ -9,6 +9,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddControllersWithViews();
+        services.AddHttpContextAccessor(); // Registrar IHttpContextAccessor
         services.AddSession(); // Agregar soporte para sesiones
     }
 

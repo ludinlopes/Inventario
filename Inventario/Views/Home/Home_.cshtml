@@ -1,8 +1,163 @@
 ﻿@{
-    Layout = "_Layout";
+    Layout = "_Menu";
 }
-<style>
-    input {
-        text-transform: uppercase;
-    }
-</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Centered Form</title>
+    @*<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">*@
+    <style>
+        input {
+            text-transform: uppercase;
+        }
+
+        .factura-form {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container d-flex vh-100">
+        <div class="row justify-content-center align-self-center w-100">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="text-center mb-4">
+                    <h1>Busqueda de inventario</h1>
+                    <p>Favor seleccione el tipo de busqueda e ingrese el valor buscado:</p>
+                </div>
+                <form class="factura-form" action="@Url.Action("Consulta", "Home")" method="post">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="InvGeneral" name="fav_language" value="Inventario General">
+                        <label class="form-check-label" for="InvGeneral">Inventario General</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="Empleado" name="fav_language" value="Empleado">
+                        <label class="form-check-label" for="Empleado">Empleado</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="Computadora" name="fav_language" value="Computadora">
+                        <label class="form-check-label" for="Computadora">Computadora / Laptop</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="Monitor" name="fav_language" value="Monitor">
+                        <label class="form-check-label" for="Monitor">Monitor</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="Impresora" name="fav_language" value="Impresora">
+                        <label class="form-check-label" for="Impresora">Impresora</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="Scanner" name="fav_language" value="Scanner">
+                        <label class="form-check-label" for="Scanner">Scanner</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="UPS" name="fav_language" value="UPS">
+                        <label class="form-check-label" for="UPS">UPS</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="Telefono" name="fav_language" value="Telefono">
+                        <label class="form-check-label" for="Telefono">Telefono</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="Celular" name="fav_language" value="Celular">
+                        <label class="form-check-label" for="Celular">Celular</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="Tablet" name="fav_language" value="Tablet">
+                        <label class="form-check-label" for="Tablet">Tablet</label>
+                    </div>
+
+                    @*<div class="input-group mb-3 mt-3">
+                        <span class="input-group-text" id="search-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                            </svg>
+                        </span>
+                        <input type="text" id="Texto" class="form-control" name="Texto" aria-describedby="search-icon">
+                    </div>
+*@
+                    <div class="input-group mb-3 mt-3">
+                        <input type="text" id="Texto" class="form-control" name="Texto" aria-describedby="search-icon">
+                        <button class="btn btn-outline-secondary" type="submit" id="search-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    @*<div class="mb-3">
+
+                        <input type="text" id="Texto" class="form-control mt-3" name="Texto">
+                    </div>*@
+                    <div>
+                        @*<input class="btn btn-primary" type="button" value="button">*@
+                        <button class="btn btn-secondary" type="button" id="Nuevo">Nuevo</button>
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>*@
+
+    <script>
+        document.getElementById('Nuevo').addEventListener('click', function () {
+            var radios = document.getElementsByName('fav_language');
+            var selectedValue = '';
+            for (var i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    selectedValue = radios[i].value;
+                    break;
+                }
+            }
+
+            var url = '';
+            switch (selectedValue) {
+                case 'Inventario General':
+                    url = '';
+                    break;
+                case 'Empleado':
+                    url = '@Url.Action("Nuevo", "Empleado")';
+                    break;
+                case 'Computadora':
+                    url = '@Url.Action("Nuevo", "Computadoras")';
+                    break;
+                case 'Monitor':
+                    url = '@Url.Action("Nuevo", "Monitor")';
+                    break;
+                case 'Impresora':
+                    url = '@Url.Action("Nuevo", "Impresora")';
+                    break;
+                case 'Scanner':
+                    url = '@Url.Action("Nuevo", "Scanner")';
+                    break;
+                case 'UPS':
+                    url = '@Url.Action("Nuevo", "UPS")';
+                    break;
+                case 'Telefono':
+                    url = '@Url.Action("Nuevo", "Telefono")';
+                    break;
+                case 'Celular':
+                    url = '@Url.Action("Nuevo", "Celular")';
+                    break;
+                case 'Tablet':
+                    url = '@Url.Action("Nuevo", "Tablet")';
+                    break;
+                default:
+                    alert('Por favor, seleccione una opción.');
+                    return;
+            }
+
+            window.location.href = url;
+        });
+    </script>
+</body>
+</html>
+
+
+

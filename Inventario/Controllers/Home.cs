@@ -11,7 +11,26 @@ namespace Inventario.Controllers
             return View();
         }
 
-        public IActionResult Menu() { 
+        public IActionResult Menu() {
+            string sucursal = HttpContext.Session.GetString("Sucursal");
+            if (sucursal == "RZ")
+            {
+                sucursal = "Ricza";
+            }
+            else if (sucursal == "INM")
+            {
+                sucursal = "Inmepro";
+            }
+            else if (sucursal == "SC")
+            {
+                sucursal = "Servicocinas";
+            }
+            else if (sucursal == "FES")
+            {
+                sucursal = "FES";
+            }
+            ViewBag.Sucursal = sucursal;
+
             return View(); 
         }
         public IActionResult Home_()
@@ -123,7 +142,27 @@ namespace Inventario.Controllers
             
         }
 
-
+        public void  GetSucursal() {
+            string sucursal = HttpContext.Session.GetString("Sucursal");
+            sucursal = "No definido";
+            if (sucursal == "RZ")
+            {
+                sucursal = "Ricza";
+            }
+            else if (sucursal == "INM")
+            {
+                sucursal = "Inmepro";
+            }
+            else if (sucursal == "SC")
+            {
+                sucursal = "Servicocinas";
+            }
+            else if (sucursal == "FES")
+            {
+                sucursal = "FES";
+            }
+            ViewBag.Sucursal = sucursal;
+        }
 
 
     }
