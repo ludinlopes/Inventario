@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Artículos</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Formulario de Artículos</h2>
+        <form>
+            <!-- Sección de Camisas -->
+            <div class="form-group">
+                <h4>Camisas</h4>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="shirtSize">Talla</label>
+                        <input type="text" class="form-control" id="shirtSize" placeholder="Ingrese la talla">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="shirtColor">Color</label>
+                        <input type="text" class="form-control" id="shirtColor" placeholder="Ingrese el color">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="shirtType">Tipo</label>
+                        <select class="form-control" id="shirtType">
+                            <option value="polo">Polo</option>
+                            <option value="formal">Camisa Formal</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label>Manga</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sleeveType" id="longSleeve" value="long">
+                            <label class="form-check-label" for="longSleeve">
+                                Manga Larga
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sleeveType" id="shortSleeve" value="short">
+                            <label class="form-check-label" for="shortSleeve">
+                                Manga Corta
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de Pantalones -->
+            <div class="form-group">
+                <h4>Pantalones</h4>
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label for="pantSize">Talla</label>
+                        <input type="text" class="form-control" id="pantSize" placeholder="Ingrese la talla">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="pantColor">Color</label>
+                        <input type="text" class="form-control" id="pantColor" placeholder="Ingrese el color">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón de envío -->
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    @*<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>*@
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
