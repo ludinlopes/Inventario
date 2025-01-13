@@ -20,4 +20,11 @@
     <Folder Include="wwwroot\css\Menu\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\RRHHDMA\Editar.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

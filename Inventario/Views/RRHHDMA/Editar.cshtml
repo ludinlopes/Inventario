@@ -1,0 +1,258 @@
+﻿@{
+    Layout = "_Menu";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Producto</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <style>
+        .form-label {
+            font-size: 0.9rem;
+        }
+
+        .form-control, .form-check-label, .btn, .page-link {
+            font-size: 0.85rem;
+        }
+
+        .form-control {
+            max-width: 100%;
+        }
+
+        .form-group {
+            max-width: 300px;
+        }
+
+        #preview {
+            width: 300px;
+            height: 300px;
+            border: 1px solid #ddd;
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .custom-file {
+            max-width: 300px;
+        }
+
+        .navbar2 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            margin-top:100px;
+        }
+
+            .navbar2 .pagination {
+                margin-bottom: 0;
+            }
+
+            .navbar2 .btn-secondary {
+                margin-left: 10px;
+            }
+
+        #proveedoresTable {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <nav class="navbar2">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Nav. Anterior</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Nav. Siguiente</a></li>
+                    <button type="button" class="btn btn-info mb-2 ml-2">Buscar</button>
+                    <button type="button" class="btn btn-info mb-2 ml-2">Crear</button>
+                </ul>
+            </nav>
+        </nav>
+        <h1 class="mb-4">Formulario de Producto</h1>
+        <form>
+            <div class="row">
+                <div class="col-md-6 order-md-1 order-1">
+                    <div class="form-group">
+                        <label for="codigo" class="form-label">Código</label>
+                        <input type="text" class="form-control" id="codigo" placeholder="Ingrese el código">
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" id="descripcion" placeholder="Ingrese la descripción">
+                    </div>
+                    <div class="form-group">
+                        <label for="talla" class="form-label">Talla</label>
+                        <input type="text" class="form-control" id="talla" placeholder="Ingrese la talla">
+                    </div>
+                    <div class="form-group">
+                        <label for="monto" class="form-label">Monto</label>
+                        <input type="number" class="form-control" id="monto" placeholder="Ingrese el monto">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Listado de Proveedores</label>
+                        <div id="proveedoresTable" class="table-responsive mb-2">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Teléfono</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="proveedoresTableBody">
+                                    <!-- Los proveedores se agregarán aquí dinámicamente -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn btn-outline-primary btn-sm" onclick="abrirModalProveedor()">
+                            <i class="fas fa-plus"></i> Agregar Proveedor
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-6 order-md-2 order-2">
+                    <div class="form-group">
+                        <label for="color" class="form-label">Color</label>
+                        <input type="text" class="form-control" id="color" placeholder="Ingrese el color">
+                    </div>
+                    <div class="form-group">
+                        <label for="existencia" class="form-label">Existencia</label>
+                        <input type="number" class="form-control" id="existencia" placeholder="Ingrese la existencia">
+                    </div>
+                    <div class="form-group">
+                        <label for="estado" class="form-label">Estado</label><br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="estado" id="activo" value="activo">
+                            <label class="form-check-label" for="activo">Activo</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="estado" id="inactivo" value="inactivo">
+                            <label class="form-check-label" for="inactivo">Inactivo</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="foto" class="form-label">Foto</label>
+                        <input type="file" class="form-control-file" id="foto" onchange="previewImage(event)">
+                        <img id="preview" alt="Vista previa de la imagen">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary mb-2">Botón para entrega</button>
+                <br>
+                <button type="button" class="btn btn-info mb-2">Buscar</button>
+                <button type="submit" class="btn btn-success mb-2">Guardar</button>
+                <button type="reset" class="btn btn-danger mb-2">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal para agregar/editar proveedor -->
+    <div class="modal fade" id="proveedorModal" tabindex="-1" role="dialog" aria-labelledby="proveedorModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="proveedorModalLabel">Agregar/Editar Proveedor</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="proveedorForm">
+                        <input type="hidden" id="proveedorIndex">
+                        <div class="form-group">
+                            <label for="proveedorNombre">Nombre</label>
+                            <input type="text" class="form-control" id="proveedorNombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="proveedorTelefono">Teléfono</label>
+                            <input type="tel" class="form-control" id="proveedorTelefono" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="guardarProveedor()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    @*<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>*@
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('preview');
+                output.src = reader.result;
+                output.style.display = 'block';
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function abrirModalProveedor(index = -1) {
+            if (index >= 0) {
+                var proveedor = document.querySelectorAll('#proveedoresTableBody tr')[index];
+                document.getElementById('proveedorNombre').value = proveedor.cells[0].textContent;
+                document.getElementById('proveedorTelefono').value = proveedor.cells[1].textContent;
+                document.getElementById('proveedorIndex').value = index;
+            } else {
+                document.getElementById('proveedorForm').reset();
+                document.getElementById('proveedorIndex').value = "-1";
+            }
+            $('#proveedorModal').modal('show');
+        }
+
+        function guardarProveedor() {
+            var nombre = document.getElementById('proveedorNombre').value;
+            var telefono = document.getElementById('proveedorTelefono').value;
+            var index = document.getElementById('proveedorIndex').value;
+
+            if (nombre && telefono) {
+                var tbody = document.getElementById('proveedoresTableBody');
+                if (index !== "-1") {
+                    // Editar proveedor existente
+                    var row = tbody.rows[parseInt(index)];
+                    row.cells[0].textContent = nombre;
+                    row.cells[1].textContent = telefono;
+                } else {
+                    // Agregar nuevo proveedor
+                    var newRow = tbody.insertRow();
+                    newRow.innerHTML = `
+                    <td>${nombre}</td>
+                    <td>${telefono}</td>
+                    <td>
+                      <button type="button" class="btn btn-outline-secondary btn-sm mr-1" onclick="abrirModalProveedor(this.closest('tr').rowIndex - 1)">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminarProveedor(this.closest('tr').rowIndex - 1)">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </td>
+                  `;
+                }
+                $('#proveedorModal').modal('hide');
+                document.getElementById('proveedorForm').reset();
+            } else {
+                alert("Por favor, complete todos los campos.");
+            }
+        }
+
+        function eliminarProveedor(index) {
+            if (confirm("¿Está seguro de que desea eliminar este proveedor?")) {
+                document.getElementById('proveedoresTableBody').deleteRow(index);
+            }
+        }
+    </script>
+</body>
+</html>

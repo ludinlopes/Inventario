@@ -1,0 +1,182 @@
+﻿@{
+    Layout = "_Menu";
+}
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingreso de Mercancías</title>
+    @*<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">*@
+    <style>
+        .form-container {
+            width: 50.1875%; /* 75% of the previous 56.25% width */
+            margin: 0 auto;
+        }
+
+        .form-control {
+            height: 25px;
+            padding: 2px 5px;
+            width: 100%;
+        }
+
+        .form-label {
+            margin-bottom: 0;
+        }
+
+        .table td, .table th {
+            padding: 0.25rem;
+        }
+
+        .align-right {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .narrow-textarea {
+            width: 42.1875%; /* Match the width of form-container */
+            height: 75px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-3 form-container">
+        <h4 class="mb-3">Engreso de Mercancías</h4>
+        <form>
+            <div class="row mb-2">
+                <div class="col-md-3">
+                    <label for="serie" class="form-label">Serie</label>
+                    <input type="text" class="form-control" id="serie">
+                </div>
+                <div class="col-md-3 offset-md-6 align-right">
+                    <div class="form-group">
+                        <label for="fecha" class="form-label">Fecha</label>
+                        <input type="date" class="form-control" id="fecha">
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-3">
+                    <label for="noDocumento" class="form-label">No. Documento</label>
+                    <input type="text" class="form-control" id="noDocumento">
+                </div>
+
+            </div>
+            <br>
+            <div class="mb-2">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="agregarFila()">Agregar Línea</button>
+            </div>
+            <table class="table table-bordered table-sm" id="mercanciasTable">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descripción</th>
+                        <th>Unidades</th>
+                        <th>Precio</th>
+                        <th>Total</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td contenteditable="true">CAM002</td>
+                        <td contenteditable="true">Camisa formal blanca</td>
+                        <td contenteditable="true" class="unidades">3</td>
+                        <td contenteditable="true" class="precio">Q 90.00</td>
+                        <td contenteditable="true" class="total">Q 270.00</td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm" onclick="eliminarFila(this)">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td contenteditable="true">CAM004</td>
+                        <td contenteditable="true">Camisa polo azul</td>
+                        <td contenteditable="true" class="unidades">10</td>
+                        <td contenteditable="true" class="precio">Q 75.00</td>
+                        <td contenteditable="true" class="total">Q 750.00</td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm" onclick="eliminarFila(this)">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" class="text-end"><strong>Total:</strong></td>
+                        <td id="totalCell">Q 1,020.00</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="mb-2">
+                <label for="observaciones" class="form-label">Observaciones:</label>
+                <textarea class="form-control narrow-textarea" id="observaciones" rows="2"></textarea>
+            </div>
+
+            <div>
+                <button type="button" class="btn btn-secondary btn-sm">Buscar</button>
+                <button type="submit" class="btn btn-primary btn-sm">Guardar</button>
+                <button type="button" class="btn btn-secondary btn-sm">Cancelar</button>
+            </div>
+        </form>
+    </div>
+    @*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>*@
+    <script>
+        function agregarFila() {
+            const table = document.getElementById('mercanciasTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+
+            newRow.innerHTML = `
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true" class="unidades"></td>
+                        <td contenteditable="true" class="precio"></td>
+                        <td contenteditable="true" class="total"></td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm" onclick="eliminarFila(this)">Eliminar</button>
+                        </td>
+                    `;
+            newRow.querySelector('.unidades').addEventListener('input', actualizarFilaTotal);
+            newRow.querySelector('.precio').addEventListener('input', actualizarFilaTotal);
+        }
+
+        function eliminarFila(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+            actualizarTotal();
+        }
+
+        function actualizarFilaTotal(event) {
+            const row = event.target.parentNode;
+            const unidades = parseFloat(row.querySelector('.unidades').innerText) || 0;
+            const precio = parseFloat(row.querySelector('.precio').innerText.replace('Q ', '')) || 0;
+            const totalCell = row.querySelector('.total');
+            const total = unidades * precio;
+            totalCell.innerText = 'Q ' + total.toFixed(2);
+            actualizarTotal();
+        }
+
+        function actualizarTotal() {
+            const table = document.getElementById('mercanciasTable');
+            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+            let total = 0;
+
+            for (let i = 0; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                const totalFila = parseFloat(cells[4].innerText.replace('Q ', '')) || 0;
+                total += totalFila;
+            }
+
+            document.getElementById('totalCell').innerText = 'Q ' + total.toFixed(2);
+        }
+
+        document.querySelectorAll('.unidades, .precio').forEach(cell => {
+            cell.addEventListener('input', actualizarFilaTotal);
+        });
+    </script>
+</body>
+</html>
