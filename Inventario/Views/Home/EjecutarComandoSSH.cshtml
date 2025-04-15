@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "PowerShell SSH";
+}
+
+<h2>PowerShell SSH</h2>
+
+<button id="btnConectar" onclick="iniciarSesion()">Conectar</button>
+<button id="btnDesconectar" onclick="cerrarSesion()" disabled>Desconectar</button>
+
+<div id="shell">
+    <pre id="output">@ViewBag.Mensaje</pre>
+</div>
+
+<input type="text" id="comando" placeholder="Escriba un comando...">
+<button onclick="ejecutarComando()">Ejecutar</button>
+
+<script>
+    function iniciarSesion() {
+        fetch('/Controllers/Home/IniciarSesionSSH')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("output").innerHTML = data;
+                document.getElementById("btnConectar").disabled = true;
+                document.getElementById("btnDesconectar").disabled = false;
+            });
+    }
+
+    function ejecutarComando() {
+        let comando = document.getElementById("comando").value;
+        fetch('/Controllers/Home/EjecutarComando?comando=' + encodeURIComponent(comando))
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("output").innerHTML += "\n" + data.resultado;
+            });
+    }
+
+    function cerrarSesion() {
+        fetch('/Controllers/Home/CerrarSesionSSH')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("output").innerHTML = data;
+                document.getElementById("btnConectar").disabled = false;
+                document.getElementById("btnDesconectar").disabled = true;
+            });
+    }
+</script>

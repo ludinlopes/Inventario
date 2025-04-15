@@ -18,8 +18,8 @@ public class Conexion
     // Inicializa los valores de la conexión
     private void Initialize()
     {
-        server = "bnn2mmcbgsjf5thnipcz-mysql.services.clever-cloud.com";
-        database = "bnn2mmcbgsjf5thnipcz";
+        server = "be64rlwsmzynyxdwrk8w-mysql.services.clever-cloud.com";
+        database = "be64rlwsmzynyxdwrk8w";
         uid = "uhr5sob5aywl7btt";
         password = "kT0rcQZXejpOVHlmyz4d";
         string connectionString;
@@ -31,7 +31,7 @@ public class Conexion
     // Método para abrir la conexión
     public MySqlConnection OpenConnection()
     {
-       // connection.Open();
+        //connection.Open();
         return connection;
     }
 

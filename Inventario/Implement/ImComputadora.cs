@@ -1,5 +1,6 @@
 ﻿using Inventario.Models;
 using MySql.Data.MySqlClient;
+using System.Data;
 using System.Drawing;
 
 namespace Inventario.Implement
@@ -61,44 +62,45 @@ namespace Inventario.Implement
         public string setComputadora(MComputadora compu)
         {
             cn = new Conexion();
-            string consulta = $"UPDATE Computadoras set " +
-                $"  Cod_Empleado = '{compu.Cod_Emple}'" +
-                $", Estado = '{compu.Estado.ToUpper()}'" +
-                $", Tipo = '{compu.Tipo.ToUpper()}'" +
-                $", NombrePc = '{compu.NombrePc.ToUpper()}'" +
-                $", Dominio = '{compu.Dominio.ToUpper()}'" +
-                $", Usuario = '{compu.Usuario.ToUpper()}'" +
-                $", Contra = '{compu.Contra}'" +
-                $", Marca = '{compu.Marca.ToUpper()}'" +
-                $", Modelo = '{compu.Modelo.ToUpper()}'" +
-                $", Serie = '{compu.Serie.ToUpper()}'" +
-                $", Procesador = '{compu.Procesador.ToUpper()}'" +
-                $", Generacion = '{compu.Generacion.ToUpper()}'" +
-                $", Tipo_Disco = '{compu.TipoDisco.ToUpper()}'" +
-                $", Capacidad_Disco = '{compu.CapacidadDisco.ToUpper()}'" +
-                $", Ram = '{compu.Ram.ToUpper()}'" +
-                $", Mac_Address = '{compu.MacAddress.ToUpper()}'" +
-                $", No_IP = '{compu.NoIp.ToUpper()}'" +
-                $", Mouse = '{compu.Mouse.ToUpper()}'" +
-                $", Teclado = '{compu.Teclado.ToUpper()}'" +
-                $", Condicion = '{compu.Condicion.ToUpper()}'" +
-                $", Fecha_Actualizacion = CURDATE() " +
-                $" WHERE No_Inventario = '{compu.NoInmentario}'";
-            Console.WriteLine(consulta);
+            string procedimiento = "UpdateComputadora"; // Nombre del procedimiento almacenado
+
             try
             {
-                if (cn.OpenConnection() != null)
+                MySqlConnection conn = cn.OpenConnection();
+                if (conn != null)
                 {
-                    MySqlCommand mySqlCommand = new MySqlCommand(consulta, cn.OpenConnection());
-                    mySqlCommand.Connection.Open();
-                    // Ejecutar la consulta de actualización
-                    int rowsAffected = mySqlCommand.ExecuteNonQuery();
+                    conn.Open(); // <-- Abrimos explícitamente la conexión
 
-                    // Cerrar la conexión
-                    cn.CloseConnection();
+                    using (MySqlCommand cmd = new MySqlCommand(procedimiento, conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                    // Devolver el resultado
-                    return $"Filas afectadas: {rowsAffected}";
+                        // Agregar parámetros
+                        cmd.Parameters.AddWithValue("_Cod_Empleado", compu.Cod_Emple);
+                        cmd.Parameters.AddWithValue("_Estado", compu.Estado.ToUpper());
+                        cmd.Parameters.AddWithValue("_No_Inventario", compu.NoInmentario);
+                        cmd.Parameters.AddWithValue("_Tipo", compu.Tipo.ToUpper());
+                        cmd.Parameters.AddWithValue("_NombrePc", compu.NombrePc.ToUpper());
+                        cmd.Parameters.AddWithValue("_Dominio", compu.Dominio.ToUpper());
+                        cmd.Parameters.AddWithValue("_Usuario", compu.Usuario.ToUpper());
+                        cmd.Parameters.AddWithValue("_Contra", compu.Contra);
+                        cmd.Parameters.AddWithValue("_Marca", compu.Marca.ToUpper());
+                        cmd.Parameters.AddWithValue("_Modelo", compu.Modelo.ToUpper());
+                        cmd.Parameters.AddWithValue("_Serie", compu.Serie.ToUpper());
+                        cmd.Parameters.AddWithValue("_Procesador", compu.Procesador.ToUpper());
+                        cmd.Parameters.AddWithValue("_Generacion", compu.Generacion.ToUpper());
+                        cmd.Parameters.AddWithValue("_Tipo_Disco", compu.TipoDisco.ToUpper());
+                        cmd.Parameters.AddWithValue("_Capacidad_Disco", compu.CapacidadDisco.ToUpper());
+                        cmd.Parameters.AddWithValue("_Ram", compu.Ram.ToUpper());
+                        cmd.Parameters.AddWithValue("_Mac_Address", compu.MacAddress.ToUpper());
+                        cmd.Parameters.AddWithValue("_No_IP", compu.NoIp.ToUpper());
+                        cmd.Parameters.AddWithValue("_Mouse", compu.Mouse.ToUpper());
+                        cmd.Parameters.AddWithValue("_Teclado", compu.Teclado.ToUpper());
+                        cmd.Parameters.AddWithValue("_Condicion", compu.Condicion.ToUpper());
+
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        return $"Filas afectadas: {rowsAffected}";
+                    }
                 }
                 else
                 {
@@ -107,68 +109,67 @@ namespace Inventario.Implement
             }
             catch (Exception ex)
             {
-                cn.CloseConnection();
-                return $"Error: {ex.Message}           "+consulta;
-
+                return $"Error: {ex.Message}";
             }
         }
+
 
         public string insert(MComputadora modelo)
         {
             cn = new Conexion();
-            string consulta = $"INSERT INTO Computadoras  VALUES (" +
-                    $" '{modelo.Cod_Emple}'" +
-                    $", '{modelo.Estado.ToUpper()}'" +
-                    $", '{modelo.NoInmentario.ToUpper()}'" +
-                    $", '{modelo.Tipo.ToUpper()}'" +
-                    $", '{modelo.NombrePc.ToUpper()}'" +
-                    $", '{modelo.Dominio.ToUpper()}'" +
-                    $", '{modelo.Usuario.ToUpper()}'" +
-                    $", '{modelo.Contra}'" +
-                    $", '{modelo.Marca.ToUpper()}'" +
-                    $", '{modelo.Modelo.ToUpper()}'" +
-                    $", '{modelo.Serie.ToUpper()}'" +
-                    $", '{modelo.Procesador.ToUpper()}'" +
-                    $", '{modelo.Generacion.ToUpper()}'" +
-                    $", '{modelo.TipoDisco.ToUpper()}'" +
-                    $", '{modelo.CapacidadDisco.ToUpper()}'" +
-                    $", '{modelo.Ram.ToUpper()}'" +
-                    $", '{modelo.MacAddress.ToUpper()}'" +
-                    $", '{modelo.NoIp.ToUpper()}'" +
-                    $", '{modelo.Mouse.ToUpper()}'" +
-                    $", '{modelo.Teclado.ToUpper()}'" +
-                    $", '{modelo.Condicion.ToUpper()}'" +
-                    $", CURDATE() )";
+            string mensaje = "Error al insertar";
+            string procedimiento = "InsertComputadora"; // Nombre del procedimiento almacenado
 
-
-            Console.WriteLine(consulta);
             try
             {
-                if (cn.OpenConnection() != null)
+                MySqlConnection conn = cn.OpenConnection();
+                if (conn != null)
                 {
-                    MySqlCommand mySqlCommand = new MySqlCommand(consulta, cn.OpenConnection());
-                    mySqlCommand.Connection.Open();
-                    // Ejecutar la consulta de actualización
-                    int rowsAffected = mySqlCommand.ExecuteNonQuery();
+                    conn.Open(); // <-- Abrimos explícitamente la conexión
 
-                    // Cerrar la conexión
-                    cn.CloseConnection();
+                    using (MySqlCommand cmd = new MySqlCommand(procedimiento, conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                    // Devolver el resultado
-                    return $"Filas afectadas: {rowsAffected}";
+                        // Agregar parámetros (con guion bajo, igual que en el procedimiento)
+                        cmd.Parameters.AddWithValue("_Cod_Empleado", modelo.Cod_Emple);
+                        cmd.Parameters.AddWithValue("_Estado", modelo.Estado.ToUpper());
+                        cmd.Parameters.AddWithValue("_No_Inventario", modelo.NoInmentario);
+                        cmd.Parameters.AddWithValue("_Tipo", modelo.Tipo.ToUpper());
+                        cmd.Parameters.AddWithValue("_NombrePc", modelo.NombrePc.ToUpper());
+                        cmd.Parameters.AddWithValue("_Dominio", modelo.Dominio.ToUpper());
+                        cmd.Parameters.AddWithValue("_Usuario", modelo.Usuario.ToUpper());
+                        cmd.Parameters.AddWithValue("_Contra", modelo.Contra); // No convertir si puede incluir caracteres especiales
+                        cmd.Parameters.AddWithValue("_Marca", modelo.Marca.ToUpper());
+                        cmd.Parameters.AddWithValue("_Modelo", modelo.Modelo.ToUpper());
+                        cmd.Parameters.AddWithValue("_Serie", modelo.Serie.ToUpper());
+                        cmd.Parameters.AddWithValue("_Procesador", modelo.Procesador.ToUpper());
+                        cmd.Parameters.AddWithValue("_Generacion", modelo.Generacion.ToUpper());
+                        cmd.Parameters.AddWithValue("_Tipo_Disco", modelo.TipoDisco.ToUpper());
+                        cmd.Parameters.AddWithValue("_Capacidad_Disco", modelo.CapacidadDisco.ToUpper());
+                        cmd.Parameters.AddWithValue("_Ram", modelo.Ram.ToUpper());
+                        cmd.Parameters.AddWithValue("_Mac_Address", modelo.MacAddress.ToUpper());
+                        cmd.Parameters.AddWithValue("_No_IP", modelo.NoIp.ToUpper());
+                        cmd.Parameters.AddWithValue("_Mouse", modelo.Mouse.ToUpper());
+                        cmd.Parameters.AddWithValue("_Teclado", modelo.Teclado.ToUpper());
+                        cmd.Parameters.AddWithValue("_Condicion", modelo.Condicion.ToUpper());
+                        cmd.Parameters.AddWithValue("_Fecha_Actualizacion", DateTime.Now);
+
+                        cmd.ExecuteNonQuery();
+                        mensaje = "Inserción exitosa";
+                    }
                 }
-                else
-                {
-                    return "No se pudo abrir la conexión a la base de datos";
-                }
+                
             }
-            //catch (Exception ex)
-            catch (MySqlException ex)
+            catch (Exception ex)
             {
-                cn.CloseConnection();
-                return $"Error: {ex.Message} " + ex.Number;
+                mensaje = "Error: " + ex;
             }
+
+            return mensaje;
         }
+
+
     }
 
 }

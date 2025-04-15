@@ -1,13 +1,56 @@
 ﻿
 using Inventario.Models;
 using Microsoft.AspNetCore.Mvc;
+using Inventario.ConexionDB.ConexionSSH; // Importar el servicio SSH
 
 namespace Inventario.Controllers
 {
     public class Home : Controller
     {
+        /*private readonly SshService _sshService;
+
+        public Home(SshService sshService) // Inyección de dependencias
+        {
+            _sshService = sshService;
+        }
+
+        public IActionResult EjecutarComandoSSH()
+        {
+            string resultado = _sshService.EjecutarComando("dir"); // Comando en Windows
+            ViewBag.Resultado = resultado;
+            //  return Content("La acción está funcionando, pero la vista no se encontró.");
+            return View();
+        }
+
+
         public IActionResult Index()
         {
+            return View();
+        }
+        */
+
+        private static SshService sshService = new SshService();
+
+        public IActionResult IniciarSesionSSH()
+        {
+            sshService.Conectar();
+            ViewBag.Mensaje = "Conectado a PowerShell.";
+            return View();
+        }
+
+        public IActionResult EjecutarComando(string comando)
+        {
+            if (string.IsNullOrEmpty(comando))
+                return Json(new { resultado = "Ingrese un comando válido." });
+
+            string resultado = sshService.EjecutarComandoInteractivo(comando);
+            return Json(new { resultado });
+        }
+
+        public IActionResult CerrarSesionSSH()
+        {
+            sshService.Desconectar();
+            ViewBag.Mensaje = "Desconectado de PowerShell.";
             return View();
         }
 

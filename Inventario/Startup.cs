@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Inventario.ConexionDB.ConexionSSH;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,8 @@ public class Startup
         services.AddControllersWithViews();
         services.AddHttpContextAccessor(); // Registrar IHttpContextAccessor
         services.AddSession(); // Agregar soporte para sesiones
+        services.AddScoped<SshService>();
+
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -49,8 +52,9 @@ public class Startup
         {
             endpoints.MapControllerRoute(
                 name: "default",
-                //pattern: "{controller=Login}/{action=VLogin}/{id?}");
-            pattern: "{controller=Empleado}/{action=Nuevo}/{id?}");
+                pattern: "{controller=Login}/{action=VLogin}");
+                //pattern: "{controller=InvGeneral}/{action=Vista}");
+            //pattern: "{controller=Empleado}/{action=Nuevo}/{id?}");
         });
     }
 }
