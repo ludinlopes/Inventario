@@ -1,0 +1,69 @@
+﻿
+
+@model Inventario.Models.SshConnectionModel
+
+@{
+    ViewBag.Title = "Conexión SSH Dinámica";
+    Layout = "_Menu";
+}
+
+<br />
+<br />
+<br />
+
+
+
+<div class="col-12 d-flex align-content-center flex-wrap">
+    <div class="col-4">
+        <h2 class="ms-2">Conexión SSH</h2>
+    </div>
+    <div class="ms-auto me-4 d-flex">
+        <input type="button" id="regresar" name="regresar" style="height:35px;" class="btn btn-dark" value="Menu" onclick="javascript:regresar();">
+    </div>
+</div>
+
+<script>
+    function regresar(){
+             url = '../Home/Menu';
+            window.location.href = url;
+
+    }</script>
+
+@using (Html.BeginForm())
+{ 
+    <div class="m-2">
+    <div>
+        <label for="IP">IP del equipo destino:</label>
+        @Html.TextBoxFor(m => m.IP, new { @class = "form-control" })
+    </div>
+
+    <div>
+        <label for="Puerto">Puerto (por defecto 3223):</label>
+        @Html.TextBoxFor(m => m.Puerto, new { @class = "form-control" })
+    </div>
+
+    <div>
+        <label for="Usuario">Usuario:</label>
+        @Html.TextBoxFor(m => m.Usuario, new { @class = "form-control" })
+    </div>
+
+    <div>
+        <label for="Clave">Contraseña:</label>
+        @Html.PasswordFor(m => m.Clave, new { @class = "form-control" })
+    </div>
+
+    <div>
+        <label for="Comando">Comando a ejecutar:</label>
+        @Html.TextAreaFor(m => m.Comando, new { @class = "form-control", rows = 3 })
+    </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Ejecutar</button>
+}
+
+@if (!string.IsNullOrEmpty(Model.Resultado))
+{
+    <div class="alert alert-info mt-3">
+        <strong>Resultado:</strong>
+        <pre>@Model.Resultado</pre>
+    </div>
+}

@@ -12,7 +12,7 @@ public class Startup
         services.AddControllersWithViews();
         services.AddHttpContextAccessor(); // Registrar IHttpContextAccessor
         services.AddSession(); // Agregar soporte para sesiones
-        services.AddScoped<SshService>();
+        
 
     }
 

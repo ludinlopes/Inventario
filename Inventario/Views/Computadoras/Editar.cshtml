@@ -1,4 +1,7 @@
-﻿@model MComputadora
+﻿@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
+@model MComputadora
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +22,7 @@
 
     <div class="contenido-mvc">
         <form class=factura-form action=@Url.Action("Actualizar","Computadoras") method="post">
+            @Html.AntiForgeryToken()
 
             <label for="">Codigo Empleado</label>
             <input type="text" value="@Model.Cod_Emple" name="Cod_Emple" id="CodEmple">
@@ -127,6 +131,19 @@
 
             <button type="button" id="cancelar"><a href=@Url.Action("Home_","Home")>Cancelar</a></button>
             <button type="button" id="Nuevo"><a href=@Url.Action("Nuevo","Computadoras")>Nuevo</a></button>
+
+            <input type="hidden" id="NoIp" value="@Model.NoIp" />
+            <input type="hidden" id="Usuario" value="@Model.Usuario" />
+            <input type="hidden" id="Contra" value="@Model.Contra" />
+
+            <!-- Puedes cambiar el comando también -->
+            <input type="hidden" id="Comando" value="hostname" />
+
+            <button type="button" class="btn btn-primary" onclick="verificarSSH()">Verificar información</button>
+
+            <div id="resultadoSSH" class="mt-3 text-success"></div>
+
+
         </form>
     </div>
 

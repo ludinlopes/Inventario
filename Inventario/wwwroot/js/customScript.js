@@ -38,4 +38,31 @@
                     modal.style.display = "none";
                 }
             }
+function verificarSSH() {
+    const ip = document.getElementById("NoIp").value.trim();
+    console.log(ip);
+    const usuario = document.getElementById("Usuario").value.trim();
+    console.log(usuario);
+    const clave = document.getElementById("Contra").value.trim();
+    console.log(clave);
+    const comando = document.getElementById("Comando").value.trim();
+    console.log(comando);
+    const puerto = 5512; // Usa el valor por defecto de tu modelo
+     
+    fetch('/Ssh/EjecutarComando', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+        },
+        body: JSON.stringify({ ip, puerto, usuario, clave, comando })
         
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("resultadoSSH").innerText = data.resultado;
+    })
+    .catch(error => {
+        document.getElementById("resultadoSSH").innerText = "Error: " + error;
+    });
+}

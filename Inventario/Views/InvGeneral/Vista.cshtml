@@ -16,8 +16,8 @@
    
 <script src="../lib/jquery/dist/jquery.min.js"></script>
 <script src="../lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../js/jquery.dataTables.min.js"></script> <!-- Este es el que tenés que agregar -->
-<script src="../js/datatables.bootstrap5.min.js"></script>
+<script src="../js/jquery.dataTables.min.js"></script> <!-- Este es el que tenés que agregar
+	<script src="../js/datatables.bootstrap5.min.js"></script>-->
 
     <script src="../lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
@@ -97,6 +97,8 @@
             </div>
         </div>
         <div class="col-12">
+            
+
             <table id="tabla-inventario" class="table table-striped">
                 <thead style="position: sticky; top: 0px;z-index: 1000;">
                     <tr>
@@ -352,28 +354,38 @@
         setTimeout(function () {
             document.getElementById('spinner').style.display = 'none';
             document.getElementById('content').style.display = 'block';
-        }, 3000);
+        }, 2000);
 
-        
-
-        $('#tabla-inventario').DataTable({
-          "language": {
-            "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+             // Inicializar DataTable sin buscador nativo
+        var table = $('#tabla-inventario').DataTable({
+            language: {
+                url: "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
             },
-          "paging": true,
-          "scrollX": true,
-          "pageLength": 50,
-              "layout": {
-            "bottomEnd": {
-                "paging": {
-                    "firstLast": false,
-                    "previousNext": false
+            paging: true,
+            scrollX: true,
+            pageLength: 50,
+            searching: true, // 👈 Desactiva el buscador que pone automáticamente
+            layout: {
+                bottomEnd: {
+                    paging: {
+                        firstLast: false,
+                        previousNext: false
+                    }
                 }
             }
-        }
         });
 
-        
+        // buscar con retardo (debounce)
+        // let debouncetimer;
+        // $('#busqueda-equipos').on('keyup', function () {
+        //     cleartimeout(debouncetimer);
+        //     const searchterm = this.value;
+
+        //     debouncetimer = settimeout(function () {
+        //         console.log('buscando: ', searchterm); para depuración
+        //         table.search(searchterm).draw();
+        //     }, 500); ⏱️ espera 500ms después de que el usuario deja de escribir
+        // });
 
     });
        

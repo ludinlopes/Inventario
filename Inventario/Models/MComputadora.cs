@@ -1,5 +1,6 @@
 ﻿namespace Inventario.Models
 {
+    
     public class MComputadora
     {
         public string Cod_Emple { get; set; }
