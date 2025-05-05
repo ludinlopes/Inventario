@@ -34,7 +34,7 @@
             <br />
 
             <label for="">No. Inventario</label>
-            <input type="text" value="@Model.NoInmentario" name="NoInmentario" readonly>
+            <input type="text" value="@Model.No_Inventario" name="No_Inventario" readonly>
             <br />
 
             <label for="">Tipo</label>
@@ -69,7 +69,7 @@
             <input class="text" type="text" value="@Model.MacAddress" name="MacAddress">
             <br />
             <label for="">No IP</label>
-            <input class="text" type="text" value="@Model.NoIp" name="NoIp">
+            <input id="NoIp" class="text" type="text" value="@Model.NoIp" name="NoIp">
             <br />
             <label for="">Teclado</label>
             <input class="text" type="text" value="@Model.Teclado" name="Teclado">
@@ -84,11 +84,11 @@
             <input class="text"  type="text" value="@Model.Dominio" name="Dominio">
             <br />
             <label for="">Usuario</label>
-            <input class="text" type="text" value="@Model.Usuario" name="Usuario">
+            <input id="Usuario" class="text" type="text" value="@Model.Usuario" name="Usuario">
             <br />
             <label for="">Contraseña</label>
             @*<input type="text" value="@Model.Contra" name="Contra" style="text-transform: lowercase;">*@
-            <input class="Contraseña" type="text" value="@Model.Contra" name="Contra" oninput="this.value = this.value">
+            <input id="Contra" class="Contraseña" type="text" value="@Model.Contra" name="Contra" oninput="this.value = this.value">
 
             <br />
 
@@ -132,9 +132,9 @@
             <button type="button" id="cancelar"><a href=@Url.Action("Home_","Home")>Cancelar</a></button>
             <button type="button" id="Nuevo"><a href=@Url.Action("Nuevo","Computadoras")>Nuevo</a></button>
 
-            <input type="hidden" id="NoIp" value="@Model.NoIp" />
+           @*  <input type="hidden" id="NoIp" value="@Model.NoIp" />
             <input type="hidden" id="Usuario" value="@Model.Usuario" />
-            <input type="hidden" id="Contra" value="@Model.Contra" />
+            <input type="hidden" id="Contra" value="@Model.Contra" /> *@
 
             <!-- Puedes cambiar el comando también -->
             <input type="hidden" id="Comando" value="hostname" />

@@ -32,7 +32,7 @@ namespace Inventario.Controllers
         public IActionResult Nuevo(MComputadora b)
         {
             var h = new ConsultasDB();
-            b.NoInmentario = h.getNewNoInv("CPU", HttpContext.Session.GetString("Sucursal"));
+            b.No_Inventario = h.getNewNoInv("CPU", HttpContext.Session.GetString("Sucursal"));
 
             var c = new ImEmpleado();
             

@@ -8,7 +8,7 @@ namespace Inventario.Implement
 
     public class ImComputadora
     {
-        private Conexion cn;
+        private Conexion? cn;
 
         public MComputadora getEmple(string noInv)
         {
@@ -31,7 +31,7 @@ namespace Inventario.Implement
                     int no = mySqlDataReader.GetInt32("Cod_Empleado");
                     compu.Cod_Emple = no.ToString();
                     compu.Nombre = mySqlDataReader.GetString("Nombre");
-                    compu.NoInmentario = mySqlDataReader.GetString("No_Inventario");
+                    compu.No_Inventario = mySqlDataReader.GetString("No_Inventario");
                     compu.Tipo = mySqlDataReader.GetString("Tipo");
                     compu.Marca = mySqlDataReader.GetString("Marca");
                     compu.Modelo = mySqlDataReader.GetString("Modelo");
@@ -61,6 +61,11 @@ namespace Inventario.Implement
 
         public string setComputadora(MComputadora compu)
         {
+            if (string.IsNullOrWhiteSpace(compu.No_Inventario))
+            {
+                return "Error: El número de inventario no puede estar vacío.";
+            }
+
             cn = new Conexion();
             string procedimiento = "UpdateComputadora"; // Nombre del procedimiento almacenado
 
@@ -76,9 +81,9 @@ namespace Inventario.Implement
                         cmd.CommandType = CommandType.StoredProcedure;
 
                         // Agregar parámetros
-                        cmd.Parameters.AddWithValue("_Cod_Empleado", compu.Cod_Emple);
+                        
                         cmd.Parameters.AddWithValue("_Estado", compu.Estado.ToUpper());
-                        cmd.Parameters.AddWithValue("_No_Inventario", compu.NoInmentario);
+                        cmd.Parameters.AddWithValue("_No_Inventario", compu.No_Inventario);
                         cmd.Parameters.AddWithValue("_Tipo", compu.Tipo.ToUpper());
                         cmd.Parameters.AddWithValue("_NombrePc", compu.NombrePc.ToUpper());
                         cmd.Parameters.AddWithValue("_Dominio", compu.Dominio.ToUpper());
@@ -97,6 +102,9 @@ namespace Inventario.Implement
                         cmd.Parameters.AddWithValue("_Mouse", compu.Mouse.ToUpper());
                         cmd.Parameters.AddWithValue("_Teclado", compu.Teclado.ToUpper());
                         cmd.Parameters.AddWithValue("_Condicion", compu.Condicion.ToUpper());
+                        cmd.Parameters.AddWithValue("_Cod_Empleado", compu.Cod_Emple);
+                        cmd.Parameters.AddWithValue("_Fecha_Actualizacion", DateTime.Now); // o compu.FechaActualizacion si viene del modelo
+
 
                         int rowsAffected = cmd.ExecuteNonQuery();
                         return $"Filas afectadas: {rowsAffected}";
@@ -109,7 +117,7 @@ namespace Inventario.Implement
             }
             catch (Exception ex)
             {
-                return $"Error: {ex.Message}";
+                return $"Error:  {ex.Message}"+ compu.No_Inventario;
             }
         }
 
@@ -134,7 +142,7 @@ namespace Inventario.Implement
                         // Agregar parámetros (con guion bajo, igual que en el procedimiento)
                         cmd.Parameters.AddWithValue("_Cod_Empleado", modelo.Cod_Emple);
                         cmd.Parameters.AddWithValue("_Estado", modelo.Estado.ToUpper());
-                        cmd.Parameters.AddWithValue("_No_Inventario", modelo.NoInmentario);
+                        cmd.Parameters.AddWithValue("_No_Inventario", modelo.No_Inventario);
                         cmd.Parameters.AddWithValue("_Tipo", modelo.Tipo.ToUpper());
                         cmd.Parameters.AddWithValue("_NombrePc", modelo.NombrePc.ToUpper());
                         cmd.Parameters.AddWithValue("_Dominio", modelo.Dominio.ToUpper());

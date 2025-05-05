@@ -14,7 +14,7 @@ namespace Inventario.Controllers
         [HttpPost]
         public JsonResult EjecutarComando([FromBody] SshConnectionModel data)
         {
-            var resultado = "";
+            var resultado = new Dictionary<string, string>();
 
             // Validar que los valores no sean nulos o vacíos
             if (string.IsNullOrEmpty(data.IP) || data.Puerto <= 0 || string.IsNullOrEmpty(data.Usuario) || string.IsNullOrEmpty(data.Clave) || string.IsNullOrEmpty(data.Comando))
@@ -28,21 +28,36 @@ namespace Inventario.Controllers
                 {
                     client.Connect();
 
+                    //if (client.IsConnected)
+                    //{
+                    //    var cmd = client.RunCommand(data.Comando);
+                    //    resultado = cmd.Result;
+                    //    client.Disconnect();
+                    //}
                     if (client.IsConnected)
                     {
-                        var cmd = client.RunCommand(data.Comando);
-                        resultado = cmd.Result;
+                        resultado["MarcaModelo"] = client.RunCommand("wmic computersystem get manufacturer, model").Result;
+                        resultado["Serie"] = client.RunCommand("wmic bios get serialnumber").Result;
+                        resultado["Procesador"] = client.RunCommand("wmic cpu get name").Result;
+                        resultado["Discos"] = client.RunCommand("wmic diskdrive get model, mediaType, size").Result;
+                        resultado["RAM"] = client.RunCommand("systeminfo | findstr /C:\"Total Physical Memory\"").Result;
+                        resultado["MAC"] = client.RunCommand("getmac").Result;
+                        resultado["NombrePC"] = client.RunCommand("hostname").Result;
+                        resultado["Dominio"] = client.RunCommand("systeminfo | findstr /C:\"Domain\"").Result;
+                        resultado["Teclado"] = client.RunCommand("wmic path Win32_Keyboard get DeviceID").Result;
+                        resultado["Mouse"] = client.RunCommand("wmic path Win32_PointingDevice get DeviceID").Result;
+
                         client.Disconnect();
                     }
                     else
                     {
-                        resultado = "No se pudo conectar al servidor SSH.";
+                        return Json(new { error = "No se pudo conectar al servidor SSH." });
                     }
                 }
             }
             catch (Exception ex)
             {
-                resultado = $"Error: {ex.Message}";
+                resultado["Error"] = $"Error: {ex.Message}";
             }
 
             return Json(new { resultado });
