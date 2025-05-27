@@ -5,7 +5,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Nuevo Registro</title>
+
+    <link href="../css/spinnerloader.css" rel="stylesheet" />
+    <link href="../css/datatables.bootstrap5.min.css" rel="stylesheet" />
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/bootstrap.rtl.min.css" rel="stylesheet" />
+    <link href="../css/bootstrap.rtl.css" rel="stylesheet" />
+    <link href="../css/bootstrap.css" rel="stylesheet" />
+
+    <script src="../lib/jquery/dist/jquery.min.js"></script>
+    <script src="../lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/jquery.dataTables.min.js"></script>
+    <!-- Este es el que tenés que agregar -->
+
     <style>
         .text {
             text-transform: uppercase;
@@ -14,151 +27,196 @@
 </head>
 <body>
 
-    <div class="encabezado">
-        <h1>Nuevo</h1>
-        <h2>@Model.RespuestaSql</h2>
-    </div>
+    <div class="container py-4">
+        <div class="mb-4 text-center">
+            <h1>Nuevo</h1>
+            <h2>@Model.RespuestaSql</h2>
+        </div>
 
-    <div class="contenido-mvc">
-        <form class=factura-form action=@Url.Action("Insert","Computadoras") method="post">
+        <form class="row g-3" action="@Url.Action("Insert", "Computadoras")" method="post">
 
-            <label for="">Codigo Empleado</label>
-            <input class="text" type="text" value="@Model.Cod_Emple" name="Cod_Emple" id="CodEmple">
-            <br />
+            <div class="col-md-4">
+                <label class="form-label">Código Empleado</label>
+                <input class="form-control text" type="text" value="@Model.Cod_Emple" name="Cod_Emple" id="CodEmple">
+            </div>
 
-            <label for="empleado">Nombre</label>
-            <input class="text" type="text" value="@Model.Nombre" name="Nombre" id="empleado">
-            <button type="button" id="seleccionarEmpleadoBtn">Seleccionar Empleado</button>
-            <br />
+            <div class="col-md-6">
+                <label class="form-label">Nombre</label>
+                <div class="input-group">
+                    <input class="form-control text" type="text" value="@Model.Nombre" name="Nombre" id="empleado">
+                    <button type="button" class="btn btn-outline-primary" id="seleccionarEmpleadoBtn">Seleccionar Empleado</button>
+                </div>
+            </div>
 
-            <label for="">No. Inventario</label>
-            <input class="text" type="text" value="@Model.No_Inventario" name="No_Inventario">
-            <br />
+            <div class="col-md-4">
+                <label class="form-label">No. Inventario</label>
+                <input class="form-control text" type="text" value="@Model.No_Inventario" name="No_Inventario">
+            </div>
 
-            <label for="">Tipo</label>
-            <input class="text" type="text" value="@Model.Tipo" name="Tipo">
-            <br />
+            <div class="col-md-4">
+                <label class="form-label">Tipo</label>
+                <input class="form-control text" type="text" value="@Model.Tipo" name="Tipo">
+            </div>
 
-            <label for="">Marca</label>
-            <input class="text" type="text" value="@Model.Marca" name="Marca">
-            <br />
-            <label for="">Modelo</label>
-            <input class="text" type="text" value="@Model.Modelo" name="Modelo">
-            <br />
-            <label for="">Serie</label>
-            <input class="text" type="text" value="@Model.Serie" name="Serie">
-            <br />
-            <label for="">Procesador</label>
-            <input class="text" type="text" value="@Model.Procesador" name="Procesador">
-            <br />
-            <label for="">Generacion</label>
-            <input class="text" type="text" value="@Model.Generacion" name="Generacion">
-            <br />
-            <label for="">Tipo de disco</label>
-            <input class="text" type="text" value="@Model.TipoDisco" name="TipoDisco">
-            <br />
-            <label for="">Capacidad de disco</label>
-            <input class="text" type="text" value="@Model.CapacidadDisco" name="CapacidadDisco">
-            <br />
-            <label for="">Ram</label>
-            <input class="text" type="text" value="@Model.Ram" name="Ram">
-            <br />
-            <label for="">Mac Address</label>
-            <input class="text" type="text" value="@Model.MacAddress" name="MacAddress">
-            <br />
-            <label for="">No IP</label>
-            <input class="text" type="text" value="@Model.NoIp" name="NoIp">
-            <br />
-            <label for="">Teclado</label>
-            <input class="text" type="text" value="@Model.Teclado" name="Teclado">
-            <br />
-            <label for="">Mouse</label>
-            <input class="text" type="text" value="@Model.Mouse" name="Mouse">
-            <br />
-            <label for="">Nombre Pc</label>
-            <input class="text" type="text" value="@Model.NombrePc" name="NombrePc">
-            <br />
-            <label for="">Dominio</label>
-            <input class="text" type="text" value="@Model.Dominio" name="Dominio">
-            <br />
-            <label for="">Usuario</label>
-            <input class="text" type="text" value="@Model.Usuario" name="Usuario">
-            <br />
-            <label for="">Contraseña</label>
-            <input class="Contraseña" type="text" value="@Model.Contra" name="Contra" oninput="this.value = this.value">
-            <br />
+            <div class="col-md-4">
+                <label class="form-label">Marca</label>
+                <input class="form-control text" type="text" value="@Model.Marca" name="Marca">
+            </div>
 
-            <label for="">Estado</label>
-            <select name="Estado">
-                @if (Model.Estado == "A")
-                {
-                    <option value="A" selected>Activo</option>
-                    <option value="I">Inactivo</option>
-                }
-                else
-                {
-                    <option value="A">Activo</option>
-                    <option value="I" selected>Inactivo</option>
-                }
-            </select>
-            @*<input class="text" type="text" value="@Model.Estado" name="Estado">*@
-            <br />
-            <label for="">Condicion</label>
-            <select name="Condicion">
-                @if (Model.Condicion == "B")
-                {
-                    <option value="B" selected>Buen estado</option>
-                    <option value="M">Mal Estado</option>
-                }
-                else
-                {
-                    <option value="B">Buen estado</option>
-                    <option value="M" selected>Mal Estado</option>
-                }
-            </select>
+            <div class="col-md-4">
+                <label class="form-label">Modelo</label>
+                <input class="form-control text" type="text" value="@Model.Modelo" name="Modelo">
+            </div>
 
-            <br />
+            <div class="col-md-4">
+                <label class="form-label">Serie</label>
+                <input class="form-control text" type="text" value="@Model.Serie" name="Serie">
+            </div>
 
+            <div class="col-md-4">
+                <label class="form-label">Procesador</label>
+                <input class="form-control text" type="text" value="@Model.Procesador" name="Procesador">
+            </div>
 
-            <br />
-            <br />
-            <button type="submit" id="Editar">Guardar</button>
+            <div class="col-md-4">
+                <label class="form-label">Generación</label>
+                <input class="form-control text" type="text" value="@Model.Generacion" name="Generacion">
+            </div>
 
+            <div class="col-md-4">
+                <label class="form-label">Tipo de Disco</label>
+                <input class="form-control text" type="text" value="@Model.TipoDisco" name="TipoDisco">
+            </div>
 
-            <button type="button" id="cancelar"><a href=@Url.Action("Home_","Home")>Cancelar</a></button>
+            <div class="col-md-4">
+                <label class="form-label">Capacidad de Disco</label>
+                <input class="form-control text" type="text" value="@Model.CapacidadDisco" name="CapacidadDisco">
+            </div>
 
+            <div class="col-md-4">
+                <label class="form-label">RAM</label>
+                <input class="form-control text" type="text" value="@Model.Ram" name="Ram">
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Mac Address</label>
+                <input class="form-control text" type="text" value="@Model.MacAddress" name="MacAddress">
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">No IP</label>
+                <input class="form-control text" type="text" value="@Model.NoIp" name="NoIp">
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Teclado</label>
+                <input class="form-control text" type="text" value="@Model.Teclado" name="Teclado">
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Mouse</label>
+                <input class="form-control text" type="text" value="@Model.Mouse" name="Mouse">
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Nombre PC</label>
+                <input class="form-control text" type="text" value="@Model.NombrePc" name="NombrePc">
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Dominio</label>
+                <input class="form-control text" type="text" value="@Model.Dominio" name="Dominio">
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Usuario</label>
+                <input class="form-control text" type="text" value="@Model.Usuario" name="Usuario">
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Contraseña</label>
+                <input class="form-control" type="text" value="@Model.Contra" name="Contra">
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">Estado</label>
+                <select class="form-select" name="Estado">
+                    @if (Model.Estado == "A")
+                    {
+                        <option value="A" selected>Activo</option>
+                        <option value="I">Inactivo</option>
+                    }
+                    else
+                    {
+                        <option value="A">Activo</option>
+                        <option value="I" selected>Inactivo</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">Condición</label>
+                <select class="form-select" name="Condicion">
+                    @if (Model.Condicion == "B")
+                    {
+                        <option value="B" selected>Buen estado</option>
+                        <option value="M">Mal estado</option>
+                    }
+                    else
+                    {
+                        <option value="B">Buen estado</option>
+                        <option value="M" selected>Mal estado</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-12 d-flex justify-content-start gap-2 mt-4">
+                <button type="submit" class="btn btn-success">Guardar</button>
+                <a href="@Url.Action("Home_", "Home")" class="btn btn-secondary">Cancelar</a>
+            </div>
         </form>
     </div>
-    
-    
-     <!-- El Popup -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Seleccionar Empleado</h2>
-            <table id="empleadosTable">
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Acción</th>
-                </tr>
-                <!-- Iterar sobre los empleados del modelo -->
-                @foreach (var empleado in Model.Empleados)
-                {
-                    <tr>
-                        <td>@empleado.Cod_Emple</td>
-                        <td>@empleado.Nombre</td>
-                        <td><button class="selectEmpleadoBtn" data-cod-emple="@empleado.Cod_Emple" data-nombre="@empleado.Nombre">Seleccionar</button></td>
-                    </tr>
-                }
-            </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="empleadoModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Seleccionar Empleado</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-hover" id="empleadosTable">
+                        <thead class="table-light">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var empleado in Model.Empleados)
+                            {
+                                <tr>
+                                    <td>@empleado.Cod_Emple</td>
+                                    <td>@empleado.Nombre</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-sm selectEmpleadoBtn" data-cod-emple="@empleado.Cod_Emple" data-nombre="@empleado.Nombre">
+                                            Seleccionar
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 
-
-
+    <!-- Scripts -->
+    <script src="~/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/customScript.js"></script>
-
 
 </body>
 </html>
