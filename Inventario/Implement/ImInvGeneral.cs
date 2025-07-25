@@ -7,14 +7,16 @@ namespace Inventario.Implement
 {
     public class ImInvGeneral
     {
-
+       
         private Conexion cn;
-        public List<MInvGeneral> getInventario()
+
+
+        public List<MInvGeneral> getInventario() 
         {
+            
             cn = new Conexion();
             var inv = new List<MInvGeneral>();
-            
-
+           
             MySqlDataReader mySqlDataReader;
             
             string consulta = $"call getInventario";

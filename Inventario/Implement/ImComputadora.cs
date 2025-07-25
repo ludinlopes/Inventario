@@ -169,6 +169,22 @@ namespace Inventario.Implement
                 }
                 
             }
+            catch (MySqlException ex)
+            {
+                // El error 1062 es el de entrada duplicada para una clave única
+                if (ex.Number == 1062)
+                {
+                    mensaje = $"Error de duplicado: La serie '{modelo.Serie}' ya existe. Por favor, ingrese una serie diferente.";
+                    // Opcional: podrías loggear el error completo para depuración
+                    Console.WriteLine($"Error MySql (1062): {ex.Message}");
+                }
+                else
+                {
+                    // Otros errores de MySQL (conexión, sintaxis, etc.)
+                    mensaje = $"Error de base de datos inesperado: {ex.Message}";
+                    Console.WriteLine($"Error MySql ({ex.Number}): {ex.Message}");
+                }
+            }
             catch (Exception ex)
             {
                 mensaje = "Error: " + ex;

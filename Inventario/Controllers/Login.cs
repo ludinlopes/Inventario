@@ -17,6 +17,10 @@ namespace Inventario.Controllers
         public IActionResult Acceso(string Usuario, string Contraseña, string Sucursal)
         {
             HttpContext.Session.SetString("Sucursal", Sucursal);
+            // Obtener la sucursal desde la sesión
+            string sucursal = HttpContext.Session.GetString("Sucursal");
+            // Pasar la sucursal como parámetro
+           
             var a = new ImLogin();
             var b = a.getUsuario(Usuario,Contraseña);
             if(b == true)

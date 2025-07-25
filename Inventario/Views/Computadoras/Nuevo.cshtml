@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuevo Registro</title>
+    <title>Nuevo Registro - Computadora</title>
 
     <link href="../css/spinnerloader.css" rel="stylesheet" />
     <link href="../css/datatables.bootstrap5.min.css" rel="stylesheet" />
@@ -13,6 +13,7 @@
     <link href="../css/bootstrap.rtl.min.css" rel="stylesheet" />
     <link href="../css/bootstrap.rtl.css" rel="stylesheet" />
     <link href="../css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 
     <script src="../lib/jquery/dist/jquery.min.js"></script>
     <script src="../lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -44,7 +45,7 @@
                 <label class="form-label">Nombre</label>
                 <div class="input-group">
                     <input class="form-control text" type="text" value="@Model.Nombre" name="Nombre" id="empleado">
-                    <button type="button" class="btn btn-outline-primary" id="seleccionarEmpleadoBtn">Seleccionar Empleado</button>
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="seleccionarEmpleadoBtn">Seleccionar Empleado</button>
                 </div>
             </div>
 
@@ -178,41 +179,46 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="empleadoModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Seleccionar Empleado</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                </div>
-                <div class="modal-body">
-                    <table class="table table-bordered table-hover" id="empleadosTable">
-                        <thead class="table-light">
+    
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Seleccionar Empleado</h2>
+            <div class="col-12">
+                <table id="empleadosTable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <!-- Iterar sobre los empleados del modelo -->
+                    <tbody>
+                        @foreach (var empleado in Model.Empleados)
+                        {
                             <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Acción</th>
+                                <td>@empleado.Cod_Emple</td>
+                                <td>@empleado.Nombre</td>
+                                <td><button class="selectEmpleadoBtn" data-cod-emple="@empleado.Cod_Emple" data-nombre="@empleado.Nombre">Seleccionar</button></td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var empleado in Model.Empleados)
-                            {
-                                <tr>
-                                    <td>@empleado.Cod_Emple</td>
-                                    <td>@empleado.Nombre</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-sm selectEmpleadoBtn" data-cod-emple="@empleado.Cod_Emple" data-nombre="@empleado.Nombre">
-                                            Seleccionar
-                                        </button>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
-    </div>
+    </div> 
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // Inicializar DataTables en tu tabla
+            $('#empleadosTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/es_es.json" // Idioma español
+                }
+            });
+        });
+    </script>
 
     <!-- Scripts -->
     <script src="~/bootstrap/js/bootstrap.bundle.min.js"></script>
