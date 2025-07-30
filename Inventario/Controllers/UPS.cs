@@ -11,7 +11,7 @@ namespace Inventario.Controllers
         {
             ImUps ups = new ImUps();
 
-            MUps a = ups.getEmple(b);
+            MUps a = ups.getUpsByNoInv(b);
             var c = new ImEmpleado();
             a.Empleados = c.getEmpleados();
             return View(a);
@@ -45,7 +45,7 @@ namespace Inventario.Controllers
             ImUps compu = new ImUps();
             MUps c = new MUps();
             c = b;
-            c.RespuestaSql = compu.insert(b);
+            c.RespuestaSql = compu.insertUps(b);
             
             return RedirectToAction("Nuevo", "UPS",c);
 

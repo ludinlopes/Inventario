@@ -10,7 +10,7 @@ namespace Inventario.Controllers
         {
             ImTablet mon = new ImTablet();
 
-            MTablet a = mon.getEmple(b);
+            MTablet a = mon.getTabletByIMEI(b);
             var c = new ImEmpleado();
             a.Empleados = c.getEmpleados();
             return View(a);
@@ -22,7 +22,7 @@ namespace Inventario.Controllers
 
             ImTablet compu = new ImTablet();
 
-            string a = compu.setCelular(b);
+            string a = compu.setTablet(b);
             MRespuestaDB resp = new MRespuestaDB();
             resp.respuesta = a;
             return View(resp);
@@ -42,7 +42,7 @@ namespace Inventario.Controllers
             ImTablet compu = new ImTablet();
             MTablet c = new MTablet();
             c = b;
-            c.RespuestaSql = compu.insert(b); ;
+            c.RespuestaSql = compu.insertTablet(b); ;
 
             return RedirectToAction("Nuevo", "Celular", c);
 

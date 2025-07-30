@@ -27,9 +27,9 @@ namespace Inventario.Controllers
         {
             return View();
         }
-        */
-
-        private static SshService sshService = new SshService();
+        ////desde aca estaba activado lo comente el 28 -7 -25 a las 13:54
+        
+         private static SshService sshService = new SshService();
 
         public IActionResult IniciarSesionSSH()
         {
@@ -53,6 +53,9 @@ namespace Inventario.Controllers
             ViewBag.Mensaje = "Desconectado de PowerShell.";
             return View();
         }
+
+        */
+
 
         public IActionResult Menu() {
             string sucursal = HttpContext.Session.GetString("Sucursal");
@@ -79,12 +82,14 @@ namespace Inventario.Controllers
         public IActionResult Home_()
         {
             string sucursal = HttpContext.Session.GetString("Sucursal");
-            MDocument a = new MDocument();
-            a.controlador = "Home";
-            a.metodo = "Consulta";
-            a.Empleado = "chequed";
-            a.Texto = "prueba";
-            
+            MDocument a = new MDocument
+            {
+                controlador = "Home",
+                metodo = "Consulta",
+                Empleado = "chequed",
+                Texto = "prueba"
+            };
+
             if (sucursal == "RZ")
             {
                 a.Sucursal = "Ricza";

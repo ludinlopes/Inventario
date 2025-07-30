@@ -12,7 +12,7 @@ namespace Inventario.Controllers
             
             ImTelefono ups = new ImTelefono();
 
-            MTelefono a = ups.getEmple(b);
+            MTelefono a = ups.getTelefonoByCodEmple(b);
             var c = new ImEmpleado();
             a.Empleados = c.getEmpleados();
             return View(a);
@@ -46,7 +46,7 @@ namespace Inventario.Controllers
             ImTelefono compu = new ImTelefono();
             MTelefono c = new MTelefono();
             c = b;
-            c.RespuestaSql = compu.insert(b);
+            c.RespuestaSql = compu.insertTelefono(b);
 
             return RedirectToAction("Nuevo", "Telefono", c);
 
