@@ -1,35 +1,50 @@
-﻿@RenderBody()
-@*@model MDocument*@
+﻿@*
+    Directivas necesarias para acceder a la sesión.
+    @using: Importa el namespace de las clases de C#.
+    @inject: Inyecta el servicio IHttpContextAccessor para acceder a la sesión.
+*@
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    // Obtiene el contexto HTTP de la solicitud actual
+    var httpContext = HttpContextAccessor.HttpContext;
+
+    // Obtiene los datos de la sucursal de la sesión
+    string sucursalNombre = httpContext?.Session?.GetString("SucursalNombre");
+    string sucursalAbrev = httpContext?.Session?.GetString("SucursalAbrev");
+    int? sucursalID = httpContext?.Session?.GetInt32("SucursalID");
+}
+
 <!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" href="~/css/mystyle.css">
-
+    <title>Inventario | @sucursalNombre</title>
 </head>
 <body>
+    @* La línea @RenderBody() es clave, aquí es donde se inserta el contenido de las otras vistas *@
+    @RenderBody()
 
     <div class="encabezado">
-
         <h1>Busqueda de inventario</h1>
-        @*<h2>@Model.Sucursal</h2>*@
-        <p>Favor seleccione el tipo de busqueda e ingrese el valor buscado:</p>
 
+        @if (!string.IsNullOrEmpty(sucursalNombre))
+        {
+            @* Muestra el nombre y el ID de la sucursal logueada *@
+            <h2>Sucursal: @sucursalNombre (@sucursalAbrev)</h2>
+        }
+        else
+        {
+            @* Mensaje si la sesión no tiene los datos (p.ej. antes de loguearse) *@
+            <h2>Sucursal: No seleccionada</h2>
+        }
+
+        <p>Favor seleccione el tipo de busqueda e ingrese el valor buscado:</p>
     </div>
 
-
-
     <div class="contenido">
-
-        <form class=factura-form action=@Url.Action("Consulta","Home") method="post">
-
-            @* <select name="Sucursal">
-
-                <option value="RZ">Ricza</option>
-                <option value="INM">Inmepro</option>
-                <option value="SC">Servicocinas</option>
-                <option value="FES">Food Equipment Solution</option>
-
-            </select> *@
+        <form class=factura-form action=@Url.Action("Consulta", "Home") method="post">
             <br>
             <input type="radio" id="InvGeneral" name="fav_language" value="Inventario General">
             <label for="InvGeneral">Inventario General</label><br>
@@ -65,14 +80,7 @@
 
             <input class="boton" type="submit" value="Submit">
         </form>
-
     </div>
-
- 
 
 </body>
 </html>
-
-
-
-

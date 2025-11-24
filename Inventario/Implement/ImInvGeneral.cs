@@ -10,12 +10,13 @@ namespace Inventario.Implement
         // Cada método creará y gestionará su propia instancia de Conexion
         // dentro de un bloque 'using'.
 
-        public List<MInvGeneral> getInventario()
+        public List<MInvGeneral> getInventario(string sucursal)
         {
             var inv = new List<MInvGeneral>();
             // Asumo que 'getInventario' es un procedimiento almacenado sin parámetros
-            string procedimiento = "getInventario";
-
+            string procedimiento = "getInventario3";
+            // Ya tienes la sucursal disponible aquí
+            Console.WriteLine("Sucursal - InInvGeneral: " + sucursal);
             try
             {
                 // Inicia el bloque 'using' para la instancia de Conexion.
@@ -25,6 +26,15 @@ namespace Inventario.Implement
                     using (MySqlConnection conn = cn.GetConnection())
                     {
                         conn.Open(); // Abre la conexión explícitamente
+
+                        // PASO CLAVE 1: Establecer la variable de sesión de MySQL
+                        // Esto se hace ANTES de llamar al procedimiento almacenado.
+                        using (MySqlCommand setSessionVarCommand = new MySqlCommand("SET @sucursal_a_filtrar = @sucursal_param", conn))
+                        {
+                            // Agregamos el parámetro C# con el valor que recibimos en el método
+                            setSessionVarCommand.Parameters.AddWithValue("@sucursal_param", sucursal);
+                            setSessionVarCommand.ExecuteNonQuery();
+                        }
 
                         // Envuelve el MySqlCommand en un 'using'.
                         using (MySqlCommand mySqlCommand = new MySqlCommand(procedimiento, conn))

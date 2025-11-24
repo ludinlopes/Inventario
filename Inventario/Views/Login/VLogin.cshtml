@@ -1,4 +1,12 @@
-﻿
+﻿@using Inventario.Models
+
+@{
+    // Convertimos la lista de ViewData
+    var sucursales = ViewData["Sucursales"] as List<MSucursales> ?? new List<MSucursales>();
+    // Obtenemos el mensaje de error
+    string errorMessage = ViewData["ErrorMessage"] as string;
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <link href="~/css/style.css" rel="stylesheet" />
@@ -7,28 +15,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planilla</title>
-    <script src="Script/login.js" defer></script>
 </head>
 <body>
     <form class=form_login action=@Url.Action("Acceso","Login") method="post">
         <h5>Formulario Login</h5>
-        
 
         <input class=controls type="text" name="Usuario" id="Usuario" placeholder="Usuario">
         <input class=controls type="password" name="Contraseña" id="Contraseña" placeholder="Contraseña">
+
         <select class="controls" name="Sucursal">
-
-            <option value="RZ">Ricza</option>
-            <option value="INM">Inmepro</option>
-            <option value="SC">Servicocinas</option>
-            <option value="HB">Semerca</option>
-            <option value="FES">Food Equipment Solution</option>
-
+            @if (sucursales.Any())
+            {
+                foreach (var sucursal in sucursales)
+                {
+                    <option value="@sucursal.Abrev">@sucursal.Nombre</option>
+                }
+            }
+            else
+            {
+                <option value="">No hay sucursales activas</option>
+            }
         </select>
+
         <div id="mensaje"></div>
         <input class=buttons type="submit" name="" value="Ingresar" id="ingresar">
         <p><a href="#">¿Olvidaste su contraseña?</a></p>
     </form>
-</body>
 
+    <script src="~/Script/login.js"></script>
+    <script>
+        // Este script revisa si hay un mensaje de error
+        var errorMessage = '@Html.Raw(errorMessage)'; // Usamos Html.Raw para que no escape caracteres especiales
+        if (errorMessage && errorMessage !== '') {
+            alert(errorMessage);
+        }
+    </script>
+</body>
 </html>

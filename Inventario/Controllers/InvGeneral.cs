@@ -7,18 +7,19 @@ namespace Inventario.Controllers
     {
         public IActionResult Vista()
         {
-            string sucursal = HttpContext.Session.GetString("Sucursal");
+            string sucursal = HttpContext.Session.GetString("SucursalAbrev");
+
             if (sucursal == "RZ")
             {
-                sucursal = "Ricza";
+                sucursal = "RICZA";
             }
             else if (sucursal == "INM")
             {
-                sucursal = "Inmepro";
+                sucursal = "INMEPRO";
             }
             else if (sucursal == "SC")
             {
-                sucursal = "Servicocinas";
+                sucursal = "SERVICOCINAS";
             }
             else if (sucursal == "FES")
             {
@@ -29,7 +30,7 @@ namespace Inventario.Controllers
 
             //string consulta = $"CALL getInventarioPorSucursal('{sucursal}')";
             var cn = new ImInvGeneral();
-            var a = cn.getInventario();
+            var a = cn.getInventario(sucursal);
             return View(a);
         }
     }
