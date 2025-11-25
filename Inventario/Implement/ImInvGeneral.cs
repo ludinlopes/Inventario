@@ -205,5 +205,148 @@ namespace Inventario.Implement
             return inv;
             // --- FIN de la parte que pediste mantener tal cual ---
         }
+
+
+
+
+
+
+
+
+
+
+        //public List<MListItems> getListInv(String Suc)
+        //{
+        //    var inv = new List<MListItems>();
+        //    // Asumo que 'getInventario' es un procedimiento almacenado sin parámetros
+        //    string procedimiento = "getListItems('1')";
+
+
+
+
+        //    try
+        //    {
+        //        // Inicia el bloque 'using' para la instancia de Conexion.
+        //        using (Conexion cn = new Conexion())
+        //        {
+        //            // Obtiene la MySqlConnection y la envuelve en un 'using'.
+        //            using (MySqlConnection conn = cn.GetConnection())
+        //            {
+        //                conn.Open(); // Abre la conexión explícitamente
+
+        //                // Envuelve el MySqlCommand en un 'using'.
+        //                using (MySqlCommand mySqlCommand = new MySqlCommand(procedimiento, conn))
+        //                {
+        //                    mySqlCommand.CommandType = CommandType.StoredProcedure; // Indicamos que es un procedimiento almacenado
+
+        //                    // Envuelve el MySqlDataReader en un 'using'.
+        //                    using (MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader())
+        //                    {
+        //                        // --- INICIO de la parte que pediste mantener tal cual ---
+        //                        while (mySqlDataReader.Read())
+        //                        {
+        //                            var minv = new MListItems();
+
+        //                            minv.Tipo = mySqlDataReader.GetString("Tipo");
+        //                            minv.No_Inventario = mySqlDataReader.GetString("No_Inventario");
+        //                            minv.Serie = mySqlDataReader.GetString("Serie");
+        //                            minv.Modelo = mySqlDataReader.GetString("Modelo");
+        //                            minv.Nombre = mySqlDataReader.GetString("Nombre");
+        //                            minv.Area = mySqlDataReader.GetString("Area");
+        //                            minv.Estado = mySqlDataReader.GetString("Estado");
+
+
+        //                            inv.Add(minv);
+        //                        }
+        //                        // --- FIN de la parte que pediste mantener tal cual ---
+        //                    } // mySqlDataReader se cierra y se dispone aquí.
+        //                } // mySqlCommand se cierra y se dispone aquí.
+        //            } // conn (MySqlConnection) se cierra y se dispone aquí.
+        //        } // cn (Conexion) se dispone aquí, asegurando el cierre de la MySqlConnection interna.
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error al obtener inventario general: {ex.Message}");
+        //        // Puedes optar por lanzar la excepción o devolver una lista vacía.
+        //        var i = new MListItems();
+        //        i.Tipo = "Computadora";
+        //        i.No_Inventario = "RZ-CO-0001";
+        //        i.Serie = "ABC123";
+        //        i.Modelo = "Dell XPS 13";
+        //        i.Nombre = "Juan Perez";
+        //        i.Area = "Ventas";
+        //        i.Estado = "A";
+
+
+        //        inv.Add(i);
+        //        return inv;
+        //    }
+
+        //    // --- INICIO de la parte que pediste mantener tal cual ---
+        //    return inv;
+        //    // --- FIN de la parte que pediste mantener tal cual ---
+        //}
+
+        public List<MListItems> getListInv(String Suc)
+        {
+            Suc = "1"; // Temporalmente forzado a "1" para pruebas
+            var inv = new List<MListItems>();
+            string procedimiento = "getListItems"; // SOLO EL NOMBRE DEL PROCEDIMIENTO
+
+            try
+            {
+                using (Conexion cn = new Conexion())
+                using (MySqlConnection conn = cn.GetConnection())
+                {
+                    conn.Open();
+
+                    using (MySqlCommand mySqlCommand = new MySqlCommand(procedimiento, conn))
+                    {
+                        mySqlCommand.CommandType = CommandType.StoredProcedure;
+
+                        // *** AÑADIR EL PARÁMETRO QUE PASA EL VALOR DE 'Suc' ***
+                        // Asegúrate de que "@p_filtro" coincida con el nombre del parámetro en MySQL.
+                        mySqlCommand.Parameters.AddWithValue("sucursal", Suc);
+
+                        using (MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader())
+                        {
+                            while (mySqlDataReader.Read())
+                            {
+                                var minv = new MListItems();
+
+                                // Nota: Se recomienda añadir manejo de NULLs aquí (IsDBNull)
+                                minv.Tipo = mySqlDataReader.GetString("Tipo");
+                                minv.No_Inventario = mySqlDataReader.GetString("No_Inventario");
+                                minv.Serie = mySqlDataReader.GetString("Serie");
+                                minv.Modelo = mySqlDataReader.GetString("Modelo");
+                                minv.Nombre = mySqlDataReader.GetString("Nombre");
+                                minv.Area = mySqlDataReader.GetString("Area");
+                                minv.Estado = mySqlDataReader.GetString("Estado");
+
+                                inv.Add(minv);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al obtener inventario general: {ex.Message}");
+                // Devolvemos una lista vacía si falla la conexión o la consulta.
+                return new List<MListItems>();
+            }
+
+            // Devolvemos la lista poblada con los datos de la base de datos.
+            return inv;
+        }
+
+
+
+
+
+
+
+
+
     }
 }

@@ -1,7 +1,8 @@
 ﻿
 using Inventario.Models;
 using Microsoft.AspNetCore.Mvc;
-using Inventario.ConexionDB.ConexionSSH; // Importar el servicio SSH
+using Inventario.ConexionDB.ConexionSSH;
+using Inventario.Implement; // Importar el servicio SSH
 
 namespace Inventario.Controllers
 {
@@ -110,6 +111,57 @@ namespace Inventario.Controllers
         }
 
 
+
+
+
+
+        //public IActionResult MenuInv_()
+        //{
+        //    var cn = new ImInvGeneral();
+        //    var a = cn.getListInv("1");
+            
+        //    var i = new MListItems();
+        //     i = a;
+        //    i.Tipo = "Computadora";
+        //    i.No_Inventario = "RZ-CO-0001";
+        //    i.Serie = "ABC123";
+        //    i.Modelo = "Dell XPS 13";
+        //    i.Nombre = "Juan Perez";
+        //    i.Area = "Ventas";
+        //    i.Estado = "A";
+
+        //    var o = new MInvListado();
+        //    o.Items = new List<MListItems>();
+        //    o.Items.Add(i);
+        //    return View(o);
+        //}
+
+
+        public IActionResult MenuInv_()
+        {
+            var cn = new ImInvGeneral();
+
+            // 1. OBTENER LOS DATOS REALES DE LA BASE DE DATOS
+            // 'a' es una lista (List<MListItems>) con los datos.
+            var a = cn.getListInv("1");
+
+            // 2. CREAR EL MODELO CONTENEDOR PARA LA VISTA
+            var o = new MInvListado();
+
+            // 3. ASIGNAR LA LISTA COMPLETA DIRECTAMENTE
+            // Asignamos la lista 'a' a la propiedad 'Items' del modelo 'o'.
+            o.Items = a;
+
+            // 4. Se retorna la vista con el modelo 'o' lleno.
+            return View(o);
+
+            // Nota: Eliminamos todo el código de prueba (la declaración de 'i' y la asignación manual de propiedades)
+        }
+
+
+
+
+
         [HttpPost]
         public ActionResult Consulta(string fav_language/*,string Sucursal*/, string Texto)
         {
@@ -212,6 +264,16 @@ namespace Inventario.Controllers
             ViewBag.Sucursal = sucursal;
         }
 
+        [HttpGet]
+        public IActionResult GetFilasGeneral(string sucursal)
+        {
+            // 1. Usar tu método existente para obtener los datos
+            var cn = new ImInvGeneral();
+            var items = cn.getListInv(sucursal); // Usa la lógica que ya tienes
 
+            // 2. Devolver una vista parcial con el modelo
+            // La vista parcial solo contendrá el ciclo @foreach
+            return PartialView("_FilasInventarioGeneral", items);
+        }
     }
 }
