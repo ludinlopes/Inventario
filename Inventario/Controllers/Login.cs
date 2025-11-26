@@ -50,18 +50,22 @@ namespace Inventario.Controllers
                 // Instancia la clase para buscar la sucursal por su abreviatura
                 var imSucursales = new ImSucursales();
                 var sucursalInfo = imSucursales.getSucursalesActivas().FirstOrDefault(s => s.Abrev == Sucursal);
+                
 
                 if (sucursalInfo != null)
                 {
                     // GUARDA EL ID , la Abrev EN LA SESIÓN y EL NOMBRE
                     // 1. El ID de la sucursal
-                    HttpContext.Session.SetInt32("SucursalID", sucursalInfo.ID);
+                    HttpContext.Session.SetString("SucursalID", sucursalInfo.ID);
+                    Console.WriteLine(sucursalInfo.ID);
 
                     // 2. La abreviatura de la sucursal
                     HttpContext.Session.SetString("SucursalAbrev", sucursalInfo.Abrev);
+                    Console.WriteLine(sucursalInfo.Abrev);
 
                     // 3. ¡EL NOMBRE COMPLETO DE LA SUCURSAL!
                     HttpContext.Session.SetString("SucursalNombre", sucursalInfo.Nombre);
+                    Console.WriteLine(sucursalInfo.Nombre);
                 }
 
                 return RedirectToAction("Menu", "Home");
@@ -74,5 +78,4 @@ namespace Inventario.Controllers
         }
     }
 }
-
 
