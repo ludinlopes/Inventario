@@ -89,7 +89,7 @@
 
             <ul class="nav flex-column sidebar-menu">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#" data-view="general">
+                    <a class="nav-link active" href="#" data-view="Todo">
                         <i class="fas fa-list-alt me-2"></i> Inventario General
                     </a>
                 </li>
@@ -106,22 +106,22 @@
 
                 <h6 class="text-secondary mt-4 mb-2 ps-3 text-uppercase">Categorías</h6>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-view="computers">
+                    <a class="nav-link" href="#" data-view="Computadora">
                         <i class="fas fa-desktop me-2"></i> Computadoras / Laptops
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-view="monitors">
+                    <a class="nav-link" href="#" data-view="Monitor">
                         <i class="fas fa-tv me-2"></i> Monitores
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-view="printers">
+                    <a class="nav-link" href="#" data-view="Impresora">
                         <i class="fas fa-print me-2"></i> Impresoras / Scanners
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-view="phones">
+                    <a class="nav-link" href="#" data-view="Celular">
                         <i class="fas fa-mobile-alt me-2"></i> Teléfonos / Móviles
                     </a>
                 </li>
@@ -196,20 +196,7 @@
                             @foreach (var item in Model.Items)
                             {
                                 
-                                @* <tr>
-                                    <td>@contador</td>
-                                    <td>@item.Tipo</td>
-                                    <td>@item.No_Inventario</td>
-                                    <td>@item.Serie</td>
-                                    <td>@item.Modelo</td>
-                                    <td>@item.Area</td>
-                                    <td>@item.Estado</td>
-                                    <td>@item.Nombre</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-info" title="Ver Detalle"><i class="fas fa-eye"></i></button>
-                                        <button class="btn btn-sm btn-outline-warning" title="Editar"><i class="fas fa-edit"></i></button>
-                                    </td>
-                                </tr> *@
+                               
                                 <tr>
                                     <td>@contador</td>
                                     <td>@item.Tipo</td>
@@ -255,63 +242,68 @@
          * Simula la carga de una vista diferente (al hacer clic en el sidebar).
          * param {string} viewName - El nombre de la vista (ej: 'assignment', 'computers').
          */
-        function loadView(viewName) {
-            const mainTitle = document.querySelector('#main-content h2');
+        const mainTitle = document.querySelector('#main-content h2');
             const assetCountBadge = document.getElementById('asset-count');
             const assetListBody = document.getElementById('asset-list');
 
+
+
+        function loadView(viewName) {
+            
+
             // Lógica simple de cambio de título y datos simulados
-            switch(viewName) {
+        //     switch(viewName) {
 
-                    case 'general':
-        mainTitle.textContent = 'Inventario General de Activos';
-        assetListBody.innerHTML = '<tr><td colspan="8">Cargando datos...</td></tr>';
 
-        const sucursalID = '1';
 
-        // ✅ URL CORRECTA: Usa solo el nombre de la clase 'Home'
-        const url = `/Home/GetFilasGeneral?sucursal=${sucursalID}`;
 
-        fetch(url)
-            .then(response => {
-                if (!response.ok) {
-                    // Manejo de error de servidor
-                    throw new Error('Error de servidor al cargar las filas.');
-                }
-                return response.text();
-            })
-            .then(htmlContent => {
-                assetListBody.innerHTML = htmlContent;
-                // ... (Lógica para actualizar el contador) ...
-            })
-            .catch(error => {
-                console.error('Fallo en la carga:', error);
-                assetListBody.innerHTML = '<tr><td colspan="8" class="text-danger">Error de conexión.</td></tr>';
-            });
+        //             case 'general':
+        // mainTitle.textContent = 'Inventario General de Activos';
+        // actualizarInventario("1","Todo");
+        // break;
 
-        break;
 
-                case 'assignment':
-                    mainTitle.textContent = 'Activos Asignados por Empleado';
-                    assetCountBadge.textContent = '120';
-                    assetListBody.innerHTML = '<!-- Carga de asignaciones aquí -->';
-                    break;
-                case 'alerts':
-                    mainTitle.textContent = 'Alertas y Mantenimiento Pendiente';
-                    assetCountBadge.textContent = '12';
-                    assetListBody.innerHTML = '<!-- Carga de alertas aquí -->';
-                    break;
-                case 'computers':
-                    mainTitle.textContent = 'Inventario: Computadoras / Laptops';
-                    assetCountBadge.textContent = '55';
-                    assetListBody.innerHTML = '<!-- Carga de PCs y Laptops aquí -->';
-                    break;
-                default:
-                    mainTitle.textContent = `Vista de Inventario: ${viewName.charAt(0).toUpperCase() + viewName.slice(1)}`;
-                    assetCountBadge.textContent = '0';
-                    assetListBody.innerHTML = '<!-- Contenido vacío o específico -->';
-                    break;
-            }
+
+
+        //         case 'assignment':
+        //             mainTitle.textContent = 'Activos Asignados por Empleado';
+        //             assetCountBadge.textContent = '120';
+        //             assetListBody.innerHTML = '<!-- Carga de asignaciones aquí -->';
+        //             break;
+        //         case 'alerts':
+        //             mainTitle.textContent = 'Alertas y Mantenimiento Pendiente';
+        //             assetCountBadge.textContent = '12';
+        //             assetListBody.innerHTML = '<!-- Carga de alertas aquí -->';
+        //             break;
+        //         case 'computers':
+        //             mainTitle.textContent = 'Inventario: Computadoras / Laptops';
+        //             actualizarInventario("1","Computadora");
+        //             break;
+
+
+        //         case 'monitors':
+        //             mainTitle.textContent = 'Inventario: Monitores';
+        //             actualizarInventario("1","Monitor");
+        //         break;
+
+
+
+
+
+
+
+
+        //         default:
+        //             mainTitle.textContent = `Vista de Inventario: ${viewName.charAt(0).toUpperCase() + viewName.slice(1)}`;
+        //             assetCountBadge.textContent = '0';
+        //             assetListBody.innerHTML = '<!-- Contenido vacío o específico -->';
+        //             var A = "Celular"
+        //             actualizarInventario("1",viewName);
+        //             break;
+        //     }
+            
+            mainTitle.textContent = `Vista de Inventario: ${viewName.charAt(0).toUpperCase() + viewName.slice(1)}`;
+            actualizarInventario("1",viewName);
 
             // Manejo de la clase activa en el menú
             document.querySelectorAll('.sidebar-menu .nav-link').forEach(link => {
@@ -349,6 +341,46 @@
         window.onload = function() {
             // Simular carga de datos iniciales si no están en la tabla.
             console.log("Dashboard cargado.");
+        };
+
+
+
+
+
+
+
+
+
+
+        const actualizarInventario = (sucursalID,Tipo) => {
+
+
+         // mainTitle.textContent = `Vista de Inventario: ${viewName.charAt(0).toUpperCase() + viewName.slice(1)}`;
+          assetListBody.innerHTML = '<tr><td colspan="8">Cargando datos...</td></tr>';
+
+        // var sucursalID = '1';
+        // var Tipo = "Monitor";
+
+        // ✅ URL CORRECTA: Usa solo el nombre de la clase 'Home'
+        var url = `/Home/GetFilasGeneral?sucursal=${sucursalID}&tipo=${Tipo}`;
+
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    // Manejo de error de servidor
+                    throw new Error('Error de servidor al cargar las filas.');
+                }
+                return response.text();
+            })
+            .then(htmlContent => {
+                assetListBody.innerHTML = htmlContent;
+                // ... (Lógica para actualizar el contador) ...
+            })
+            .catch(error => {
+                console.error('Fallo en la carga:', error);
+                assetListBody.innerHTML = '<tr><td colspan="8" class="text-danger">Error de conexión.</td></tr>';
+            });
+            assetCountBadge.textContent = @Model.Items.Count;
         };
     </script>
 </body>
