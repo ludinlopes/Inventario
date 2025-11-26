@@ -36,3 +36,5 @@ namespace Inventario.Controllers
         }
     }
 }
+
+//pueba de comentario
