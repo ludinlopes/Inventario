@@ -143,7 +143,7 @@ namespace Inventario.Controllers
 
             // 1. OBTENER LOS DATOS REALES DE LA BASE DE DATOS
             // 'a' es una lista (List<MListItems>) con los datos.
-            var a = cn.getListInv("1");
+            var a = cn.getListInv("1","Todo");
 
             // 2. CREAR EL MODELO CONTENEDOR PARA LA VISTA
             var o = new MInvListado();
@@ -265,11 +265,11 @@ namespace Inventario.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetFilasGeneral(string sucursal)
+        public IActionResult GetFilasGeneral(string sucursal, string tipo)
         {
             // 1. Usar tu método existente para obtener los datos
             var cn = new ImInvGeneral();
-            var items = cn.getListInv(sucursal); // Usa la lógica que ya tienes
+            var items = cn.getListInv(sucursal,tipo); // Usa la lógica que ya tienes
 
             // 2. Devolver una vista parcial con el modelo
             // La vista parcial solo contendrá el ciclo @foreach
