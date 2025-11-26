@@ -1,7 +1,18 @@
-﻿@model MInvListado
+﻿
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@model MInvListado
 @{
+    var httpContext = HttpContextAccessor.HttpContext;
+    string sucursalNombre = httpContext?.Session?.GetString("SucursalNombre");
+    string sucursalAbrev = httpContext?.Session?.GetString("SucursalAbrev");
+    int? sucursalID = httpContext?.Session?.GetInt32("SucursalID");
+
+
 
     int contador = 1;
+
+    
 }
 <!DOCTYPE html>
 <html lang="es">

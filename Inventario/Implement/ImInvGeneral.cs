@@ -300,44 +300,13 @@ namespace Inventario.Implement
 
         public List<MListItems> getListInv(String Suc, string Tipo)
         {
-            Suc = "1"; // Temporalmente forzado a "1" para pruebas
-            
+            //Suc = "1"; // Temporalmente forzado a "1" para pruebas
+            Console.WriteLine("!"+Suc);
             var inv = new List<MListItems>();
             //string procedimiento; // SOLO EL NOMBRE DEL PROCEDIMIENTO
             string procedimiento = "getListItems"; // SOLO EL NOMBRE DEL PROCEDIMIENTO
             
 
-            //switch (Tipo)
-            //{
-                
-            //    case "Computadora":
-            //        procedimiento = "getListItems_Computadora";
-            //        break;
-            //    case "Monitor":
-            //        procedimiento = "getListItems_Monitor";
-            //        break;
-            //    case "Impresora":
-            //        procedimiento = "getListItems_Impresora";
-            //        break;
-            //    case "Escaner":
-            //        procedimiento = "getListItems_Escaner";
-            //        break;
-            //    case "Ups":
-            //        procedimiento = "getListItems_Ups";
-            //        break;
-            //    case "Telefono":
-            //        procedimiento = "getListItems_Telefono";
-            //        break;
-            //    case "Celular":
-            //        procedimiento = "getListItems_Celular";
-            //        break;
-            //    case "Tablet":
-            //        procedimiento = "getListItems_Tablet";
-            //        break;
-            //    default:
-            //        procedimiento = "getListItems"; // Procedimiento general si no coincide
-            //        break;
-            //}
             if (Tipo == "Todo") {
                 Tipo = "";
             }

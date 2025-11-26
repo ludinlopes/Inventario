@@ -143,7 +143,12 @@ namespace Inventario.Controllers
 
             // 1. OBTENER LOS DATOS REALES DE LA BASE DE DATOS
             // 'a' es una lista (List<MListItems>) con los datos.
-            var a = cn.getListInv("1","Todo");
+            Console.WriteLine("SucursalID en MenuInv_: " + HttpContext.Session.GetString("SucursalID"));
+            
+            String Id = HttpContext.Session.GetString("SucursalID");
+            var g = Id.ToString().Trim();
+            Console.WriteLine("SucursalID como cadena: " + g);
+            var a = cn.getListInv("1", "Todo");
 
             // 2. CREAR EL MODELO CONTENEDOR PARA LA VISTA
             var o = new MInvListado();
