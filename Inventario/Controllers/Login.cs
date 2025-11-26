@@ -91,7 +91,7 @@ namespace Inventario.Controllers
 
         public IActionResult Acceso(string Usuario, string Contraseña, string Sucursal)
         {
-            HttpContext.Session.SetString("Sucursal", Sucursal);
+            HttpContext.Session.SetString("Sucursal EJEM", Sucursal);
             var a = new ImLogin();
             var b = a.getUsuario(Usuario, Contraseña);
             if (b == true)
