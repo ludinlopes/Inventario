@@ -39,21 +39,24 @@ namespace Inventario.Implement
                             mySqlCommand.Parameters.AddWithValue("_username", us);
                             mySqlCommand.Parameters.AddWithValue("_password", hashedPassword);
 
-                            // Envuelve el MySqlDataReader en un 'using'.
-                            using (MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader())
+                            // V E R S I Ó N   C O R R E G I D A
+                            // -------------------------------------------------------------
+                            // Ejecuta el comando y recupera el valor de la primera columna 
+                            // de la primera fila (que es el resultado del COUNT(*)).
+                            object result = mySqlCommand.ExecuteScalar();
+
+                            if (result != null)
                             {
-                                // Si mySqlDataReader.Read() devuelve true, significa que se encontró una fila
-                                // con el usuario y la contraseña hasheada, por lo tanto, la autenticación fue exitosa.
-                                if (mySqlDataReader.Read())
+                                // Convertimos el resultado (que es el COUNT) a un entero.
+                                int userCount = Convert.ToInt32(result);
+
+                                // La autenticación es exitosa SÓLO si el conteo es 1.
+                                if (userCount > 0)
                                 {
                                     respuesta = true;
                                 }
-                                else
-                                {
-                                    respuesta = false; // No se encontraron coincidencias
-                                }
-
-                            } // mySqlDataReader se cierra y se dispone aquí.
+                                // Si userCount es 0, respuesta ya es false por defecto.
+                            }
                         } // mySqlCommand se cierra y se dispone aquí.
                     } // conn (MySqlConnection) se cierra y se dispone aquí.
                 } // cn (Conexion) se dispone aquí, asegurando el cierre de la MySqlConnection interna.

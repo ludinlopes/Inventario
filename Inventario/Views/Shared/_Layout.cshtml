@@ -13,7 +13,7 @@
     // Obtiene los datos de la sucursal de la sesión
     string sucursalNombre = httpContext?.Session?.GetString("SucursalNombre");
     string sucursalAbrev = httpContext?.Session?.GetString("SucursalAbrev");
-    int? sucursalID = httpContext?.Session?.GetInt32("SucursalID");
+    string sucursalID = httpContext?.Session?.GetString("SucursalID");
 }
 
 <!DOCTYPE html>
