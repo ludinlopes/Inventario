@@ -275,5 +275,7 @@ namespace Inventario.Controllers
             // La vista parcial solo contendrá el ciclo @foreach
             return PartialView("_FilasInventarioGeneral", items);
         }
+
+        
     }
 }
