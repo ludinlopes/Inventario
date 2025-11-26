@@ -6,7 +6,7 @@
     var httpContext = HttpContextAccessor.HttpContext;
     string sucursalNombre = httpContext?.Session?.GetString("SucursalNombre");
     string sucursalAbrev = httpContext?.Session?.GetString("SucursalAbrev");
-    int? sucursalID = httpContext?.Session?.GetInt32("SucursalID");
+    string sucursalID = httpContext?.Session?.GetString("SucursalID");
 
 
 
@@ -128,12 +128,33 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-view="Impresora">
-                        <i class="fas fa-print me-2"></i> Impresoras / Scanners
+                        <i class="fas fa-print me-2"></i> Impresoras
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-view="Celular">
-                        <i class="fas fa-mobile-alt me-2"></i> Teléfonos / Móviles
+                        <i class="fas fa-mobile-alt me-2"></i> Móviles
+                    </a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-view="Tablet">
+                        <i class="fas fa-tablet-alt me-2"></i> Tablets
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-view="Scanner">
+                        <i class="fas fa-print me-2"></i> Escanner
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-view="Telefono">
+                        <i class="fas fa-phone me-2"></i> Teléfono Fijo
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-view="UPS">
+                        <i class="fas fa-battery-full me-2"></i> Reguladores
                     </a>
                 </li>
             </ul>
@@ -261,60 +282,11 @@
 
         function loadView(viewName) {
             
+            var idSuc = @sucursalID;
 
-            // Lógica simple de cambio de título y datos simulados
-        //     switch(viewName) {
-
-
-
-
-        //             case 'general':
-        // mainTitle.textContent = 'Inventario General de Activos';
-        // actualizarInventario("1","Todo");
-        // break;
-
-
-
-
-        //         case 'assignment':
-        //             mainTitle.textContent = 'Activos Asignados por Empleado';
-        //             assetCountBadge.textContent = '120';
-        //             assetListBody.innerHTML = '<!-- Carga de asignaciones aquí -->';
-        //             break;
-        //         case 'alerts':
-        //             mainTitle.textContent = 'Alertas y Mantenimiento Pendiente';
-        //             assetCountBadge.textContent = '12';
-        //             assetListBody.innerHTML = '<!-- Carga de alertas aquí -->';
-        //             break;
-        //         case 'computers':
-        //             mainTitle.textContent = 'Inventario: Computadoras / Laptops';
-        //             actualizarInventario("1","Computadora");
-        //             break;
-
-
-        //         case 'monitors':
-        //             mainTitle.textContent = 'Inventario: Monitores';
-        //             actualizarInventario("1","Monitor");
-        //         break;
-
-
-
-
-
-
-
-
-        //         default:
-        //             mainTitle.textContent = `Vista de Inventario: ${viewName.charAt(0).toUpperCase() + viewName.slice(1)}`;
-        //             assetCountBadge.textContent = '0';
-        //             assetListBody.innerHTML = '<!-- Contenido vacío o específico -->';
-        //             var A = "Celular"
-        //             actualizarInventario("1",viewName);
-        //             break;
-        //     }
             
             mainTitle.textContent = `Vista de Inventario: ${viewName.charAt(0).toUpperCase() + viewName.slice(1)}`;
-            actualizarInventario("1",viewName);
+            actualizarInventario(idSuc,viewName);
 
             // Manejo de la clase activa en el menú
             document.querySelectorAll('.sidebar-menu .nav-link').forEach(link => {
