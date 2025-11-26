@@ -1,0 +1,385 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración de Usuarios</title>
+    <!-- Carga de Bootstrap CSS (v5.3) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Carga de Bootstrap JS (para componentes como modales si se implementan) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Carga de Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJd/r+3xZ/qH6v8g5/7tGowUa/K/6UqB7+I2G8q/yL75P6B7M6YjR+J0L5z5P6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Estilos personalizados para mejorar la apariencia */
+        body {
+            background-color: #f4f7f6;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .form-card, .list-card {
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-item {
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+            .user-item:hover {
+                background-color: #e9ecef;
+                transform: translateY(-2px);
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            }
+
+        .required-star {
+            color: #dc3545;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center mb-5 text-primary fw-bold">Gestión de Usuarios (Integración C# API)</h1>
+
+        <div id="alert-message" class="alert alert-warning d-none" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            **ATENCIÓN:** Se están intentando llamadas a la API `/api/users`. Si el servidor C# no está corriendo, estas llamadas fallarán y verás un error en la consola.
+        </div>
+
+        <div class="row">
+            <!-- Columna del Formulario (Añadir/Editar) -->
+            <div class="col-lg-4 mb-4">
+                <div class="card form-card">
+                    <div class="card-body">
+                        <h4 id="form-title" class="card-title text-primary">Crear Nuevo Usuario</h4>
+                        <form id="user-form">
+                            <input type="hidden" id="user-id">
+
+                            <!-- Campo Nombre Completo -->
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Nombre Completo<span class="required-star">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-signature"></i></span>
+                                    <input type="text" class="form-control" id="name" required placeholder="Ej: Laura López">
+                                </div>
+                            </div>
+
+                            <!-- Campo Nombre de Usuario -->
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Usuario<span class="required-star">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    <input type="text" class="form-control" id="username" required placeholder="Ej: llopez">
+                                </div>
+                            </div>
+
+                            <!-- Campo Correo Electrónico -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Correo<span class="required-star">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                    <input type="email" class="form-control" id="email" required placeholder="Ej: correo@ejemplo.com">
+                                </div>
+                            </div>
+
+                            <!-- Campo Contraseña -->
+                            <div class="mb-4">
+                                <label for="password" class="form-label">Contraseña<span class="required-star">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                    <input type="password" class="form-control" id="password" required placeholder="Mínimo 8 caracteres">
+                                </div>
+                            </div>
+
+                            <button type="submit" id="submit-button" class="btn btn-primary w-100"><i class="fas fa-plus-circle me-2"></i>Registrar Usuario</button>
+                            <button type="button" id="cancel-button" class="btn btn-outline-secondary w-100 mt-2 d-none" onclick="resetForm()"><i class="fas fa-times-circle me-2"></i>Cancelar Edición</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna de Lista de Usuarios -->
+            <div class="col-lg-8">
+                <div class="card list-card p-3">
+                    <h4 class="card-title text-secondary border-bottom pb-2 mb-3">Lista de Usuarios <span class="badge bg-primary" id="user-count">0</span></h4>
+                    <div id="user-list" class="list-group">
+                        <!-- Los usuarios se insertan aquí por JS -->
+                    </div>
+                    <div id="no-users-message" class="alert alert-info text-center mt-3 d-none">
+                        No hay usuarios registrados.
+                    </div>
+                    <div id="loading-spinner" class="text-center d-none">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Cargando...</span>
+                        </div>
+                        <p class="text-primary mt-2">Cargando datos del servidor...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="mt-4 text-center text-muted">
+            La lógica de datos ahora reside en el **`UserController.cs`** (C#). Este frontend realiza llamadas HTTP para CRUD.
+        </p>
+
+    </div>
+
+    <script>
+        // Array local para almacenar los usuarios después de cargarlos desde la API (Cache)
+        let users = [];
+        const API_URL = '/api/Users'; // La URL base de tu controlador C#
+
+        // Referencias del DOM
+        const userForm = document.getElementById('user-form');
+        const userList = document.getElementById('user-list');
+        const formTitle = document.getElementById('form-title');
+        const submitButton = document.getElementById('submit-button');
+        const cancelButton = document.getElementById('cancel-button');
+        const userIdInput = document.getElementById('user-id');
+        const userCount = document.getElementById('user-count');
+        const noUsersMessage = document.getElementById('no-users-message');
+        const loadingSpinner = document.getElementById('loading-spinner');
+        const alertMessage = document.getElementById('alert-message');
+
+        /**
+         * Muestra un spinner de carga o esconde el contenido principal.
+         * param {boolean} isLoading - Si es true, muestra el spinner.
+         */
+        function setLoading(isLoading) {
+            if (isLoading) {
+                loadingSpinner.classList.remove('d-none');
+                userList.innerHTML = '';
+            } else {
+                loadingSpinner.classList.add('d-none');
+            }
+        }
+
+        /**
+         * Realiza la llamada GET a la API de C# para obtener la lista de usuarios.
+         */
+        async function fetchUsers() {
+            setLoading(true);
+            alertMessage.classList.add('d-none');
+            try {
+                // Llama al método [HttpGet] GetUsers() en UserController.cs
+                const response = await fetch(API_URL);
+
+                if (!response.ok) {
+                    throw new Error(`Error HTTP: ${response.status}`);
+                }
+
+                users = await response.json();
+                renderUsers();
+            } catch (error) {
+                console.error('Error al cargar usuarios desde la API C#:', error);
+                alertMessage.classList.remove('d-none');
+
+                // En caso de fallo de conexión (ej: C# API no corriendo), usamos datos de simulación
+                // para que la interfaz sea utilizable.
+                users = [
+                    { id: 1, username: 'llopez', password: 'password123', email: 'llopez@mail.com', name: 'Laura López' },
+                    { id: 2, username: 'jsanchez', password: 'securepass', email: 'j.sanchez@web.net', name: 'Javier Sánchez' },
+
+                ];
+                renderUsers();
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        /**
+         * Renderiza la lista completa de usuarios en el DOM.
+         */
+        function renderUsers() {
+            userList.innerHTML = '';
+
+            if (users.length === 0) {
+                noUsersMessage.classList.remove('d-none');
+            } else {
+                noUsersMessage.classList.add('d-none');
+            }
+
+            userCount.textContent = users.length;
+
+            users.forEach(user => {
+                const item = document.createElement('div');
+                item.className = 'user-item list-group-item list-group-item-action d-flex justify-content-between align-items-center';
+                // La contraseña no se muestra por seguridad
+                item.innerHTML = `
+                    <div class="d-flex flex-column flex-grow-1">
+                        <span class="fw-bold text-primary"><i class="fas fa-user-circle me-2"></i>${user.name}</span>
+                        <small class="text-muted ms-4">
+                            Usuario: ${user.username} | Correo: ${user.email}
+                        </small>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-sm btn-warning me-2" onclick="startEdit(${user.id})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteUser(${user.id})">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                `;
+                userList.appendChild(item);
+            });
+        }
+
+        /**
+         * Maneja el envío del formulario: POST (Crear) o PUT (Actualizar)
+         * Llama a los métodos [HttpPost] o [HttpPut] en UserController.cs
+         * param {Event} event - Evento de submit.
+         */
+        userForm.addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const id = parseInt(userIdInput.value);
+            const method = id ? 'PUT' : 'POST';
+            const url = id ? `${API_URL}/${id}` : API_URL;
+
+            const formData = {
+                // Incluir el Id si es PUT, si no C# lo asigna
+                ...(id && { id: id }),
+                username: document.getElementById('username').value,
+                // La contraseña solo se incluye si es POST o si es un PUT y el campo no está vacío
+                password: document.getElementById('password').value,
+                email: document.getElementById('email').value,
+                name: document.getElementById('name').value,
+            };
+
+            // Para PUT, si la contraseña está vacía, no la enviamos para que el C# la ignore
+            if (method === 'PUT' && formData.password === '') {
+                delete formData.password;
+            } else if (formData.password === '') {
+                 // Para POST, la contraseña es obligatoria. El lado de C# también lo valida.
+                 alert('La contraseña es obligatoria para registrar un nuevo usuario.');
+                 return;
+            }
+
+            setLoading(true);
+
+            try {
+                const response = await fetch(url, {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok || response.status === 204 || response.status === 201) { // 204 para PUT, 201 para POST
+                    console.log(`Operación ${method} exitosa.`);
+                    resetForm();
+                    await fetchUsers(); // Recargar la lista desde el servidor
+                } else {
+                    const errorText = await response.text();
+                    throw new Error(`Fallo de la API: ${response.status} - ${errorText}`);
+                }
+            } catch (error) {
+                console.error(`Error al ${method === 'POST' ? 'crear' : 'actualizar'} usuario:`, error);
+                // Usamos una notificación simple ya que alert() está prohibido
+                const errorAlert = document.getElementById('alert-message');
+                errorAlert.classList.remove('alert-warning');
+                errorAlert.classList.add('alert-danger');
+                errorAlert.innerHTML = `<strong>Error de Comunicación:</strong> No se pudo conectar a la API. Revisa la consola.`;
+                errorAlert.classList.remove('d-none');
+            } finally {
+                setLoading(false);
+            }
+        });
+
+        /**
+         * Carga los datos de un usuario en el formulario para edición.
+         * param {number} id - ID del usuario a editar.
+         */
+        function startEdit(id) {
+            const user = users.find(u => u.id === id);
+            if (!user) return;
+
+            // Rellenar formulario
+            userIdInput.value = user.id;
+            document.getElementById('username').value = user.username;
+            document.getElementById('email').value = user.email;
+            document.getElementById('name').value = user.name;
+            // La contraseña NO se rellena.
+            document.getElementById('password').value = '';
+            document.getElementById('password').placeholder = 'Dejar vacío para no cambiar';
+
+
+            // Cambiar UI a modo edición
+            formTitle.textContent = 'Editar Usuario: ' + user.username;
+            submitButton.innerHTML = '<i class="fas fa-save me-2"></i> Guardar Cambios';
+            submitButton.classList.remove('btn-primary');
+            submitButton.classList.add('btn-success');
+            cancelButton.classList.remove('d-none');
+        }
+
+        /**
+         * Elimina un usuario llamando al método [HttpDelete] en UserController.cs
+         * param {number} id - ID del usuario a eliminar.
+         */
+        async function deleteUser(id) {
+            // Utilizamos confirm() para el ejercicio, pero se recomienda un modal personalizado en producción.
+            if (!window.confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
+                return;
+            }
+
+            const url = `${API_URL}/${id}`;
+            setLoading(true);
+
+            try {
+                const response = await fetch(url, { method: 'DELETE' });
+
+                if (response.ok || response.status === 204) { // 204 No Content indica éxito
+                    console.log(`Operación DELETE exitosa para ID: ${id}`);
+                    resetForm();
+                    await fetchUsers(); // Recargar la lista
+                } else {
+                    const errorText = await response.text();
+                    throw new Error(`Fallo de la API: ${response.status} - ${errorText}`);
+                }
+            } catch (error) {
+                console.error('Error al eliminar usuario:', error);
+                const errorAlert = document.getElementById('alert-message');
+                errorAlert.classList.remove('alert-warning');
+                errorAlert.classList.add('alert-danger');
+                errorAlert.innerHTML = `<strong>Error de Comunicación:</strong> No se pudo conectar a la API para eliminar.`;
+                errorAlert.classList.remove('d-none');
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        /**
+         * Restablece el formulario a su estado original de "Crear Nuevo Usuario".
+         */
+        function resetForm() {
+            userForm.reset();
+            userIdInput.value = '';
+
+            // Restaurar UI a modo creación
+            formTitle.textContent = 'Crear Nuevo Usuario';
+            submitButton.innerHTML = '<i class="fas fa-plus-circle me-2"></i>Registrar Usuario';
+            submitButton.classList.remove('btn-success');
+            submitButton.classList.add('btn-primary');
+            cancelButton.classList.add('d-none');
+            document.getElementById('password').placeholder = 'Mínimo 8 caracteres';
+        }
+
+        // Inicialización: Cargar los datos desde la API al cargar la página
+        window.onload = function() {
+            fetchUsers();
+            alertMessage.classList.remove('d-none'); // Asegurarse de que la advertencia de simulación esté visible al inicio
+        };
+    </script>
+
+</body>
+</html>
