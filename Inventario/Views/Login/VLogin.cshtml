@@ -17,13 +17,14 @@
     <title>Planilla</title>
 </head>
 <body>
-    <form class=form_login action=@Url.Action("Acceso","Login") method="post">
+	<form class=form_login action=@Url.Action("Acceso","Login") method="post">
+		<a href="c:\users\ricza\source\repos\inventario\inventario\views\login\vlogin.cshtml">c:\users\ricza\source\repos\inventario\inventario\views\login\vlogin.cshtml</a>
         <h5>Formulario Login</h5>
 
         <input class=controls type="text" name="Usuario" id="Usuario" placeholder="Usuario">
         <input class=controls type="password" name="Contraseña" id="Contraseña" placeholder="Contraseña">
 
-        <select class="controls" name="Sucursal">
+        <select class="controls" name="Sucursal" id="Sucursal">
             @if (sucursales.Any())
             {
                 foreach (var sucursal in sucursales)
@@ -42,13 +43,6 @@
         <p><a href="#">¿Olvidaste su contraseña?</a></p>
     </form>
 
-    <script src="~/Script/login.js"></script>
-    <script>
-        // Este script revisa si hay un mensaje de error
-        var errorMessage = '@Html.Raw(errorMessage)'; // Usamos Html.Raw para que no escape caracteres especiales
-        if (errorMessage && errorMessage !== '') {
-            alert(errorMessage);
-        }
-    </script>
+
 </body>
 </html>

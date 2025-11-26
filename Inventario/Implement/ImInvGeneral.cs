@@ -32,7 +32,7 @@ namespace Inventario.Implement
                         using (MySqlCommand setSessionVarCommand = new MySqlCommand("SET @sucursal_a_filtrar = @sucursal_param", conn))
                         {
                             // Agregamos el parámetro C# con el valor que recibimos en el método
-                            setSessionVarCommand.Parameters.AddWithValue("@sucursal_param", sucursal);
+                            setSessionVarCommand.Parameters.AddWithValue("@sucursal_param", "1");
                             setSessionVarCommand.ExecuteNonQuery();
                         }
 
@@ -45,6 +45,7 @@ namespace Inventario.Implement
                             using (MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader())
                             {
                                 // --- INICIO de la parte que pediste mantener tal cual ---
+                                Console.WriteLine(mySqlDataReader.Read());
                                 while (mySqlDataReader.Read())
                                 {
                                     var minv = new MInvGeneral();
