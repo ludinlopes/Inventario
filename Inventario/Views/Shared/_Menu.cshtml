@@ -48,8 +48,8 @@
                                 Ventas
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a class="dropdown-item">Cotizacion</a></li>
-                                <li><a class="dropdown-item" href="#">Pedido</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Editar", "Cotizacion")">Cotizacion</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Editar", "Pedido")">Pedido</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="#">Reportes</a></li>
                             </ul>
@@ -59,7 +59,7 @@
                                 Inventario
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a class="dropdown-item" href="@Url.Action("Home_", "Home")">Informatica</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("MenuInv_", "Home")">Informatica</a></li>
                                 @* <li><a class="dropdown-item" href="@Url.Action("Index", "Ssh")">Conexion SSH</a></li> *@
 
                                 <li class="dropdown-submenu">
@@ -86,7 +86,7 @@
                                 Configuracion
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a class="dropdown-item" href="#">Usuario</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Editar", "Usuarios")">Usuario</a></li>
                                 <li><a class="dropdown-item" href="#">Parametrizaciones</a></li>
                                 <li><a class="dropdown-item" href="#">SAP</a></li>
                                 <li><hr class="dropdown-divider"></li>

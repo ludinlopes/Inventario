@@ -1,0 +1,430 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotización - VISTA RAZOR SIMULADA</title>
+    <!-- Carga de Bootstrap CSS (v5.3) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Carga de Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJd/r+3xZ/qH6v8g5/7tGowUa/K/6UqB7+I2G8q/yL75P6B7M6YjR+J0L5z5P6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .quotation-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-section {
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .detail-table th, .detail-table td {
+            vertical-align: middle;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .detail-table input {
+            padding: 0.25rem;
+            height: auto;
+            font-size: 0.85rem;
+        }
+        /* Estilo para las filas seleccionadas */
+        .detail-table tbody tr.selected {
+            background-color: #ffe4b2; /* Color suave para indicar selección */
+            border: 2px solid #ffc107;
+        }
+
+        .totals-box {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        /* Para el área de observaciones */
+        .observations-container {
+            height: 100%;
+            padding-right: 15px; /* Espacio si el scrollbar aparece */
+        }
+
+        .observations-textarea {
+            resize: vertical; /* Permitir redimensionar solo verticalmente */
+            min-height: 120px; /* Asegurar que se vean 4 líneas */
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quotation-container">
+        <!-- Título principal -->
+        <h2 class="text-center text-primary mb-4">Cotización de Ventas</h2>
+
+        <!-- ENCABEZADO DEL DOCUMENTO -->
+        <div class="header-section">
+            <div class="row">
+                <!-- Columna Izquierda: Datos del Cliente (AJUSTADO A col-2/col-10) -->
+                <div class="col-md-7">
+                    <h5 class="text-secondary mb-3">Datos del Cliente</h5>
+                    <div class="row g-2 mb-2">
+                        <!-- AJUSTE DE COLUMNAS PARA MÁS ESPACIO EN INPUTS -->
+                        <div class="col-2 fw-bold">Nombre:</div>
+                        <div class="col-10"><input type="text" class="form-control form-control-sm" id="clientName" value="Cliente Ejemplo S.A."></div>
+                        <div class="col-2 fw-bold">Dirección:</div>
+                        <div class="col-10"><input type="text" class="form-control form-control-sm" id="address" value="Zona 1, Ciudad"></div>
+                        <div class="col-2 fw-bold">NIT:</div>
+                        <div class="col-10"><input type="text" class="form-control form-control-sm" id="nit" value="123456-7"></div>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: Datos de la Cotización (Sin cambios, mantiene col-6/col-6) -->
+                <div class="col-md-5">
+                    <h5 class="text-secondary mb-3">Datos del Documento</h5>
+                    <div class="row g-2 mb-2">
+                        <div class="col-6 fw-bold">Serie de Cotización:</div>
+                        <div class="col-6"><input type="text" class="form-control form-control-sm text-end" id="quotationSeries" value="A"></div>
+                        <div class="col-6 fw-bold">Número de Cotización:</div>
+                        <div class="col-6"><input type="number" class="form-control form-control-sm text-end" id="quotationNumber" value="105"></div>
+                        <div class="col-6 fw-bold">Fecha de Documento:</div>
+                        <div class="col-6"><input type="date" class="form-control form-control-sm" id="documentDate" value="2025-10-25"></div>
+                        <div class="col-6 fw-bold">No. Orden de Compra:</div>
+                        <div class="col-6"><input type="text" class="form-control form-control-sm text-end" id="purchaseOrderNumber" value=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DETALLE DE ARTÍCULOS -->
+        <h4 class="text-secondary mb-3">Detalle de Artículos</h4>
+        <div class="table-responsive">
+            <table class="table table-bordered detail-table">
+                <thead class="table-primary">
+                    <tr>
+                        <th style="width: 50px;">Sel.</th>
+                        <th>Código</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Descripción</th>
+                        <th style="width: 80px;">Cant.</th>
+                        <th>Precio Un. (12% IVA)</th>
+                        <th>Desc. (%)</th>
+                        <th>Total Desc.</th>
+                        <th>Total Línea (c/IVA)</th>
+                    </tr>
+                </thead>
+                <tbody id="detail-body">
+                    <!-- Filas de detalle se inyectarán aquí con JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- PIE DEL DOCUMENTO -->
+        <div class="row mt-4">
+            <!-- Columna Izquierda: Botones de Detalle y Observaciones -->
+            <div class="col-md-9">
+                <!-- Botones de Agregar/Eliminar Línea -->
+                <div class="row mb-3">
+                    <div class="col-md-12 d-flex justify-content-start align-items-center">
+                        <button class="btn btn-success btn-sm me-2" onclick="addLine()" title="Agregar Línea"><i class="fas fa-plus"></i></button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteSelectedLine()" title="Eliminar Línea Seleccionada"><i class="fas fa-minus"></i></button>
+                    </div>
+                </div>
+
+                <!-- Campo de Observaciones -->
+                <div class="observations-container mb-4">
+                    <label for="observations" class="form-label fw-bold">Observaciones:</label>
+                    <textarea class="form-control observations-textarea" id="observations" placeholder="Detalle las observaciones correspondientes aquí..." style="width: 300px; max-width: 100%;"></textarea>
+                </div>
+
+                <!-- BOTONES DE ACCIÓN (GUARDAR/CANCELAR) -->
+                <div class="d-flex justify-content-start">
+                    <button class="btn btn-primary me-2" onclick="saveQuotation()"><i class="fas fa-save me-2"></i>Guardar</button>
+                    <button class="btn btn-secondary" onclick="cancelQuotation()"><i class="fas fa-times me-2"></i>Cancelar</button>
+                </div>
+            </div>
+
+            <!-- Columna Derecha: Totales Verticales -->
+            <div class="col-md-3 d-flex justify-content-end">
+                <div class="totals-box w-100">
+                    <div class="row mb-2">
+                        <div class="col-8 fw-bold">Total sin IVA:</div>
+                        <div class="col-4 text-end" id="totalSubtotal">0.00</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-8 fw-bold">Total de IVA (12%):</div>
+                        <div class="col-4 text-end" id="totalTax">0.00</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-8 fw-bold fs-5 text-primary">TOTAL CON IVA:</div>
+                        <div class="col-4 text-end fs-5 text-primary" id="totalGrandTotal">0.00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div> <!-- Fin del quotation-container -->
+
+    <script>
+        // Tasa de IVA fija del 12%
+        const TAX_RATE = 0.12;
+
+        // Simulación del array de detalles que se enlazaría al modelo C#
+        let quotationDetails = [
+            { id: 1, code: 'PROD-A', brand: 'Marca X', model: 'M-1', description: 'Servidor Dell PowerEdge R440', quantity: 2, unitPrice: 850.00, discountPercentage: 5, discountTotal: 0, lineTotalWithTax: 0 },
+            { id: 2, code: 'SVC-INST', brand: 'N/A', model: 'N/A', description: 'Servicio de Instalación y Configuración', quantity: 1, unitPrice: 150.00, discountPercentage: 0, discountTotal: 0, lineTotalWithTax: 0 }
+        ];
+
+        let nextId = 3; // Contador para nuevas líneas
+        let selectedRowId = null; // ID de la línea seleccionada para borrar
+
+        // Referencias del DOM para los totales
+        const totalSubtotalEl = document.getElementById('totalSubtotal');
+        const totalTaxEl = document.getElementById('totalTax');
+        const totalGrandTotalEl = document.getElementById('totalGrandTotal');
+        const detailBodyEl = document.getElementById('detail-body');
+        const observationsEl = document.getElementById('observations');
+
+        // --- Funciones de Cálculo ---
+
+        /**
+         * Calculates the total of a detail line.
+         * The formula is based on: (Price without VAT) * Quantity * (1 - Discount) * (1 + VAT)
+         * param {object} item - Detail line object.
+         */
+        function calculateLineTotals(item) {
+            // Price per unit without VAT (assuming UnitPrice comes without VAT)
+            const price = parseFloat(item.unitPrice) || 0;
+            const quantity = parseInt(item.quantity) || 0;
+            const discountPct = parseFloat(item.discountPercentage) || 0;
+
+            // 1. Total without VAT or discount
+            const subtotalLine = price * quantity;
+
+            // 2. Discount total calculation
+            const discountAmount = subtotalLine * (discountPct / 100);
+
+            // 3. Final subtotal (without VAT, with discount)
+            const finalSubtotalLine = subtotalLine - discountAmount;
+
+            // 4. VAT calculation (12%)
+            const taxAmount = finalSubtotalLine * TAX_RATE;
+
+            // 5. Total line with VAT
+            const totalWithTax = finalSubtotalLine + taxAmount;
+
+            item.discountTotal = discountAmount;
+            item.lineTotalWithTax = totalWithTax;
+        }
+
+        /**
+         * Recalculates the general totals of the document (subtotal, VAT, total).
+         */
+        function calculateGrandTotals() {
+            let totalSubtotal = 0; // Total line BEFORE VAT (with discount)
+            let totalTax = 0;
+            let totalGrandTotal = 0;
+
+            quotationDetails.forEach(item => {
+                // Force line recalculation if data has changed
+                calculateLineTotals(item);
+
+                // These inverse calculations are only for the presentation of the document footer
+                const finalSubtotalLine = item.lineTotalWithTax / (1 + TAX_RATE);
+                const taxAmountLine = item.lineTotalWithTax - finalSubtotalLine;
+
+                totalSubtotal += finalSubtotalLine;
+                totalTax += taxAmountLine;
+                totalGrandTotal += item.lineTotalWithTax;
+            });
+
+            // Update the DOM
+            totalSubtotalEl.textContent = totalSubtotal.toFixed(2);
+            totalTaxEl.textContent = totalTax.toFixed(2);
+            totalGrandTotalEl.textContent = totalGrandTotal.toFixed(2);
+        }
+
+        // --- Render and Event Functions ---
+
+        /**
+         * Creates the HTML row for a detail object.
+         * param {object} item - Detail line object.
+         * returns {string} - HTML code for the row.
+         */
+        function createDetailRow(item) {
+            // Use the initial calculation to display totals on rendering
+            calculateLineTotals(item);
+
+            const isSelected = item.id === selectedRowId ? 'selected' : '';
+
+            return `
+                <tr id="row-${item.id}" class="${isSelected}" onclick="selectRow(${item.id})">
+                    <td class="text-center">
+                        <input type="radio" name="selectedRow" id="radio-${item.id}" ${isSelected ? 'checked' : ''} onclick="event.stopPropagation(); selectRow(${item.id});">
+                    </td>
+                    <td><input type="text" class="form-control" name="code" value="${item.code}" onchange="updateDetail(${item.id}, 'code', this.value)"></td>
+                    <td><input type="text" class="form-control" name="brand" value="${item.brand}" onchange="updateDetail(${item.id}, 'brand', this.value)"></td>
+                    <td><input type="text" class="form-control" name="model" value="${item.model}" onchange="updateDetail(${item.id}, 'model', this.value)"></td>
+                    <td><input type="text" class="form-control" name="description" value="${item.description}" onchange="updateDetail(${item.id}, 'description', this.value)"></td>
+                    <td><input type="number" class="form-control text-end" name="quantity" value="${item.quantity}" min="1" onchange="updateDetail(${item.id}, 'quantity', this.value)"></td>
+                    <td><input type="number" class="form-control text-end" name="unitPrice" value="${item.unitPrice.toFixed(2)}" step="0.01" min="0.01" onchange="updateDetail(${item.id}, 'unitPrice', this.value)"></td>
+                    <td><input type="number" class="form-control text-end" name="discountPercentage" value="${item.discountPercentage}" min="0" max="100" onchange="updateDetail(${item.id}, 'discountPercentage', this.value)"></td>
+                    <td class="text-end fw-bold text-danger discount-total">${item.discountTotal.toFixed(2)}</td>
+                    <td class="text-end fw-bold text-success line-total-with-tax">${item.lineTotalWithTax.toFixed(2)}</td>
+                </tr>
+            `;
+        }
+
+        /**
+         * Renders all detail rows and updates totals.
+         */
+        function renderDetails() {
+            detailBodyEl.innerHTML = '';
+            quotationDetails.forEach(item => {
+                detailBodyEl.insertAdjacentHTML('beforeend', createDetailRow(item));
+            });
+            calculateGrandTotals();
+        }
+
+        /**
+         * Updates the value of a property in the model and recalculates.
+         * param {number} id - Line ID.
+         * param {string} key - Name of the property to update.
+         * param {string} value - New value.
+         */
+        function updateDetail(id, key, value) {
+            const item = quotationDetails.find(i => i.id === id);
+            if (item) {
+                // Convert to number if necessary for calculations
+                if (['quantity', 'unitPrice', 'discountPercentage'].includes(key)) {
+                    item[key] = parseFloat(value) || 0;
+                } else {
+                    item[key] = value;
+                }
+
+                calculateLineTotals(item);
+
+                // Immediately update the calculated fields in the row
+                const row = document.getElementById(`row-${id}`);
+                row.querySelector('.discount-total').textContent = item.discountTotal.toFixed(2);
+                row.querySelector('.line-total-with-tax').textContent = item.lineTotalWithTax.toFixed(2);
+
+                calculateGrandTotals(); // Recalculate general totals
+            }
+        }
+
+        /**
+         * Adds a new detail line to the array.
+         */
+        function addLine() {
+            const newLine = {
+                id: nextId++,
+                code: '',
+                brand: '',
+                model: '',
+                description: '',
+                quantity: 1,
+                unitPrice: 0.00,
+                discountPercentage: 0,
+                discountTotal: 0,
+                lineTotalWithTax: 0
+            };
+            quotationDetails.push(newLine);
+            renderDetails();
+        }
+
+        /**
+         * Marks a row as selected for deletion.
+         * param {number} id - ID of the selected line.
+         */
+        function selectRow(id) {
+            // Deselect the previous row
+            if (selectedRowId) {
+                const prevRow = document.getElementById(`row-${selectedRowId}`);
+                if (prevRow) {
+                    prevRow.classList.remove('selected');
+                    prevRow.querySelector('input[type="radio"]').checked = false;
+                }
+            }
+
+            // Select the new row
+            selectedRowId = id;
+            const newRow = document.getElementById(`row-${id}`);
+            if (newRow) {
+                newRow.classList.add('selected');
+                newRow.querySelector('input[type="radio"]').checked = true;
+            }
+        }
+
+        /**
+         * Deletes the selected line from the array.
+         */
+        function deleteSelectedLine() {
+            if (selectedRowId === null) {
+                // Temporary feedback message (replacing alert())
+                const modal = document.createElement('div');
+                modal.className = 'alert alert-danger position-fixed top-0 start-50 translate-middle-x mt-4';
+                modal.style.zIndex = '1050';
+                modal.innerHTML = '<strong>Alerta:</strong> Debe seleccionar una línea para borrar.';
+                document.body.appendChild(modal);
+                setTimeout(() => modal.remove(), 3000);
+
+                return;
+            }
+
+            // Filter and remove the line
+            quotationDetails = quotationDetails.filter(item => item.id !== selectedRowId);
+            selectedRowId = null; // Deselect
+
+            renderDetails();
+        }
+
+        /**
+         * Placeholder for the Save quotation logic.
+         */
+        function saveQuotation() {
+            // Logic to collect all data (header, observations, and quotationDetails) and send it to the C# server goes here
+
+            const modal = document.createElement('div');
+            modal.className = 'alert alert-info position-fixed top-0 start-50 translate-middle-x mt-4';
+            modal.style.zIndex = '1050';
+            modal.innerHTML = '<strong>Guardando:</strong> Lógica de Guardado (POST) en C# iría aquí.';
+            document.body.appendChild(modal);
+            setTimeout(() => modal.remove(), 3000);
+        }
+
+        /**
+         * Placeholder for the Cancel quotation logic.
+         */
+        function cancelQuotation() {
+            // Logic to confirm cancellation and/or redirect goes here
+
+            const modal = document.createElement('div');
+            modal.className = 'alert alert-secondary position-fixed top-0 start-50 translate-middle-x mt-4';
+            modal.style.zIndex = '1050';
+            modal.innerHTML = '<strong>Cancelando:</strong> Lógica de Cancelación y Redirección iría aquí.';
+            document.body.appendChild(modal);
+            setTimeout(() => modal.remove(), 3000);
+        }
+
+        // Initialize the view on document load
+        window.onload = function() {
+            renderDetails();
+            // Ensure the observations field has the correct width (a quarter of the container)
+            observationsEl.style.width = '100%';
+            observationsEl.style.maxWidth = '300px';
+            observationsEl.style.minWidth = '250px';
+        };
+    </script>
+
+</body>
+</html>

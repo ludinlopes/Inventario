@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Inventario.Implement;
+using Inventario.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Inventario.Controllers
 {
@@ -8,5 +10,6 @@ namespace Inventario.Controllers
         {
             return View();
         }
+
     }
 }
