@@ -8,81 +8,32 @@ namespace Inventario.Controllers
 {
     public class Home : Controller
     {
-        /*private readonly SshService _sshService;
-
-        public Home(SshService sshService) // Inyección de dependencias
-        {
-            _sshService = sshService;
-        }
-
-        public IActionResult EjecutarComandoSSH()
-        {
-            string resultado = _sshService.EjecutarComando("dir"); // Comando en Windows
-            ViewBag.Resultado = resultado;
-            //  return Content("La acción está funcionando, pero la vista no se encontró.");
-            return View();
-        }
-
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-        ////desde aca estaba activado lo comente el 28 -7 -25 a las 13:54
-        
-         private static SshService sshService = new SshService();
-
-        public IActionResult IniciarSesionSSH()
-        {
-            sshService.Conectar();
-            ViewBag.Mensaje = "Conectado a PowerShell.";
-            return View();
-        }
-
-        public IActionResult EjecutarComando(string comando)
-        {
-            if (string.IsNullOrEmpty(comando))
-                return Json(new { resultado = "Ingrese un comando válido." });
-
-            string resultado = sshService.EjecutarComandoInteractivo(comando);
-            return Json(new { resultado });
-        }
-
-        public IActionResult CerrarSesionSSH()
-        {
-            sshService.Desconectar();
-            ViewBag.Mensaje = "Desconectado de PowerShell.";
-            return View();
-        }
-
-        */
-
-
+       
         public IActionResult Menu() {
-            string sucursal = HttpContext.Session.GetString("Sucursal");
-            if (sucursal == "RZ")
-            {
-                sucursal = "Ricza";
-            }
-            else if (sucursal == "INM")
-            {
-                sucursal = "Inmepro";
-            }
-            else if (sucursal == "SC")
-            {
-                sucursal = "Servicocinas";
-            }
-            else if (sucursal == "FES")
-            {
-                sucursal = "FES";
-            }
+            string sucursal = HttpContext.Session.GetString("SucursalNombre");
+            //if (sucursal == "RZ")
+            //{
+            //    sucursal = "Ricza";
+            //}
+            //else if (sucursal == "INM")
+            //{
+            //    sucursal = "Inmepro";
+            //}
+            //else if (sucursal == "SC")
+            //{
+            //    sucursal = "Servicocinas";
+            //}
+            //else if (sucursal == "FES")
+            //{
+            //    sucursal = "FES";
+            //}
             ViewBag.Sucursal = sucursal;
 
             return View(); 
         }
         public IActionResult Home_()
         {
-            string sucursal = HttpContext.Session.GetString("Sucursal");
+            string sucursal = HttpContext.Session.GetString("SucursalNombre");
             MDocument a = new MDocument
             {
                 controlador = "Home",
@@ -90,51 +41,25 @@ namespace Inventario.Controllers
                 Empleado = "chequed",
                 Texto = "prueba"
             };
-
-            if (sucursal == "RZ")
-            {
-                a.Sucursal = "Ricza";
-            }else if (sucursal == "INM")
-            {
-                a.Sucursal = "Inmepro";
-            }
-            else if (sucursal == "SC")
-            {
-                a.Sucursal = "Servicocinas";
-            }
-            else if (sucursal == "FES")
-            {
-                a.Sucursal = "FES";
-            }
+            a.Sucursal = sucursal;
+            //if (sucursal == "RZ")
+            //{
+            //    a.Sucursal = "Ricza";
+            //}else if (sucursal == "INM")
+            //{
+            //    a.Sucursal = "Inmepro";
+            //}
+            //else if (sucursal == "SC")
+            //{
+            //    a.Sucursal = "Servicocinas";
+            //}
+            //else if (sucursal == "FES")
+            //{
+            //    a.Sucursal = "FES";
+            //}
 
             return View(a);
         }
-
-
-
-
-
-
-        //public IActionResult MenuInv_()
-        //{
-        //    var cn = new ImInvGeneral();
-        //    var a = cn.getListInv("1");
-            
-        //    var i = new MListItems();
-        //     i = a;
-        //    i.Tipo = "Computadora";
-        //    i.No_Inventario = "RZ-CO-0001";
-        //    i.Serie = "ABC123";
-        //    i.Modelo = "Dell XPS 13";
-        //    i.Nombre = "Juan Perez";
-        //    i.Area = "Ventas";
-        //    i.Estado = "A";
-
-        //    var o = new MInvListado();
-        //    o.Items = new List<MListItems>();
-        //    o.Items.Add(i);
-        //    return View(o);
-        //}
 
 
         public IActionResult MenuInv_()
