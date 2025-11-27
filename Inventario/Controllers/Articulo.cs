@@ -24,13 +24,28 @@ namespace Inventario.Controllers
                     break;
 
                 case "Celular":
-                    controladorDestino = "Celulares"; // Asumiendo que tienes un CelularesController
+                    controladorDestino = "Celular"; // Asumiendo que tienes un CelularesController
                     break;
 
                 case "Impresora":
-                    controladorDestino = "Impresora"; // Asumiendo que tienes un ImpresorasController
+                    controladorDestino = "Impresora"; 
                     break;
 
+                case "Monitor":
+                    controladorDestino = "Monitor"; 
+                    break;
+                case "Scanner":
+                    controladorDestino = "Scanner"; 
+                    break;
+                case "Tablet":
+                    controladorDestino = "Tablet"; 
+                    break;
+                case "Telefono":
+                    controladorDestino = "Telefono"; 
+                    break;
+                case "UPS":
+                    controladorDestino = "UPS"; 
+                    break;
                 // Puedes agregar más casos aquí
 
                 default:

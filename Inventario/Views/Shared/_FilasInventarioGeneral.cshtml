@@ -23,10 +23,10 @@
                 <i class="fas fa-eye"></i>
             </a>
 
-            <a asp-action="Editar"
-               asp-controller="Computadoras"
-               asp-route-b="@item.No_Inventario"
-            @* asp-route-tipoItem="@item.Tipo"  *@
+            <a asp-action="viewItemEditIt"
+               asp-controller="Articulo"
+               asp-route-idItem="@item.No_Inventario"
+               asp-route-Tipo="@item.Tipo"
                class="btn btn-sm btn-outline-warning"
                title="Editar">
                 <i class="fas fa-edit"></i>

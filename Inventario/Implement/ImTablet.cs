@@ -149,7 +149,7 @@ namespace Inventario.Implement
         {
             MTablet tablet = new MTablet();
             // Nombre del procedimiento almacenado para obtener una tablet por su IMEI
-            string procedimiento = "GetTabletByIMEI"; // Sugerencia de nombre
+            string procedimiento = "GetTablet"; // Sugerencia de nombre
 
             try
             {
@@ -163,7 +163,7 @@ namespace Inventario.Implement
                         {
                             cmd.CommandType = CommandType.StoredProcedure;
                             // Añadimos el parámetro para el procedimiento almacenado
-                            cmd.Parameters.AddWithValue("_IMEI", IMEI);
+                            cmd.Parameters.AddWithValue("IMEI", IMEI);
 
                             using (MySqlDataReader reader = cmd.ExecuteReader())
                             {

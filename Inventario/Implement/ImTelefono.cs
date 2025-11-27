@@ -150,7 +150,7 @@ namespace Inventario.Implement
         {
             MTelefono tel = new MTelefono();
             // Nombre del procedimiento almacenado para obtener un teléfono por el código de empleado
-            string procedimiento = "GetTelefonoByCodEmple"; // Sugerencia de nombre
+            string procedimiento = "GetTelefono"; // Sugerencia de nombre
 
             try
             {
@@ -164,7 +164,7 @@ namespace Inventario.Implement
                         {
                             cmd.CommandType = CommandType.StoredProcedure;
                             // Añadimos el parámetro para el procedimiento almacenado
-                            cmd.Parameters.AddWithValue("_Cod_Empleado", CodEmple);
+                            cmd.Parameters.AddWithValue("noInv", CodEmple);
 
                             using (MySqlDataReader reader = cmd.ExecuteReader())
                             {
