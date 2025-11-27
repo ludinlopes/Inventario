@@ -149,7 +149,7 @@ namespace Inventario.Implement
         {
             MImpresora imp = new MImpresora();
             // Asumo que 'getImpresoras' es un procedimiento almacenado que acepta No_Inventario
-            string procedimiento = "getImpresoraByNoInv";
+            string procedimiento = "getImpresoras";
 
             try
             {
@@ -162,7 +162,7 @@ namespace Inventario.Implement
                         using (MySqlCommand cmd = new MySqlCommand(procedimiento, conn))
                         {
                             cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("_No_Inventario", NoInv); // Parámetro para el procedimiento almacenado
+                            cmd.Parameters.AddWithValue("noInv", NoInv); // Parámetro para el procedimiento almacenado
 
                             using (MySqlDataReader reader = cmd.ExecuteReader())
                             {
