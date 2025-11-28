@@ -47,5 +47,18 @@ namespace Inventario.Controllers
             return RedirectToAction("Nuevo", "Empleado", c);
 
         }
+
+
+
+        [HttpGet]
+        public IActionResult GetFilas(string sucursal)
+        {
+            MEmpleado b = new MEmpleado();
+            var c = new ImEmpleado();
+            b.Empleados = c.getEmpleados();
+
+            Console.WriteLine("Esta es una fila de getFilas"+ sucursal);
+            return PartialView("_ListaEmple", b);
+        }
     }
 }

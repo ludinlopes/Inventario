@@ -301,7 +301,7 @@ namespace Inventario.Implement
         public List<MListItems> getListInv(String Suc, string Tipo)
         {
             //Suc = "1"; // Temporalmente forzado a "1" para pruebas
-            Console.WriteLine("!"+Suc);
+            
             var inv = new List<MListItems>();
             //string procedimiento; // SOLO EL NOMBRE DEL PROCEDIMIENTO
             string procedimiento = "getListItems"; // SOLO EL NOMBRE DEL PROCEDIMIENTO

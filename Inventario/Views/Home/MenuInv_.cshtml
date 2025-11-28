@@ -105,7 +105,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-view="assignment">
+                    <a class="nav-link" href="#" data-view="Empleado">
                         <i class="fas fa-user-tag me-2"></i> Asignación (Empleados)
                     </a>
                 </li>
@@ -276,7 +276,9 @@
          */
         const mainTitle = document.querySelector('#main-content h2');
             const assetCountBadge = document.getElementById('asset-count');
-            const assetListBody = document.getElementById('asset-list');
+            // const assetListBody = document.getElementById('asset-list');
+            const assetListBody = document.getElementById('main-content');
+            
 
 
 
@@ -293,6 +295,7 @@
                 link.classList.remove('active');
             });
             event.target.classList.add('active');
+
         }
 
         /**
@@ -345,7 +348,13 @@
         // var Tipo = "Monitor";
 
         // ✅ URL CORRECTA: Usa solo el nombre de la clase 'Home'
-        var url = `/Home/GetFilasGeneral?sucursal=${sucursalID}&tipo=${Tipo}`;
+
+		if (Tipo == "Empleado") {
+            var url = `/Empleado/GetFilas?sucursal=${sucursalID}`;
+		} else  {
+            var url = `/Home/GetFilasGeneral?sucursal=${sucursalID}&tipo=${Tipo}`;
+		}
+        // var url = `/Home/GetFilasGeneral?sucursal=${sucursalID}&tipo=${Tipo}`;
 
         fetch(url)
             .then(response => {
@@ -363,7 +372,7 @@
                 console.error('Fallo en la carga:', error);
                 assetListBody.innerHTML = '<tr><td colspan="8" class="text-danger">Error de conexión.</td></tr>';
             });
-            assetCountBadge.textContent = @Model.Items.Count;
+            
         };
     </script>
 </body>
