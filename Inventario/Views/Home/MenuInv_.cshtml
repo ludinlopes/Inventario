@@ -97,6 +97,8 @@
 
 
 
+        /*//////////////////////////Modal de prueba//////////////////////////////////*/
+
         /* CSS personalizado para mover el botón de cierre (X) a la izquierda */
         #modalUsuario .modal-header {
             display: flex;
@@ -115,7 +117,51 @@
                 margin-left: auto; /* Mueve el título a la derecha */
             }
 
+            /*/////////////////////Modal Funcional(Bueno)///////////////////////////////////*/
+        .modal-fondo {
+            display: none; /* Oculto inicialmente */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5); /* Fondo semitransparente */
+            justify-content: center;
+            align-items: center;
+        }
 
+        /* 2. La caja blanca del modal */
+        /* .modal-caja {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        } */
+
+        /* Clase para mostrar el modal (usada por JS) */
+        .mostrar {
+            display: flex;
+        }
+
+        .modal-caja {
+            /* Propiedades de estilo que ya tengas (ancho, color de fondo, etc.) */
+            width: 80%;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            /* 🛑 PROPIEDADES CLAVE PARA EL SCROLL 🛑 */
+            /* Define la altura máxima. Usa 'vh' (viewport height) para que se adapte al tamaño de la pantalla. */
+            /* Ejemplo: 80vh significa que no excederá el 80% de la altura de la ventana del navegador. */
+            max-height: 80vh;
+            /* Muestra la barra de desplazamiento vertical solo cuando el contenido exceda max-height. */
+            overflow-y: auto;
+            /* Opcional: Para evitar que aparezca una barra de desplazamiento horizontal no deseada */
+            overflow-x: hidden;
+            
+        }
+        /*////////////////////////////////////////////////////////*/
     </style>
 </head>
 <body>
@@ -221,23 +267,24 @@
 
             <!-- Panel de Búsqueda y Acciones -->
             <div class="asset-card d-flex justify-content-between align-items-center">
-                <div class="input-group" style="max-width: 400px;">
+                <div  style="max-width: 400px;display:flex;">
                     <input type="text" class="form-control" placeholder="Buscar por Serial, Modelo o Empleado...">
-                    <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
+                    <button class="btn btn-primary ms-0" type="button"><i class="fas fa-search"></i></button>
                 </div>
 
                 <div>
-                    <button class="btn btn-outline-secondary me-2" onclick="showFilters()"><i class="fas fa-filter me-1"></i> Filtros Avanzados</button>
-                    <button class="btn btn-success" onclick="addNewAsset()"><i class="fas fa-plus me-1"></i> Nuevo Activo</button>
-                    <button class="btn btn-success" onclick="addNewAsset()" id="seleccionarEmpleadoBtn"><i class="fas fa-plus me-1"></i> Seleccionar Empleado</button>
-                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="seleccionarEmpleadoBtn">Seleccionar Empleado</button>
+                    @* <button class="btn btn-outline-secondary me-2" onclick="showFilters()"><i class="fas fa-filter me-1"></i> Filtros Avanzados</button> *@
+                    @* <button class="btn btn-success" @* onclick="addNewAsset()" ><i class="fas fa-plus me-1"></i> Nuevo Activo</button> *@
+                    
+                    <button class="btn btn-success" id="btnAccion"> <i class="fas fa-plus me-1"></i> Nuevo Activo</button>
+                    
                     
                     
                 </div>
             </div>
 
             <!-- Tabla de Inventario -->
-            <div class="asset-card">
+            <div class="asset-card" id="asset-card">
                 <h4 class="mb-3 text-secondary">Listado de Activos <span class="badge bg-info" id="asset-count">@Model.Items.Count</span></h4>
                 <div class="table-responsive table-scroll-vertical">
                     <table class="table table-hover data-table align-middle">
@@ -310,152 +357,27 @@
 
 
 
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Seleccionar Empleado</h2>
-            <table id="empleadosTable">
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Acción</th>
-                </tr>
-                <!-- Iterar sobre los empleados del modelo -->
-                @foreach (var empleado in Model.Items)
-                {
-                    <tr>
-                        <td>@empleado.No_Inventario</td>
-                        <td>@empleado.Nombre</td>
-                        <td><button class="selectEmpleadoBtn" data-cod-emple="@empleado.No_Inventario" data-nombre="@empleado.Nombre">Seleccionar</button></td>
-                    </tr>
-                }
-            </table>
+
+
+    
+    @* ////////////////////////////Diseño de modal Bueno////////////////////////////////// *@
+    <div id="miModal" class="modal-fondo ">
+        <div class="modal-caja ">
+            <div id="contenedorTexto"></div>
+
+            <br>
+            <button onclick="cerrarModal()">Cerrar</button>
         </div>
     </div>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-    @* <script>
-        // Lógica de JavaScript para el Dashboard
-
-        /**
-         * Simula la carga de una vista diferente (al hacer clic en el sidebar).
-         * param {string} viewName - El nombre de la vista (ej: 'assignment', 'computers').
-         */
-        const mainTitle = document.querySelector('#main-content h2');
-            const assetCountBadge = document.getElementById('asset-count');
-            // const assetListBody = document.getElementById('asset-list');
-            const assetListBody = document.getElementById('main-content');
-            
-
-
-
-        function loadView(viewName) {
-            
-            var idSuc = @sucursalID;
-
-            
-            mainTitle.textContent = `Vista de Inventario: ${viewName.charAt(0).toUpperCase() + viewName.slice(1)}`;
-            actualizarInventario(idSuc,viewName);
-
-            // Manejo de la clase activa en el menú
-            document.querySelectorAll('.sidebar-menu .nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-            event.target.classList.add('active');
-
-        }
-
-        /**
-         * Placeholder para la función de agregar nuevo activo.
-         */
-        function addNewAsset() {
-            // Se abriría un modal o se navegaría a una página de creación.
-            console.log("Acción: Abrir formulario para Nuevo Activo");
-        }
-
-        /**
-         * Placeholder para mostrar filtros avanzados.
-         */
-        function showFilters() {
-            // Se mostraría un modal o un panel de filtros complejos.
-            console.log("Acción: Mostrar/Ocultar Filtros Avanzados");
-        }
-
-
-        // Asignar el evento click a los enlaces de la barra lateral
-        document.querySelectorAll('.sidebar-menu .nav-link').forEach(link => {
-            link.addEventListener('click', function(event) {
-                event.preventDefault();
-                loadView(this.getAttribute('data-view'));
-            });
-        });
-
-        // Inicializar con la vista general
-        window.onload = function() {
-            // Simular carga de datos iniciales si no están en la tabla.
-            console.log("Dashboard cargado.");
-        };
-
-
-
-
-        const actualizarInventario = (sucursalID,Tipo) => {
-
-
-         // mainTitle.textContent = `Vista de Inventario: ${viewName.charAt(0).toUpperCase() + viewName.slice(1)}`;
-          assetListBody.innerHTML = '<tr><td colspan="8">Cargando datos...</td></tr>';
-
-        // var sucursalID = '1';
-        // var Tipo = "Monitor";
-
-        // ✅ URL CORRECTA: Usa solo el nombre de la clase 'Home'
-
-		if (Tipo == "Empleado") {
-            var url = `/Empleado/GetFilas?sucursal=${sucursalID}`;
-		} else  {
-            var url = `/Home/GetFilasGeneral?sucursal=${sucursalID}&tipo=${Tipo}`;
-		}
-        // var url = `/Home/GetFilasGeneral?sucursal=${sucursalID}&tipo=${Tipo}`;
-
-        fetch(url)
-            .then(response => {
-                if (!response.ok) {
-                    // Manejo de error de servidor
-                    throw new Error('Error de servidor al cargar las filas.');
-                }
-                return response.text();
-            })
-            .then(htmlContent => {
-                assetListBody.innerHTML = htmlContent;
-                // ... (Lógica para actualizar el contador) ...
-            })
-            .catch(error => {
-                console.error('Fallo en la carga:', error);
-                assetListBody.innerHTML = '<tr><td colspan="8" class="text-danger">Error de conexión.</td></tr>';
-            });
-            
-        };
-    </script>
- *@
-
     <script>
         // Define esta variable globalmente en tu vista, antes de cargar ViewMenu.js
         const SUCURSAL_ID_ACTUAL = '@sucursalID';
     </script>
-    @* <script src="~/js/customScript.js"></script> *@
+
     <script src="~/js/ViewMenu.js"></script>
     
 

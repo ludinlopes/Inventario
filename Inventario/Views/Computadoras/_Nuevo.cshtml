@@ -1,0 +1,152 @@
+﻿
+@model MComputadora
+
+<div class="container py-4">
+    <div class="mb-4 text-center">
+        <h1>Nuevo</h1>
+        <h2>@Model.RespuestaSql</h2>
+    </div>
+
+    <form class="row g-3" action="@Url.Action("Insert", "Computadoras")" method="post">
+
+        <div class="col-md-4">
+            <label class="form-label">Código Empleado</label>
+            <input class="form-control text" type="text" value="@Model.Cod_Emple" name="Cod_Emple" id="CodEmple">
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Nombre</label>
+            <div class="input-group">
+                <input class="form-control text" type="text" value="@Model.Nombre" name="Nombre" id="empleado">
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="seleccionarEmpleadoBtn">Seleccionar Empleado</button>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">No. Inventario</label>
+            <input class="form-control text" type="text" value="@Model.No_Inventario" name="No_Inventario">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Tipo</label>
+            <input class="form-control text" type="text" value="@Model.Tipo" name="Tipo">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Marca</label>
+            <input class="form-control text" type="text" value="@Model.Marca" name="Marca">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Modelo</label>
+            <input class="form-control text" type="text" value="@Model.Modelo" name="Modelo">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Serie</label>
+            <input class="form-control text" type="text" value="@Model.Serie" name="Serie">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Procesador</label>
+            <input class="form-control text" type="text" value="@Model.Procesador" name="Procesador">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Generación</label>
+            <input class="form-control text" type="text" value="@Model.Generacion" name="Generacion">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Tipo de Disco</label>
+            <input class="form-control text" type="text" value="@Model.TipoDisco" name="TipoDisco">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Capacidad de Disco</label>
+            <input class="form-control text" type="text" value="@Model.CapacidadDisco" name="CapacidadDisco">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">RAM</label>
+            <input class="form-control text" type="text" value="@Model.Ram" name="Ram">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Mac Address</label>
+            <input class="form-control text" type="text" value="@Model.MacAddress" name="MacAddress">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">No IP</label>
+            <input class="form-control text" type="text" value="@Model.NoIp" name="NoIp">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Teclado</label>
+            <input class="form-control text" type="text" value="@Model.Teclado" name="Teclado">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Mouse</label>
+            <input class="form-control text" type="text" value="@Model.Mouse" name="Mouse">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Nombre PC</label>
+            <input class="form-control text" type="text" value="@Model.NombrePc" name="NombrePc">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Dominio</label>
+            <input class="form-control text" type="text" value="@Model.Dominio" name="Dominio">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Usuario</label>
+            <input class="form-control text" type="text" value="@Model.Usuario" name="Usuario">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Contraseña</label>
+            <input class="form-control" type="text" value="@Model.Contra" name="Contra">
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Estado</label>
+            <select class="form-select" name="Estado">
+                @if (Model.Estado == "A")
+                {
+                    <option value="A" selected>Activo</option>
+                    <option value="I">Inactivo</option>
+                }
+                else
+                {
+                    <option value="A">Activo</option>
+                    <option value="I" selected>Inactivo</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Condición</label>
+            <select class="form-select" name="Condicion">
+                @if (Model.Condicion == "B")
+                {
+                    <option value="B" selected>Buen estado</option>
+                    <option value="M">Mal estado</option>
+                }
+                else
+                {
+                    <option value="B">Buen estado</option>
+                    <option value="M" selected>Mal estado</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-12 d-flex justify-content-start gap-2 mt-4">
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a href="@Url.Action("Home_", "Home")" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>

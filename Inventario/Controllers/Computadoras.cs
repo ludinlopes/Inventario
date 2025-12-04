@@ -7,6 +7,8 @@ namespace Inventario.Controllers
 {
     public class Computadoras : Controller
     {
+        
+        
         public IActionResult Editar(string b)
         {
             ImComputadora emple = new ImComputadora();
@@ -51,6 +53,14 @@ namespace Inventario.Controllers
 
             return RedirectToAction("Nuevo", "Computadoras", c);
 
+        }
+        [HttpGet]
+        public IActionResult GetNewItemView()
+        {
+            
+            MComputadora b = new MComputadora();
+            
+            return PartialView("_Nuevo", b);
         }
     }
 }

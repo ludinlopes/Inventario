@@ -4,21 +4,26 @@
  * Simula la carga de una vista diferente (al hacer clic en el sidebar).
  * param {string} viewName - El nombre de la vista (ej: 'assignment', 'computers').
  */
-const mainTitle = document.querySelector('#main-content h2');
-const assetCountBadge = document.getElementById('asset-count');
-// const assetListBody = document.getElementById('asset-list');
-const assetListBody = document.getElementById('main-content');
+/*const mainTitle = document.querySelector('#main-content h2');*/
+/*const assetCountBadge = document.getElementById('asset-count');*/
+/* const assetListBody = document.getElementById('asset-list');*/
+const assetListBody = document.getElementById('asset-card');
+
+////////////////////////////////////////////////////////////
 
 
+///////////////////////////////////////////////////////////
 
+var tipoVista;
 
 function loadView(viewName) {
+    tipoVista = viewName;
 
     /*var idSuc = @sucursalID;*/
     const idSuc = SUCURSAL_ID_ACTUAL;
 
 
-    mainTitle.textContent = `Vista de Inventario: ${viewName.charAt(0).toUpperCase() + viewName.slice(1)}`;
+    /*mainTitle.textContent = `Vista de Inventario: ${viewName.charAt(0).toUpperCase() + viewName.slice(1)}`;*/
     actualizarInventario(idSuc, viewName);
 
     // Manejo de la clase activa en el menú
@@ -31,13 +36,7 @@ function loadView(viewName) {
 
 
 
-/**
- * Placeholder para mostrar filtros avanzados.
- */
-function showFilters() {
-    // Se mostraría un modal o un panel de filtros complejos.
-    console.log("Acción: Mostrar/Ocultar Filtros Avanzados");
-}
+
 
 
 // Asignar el evento click a los enlaces de la barra lateral
@@ -48,11 +47,6 @@ document.querySelectorAll('.sidebar-menu .nav-link').forEach(link => {
     });
 });
 
-// Inicializar con la vista general
-window.onload = function () {
-    // Simular carga de datos iniciales si no están en la tabla.
-    console.log("Dashboard cargado.");
-};
 
 
 
@@ -85,6 +79,7 @@ const actualizarInventario = (sucursalID, Tipo) => {
         })
         .then(htmlContent => {
             assetListBody.innerHTML = htmlContent;
+
             // ... (Lógica para actualizar el contador) ...
         })
         .catch(error => {
@@ -93,41 +88,105 @@ const actualizarInventario = (sucursalID, Tipo) => {
         });
 
 };
+var HTMLContenModal = '';
 
 
 
 
 
-/****************************Acciones para el Modal Empleado******************************************* */
-/**
- * Placeholder para la función de agregar nuevo activo.
- */
-var modal = document.getElementById("myModal");
-function addNewAsset() {
-    // Se abriría un modal o se navegaría a una página de creación.
-    console.log("Acción: Abrir formulario para Nuevo Activo");
-    modal.style.display = "block";
+
+
+
+
+
+
+
+//////////////////////////Modal en Funcion (Bueno)/////////////////
+
+const boton = document.getElementById('btnAccion');
+const modal1 = document.getElementById('miModal');
+const contenedor = document.getElementById('contenedorTexto');
+
+// EVENTO: Al hacer clic en el botón
+boton.addEventListener('click', async function () {
+    //                                 ^^^^^ Aquí agregas 'async'
+
+    // Declaración de variables (asumiendo que 'contenedor' y 'modal1' ya existen)
+    let HTMLContenModal = ''; // Inicializamos para manejar el scope
+
+    switch (tipoVista) {
+        case "Computadora":
+
+            var direccionURL = `/Computadoras/GetNewItemView`;
+
+            // 🛑 ¡CAMBIO CLAVE! Usamos 'await' para pausar la ejecución
+            // hasta que la función getFetch devuelva el resultado.
+            HTMLContenModal = await getFetch(direccionURL);
+
+            // Esta línea ahora se ejecuta SÓLO después de que la respuesta de red haya llegado.
+            contenedor.innerHTML = HTMLContenModal;
+
+            break;
+
+        case "Monitor":
+            contenedor.innerHTML += `<p>Has seleccionado la vista de <b>Monitores</b>.</p>`;
+            break;
+        case "Impresora":
+            contenedor.innerHTML += `<p>Has seleccionado la vista de <b>Impresoras</b>.</p>`;
+            break;
+        case "Empleado":
+            contenedor.innerHTML += `<p>Has seleccionado la vista de <b>Empleados</b>.</p>`;
+            break;
+        default:
+            contenedor.innerHTML += `<p>Vista desconocida.</p>`;
+    }
+
+    // Mostramos el modal
+    modal1.classList.add('mostrar');
+});
+
+// Función auxiliar para cerrar
+function cerrarModal() {
+    modal1.classList.remove('mostrar');
+    // Opcional: Limpiar el contenido al cerrar
+    contenedor.innerHTML = "";
 }
-// Obtener el botón que abre el modal
-/*var btn = document.getElementById("seleccionarEmpleadoBtn");*/
 
-// Obtener el elemento <span> que cierra el modal
-var span = document.getElementsByClassName("close")[0];
 
-// Cuando el usuario hace clic en el botón, abre el modal
-//btn.onclick = function () {
-//    modal.style.display = "block";
-//}
 
-// Cuando el usuario hace clic en <span> (x), cierra el modal
-span.onclick = function () {
-    modal.style.display = "none";
-}
 
-// Cuando el usuario hace clic en cualquier parte fuera del modal, cierra el modal
-window.onclick = function (event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+//async function getFetch(url1) {
+
+//    try {
+//        const response = await fetch(url1);
+//        if (!response.ok) {
+//            // Manejo de error de servidor
+//            throw new Error('Error de servidor al cargar las filas.');
+//        }
+//        const htmlContent = undefined;
+//        HTMLContenModal = htmlContent;
+//        console.log("Prueba desde fetcjh" + htmlContent);
+//    } catch (error) {
+//        console.error('Fallo en la carga:', error);
+//        HTMLContenModal = '<tr><td colspan="8" class="text-danger">Error de conexión.</td></tr>';
+//    }
+//};
+
+async function getFetch(url1) {
+    try {
+        const response = await fetch(url1);
+
+        if (!response.ok) {
+            // Lanza un error para ser manejado si es necesario
+            throw new Error(`Error ${response.status} de servidor.`);
+        }
+
+        // 1. Obtiene el texto y lo devuelve.
+        return await response.text();
+
+    } catch (error) {
+        console.error('Fallo en la carga:', error);
+        // 2. O devuelve el mensaje de error en caso de fallo de red.
+        return '<tr><td colspan="8" class="text-danger">Error de conexión.</td></tr>';
     }
 }
-

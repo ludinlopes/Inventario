@@ -3,26 +3,7 @@
     int contador = 1;
 }
 
-<h2 class="mb-4 text-dark">Listado de Empleados</h2>
 
-<div class="asset-card d-flex justify-content-between align-items-center">
-    <div class="input-group" style="max-width: 400px;">
-        <input type="text" class="form-control" placeholder="Buscar por Serial, Modelo o Empleado...">
-        <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
-    </div>
-
-    <div>
-        <button class="btn btn-outline-secondary me-2" onclick="showFilters()"><i class="fas fa-filter me-1"></i> Filtros Avanzados</button>
-        <button class="btn btn-success" onclick="addNewAsset()" id="NuevoEmpleadoBtn"><i class="fas fa-plus me-1"></i> Nuevo Activo</button>
-        
-        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="seleccionarEmpleadoBtn">Seleccionar Empleado</button>
-        <button class="btn btn-success" onclick="addNewAsset()" id="seleccionarEmpleadoBtn"><i class="fas fa-plus me-1"></i> Seleccionar Empleado</button>
-        
-    </div>
-</div>
-
-<!-- Tabla de Inventario -->
-<div class="asset-card">
     <h4 class="mb-3 text-secondary">Listado de Activos <span class="badge bg-info" id="asset-count">@Model.Empleados.Count</span></h4>
     <div class="table-responsive table-scroll-vertical">
         <table class="table table-hover data-table align-middle">
@@ -71,7 +52,7 @@
             </tbody>
         </table>
     </div>
-</div>
+
 
 @* ////////////////////////////////////////////////////   MODAL EMPLEADO /////////////////////////////////////////////////////////////////////////////////////// *@
 
