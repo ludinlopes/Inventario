@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Inventario.Controllers
 {
-    public class Computadoras : Controller
+    public class Computadora : Controller
     {
         
         
@@ -51,7 +51,7 @@ namespace Inventario.Controllers
             c = b;
             c.RespuestaSql = compu.insert(b);
 
-            return RedirectToAction("Nuevo", "Computadoras", c);
+            return RedirectToAction("Nuevo", "Computadora", c);
 
         }
         [HttpGet]

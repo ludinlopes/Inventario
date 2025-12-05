@@ -47,5 +47,16 @@ namespace Inventario.Controllers
             return RedirectToAction("Nuevo", "Celular", c);
 
         }
+
+
+
+        [HttpGet]
+        public IActionResult GetNewItemView()
+        {
+
+            MTablet b = new MTablet();
+
+            return PartialView("_Nuevo", b);
+        }
     }
 }

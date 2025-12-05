@@ -49,5 +49,15 @@ namespace Inventario.Controllers
 
         }
 
+
+        [HttpGet]
+        public IActionResult GetNewItemView()
+        {
+
+            MCelular b = new MCelular();
+
+            return PartialView("_Nuevo", b);
+        }
+
     }
 }

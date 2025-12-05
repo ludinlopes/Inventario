@@ -50,5 +50,15 @@ namespace Inventario.Controllers
             return RedirectToAction("Nuevo", "Monitor", c);
 
         }
+
+
+        [HttpGet]
+        public IActionResult GetNewItemView()
+        {
+
+            MMonitor b = new MMonitor();
+
+            return PartialView("_Nuevo", b);
+        }
     }
 }

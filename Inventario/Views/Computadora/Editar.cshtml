@@ -32,7 +32,7 @@
             <h2>Editar Computadora</h2>
         </div>
         <br />
-        <form class="row g-3 factura-form" action=@Url.Action("Actualizar","Computadoras") method="post">
+        <form class="row g-3 factura-form" action=@Url.Action("Actualizar","Computadora") method="post">
             @Html.AntiForgeryToken()
 
             <div class="col-md-4">
@@ -176,7 +176,7 @@
             <div class="col-12 d-flex justify-content-start gap-2 mt-4">
                 <button type="submit" id="Editar" class="btn btn-success">Guardar</button>
                 <a href="@Url.Action("Home_", "Home")" id="cancelar" class="btn btn-secondary">Cancelar</a>
-                <a href=@Url.Action("Nuevo","Computadoras") id="Nuevo" class="btn btn-outline-primary">Nuevo</a>
+                <a href=@Url.Action("Nuevo","Computadora") id="Nuevo" class="btn btn-outline-primary">Nuevo</a>
                 <button type="button" class="btn btn-primary" onclick="verificarSSH()">Verificar información</button>
             </div>
            

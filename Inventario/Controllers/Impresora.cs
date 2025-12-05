@@ -50,5 +50,14 @@ namespace Inventario.Controllers
             return RedirectToAction("Nuevo", "Impresora", c);
 
         }
+
+
+        [HttpGet]
+        public IActionResult GetNewItemView()
+        {
+
+            MImpresora b = new MImpresora();
+            return PartialView("_Nuevo", b);
+        }
     }
 }

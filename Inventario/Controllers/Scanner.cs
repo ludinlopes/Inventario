@@ -50,5 +50,15 @@ namespace Inventario.Controllers
             return RedirectToAction("Nuevo", "Scanner", c);
 
         }
+
+
+        [HttpGet]
+        public IActionResult GetNewItemView()
+        {
+
+            MScanner b = new MScanner();
+
+            return PartialView("_Nuevo", b);
+        }
     }
 }

@@ -179,7 +179,7 @@ namespace Inventario.Controllers
             else if (fav_language == "Computadora")
             {
                 
-                return RedirectToAction("editar", "Computadoras", new { b = Texto });
+                return RedirectToAction("editar", "Computadora", new { b = Texto });
             }
 
 

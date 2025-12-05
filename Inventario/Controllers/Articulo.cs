@@ -20,7 +20,7 @@ namespace Inventario.Controllers
             switch (Tipo)
             {
                 case "Computadora":
-                    controladorDestino = "Computadoras";
+                    controladorDestino = "Computadora";
                     break;
 
                 case "Celular":
@@ -56,7 +56,7 @@ namespace Inventario.Controllers
 
             // 2. Redireccionar a la acción 'Editar' del controlador de destino
             // 🚨 CRUCIAL: Pasamos el ID del ítem (idItem) como parámetro de ruta llamado 'b'.
-            // Esto hace que la URL sea: /Computadoras/Editar?b={idItem}
+            // Esto hace que la URL sea: /Computadora/Editar?b={idItem}
             return RedirectToAction("Editar", controladorDestino, new { b = idItem });
         }
 

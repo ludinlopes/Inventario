@@ -50,5 +50,15 @@ namespace Inventario.Controllers
             return RedirectToAction("Nuevo", "UPS",c);
 
         }
+
+
+        [HttpGet]
+        public IActionResult GetNewItemView()
+        {
+
+            MUps b = new MUps();
+
+            return PartialView("_Nuevo", b);
+        }
     }
 }
