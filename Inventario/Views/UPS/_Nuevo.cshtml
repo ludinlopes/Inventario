@@ -1,4 +1,4 @@
-﻿<div class="encabezado">
+﻿@* <div class="encabezado">
 
     <h1>Nuevo UPS</h1>
     <h2 class="error">@Model.RespuestaSql</h2>
@@ -74,4 +74,135 @@
 
     </form>
 
+</div> *@
+
+
+
+
+@* Este es un formulario de vista parcial diseñado con Bootstrap 5 para el registro de UPS.
+    Está optimizado para ser cargado dentro de un modal y es completamente responsivo.
+
+    *** ⚠️ IMPORTANTE ⚠️: Las referencias a Bootstrap CSS y JS deben estar cargadas
+    en el archivo de diseño principal (_Layout.cshtml) para que las clases funcionen. ***
+*@
+
+<div class="container-fluid py-3">
+    <h4 class="mb-4 text-dark text-center">Registro de Nuevo Activo: UPS (Sistema de Alimentación Ininterrumpida)</h4>
+
+    @* La acción del formulario se ajusta para el controlador de UPS *@
+    <form id="formulario-ups" method="post" action="/UPS/Guardar" data-ajax="true">
+
+        <div class="row g-4">
+
+            @* === SECCIÓN 1: ASIGNACIÓN Y DETALLES DEL UPS === *@
+            <div class="col-12">
+                <div class="card shadow-lg h-100 border-warning">
+                    <div class="card-header bg-warning text-dark">
+                        Información Esencial del Activo
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+
+                            @* --- Columna Izquierda: Empleado --- *@
+                            <div class="col-lg-6 border-end">
+                                <h6 class="text-warning mb-3">Asignación de Empleado</h6>
+
+                                @* Código de Empleado *@
+                                <div class="mb-3">
+                                    <label for="codigoEmpleado" class="form-label">Código de Empleado</label>
+                                    <input type="text" class="form-control" id="codigoEmpleado" name="CodigoEmpleado" readonly placeholder="Cargar con el selector" required>
+                                </div>
+
+                                @* Nombre de Empleado (con Botón Selector) *@
+                                <div class="mb-3">
+                                    <label for="nombreEmpleado" class="form-label">Nombre de Empleado</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="nombreEmpleado" name="NombreEmpleado" readonly placeholder="Seleccione un empleado" required>
+                                        <button class="btn btn-outline-warning" type="button" id="btnSeleccionarEmpleado" aria-label="Abrir selector de empleado">
+                                            <i class="bi bi-person-fill"></i> Seleccionar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @* --- Columna Derecha: Detalles del UPS --- *@
+                            <div class="col-lg-6">
+                                <h6 class="text-warning mb-3">Características Técnicas</h6>
+
+                                <div class="row g-3">
+                                    @* Marca, Modelo *@
+                                    <div class="col-md-6">
+                                        <label for="marca" class="form-label">Marca</label>
+                                        <input type="text" class="form-control" id="marca" name="Marca" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="modelo" class="form-label">Modelo</label>
+                                        <input type="text" class="form-control" id="modelo" name="Modelo" required>
+                                    </div>
+                                </div>
+
+                                @* No. de Serie y Capacidad *@
+                                <div class="row g-3 mt-1">
+                                    <div class="col-md-6">
+                                        <label for="serie" class="form-label">No. de Serie</label>
+                                        <input type="text" class="form-control" id="serie" name="Serie" required>
+                                        <small class="form-text text-muted">Identificador único del equipo.</small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="capacidad" class="form-label">Capacidad (KVA)</label>
+                                        <input type="number" step="0.1" class="form-control" id="capacidad" name="Capacidad" placeholder="Ej: 1.5" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @* === SECCIÓN 2: ESTADO Y CONDICIÓN (Fila Completa) === *@
+            <div class="col-12">
+                <div class="row g-3 justify-content-center">
+
+                    @* Campo Estado *@
+                    <div class="col-md-4">
+                        <label for="estado" class="form-label">Estado</label>
+                        <select class="form-select" id="estado" name="Estado" required>
+                            <option value="" disabled selected>Seleccione un estado</option>
+                            <option value="A">Activo</option>
+                            <option value="I">Inactivo</option>
+                        </select>
+                    </div>
+
+                    @* Campo Condición *@
+                    <div class="col-md-4">
+                        <label for="condicion" class="form-label">Condición</label>
+                        <select class="form-select" id="condicion" name="Condicion" required>
+                            <option value="" disabled selected>Seleccione la condición</option>
+                            <option value="B">Buen Estado</option>
+                            <option value="M">Mal Estado</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div> @* Fin de row g-4 (Contenedor principal) *@
+
+        <hr class="my-5">
+
+        @* Botones de Acción (Alineación a la Derecha) *@
+        <div class="d-flex justify-content-end gap-2">
+
+            @* Botón Cancelar (Cierra el modal, debe estar vinculado a la función JS cerrarModal) *@
+            <button type="button" class="btn btn-secondary" onclick="cerrarModal()" aria-label="Cancelar y cerrar modal">
+                <i class="bi bi-x-circle"></i> Cancelar
+            </button>
+
+            @* Botón Guardar (Funciona como Submit del formulario) *@
+            <button type="submit" class="btn btn-warning text-dark" aria-label="Guardar formulario">
+                <i class="bi bi-battery-full"></i> Guardar
+            </button>
+
+        </div>
+
+    </form>
 </div>

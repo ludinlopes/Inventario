@@ -42,18 +42,28 @@ namespace Inventario.Controllers
             return View(b);
         }
 
-
-        public IActionResult Insert(MComputadora b)
+        [HttpPost]
+        public string Insert (MComputadora b)
         {
 
             ImComputadora compu = new ImComputadora();
             MComputadora c = new MComputadora();
             c = b;
             c.RespuestaSql = compu.insert(b);
-
-            return RedirectToAction("Nuevo", "Computadora", c);
+            MInvListado inv = new MInvListado();
+            
+            var g = c.RespuestaSql;
+            //return RedirectToAction("MenuInv_", "Home",new {b = inv });
+            return g;
 
         }
+
+
+
+
+
+
+
         [HttpGet]
         public IActionResult GetNewItemView()
         {

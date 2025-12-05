@@ -1,72 +1,147 @@
 ﻿@model MImpresora
 
-<div class="encabezado">
-    <h1>Nueva Impresora</h1>
-    <h2>@Model.RespuestaSql</h2>
-</div>
 
-<div class="contenido-mvc">
-    <form class=factura-form action=@Url.Action("Insert","Impresora") method="post">
 
-        <label for="">Codigo Empleado</label>
-        <input type="text" value="@Model.Cod_Emple" name="Cod_Emple" id="CodEmple">
-        <br />
 
-        <label for="empleado">Nombre</label>
-        <input type="text" value="@Model.Nombre" name="Nombre" id="empleado">
-        <button type="button" id="seleccionarEmpleadoBtn">Seleccionar Empleado</button>
-        <br />
 
-        <label for="">No Inventario</label>
-        <input type="text" value="@Model.NoInventario" name="NoInventario">
-        <br />
 
-        <label for="">Marca</label>
-        <input type="text" value="@Model.Marca" name="Marca">
-        <br />
+@* Este es un formulario de vista parcial diseñado con Bootstrap 5 para el registro de Impresoras.
+    Está optimizado para ser cargado dentro de un modal y es completamente responsivo.
 
-        <label for="">Modelo</label>
-        <input type="text" value="@Model.Modelo" name="Modelo">
-        <br />
-        <label for="">Serie</label>
-        <input type="text" value="@Model.Serie" name="Serie">
-        <br />
-        <label for="">Tipo</label>
-        <input type="text" value="@Model.Tipo" name="Tipo">
-        <br />
-        <label for="">Estado</label>
-        <select name="Estado">
-            @if (Model.Estado == "A")
-            {
-                <option value="A" selected>Activo</option>
-                <option value="I">Inactivo</option>
-            }
-            else
-            {
-                <option value="A">Activo</option>
-                <option value="I" selected>Inactivo</option>
-            }
-        </select>
-        <br />
-        <label for="">Condicion</label>
-        <select name="Condicion">
-            @if (Model.Condicion == "B")
-            {
-                <option value="B" selected>Buen estado</option>
-                <option value="M">Mal Estado</option>
-            }
-            else
-            {
-                <option value="B">Buen estado</option>
-                <option value="M" selected>Mal Estado</option>
-            }
-        </select>
+    *** ⚠️ IMPORTANTE ⚠️: Las referencias a Bootstrap CSS y JS deben estar cargadas
+    en el archivo de diseño principal (_Layout.cshtml) para que las clases funcionen. ***
+*@
 
-        <br />
-        <br />
-        <br />
-        <button type="submit">Guardar</button>
-        <button type="button" id="cancelar"><a href=@Url.Action("Home_","Home")>Cancelar</a></button>
+<div class="container-fluid py-3">
+    <h4 class="mb-4 text-secondary text-center">Registro de Nuevo Activo: Impresora</h4>
+
+    @* La acción del formulario se ajusta para el controlador de Impresoras *@
+    <form id="formulario-impresora" method="post" action="/Impresoras/Guardar" data-ajax="true">
+
+        <div class="row g-4">
+
+            @* === SECCIÓN 1: INFORMACIÓN DE EMPLEADO === *@
+            <div class="col-lg-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-secondary text-white">
+                        Asignación a Empleado
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            @* Código de Empleado *@
+                            <div class="col-12">
+                                <label for="codigoEmpleado" class="form-label">Código de Empleado</label>
+                                <input type="text" class="form-control" id="codigoEmpleado" name="CodigoEmpleado" readonly placeholder="Cargar con el selector" required>
+                            </div>
+
+                            @* Nombre de Empleado (con Botón Selector) *@
+                            <div class="col-12">
+                                <label for="nombreEmpleado" class="form-label">Nombre de Empleado</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="nombreEmpleado" name="NombreEmpleado" readonly placeholder="Seleccione un empleado" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="btnSeleccionarEmpleado" aria-label="Abrir selector de empleado">
+                                        <i class="bi bi-person-fill"></i> Seleccionar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @* === SECCIÓN 2: CARACTERÍSTICAS TÉCNICAS Y TIPO === *@
+            <div class="col-lg-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-info text-white">
+                        Detalles de la Impresora
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            @* No. Inventario y Tipo *@
+                            <div class="col-md-6">
+                                <label for="noInventario" class="form-label">No. Inventario</label>
+                                <input type="text" class="form-control" id="noInventario" name="NoInventario" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="tipo" class="form-label">Tipo</label>
+                                <select class="form-select" id="tipo" name="Tipo" required>
+                                    <option value="" disabled selected>Seleccionar Tipo</option>
+                                    <option value="Laser">Láser Monocromática</option>
+                                    <option value="ColorLaser">Láser Color</option>
+                                    <option value="Inkjet">Inyección de Tinta</option>
+                                    <option value="Matriz">Matriz de Punto</option>
+                                </select>
+                            </div>
+
+                            @* Marca, Modelo, Serie *@
+                            <div class="col-md-4">
+                                <label for="marca" class="form-label">Marca</label>
+                                <input type="text" class="form-control" id="marca" name="Marca" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="modelo" class="form-label">Modelo</label>
+                                <input type="text" class="form-control" id="modelo" name="Modelo" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="serie" class="form-label">Serie</label>
+                                <input type="text" class="form-control" id="serie" name="Serie" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @* === SECCIÓN 3: ESTADO Y CONDICIÓN (Fila Completa) === *@
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-warning text-dark">
+                        Estado y Condición
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3 justify-content-center">
+
+                            @* Campo Estado *@
+                            <div class="col-md-4">
+                                <label for="estado" class="form-label">Estado</label>
+                                <select class="form-select" id="estado" name="Estado" required>
+                                    <option value="" disabled selected>Seleccione un estado</option>
+                                    <option value="A">Activo</option>
+                                    <option value="I">Inactivo</option>
+                                </select>
+                            </div>
+
+                            @* Campo Condición *@
+                            <div class="col-md-4">
+                                <label for="condicion" class="form-label">Condición</label>
+                                <select class="form-select" id="condicion" name="Condicion" required>
+                                    <option value="" disabled selected>Seleccione la condición</option>
+                                    <option value="B">Buen Estado</option>
+                                    <option value="M">Mal Estado</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> @* Fin de row g-4 (Contenedor principal) *@
+
+        <hr class="my-5">
+
+        @* Botones de Acción (Alineación a la Derecha) *@
+        <div class="d-flex justify-content-end gap-2">
+
+            @* Botón Cancelar (Cierra el modal, debe estar vinculado a la función JS cerrarModal) *@
+            <button type="button" class="btn btn-secondary" onclick="cerrarModal()" aria-label="Cancelar y cerrar modal">
+                <i class="bi bi-x-circle"></i> Cancelar
+            </button>
+
+            @* Botón Guardar (Funciona como Submit del formulario) *@
+            <button type="submit" class="btn btn-primary" aria-label="Guardar formulario">
+                <i class="bi bi-printer-fill"></i> Guardar
+            </button>
+
+        </div>
 
     </form>
 </div>

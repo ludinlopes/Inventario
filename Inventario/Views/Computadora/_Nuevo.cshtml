@@ -1,152 +1,332 @@
-﻿
-@model MComputadora
+﻿@model Inventario.Models.MComputadora
 
-<div class="container py-4">
-    <div class="mb-4 text-center">
-        <h1>Nuevo</h1>
-        <h2>@Model.RespuestaSql</h2>
-    </div>
+<div class="container-fluid py-3">
+    
 
-    <form class="row g-3" action="@Url.Action("Insert", "Computadora")" method="post">
+    @* action="/Computadoras/Guardar"  data-ajax="true" *@
+    @* method="post" action="/Computadora/Insert" *@
+    <form id="formulario-computadora" >
+        <h4 class="mb-4 text-primary text-center">Registro Detallado de Activo: Computadora</h4>
 
-        <div class="col-md-4">
-            <label class="form-label">Código Empleado</label>
-            <input class="form-control text" type="text" value="@Model.Cod_Emple" name="Cod_Emple" id="CodEmple">
+        @* Contenedor para mostrar mensajes de éxito o error después del submit *@
+        <div id="messageContainer" class="mb-3">
+            @* Aquí se mostrarán los mensajes dinámicos de la respuesta del servidor. *@
         </div>
 
-        <div class="col-md-6">
-            <label class="form-label">Nombre</label>
-            <div class="input-group">
-                <input class="form-control text" type="text" value="@Model.Nombre" name="Nombre" id="empleado">
-                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="seleccionarEmpleadoBtn">Seleccionar Empleado</button>
+
+        <div class="row g-4">
+
+            @* === SECCIÓN 1: INFORMACIÓN BÁSICA Y EMPLEADO === *@
+            <div class="col-lg-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-primary text-white">
+                        Datos del Empleado / Inventario
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            @* Código y Nombre de Empleado (Columna 1) *@
+                            <div class="col-12">
+                                <label for="codigoEmpleado" class="form-label">Código de Empleado</label>
+                                @* readonly *@
+                                <input type="text" class="form-control" id="codigoEmpleado" name="Cod_Emple" value="@Model.Cod_Emple" placeholder="Cargar con el selector" required>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="nombreEmpleado" class="form-label">Nombre de Empleado</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="nombreEmpleado" name="Nombre" value="@Model.Nombre" @* readonly *@ placeholder="Seleccione un empleado" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="btnSeleccionarEmpleado" aria-label="Abrir selector de empleado">
+                                        <i class="bi bi-person-fill"></i> Seleccionar
+                                    </button>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <label for="noInventario" class="form-label">No. Inventario</label>
+                                <input type="text" class="form-control" id="noInventario" name="No_Inventario" value="@Model.No_Inventario" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="tipo" class="form-label">Tipo</label>
+                                <select class="form-select" id="tipo" name="Tipo" value="@Model.Tipo" required>
+                                    <option value="" disabled selected>Seleccionar</option>
+                                    <option value="Desktop">Desktop</option>
+                                    <option value="Laptop">Laptop</option>
+                                    <option value="AllInOne">All-In-One</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
+            <div class="col-lg-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-success text-white">
+                        Especificaciones de Hardware
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+
+                            <div class="col-md-4">
+                                <label for="marca" class="form-label">Marca</label>
+                                <input type="text" class="form-control" id="marca" name="Marca" value="@Model.Marca" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="modelo" class="form-label">Modelo</label>
+                                <input type="text" class="form-control" id="modelo" name="Modelo" value="@Model.Modelo" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="serie" class="form-label">Serie</label>
+                                <input type="text" class="form-control" id="serie" name="Serie" value="@Model.Serie" required>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <label for="procesador" class="form-label">Procesador</label>
+                                <input type="text" class="form-control" id="procesador" name="Procesador" value="@Model.Procesador" placeholder="Ej: Core i7" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="generacion" class="form-label">Generación</label>
+                                <input type="text" class="form-control" id="generacion" name="Generacion" value="@Model.Generacion" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="ram" class="form-label">RAM (GB)</label>
+                                <input type="number" class="form-control" id="ram" name="Ram" min="1" value="@Model.Ram" required>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <label for="tipoDisco" class="form-label">Tipo de Disco</label>
+                                <select class="form-select" id="tipoDisco" name="TipoDisco" value="@Model.TipoDisco" required>
+                                    <option value="" disabled selected>Seleccionar</option>
+                                    <option value="HDD">HDD (Mecánico)</option>
+                                    <option value="SSD">SSD (Sólido)</option>
+                                    <option value="NVMe">NVMe (Alta Velocidad)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="capacidadDisco" class="form-label">Capacidad de Disco (GB)</label>
+                                <input type="number" class="form-control" id="capacidadDisco" name="CapacidadDisco" value="@Model.CapacidadDisco" min="100" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-info text-white">
+                        Red, Periféricos y Credenciales
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+
+                            <div class="col-md-3">
+                                <label for="macAddress" class="form-label">Mac Address</label>
+                                <input type="text" class="form-control" id="macAddress" name="MacAddress" value="@Model.MacAddress" placeholder="XX:XX:XX:XX:XX:XX" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="noIP" class="form-label">No. IP</label>
+                                <input type="text" class="form-control" id="noIP" name="NoIp" value="@Model.NoIp" placeholder="Ej: 192.168.1.10" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="nombrePC" class="form-label">Nombre PC</label>
+                                <input type="text" class="form-control" id="nombrePC" name="NombrePc" value="@Model.NombrePc" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="dominio" class="form-label">Dominio</label>
+                                <input type="text" class="form-control" id="dominio" name="Dominio" value="@Model.Dominio" placeholder="Ej: corp.local" required>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <label for="teclado" class="form-label">Teclado</label>
+                                <select class="form-select" id="teclado" name="Teclado" value="@Model.Teclado" required>
+                                    <option value="" disabled selected>Seleccionar</option>
+                                    <option value="USB">USB</option>
+                                    <option value="Wireless">Inalámbrico</option>
+                                    <option value="Integrated">Integrado (Laptop)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="mouse" class="form-label">Mouse</label>
+                                <select class="form-select" id="mouse" name="Mouse" value="@Model.Mouse" required>
+                                    <option value="" disabled selected>Seleccionar</option>
+                                    <option value="USB">USB</option>
+                                    <option value="Wireless">Inalámbrico</option>
+                                </select>
+                            </div>
+
+
+                            <div class="col-md-2">
+                                <label for="usuario" class="form-label">Usuario</label>
+                                <input type="text" class="form-control" id="usuario" name="Usuario" value="@Model.Usuario" required>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="contrasena" class="form-label">Contraseña</label>
+                                <input type="text" class="form-control" id="contrasena" name="Contra" value="@Model.Contra" placeholder="Contraseña de Admin/Local" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-12">
+                <div class="row g-3 justify-content-center">
+
+
+                    <div class="col-md-4">
+                        <label for="estado" class="form-label">Estado</label>
+                        <select class="form-select" id="estado" name="Estado" value="@Model.Estado" required>
+                            <option value="" disabled selected>Seleccione un estado</option>
+                            <option value="A">Activo</option>
+                            <option value="I">Inactivo</option>
+                        </select>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <label for="condicion" class="form-label">Condición</label>
+                        <select class="form-select" id="condicion" name="Condicion" value="@Model.Condicion" required>
+                            <option value="" disabled selected>Seleccione la condición</option>
+                            <option value="B">Buen Estado</option>
+                            <option value="M">Mal Estado</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div> @* Fin de row g-4 (Contenedor principal) *@
+
+        <hr class="my-5">
+
+        @* Botones de Acción (Alineación a la Derecha) *@
+        <div class="d-flex justify-content-end gap-2">
+
+            @* Botón Cancelar (Cierra el modal, debe estar vinculado a la función JS cerrarModal) *@
+            <button type="button" class="btn btn-secondary" @* onclick="cerrarModal()" *@ aria-label="Cancelar y cerrar modal">
+                <i class="bi bi-x-circle"></i> Cancelar
+            </button>
+
+            @* Botón Guardar (Funciona como Submit del formulario) *@
+            <button type="button" class="btn btn-primary" onclick="ingresar()" aria-label="Guardar formulario">
+                <i class="bi bi-hdd-fill"></i> Guardar
+            </button>
+
         </div>
 
-        <div class="col-md-4">
-            <label class="form-label">No. Inventario</label>
-            <input class="form-control text" type="text" value="@Model.No_Inventario" name="No_Inventario">
-        </div>
-
-        <div class="col-md-4">
-            <label class="form-label">Tipo</label>
-            <input class="form-control text" type="text" value="@Model.Tipo" name="Tipo">
-        </div>
-
-        <div class="col-md-4">
-            <label class="form-label">Marca</label>
-            <input class="form-control text" type="text" value="@Model.Marca" name="Marca">
-        </div>
-
-        <div class="col-md-4">
-            <label class="form-label">Modelo</label>
-            <input class="form-control text" type="text" value="@Model.Modelo" name="Modelo">
-        </div>
-
-        <div class="col-md-4">
-            <label class="form-label">Serie</label>
-            <input class="form-control text" type="text" value="@Model.Serie" name="Serie">
-        </div>
-
-        <div class="col-md-4">
-            <label class="form-label">Procesador</label>
-            <input class="form-control text" type="text" value="@Model.Procesador" name="Procesador">
-        </div>
-
-        <div class="col-md-4">
-            <label class="form-label">Generación</label>
-            <input class="form-control text" type="text" value="@Model.Generacion" name="Generacion">
-        </div>
-
-        <div class="col-md-4">
-            <label class="form-label">Tipo de Disco</label>
-            <input class="form-control text" type="text" value="@Model.TipoDisco" name="TipoDisco">
-        </div>
-
-        <div class="col-md-4">
-            <label class="form-label">Capacidad de Disco</label>
-            <input class="form-control text" type="text" value="@Model.CapacidadDisco" name="CapacidadDisco">
-        </div>
-
-        <div class="col-md-4">
-            <label class="form-label">RAM</label>
-            <input class="form-control text" type="text" value="@Model.Ram" name="Ram">
-        </div>
-
-        <div class="col-md-4">
-            <label class="form-label">Mac Address</label>
-            <input class="form-control text" type="text" value="@Model.MacAddress" name="MacAddress">
-        </div>
-
-        <div class="col-md-4">
-            <label class="form-label">No IP</label>
-            <input class="form-control text" type="text" value="@Model.NoIp" name="NoIp">
-        </div>
-
-        <div class="col-md-4">
-            <label class="form-label">Teclado</label>
-            <input class="form-control text" type="text" value="@Model.Teclado" name="Teclado">
-        </div>
-
-        <div class="col-md-4">
-            <label class="form-label">Mouse</label>
-            <input class="form-control text" type="text" value="@Model.Mouse" name="Mouse">
-        </div>
-
-        <div class="col-md-4">
-            <label class="form-label">Nombre PC</label>
-            <input class="form-control text" type="text" value="@Model.NombrePc" name="NombrePc">
-        </div>
-
-        <div class="col-md-4">
-            <label class="form-label">Dominio</label>
-            <input class="form-control text" type="text" value="@Model.Dominio" name="Dominio">
-        </div>
-
-        <div class="col-md-4">
-            <label class="form-label">Usuario</label>
-            <input class="form-control text" type="text" value="@Model.Usuario" name="Usuario">
-        </div>
-
-        <div class="col-md-4">
-            <label class="form-label">Contraseña</label>
-            <input class="form-control" type="text" value="@Model.Contra" name="Contra">
-        </div>
-
-        <div class="col-md-3">
-            <label class="form-label">Estado</label>
-            <select class="form-select" name="Estado">
-                @if (Model.Estado == "A")
-                {
-                    <option value="A" selected>Activo</option>
-                    <option value="I">Inactivo</option>
-                }
-                else
-                {
-                    <option value="A">Activo</option>
-                    <option value="I" selected>Inactivo</option>
-                }
-            </select>
-        </div>
-
-        <div class="col-md-3">
-            <label class="form-label">Condición</label>
-            <select class="form-select" name="Condicion">
-                @if (Model.Condicion == "B")
-                {
-                    <option value="B" selected>Buen estado</option>
-                    <option value="M">Mal estado</option>
-                }
-                else
-                {
-                    <option value="B">Buen estado</option>
-                    <option value="M" selected>Mal estado</option>
-                }
-            </select>
-        </div>
-
-        <div class="col-12 d-flex justify-content-start gap-2 mt-4">
-            <button type="submit" class="btn btn-success">Guardar</button>
-            <a href="@Url.Action("Home_", "Home")" class="btn btn-secondary">Cancelar</a>
-        </div>
     </form>
 </div>
+
+
+
+
+        <script>
+            window.ingresar = function () { console.log("Texto de submit"); };
+ 
+
+
+            document.addEventListener('DOMContentLoaded', () => {
+
+                // =========================================================================
+                // ⚠️ 1. CONFIGURACIÓN: AJUSTA ESTA URL
+                const URL_WEB_METHOD = 'Computadora/Insert';
+                // =========================================================================
+
+                // 2. Referencias esenciales del DOM
+                const form = document.getElementById('formulario-computadora');
+                const messageContainer = document.getElementById('messageContainer');
+                const saveButton = form.querySelector('button[type="submit"]');
+
+                // Función para mostrar mensajes de éxito o error
+                function displayMessage(message, isSuccess = true) {
+                    messageContainer.innerHTML = '';
+                    const alertClass = isSuccess ? 'alert-success' : 'alert-danger';
+                    const iconClass = isSuccess ? 'bi-check-circle-fill' : 'bi-exclamation-triangle-fill';
+
+                    messageContainer.innerHTML = `
+                <div class="alert ${alertClass} alert-dismissible fade show" role="alert">
+                    <i class="bi ${iconClass} me-2"></i>
+                    <strong>${isSuccess ? 'Éxito:' : 'Error:'}</strong> ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            `;
+                }
+
+                
+                // 3. Manejador del evento 'submit' del formulario
+                form.addEventListener('submit', async (e) => {
+
+                    // 🚨 LÍNEA CRÍTICA: Previene el envío HTTP por defecto (y la recarga de la página)
+                    e.preventDefault();
+                    console.log("Submit prevenido. Iniciando envío por fetch.");
+
+                    // Deshabilitar el botón para evitar doble clic y feedback visual
+                    if (saveButton) saveButton.disabled = true;
+
+                    displayMessage('Procesando y enviando datos...', false);
+
+                    // 4. Recolectar datos del formulario
+                    const formData = new FormData(form);
+                    const datosComputadora = {};
+
+                    formData.forEach((value, key) => {
+                        datosComputadora[key] = value;
+                    });
+
+                    // 5. Estructurar el cuerpo de la petición para el Web Method
+                    const cuerpoPeticion = {
+                        computadora: datosComputadora
+                    };
+
+                    // 6. Ejecutar la llamada fetch
+                    try {
+                        const response = await fetch(URL_WEB_METHOD, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(cuerpoPeticion)
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`Error de red: ${response.status} ${response.statusText}`);
+                        }
+
+                        // 7. Procesar la respuesta del Web Method
+                        const jsonResponse = await response.json();
+                        const mensajeServidor = jsonResponse.d;
+
+                        // 8. Mostrar resultado y manejar acciones
+                        if (mensajeServidor.startsWith('ÉXITO')) {
+                            displayMessage(mensajeServidor, true);
+                            // Si la acción es exitosa, ahora puedes optar por cerrar el modal
+                            // window.cerrarModal();
+                        } else {
+                            displayMessage(mensajeServidor, false);
+                        }
+
+                    } catch (error) {
+                        console.error('Error durante la inserción:', error);
+                        displayMessage(`Error de comunicación: ${error.message}`, false);
+                    } finally {
+                        // Habilitar el botón nuevamente al finalizar la operación (éxito o error)
+                        if (saveButton) saveButton.disabled = false;
+                    }
+                });
+
+                // Función de ayuda para cerrar el modal (que debes implementar)
+                window.cerrarModal = function () {
+                    // Debes llamar a la función de cierre de Bootstrap aquí
+                    // Por ejemplo, si usas jQuery: $('#idDelModal').modal('hide');
+                    // O si usas JS puro:
+                    // var miModal = bootstrap.Modal.getInstance(document.getElementById('idDelModal'));
+                    // miModal.hide();
+                    console.log("Cierre de modal solicitado. Implementa la lógica de cierre de Bootstrap aquí.");
+                };
+            });
+</script>
