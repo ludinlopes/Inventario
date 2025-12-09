@@ -44,7 +44,7 @@
 
                             <div class="col-md-6">
                                 <label for="noInventario" class="form-label">No. Inventario</label>
-                                <input type="text" class="form-control" id="noInventario" name="No_Inventario" value="@Model.No_Inventario" required>
+                                <input type="text" class="form-control" id="noInventario" name="No_Inventario" value="@Model.No_Inventario" readonly required>
                             </div>
                             <div class="col-md-6">
                                 <label for="tipo" class="form-label">Tipo</label>
@@ -198,22 +198,20 @@
                         </select>
                     </div>
                 </div>
-            </div>
+            </div> 
 
-        </div> @* Fin de row g-4 (Contenedor principal) *@
-
-        <hr class="my-5">
-
-        @* Botones de Acción (Alineación a la Derecha) *@
+        </div> 
+        <br>
         <div class="d-flex justify-content-end gap-2">
+            
 
             @* Botón Cancelar (Cierra el modal, debe estar vinculado a la función JS cerrarModal) *@
-            <button type="button" class="btn btn-secondary" @* onclick="cerrarModal()" *@ aria-label="Cancelar y cerrar modal">
+            <button type="button" class="btn btn-secondary ms-lg-0" onclick="cerrarModal()" aria-label="Cancelar y cerrar modal">
                 <i class="bi bi-x-circle"></i> Cancelar
             </button>
 
             @* Botón Guardar (Funciona como Submit del formulario) *@
-            <button type="button" class="btn btn-primary" onclick="ingresar()" aria-label="Guardar formulario">
+            <button type="button" class="btn btn-primary ms-lg-2" onclick="prueba()" aria-label="Guardar formulario">
                 <i class="bi bi-hdd-fill"></i> Guardar
             </button>
 
@@ -224,109 +222,3 @@
 
 
 
-
-        <script>
-            window.ingresar = function () { console.log("Texto de submit"); };
- 
-
-
-            document.addEventListener('DOMContentLoaded', () => {
-
-                // =========================================================================
-                // ⚠️ 1. CONFIGURACIÓN: AJUSTA ESTA URL
-                const URL_WEB_METHOD = 'Computadora/Insert';
-                // =========================================================================
-
-                // 2. Referencias esenciales del DOM
-                const form = document.getElementById('formulario-computadora');
-                const messageContainer = document.getElementById('messageContainer');
-                const saveButton = form.querySelector('button[type="submit"]');
-
-                // Función para mostrar mensajes de éxito o error
-                function displayMessage(message, isSuccess = true) {
-                    messageContainer.innerHTML = '';
-                    const alertClass = isSuccess ? 'alert-success' : 'alert-danger';
-                    const iconClass = isSuccess ? 'bi-check-circle-fill' : 'bi-exclamation-triangle-fill';
-
-                    messageContainer.innerHTML = `
-                <div class="alert ${alertClass} alert-dismissible fade show" role="alert">
-                    <i class="bi ${iconClass} me-2"></i>
-                    <strong>${isSuccess ? 'Éxito:' : 'Error:'}</strong> ${message}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            `;
-                }
-
-                
-                // 3. Manejador del evento 'submit' del formulario
-                form.addEventListener('submit', async (e) => {
-
-                    // 🚨 LÍNEA CRÍTICA: Previene el envío HTTP por defecto (y la recarga de la página)
-                    e.preventDefault();
-                    console.log("Submit prevenido. Iniciando envío por fetch.");
-
-                    // Deshabilitar el botón para evitar doble clic y feedback visual
-                    if (saveButton) saveButton.disabled = true;
-
-                    displayMessage('Procesando y enviando datos...', false);
-
-                    // 4. Recolectar datos del formulario
-                    const formData = new FormData(form);
-                    const datosComputadora = {};
-
-                    formData.forEach((value, key) => {
-                        datosComputadora[key] = value;
-                    });
-
-                    // 5. Estructurar el cuerpo de la petición para el Web Method
-                    const cuerpoPeticion = {
-                        computadora: datosComputadora
-                    };
-
-                    // 6. Ejecutar la llamada fetch
-                    try {
-                        const response = await fetch(URL_WEB_METHOD, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(cuerpoPeticion)
-                        });
-
-                        if (!response.ok) {
-                            throw new Error(`Error de red: ${response.status} ${response.statusText}`);
-                        }
-
-                        // 7. Procesar la respuesta del Web Method
-                        const jsonResponse = await response.json();
-                        const mensajeServidor = jsonResponse.d;
-
-                        // 8. Mostrar resultado y manejar acciones
-                        if (mensajeServidor.startsWith('ÉXITO')) {
-                            displayMessage(mensajeServidor, true);
-                            // Si la acción es exitosa, ahora puedes optar por cerrar el modal
-                            // window.cerrarModal();
-                        } else {
-                            displayMessage(mensajeServidor, false);
-                        }
-
-                    } catch (error) {
-                        console.error('Error durante la inserción:', error);
-                        displayMessage(`Error de comunicación: ${error.message}`, false);
-                    } finally {
-                        // Habilitar el botón nuevamente al finalizar la operación (éxito o error)
-                        if (saveButton) saveButton.disabled = false;
-                    }
-                });
-
-                // Función de ayuda para cerrar el modal (que debes implementar)
-                window.cerrarModal = function () {
-                    // Debes llamar a la función de cierre de Bootstrap aquí
-                    // Por ejemplo, si usas jQuery: $('#idDelModal').modal('hide');
-                    // O si usas JS puro:
-                    // var miModal = bootstrap.Modal.getInstance(document.getElementById('idDelModal'));
-                    // miModal.hide();
-                    console.log("Cierre de modal solicitado. Implementa la lógica de cierre de Bootstrap aquí.");
-                };
-            });
-</script>

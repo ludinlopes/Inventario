@@ -2,6 +2,7 @@
 using Inventario.Implement;
 using Inventario.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Inventario.Controllers
 {
@@ -33,6 +34,7 @@ namespace Inventario.Controllers
 
         public IActionResult Nuevo(MComputadora b)
         {
+
             var h = new ConsultasDB();
             b.No_Inventario = h.getNewNoInv("CPU", HttpContext.Session.GetString("Sucursal"));
 
@@ -42,21 +44,21 @@ namespace Inventario.Controllers
             return View(b);
         }
 
-        [HttpPost]
-        public string Insert (MComputadora b)
-        {
+        //[HttpPost]
+        //public string Insert (MComputadora b)
+        //{
 
-            ImComputadora compu = new ImComputadora();
-            MComputadora c = new MComputadora();
-            c = b;
-            c.RespuestaSql = compu.insert(b);
-            MInvListado inv = new MInvListado();
+        //    ImComputadora compu = new ImComputadora();
+        //    MComputadora c = new MComputadora();
+        //    c = b;
+        //    c.RespuestaSql = compu.insert(b);
+        //    MInvListado inv = new MInvListado();
             
-            var g = c.RespuestaSql;
-            //return RedirectToAction("MenuInv_", "Home",new {b = inv });
-            return g;
+        //    var g = c.RespuestaSql;
+        //    //return RedirectToAction("MenuInv_", "Home",new {b = inv });
+        //    return g;
 
-        }
+        //}
 
 
 
@@ -67,10 +69,43 @@ namespace Inventario.Controllers
         [HttpGet]
         public IActionResult GetNewItemView()
         {
-            
             MComputadora b = new MComputadora();
+            var h = new ConsultasDB();
+            b.No_Inventario = h.getNewNoInv("CPU", HttpContext.Session.GetString("Sucursal"));
+            
             
             return PartialView("_Nuevo", b);
         }
+
+        [HttpPost]
+        public IActionResult GetNewItemView2([FromBody] MComputadora b)
+        {
+
+            ImComputadora compu = new ImComputadora();
+            MComputadora c = new MComputadora();
+            c = b;
+            c.RespuestaSql = compu.insert(b);
+            MInvListado inv = new MInvListado();
+
+            var g = c.RespuestaSql;
+            
+
+            return Ok(g);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
     }
-}
+    }
+
+
+

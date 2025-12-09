@@ -231,7 +231,7 @@ namespace Inventario.Implement
                             cmd.Parameters.AddWithValue("_Fecha_Actualizacion", DateTime.Now);
 
                             cmd.ExecuteNonQuery();
-                            mensaje = "Inserción exitosa";
+                            mensaje = "Guardado exitosamente";
                         } // cmd (MySqlCommand) se dispone aquí
                     } // conn (MySqlConnection) se cierra y dispone aquí
                 } // cn (Conexion) se dispone aquí, lo que garantiza el cierre de la MySqlConnection interna
@@ -240,7 +240,8 @@ namespace Inventario.Implement
             {
                 if (ex.Number == 1062)
                 {
-                    mensaje = $"Error de duplicado: La serie '{modelo.Serie}' ya existe. Por favor, ingrese una serie diferente.";
+                    //mensaje = $"Error de duplicado: El No Inventario '{modelo.No_Inventario}' o la serie '{modelo.Serie}' ya existe. Por favor, ingrese un dato diferente.";
+                    mensaje = $"Fallo al guardar: El activo no se pudo registrar porque el No.Inventario '{modelo.No_Inventario}' o la Serie '{modelo.Serie}' ya existen en la base de datos.";
                     Console.WriteLine($"Error MySql (1062): {ex.Message}");
                 }
                 else

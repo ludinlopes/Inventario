@@ -25,13 +25,13 @@
         public string Contra { get; set; }
         public string Estado { get; set; }
         public string Condicion { get; set; }
-        public string RespuestaSql { get; set; }
+        public string? RespuestaSql { get; set; }
         /// <summary>
         /// ///
         /// </summary>
-        public string Texto { get; set; }
+        public string? Texto { get; set; }
 
-        public List<MEmpleado> Empleados { get; set; }
+        public List<MEmpleado>? Empleados { get; set; }
 
 
 
