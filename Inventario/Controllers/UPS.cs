@@ -57,7 +57,12 @@ namespace Inventario.Controllers
         {
 
             MUps b = new MUps();
+            var h = new ConsultasDB();
+            b.No_Inventario = h.getNewNoInv("UPS", HttpContext.Session.GetString("Sucursal"));
 
+            var c = new ImEmpleado();
+
+            b.Empleados = c.getEmpleados();
             return PartialView("_Nuevo", b);
         }
 
