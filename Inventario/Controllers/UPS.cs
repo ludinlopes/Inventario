@@ -32,7 +32,7 @@ namespace Inventario.Controllers
         public IActionResult Nuevo(MUps b)
         {
             var h = new ConsultasDB();
-            b.NoInventario = h.getNewNoInv("UPS", HttpContext.Session.GetString("Sucursal"));
+            b.No_Inventario = h.getNewNoInv("UPS", HttpContext.Session.GetString("Sucursal"));
             var c = new ImEmpleado();
             b.Empleados = c.getEmpleados();
             return View(b);
@@ -59,6 +59,17 @@ namespace Inventario.Controllers
             MUps b = new MUps();
 
             return PartialView("_Nuevo", b);
+        }
+
+
+
+        [HttpGet]
+        public IActionResult GetNewNoInv()
+        {
+            var h = new ConsultasDB();
+            var b = h.getNewNoInv("UPS", HttpContext.Session.GetString("Sucursal"));
+
+            return Ok(b);
         }
     }
 }

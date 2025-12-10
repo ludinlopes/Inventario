@@ -33,18 +33,16 @@
                             <div class="col-lg-6 border-end">
                                 <h6 class="text-success mb-3">Asignación de Empleado</h6>
 
-                                @* Código de Empleado *@
-                                <div class="mb-3">
+                                <div class="col-12">
                                     <label for="codigoEmpleado" class="form-label">Código de Empleado</label>
-                                    <input type="text" class="form-control" id="codigoEmpleado" name="CodigoEmpleado" readonly placeholder="Cargar con el selector" required>
+                                    <input type="text" class="form-control" id="codigoEmpleado" name="Cod_Emple" value="@Model.Cod_Emple" readonly placeholder="Cargar con el selector" required>
                                 </div>
 
-                                @* Nombre de Empleado (con Botón Selector) *@
-                                <div class="mb-3">
+                                <div class="col-12">
                                     <label for="nombreEmpleado" class="form-label">Nombre de Empleado</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="nombreEmpleado" name="NombreEmpleado" readonly placeholder="Seleccione un empleado" required>
-                                        <button class="btn btn-outline-success" type="button" id="btnSeleccionarEmpleado" aria-label="Abrir selector de empleado">
+                                        <input type="text" class="form-control" id="nombreEmpleado" name="Nombre" value="@Model.Nombre" readonly placeholder="Seleccione un empleado" required>
+                                        <button class="btn btn-outline-secondary" type="button" id="btnSeleccionarEmpleado" onclick="abrirModal()" aria-label="Abrir selector de empleado">
                                             <i class="bi bi-person-fill"></i> Seleccionar
                                         </button>
                                     </div>
@@ -57,11 +55,15 @@
 
                                 @* Marca, Modelo *@
                                 <div class="row g-3">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <label for="noInventario" class="form-label">No. Inventario</label>
+                                        <input type="text" class="form-control" id="noInventario" name="NoInventario" value="@Model.No_Inventario" readonly required>
+                                    </div>
+                                    <div class="col-md-4">
                                         <label for="marca" class="form-label">Marca</label>
                                         <input type="text" class="form-control" id="marca" name="Marca" required>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <label for="modelo" class="form-label">Modelo</label>
                                         <input type="text" class="form-control" id="modelo" name="Modelo" required>
                                     </div>
@@ -83,20 +85,20 @@
             <div class="col-12">
                 <div class="row g-3 justify-content-center">
 
-                    @* Campo Estado *@
+
                     <div class="col-md-4">
                         <label for="estado" class="form-label">Estado</label>
-                        <select class="form-select" id="estado" name="Estado" required>
+                        <select class="form-select" id="estado" name="Estado" value="@Model.Estado" required>
                             <option value="" disabled selected>Seleccione un estado</option>
                             <option value="A">Activo</option>
                             <option value="I">Inactivo</option>
                         </select>
                     </div>
 
-                    @* Campo Condición *@
+
                     <div class="col-md-4">
                         <label for="condicion" class="form-label">Condición</label>
-                        <select class="form-select" id="condicion" name="Condicion" required>
+                        <select class="form-select" id="condicion" name="Condicion" value="@Model.Condicion" required>
                             <option value="" disabled selected>Seleccione la condición</option>
                             <option value="B">Buen Estado</option>
                             <option value="M">Mal Estado</option>

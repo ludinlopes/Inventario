@@ -26,7 +26,7 @@ namespace Inventario.Implement
                     int cod = mySqlDataReader.GetInt32("Cod_Empleado");
                     tel.Cod_Emple = cod.ToString();
                     tel.Nombre = mySqlDataReader.GetString("Nombre");
-                    tel.NoInventario = mySqlDataReader.GetString("No_Inventario");
+                    tel.No_Inventario = mySqlDataReader.GetString("No_Inventario");
                     tel.Marca = mySqlDataReader.GetString("Marca");
                     tel.Modelo = mySqlDataReader.GetString("Modelo");
                     tel.Serie = mySqlDataReader.GetString("Serie");
@@ -50,7 +50,7 @@ namespace Inventario.Implement
             cn = new Conexion();
             string consulta = $"UPDATE Telefono set " +
                 $"Cod_Empleado = {modelo.Cod_Emple}" +
-                $", No_Inventario = '{modelo.NoInventario.ToUpper()}'" +
+                $", No_Inventario = '{modelo.No_Inventario.ToUpper()}'" +
                 $", Marca = '{modelo.Marca.ToUpper()}'" +
                 $", Modelo = '{modelo.Modelo.ToUpper()}'" +
                 $", Serie = '{modelo.Serie.ToUpper()}'" +
@@ -58,7 +58,7 @@ namespace Inventario.Implement
                 $", Estado = '{modelo.Estado.ToUpper()}'" +
                 $", Condicion = '{modelo.Condicion.ToUpper()}'" +
                 $", Fecha_Actualizacion = CURDATE() " +
-                $"WHERE No_Inventario = '{modelo.NoInventario}'";
+                $"WHERE No_Inventario = '{modelo.No_Inventario}'";
 
 
             Console.WriteLine(consulta);
@@ -95,7 +95,7 @@ namespace Inventario.Implement
             cn = new Conexion();
             string consulta = $"INSERT INTO Telefono  VALUES (" +
                     $" '{modelo.Cod_Emple}'" +
-                    $", '{modelo.NoInventario.ToUpper()}'" +
+                    $", '{modelo.No_Inventario.ToUpper()}'" +
                     $", '{modelo.Marca.ToUpper()}'" +
                     $", '{modelo.Modelo.ToUpper()}'" +
                     $", '{modelo.Serie.ToUpper()}'" +
@@ -172,7 +172,7 @@ namespace Inventario.Implement
                                 {
                                     tel.Cod_Emple = reader.GetInt32("Cod_Empleado").ToString();
                                     tel.Nombre = reader.GetString("Nombre"); // Asumo que el SP une con Empleado para obtener el nombre
-                                    tel.NoInventario = reader.GetString("No_Inventario");
+                                    tel.No_Inventario = reader.GetString("No_Inventario");
                                     tel.Marca = reader.GetString("Marca");
                                     tel.Modelo = reader.GetString("Modelo");
                                     tel.Serie = reader.GetString("Serie");
@@ -198,7 +198,7 @@ namespace Inventario.Implement
 
         public string setTelefono(MTelefono modelo)
         {
-            if (string.IsNullOrWhiteSpace(modelo.NoInventario))
+            if (string.IsNullOrWhiteSpace(modelo.No_Inventario))
             {
                 return "Error: El número de inventario del teléfono no puede estar vacío para la actualización.";
             }
@@ -220,7 +220,7 @@ namespace Inventario.Implement
 
                             // Agregar parámetros de forma segura
                             // Los nombres de los parámetros deben coincidir con los del SP en MySQL
-                            cmd.Parameters.AddWithValue("_No_Inventario", modelo.NoInventario); // Para la cláusula WHERE
+                            cmd.Parameters.AddWithValue("_No_Inventario", modelo.No_Inventario); // Para la cláusula WHERE
                             cmd.Parameters.AddWithValue("_Cod_Empleado", modelo.Cod_Emple);
                             cmd.Parameters.AddWithValue("_Marca", modelo.Marca.ToUpper());
                             cmd.Parameters.AddWithValue("_Modelo", modelo.Modelo.ToUpper());
@@ -238,7 +238,7 @@ namespace Inventario.Implement
                             }
                             else
                             {
-                                resultadoMensaje = $"No se encontró el teléfono con número de inventario '{modelo.NoInventario}' para actualizar o no hubo cambios.";
+                                resultadoMensaje = $"No se encontró el teléfono con número de inventario '{modelo.No_Inventario}' para actualizar o no hubo cambios.";
                             }
                         } // cmd se dispone aquí.
                     } // conn se cierra y dispone aquí.
@@ -261,7 +261,7 @@ namespace Inventario.Implement
 
         public string insertTelefono(MTelefono modelo) // Renombramos para mayor claridad
         {
-            if (string.IsNullOrWhiteSpace(modelo.NoInventario))
+            if (string.IsNullOrWhiteSpace(modelo.No_Inventario))
             {
                 return "Error: El número de inventario del teléfono no puede estar vacío para la inserción.";
             }
@@ -284,7 +284,7 @@ namespace Inventario.Implement
                             // Agregar parámetros de forma segura
                             // Los nombres de los parámetros deben coincidir con los del SP en MySQL
                             cmd.Parameters.AddWithValue("_Cod_Empleado", modelo.Cod_Emple);
-                            cmd.Parameters.AddWithValue("_No_Inventario", modelo.NoInventario.ToUpper());
+                            cmd.Parameters.AddWithValue("_No_Inventario", modelo.No_Inventario.ToUpper());
                             cmd.Parameters.AddWithValue("_Marca", modelo.Marca.ToUpper());
                             cmd.Parameters.AddWithValue("_Modelo", modelo.Modelo.ToUpper());
                             cmd.Parameters.AddWithValue("_Serie", modelo.Serie.ToUpper());
@@ -311,7 +311,7 @@ namespace Inventario.Implement
             {
                 if (ex.Number == 1062) // Código de error para entrada duplicada (Duplicate entry for primary key)
                 {
-                    mensaje = $"Error de duplicado: El número de inventario '{modelo.NoInventario}' ya existe. Por favor, ingrese uno diferente.";
+                    mensaje = $"Error de duplicado: El número de inventario '{modelo.No_Inventario}' ya existe. Por favor, ingrese uno diferente.";
                 }
                 else
                 {

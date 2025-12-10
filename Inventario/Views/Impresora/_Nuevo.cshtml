@@ -28,18 +28,17 @@
                     </div>
                     <div class="card-body">
                         <div class="row g-3">
-                            @* Código de Empleado *@
+
                             <div class="col-12">
                                 <label for="codigoEmpleado" class="form-label">Código de Empleado</label>
-                                <input type="text" class="form-control" id="codigoEmpleado" name="CodigoEmpleado" readonly placeholder="Cargar con el selector" required>
+                                <input type="text" class="form-control" id="codigoEmpleado" name="Cod_Emple" value="@Model.Cod_Emple" readonly placeholder="Cargar con el selector" required>
                             </div>
 
-                            @* Nombre de Empleado (con Botón Selector) *@
                             <div class="col-12">
                                 <label for="nombreEmpleado" class="form-label">Nombre de Empleado</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="nombreEmpleado" name="NombreEmpleado" readonly placeholder="Seleccione un empleado" required>
-                                    <button class="btn btn-outline-secondary" type="button" id="btnSeleccionarEmpleado" aria-label="Abrir selector de empleado">
+                                    <input type="text" class="form-control" id="nombreEmpleado" name="Nombre" value="@Model.Nombre" readonly placeholder="Seleccione un empleado" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="btnSeleccionarEmpleado" onclick="abrirModal()" aria-label="Abrir selector de empleado">
                                         <i class="bi bi-person-fill"></i> Seleccionar
                                     </button>
                                 </div>
@@ -57,10 +56,25 @@
                     </div>
                     <div class="card-body">
                         <div class="row g-3">
-                            @* No. Inventario y Tipo *@
-                            <div class="col-md-6">
+
+
+                            <div class="col-md-4">
                                 <label for="noInventario" class="form-label">No. Inventario</label>
                                 <input type="text" class="form-control" id="noInventario" name="NoInventario" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="marca" class="form-label">Marca</label>
+                                <input type="text" class="form-control" id="marca" name="Marca" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="modelo" class="form-label">Modelo</label>
+                                <input type="text" class="form-control" id="modelo" name="Modelo" required>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <label for="serie" class="form-label">Serie</label>
+                                <input type="text" class="form-control" id="serie" name="Serie" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="tipo" class="form-label">Tipo</label>
@@ -73,19 +87,7 @@
                                 </select>
                             </div>
 
-                            @* Marca, Modelo, Serie *@
-                            <div class="col-md-4">
-                                <label for="marca" class="form-label">Marca</label>
-                                <input type="text" class="form-control" id="marca" name="Marca" required>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="modelo" class="form-label">Modelo</label>
-                                <input type="text" class="form-control" id="modelo" name="Modelo" required>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="serie" class="form-label">Serie</label>
-                                <input type="text" class="form-control" id="serie" name="Serie" required>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -93,33 +95,26 @@
 
             @* === SECCIÓN 3: ESTADO Y CONDICIÓN (Fila Completa) === *@
             <div class="col-12">
-                <div class="card shadow-sm">
-                    <div class="card-header bg-warning text-dark">
-                        Estado y Condición
+                <div class="row g-3 justify-content-center">
+
+
+                    <div class="col-md-4">
+                        <label for="estado" class="form-label">Estado</label>
+                        <select class="form-select" id="estado" name="Estado" value="@Model.Estado" required>
+                            <option value="" disabled selected>Seleccione un estado</option>
+                            <option value="A">Activo</option>
+                            <option value="I">Inactivo</option>
+                        </select>
                     </div>
-                    <div class="card-body">
-                        <div class="row g-3 justify-content-center">
 
-                            @* Campo Estado *@
-                            <div class="col-md-4">
-                                <label for="estado" class="form-label">Estado</label>
-                                <select class="form-select" id="estado" name="Estado" required>
-                                    <option value="" disabled selected>Seleccione un estado</option>
-                                    <option value="A">Activo</option>
-                                    <option value="I">Inactivo</option>
-                                </select>
-                            </div>
 
-                            @* Campo Condición *@
-                            <div class="col-md-4">
-                                <label for="condicion" class="form-label">Condición</label>
-                                <select class="form-select" id="condicion" name="Condicion" required>
-                                    <option value="" disabled selected>Seleccione la condición</option>
-                                    <option value="B">Buen Estado</option>
-                                    <option value="M">Mal Estado</option>
-                                </select>
-                            </div>
-                        </div>
+                    <div class="col-md-4">
+                        <label for="condicion" class="form-label">Condición</label>
+                        <select class="form-select" id="condicion" name="Condicion" value="@Model.Condicion" required>
+                            <option value="" disabled selected>Seleccione la condición</option>
+                            <option value="B">Buen Estado</option>
+                            <option value="M">Mal Estado</option>
+                        </select>
                     </div>
                 </div>
             </div>

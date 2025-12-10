@@ -32,7 +32,7 @@ namespace Inventario.Controllers
         public IActionResult Nuevo(MMonitor b)
         {
             var h = new ConsultasDB();
-            b.NoInventario = h.getNewNoInv("MON", HttpContext.Session.GetString("Sucursal"));
+            b.No_Inventario = h.getNewNoInv("MON", HttpContext.Session.GetString("Sucursal"));
             var c = new ImEmpleado();
             b.Empleados = c.getEmpleados();
             return View(b);
@@ -59,6 +59,17 @@ namespace Inventario.Controllers
             MMonitor b = new MMonitor();
 
             return PartialView("_Nuevo", b);
+        }
+
+
+
+        [HttpGet]
+        public IActionResult GetNewNoInv()
+        {
+            var h = new ConsultasDB();
+            var b = h.getNewNoInv("MON", HttpContext.Session.GetString("Sucursal"));
+
+            return Ok(b);
         }
     }
 }

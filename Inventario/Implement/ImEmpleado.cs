@@ -184,6 +184,7 @@ namespace Inventario.Implement
 
         public List<MEmpleado> getEmpleados()
         {
+
             var emple = new List<MEmpleado>();
             string consulta = "SELECT Cod_Empleado, Nombre, Area, Estado, Sucursal FROM Empleado"; // Consulta directa
 

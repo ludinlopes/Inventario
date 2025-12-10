@@ -26,7 +26,7 @@ namespace Inventario.Implement
                     int cod = mySqlDataReader.GetInt32("Cod_Empleado");
                     imp.Cod_Emple = cod.ToString();
                     imp.Nombre = mySqlDataReader.GetString("Nombre");
-                    imp.NoInventario = mySqlDataReader.GetString("No_Inventario");
+                    imp.No_Inventario = mySqlDataReader.GetString("No_Inventario");
                     imp.Marca = mySqlDataReader.GetString("Marca");
                     imp.Modelo = mySqlDataReader.GetString("Modelo");
                     imp.Serie = mySqlDataReader.GetString("Serie");
@@ -55,7 +55,7 @@ namespace Inventario.Implement
                 $", Estado = '{modelo.Estado.ToUpper()}'" +
                 $", Condicion = '{modelo.Condicion.ToUpper()}'" +
                 $", Fecha_Actualizacion = CURDATE() " +
-                $"WHERE No_Inventario = '{modelo.NoInventario}'";
+                $"WHERE No_Inventario = '{modelo.No_Inventario}'";
 
 
             Console.WriteLine(consulta);
@@ -91,7 +91,7 @@ namespace Inventario.Implement
             cn = new Conexion();
             string consulta = $"INSERT INTO Impresoras  VALUES (" +
                     $" '{modelo.Cod_Emple}'" +
-                    $", '{modelo.NoInventario.ToUpper()}'" +
+                    $", '{modelo.No_Inventario.ToUpper()}'" +
                     $", '{modelo.Marca.ToUpper()}'" +
                     $", '{modelo.Modelo.ToUpper()}'" +
                     $", '{modelo.Serie.ToUpper()}'" +
@@ -170,7 +170,7 @@ namespace Inventario.Implement
                                 {
                                     imp.Cod_Emple = reader.GetInt32("Cod_Empleado").ToString();
                                     imp.Nombre = reader.GetString("Nombre");
-                                    imp.NoInventario = reader.GetString("No_Inventario");
+                                    imp.No_Inventario = reader.GetString("No_Inventario");
                                     imp.Marca = reader.GetString("Marca");
                                     imp.Modelo = reader.GetString("Modelo");
                                     imp.Serie = reader.GetString("Serie");
@@ -195,7 +195,7 @@ namespace Inventario.Implement
 
         public string setImpresora(MImpresora modelo)
         {
-            if (string.IsNullOrWhiteSpace(modelo.NoInventario))
+            if (string.IsNullOrWhiteSpace(modelo.No_Inventario))
             {
                 return "Error: El número de inventario no puede estar vacío para la actualización.";
             }
@@ -224,7 +224,7 @@ namespace Inventario.Implement
                             cmd.Parameters.AddWithValue("_Estado", modelo.Estado.ToUpper());
                             cmd.Parameters.AddWithValue("_Condicion", modelo.Condicion.ToUpper());
                             cmd.Parameters.AddWithValue("_Fecha_Actualizacion", DateTime.Now); // Para CURDATE()
-                            cmd.Parameters.AddWithValue("_No_Inventario", modelo.NoInventario); // Para la cláusula WHERE
+                            cmd.Parameters.AddWithValue("_No_Inventario", modelo.No_Inventario); // Para la cláusula WHERE
 
                             int rowsAffected = cmd.ExecuteNonQuery();
 
@@ -234,7 +234,7 @@ namespace Inventario.Implement
                             }
                             else
                             {
-                                resultadoMensaje = $"No se encontró la impresora con número de inventario '{modelo.NoInventario}' para actualizar o no hubo cambios.";
+                                resultadoMensaje = $"No se encontró la impresora con número de inventario '{modelo.No_Inventario}' para actualizar o no hubo cambios.";
                             }
                         } // cmd se dispone aquí.
                     } // conn se cierra y dispone aquí.
@@ -260,7 +260,7 @@ namespace Inventario.Implement
 
         public string insert(MImpresora modelo)
         {
-            if (string.IsNullOrWhiteSpace(modelo.NoInventario))
+            if (string.IsNullOrWhiteSpace(modelo.No_Inventario))
             {
                 return "Error: El número de inventario no puede estar vacío para la inserción.";
             }
@@ -282,7 +282,7 @@ namespace Inventario.Implement
 
                             // Agregar parámetros de forma segura
                             cmd.Parameters.AddWithValue("_Cod_Empleado", modelo.Cod_Emple);
-                            cmd.Parameters.AddWithValue("_No_Inventario", modelo.NoInventario.ToUpper());
+                            cmd.Parameters.AddWithValue("_No_Inventario", modelo.No_Inventario.ToUpper());
                             cmd.Parameters.AddWithValue("_Marca", modelo.Marca.ToUpper());
                             cmd.Parameters.AddWithValue("_Modelo", modelo.Modelo.ToUpper());
                             cmd.Parameters.AddWithValue("_Serie", modelo.Serie.ToUpper());
@@ -311,7 +311,7 @@ namespace Inventario.Implement
             {
                 if (ex.Number == 1062) // Código de error para entrada duplicada (Duplicate entry for primary key)
                 {
-                    mensaje = $"Error de duplicado: El número de inventario '{modelo.NoInventario}' ya existe. Por favor, ingrese uno diferente.";
+                    mensaje = $"Error de duplicado: El número de inventario '{modelo.No_Inventario}' ya existe. Por favor, ingrese uno diferente.";
                 }
                 else
                 {

@@ -1,4 +1,5 @@
-﻿using Inventario.Implement;
+﻿using Inventario.ConexionDB.Consultas;
+using Inventario.Implement;
 using Inventario.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -57,6 +58,17 @@ namespace Inventario.Controllers
             MTablet b = new MTablet();
 
             return PartialView("_Nuevo", b);
+        }
+
+
+
+        [HttpGet]
+        public IActionResult GetNewNoInv()
+        {
+            var h = new ConsultasDB();
+            var b = h.getNewNoInv("TBL", HttpContext.Session.GetString("Sucursal"));
+
+            return Ok(b);
         }
     }
 }

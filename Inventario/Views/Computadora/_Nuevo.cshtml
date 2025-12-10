@@ -27,15 +27,15 @@
                             @* Código y Nombre de Empleado (Columna 1) *@
                             <div class="col-12">
                                 <label for="codigoEmpleado" class="form-label">Código de Empleado</label>
-                                @* readonly *@
-                                <input type="text" class="form-control" id="codigoEmpleado" name="Cod_Emple" value="@Model.Cod_Emple" placeholder="Cargar con el selector" required>
+                                
+                                <input type="text" class="form-control" id="codigoEmpleado" name="Cod_Emple" value="@Model.Cod_Emple" readonly placeholder="Cargar con el selector" required>
                             </div>
 
                             <div class="col-12">
                                 <label for="nombreEmpleado" class="form-label">Nombre de Empleado</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="nombreEmpleado" name="Nombre" value="@Model.Nombre" @* readonly *@ placeholder="Seleccione un empleado" required>
-                                    <button class="btn btn-outline-secondary" type="button" id="btnSeleccionarEmpleado" aria-label="Abrir selector de empleado">
+                                    <input type="text" class="form-control" id="nombreEmpleado" name="Nombre" value="@Model.Nombre"  readonly  placeholder="Seleccione un empleado" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="btnSeleccionarEmpleado" onclick="abrirModal()" aria-label="Abrir selector de empleado">
                                         <i class="bi bi-person-fill"></i> Seleccionar
                                     </button>
                                 </div>
@@ -45,6 +45,7 @@
                             <div class="col-md-6">
                                 <label for="noInventario" class="form-label">No. Inventario</label>
                                 <input type="text" class="form-control" id="noInventario" name="No_Inventario" value="@Model.No_Inventario" readonly required>
+
                             </div>
                             <div class="col-md-6">
                                 <label for="tipo" class="form-label">Tipo</label>
@@ -211,7 +212,7 @@
             </button>
 
             @* Botón Guardar (Funciona como Submit del formulario) *@
-            <button type="button" class="btn btn-primary ms-lg-2" onclick="prueba()" aria-label="Guardar formulario">
+            <button type="button" class="btn btn-primary ms-lg-2" onclick="Save()" aria-label="Guardar formulario">
                 <i class="bi bi-hdd-fill"></i> Guardar
             </button>
 

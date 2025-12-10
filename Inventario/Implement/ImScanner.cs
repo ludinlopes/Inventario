@@ -26,7 +26,7 @@ namespace Inventario.Implement
                     int cod = mySqlDataReader.GetInt32("Cod_Empleado");
                     scn.Cod_Emple = cod.ToString();
                     scn.Nombre = mySqlDataReader.GetString("Nombre");
-                    scn.NoImventario = mySqlDataReader.GetString("No_Inventario");
+                    scn.No_Imventario = mySqlDataReader.GetString("No_Inventario");
                     scn.Marca = mySqlDataReader.GetString("Marca");
                     scn.Modelo = mySqlDataReader.GetString("Modelo");
                     scn.Serie = mySqlDataReader.GetString("Serie");
@@ -54,7 +54,7 @@ namespace Inventario.Implement
                 $", Estado = '{modelo.Estado.ToUpper()}'" +
                 $", Condicion = '{modelo.Condicion.ToUpper()}'" +
                 $", Fecha_Actualizacion = CURDATE() " +
-                $"WHERE No_Inventario = '{modelo.NoImventario}'";
+                $"WHERE No_Inventario = '{modelo.No_Imventario}'";
                 
                
 
@@ -91,7 +91,7 @@ namespace Inventario.Implement
             cn = new Conexion();
             string consulta = $"INSERT INTO Scanner VALUES (" +
                     $" '{modelo.Cod_Emple}'" +
-                    $", '{modelo.NoImventario.ToUpper()}'" +
+                    $", '{modelo.No_Imventario.ToUpper()}'" +
                     $", '{modelo.Marca.ToUpper()}'" +
                     $", '{modelo.Modelo.ToUpper()}'" +
                     $", '{modelo.Serie.ToUpper()}'" +
@@ -167,7 +167,7 @@ namespace Inventario.Implement
                                 {
                                     scn.Cod_Emple = reader.GetInt32("Cod_Empleado").ToString();
                                     scn.Nombre = reader.GetString("Nombre"); // Asumo que el SP une con Empleado para obtener el nombre
-                                    scn.NoImventario = reader.GetString("No_Inventario");
+                                    scn.No_Imventario = reader.GetString("No_Inventario");
                                     scn.Marca = reader.GetString("Marca");
                                     scn.Modelo = reader.GetString("Modelo");
                                     scn.Serie = reader.GetString("Serie");
@@ -191,7 +191,7 @@ namespace Inventario.Implement
 
         public string setScanner(MScanner modelo)
         {
-            if (string.IsNullOrWhiteSpace(modelo.NoImventario))
+            if (string.IsNullOrWhiteSpace(modelo.No_Imventario))
             {
                 return "Error: El número de inventario del escáner no puede estar vacío para la actualización.";
             }
@@ -213,7 +213,7 @@ namespace Inventario.Implement
 
                             // Agregar parámetros de forma segura
                             // Los nombres de los parámetros deben coincidir con los del SP en MySQL
-                            cmd.Parameters.AddWithValue("_No_Inventario", modelo.NoImventario); // Para la cláusula WHERE
+                            cmd.Parameters.AddWithValue("_No_Inventario", modelo.No_Imventario); // Para la cláusula WHERE
                             cmd.Parameters.AddWithValue("_Cod_Empleado", modelo.Cod_Emple);
                             cmd.Parameters.AddWithValue("_Marca", modelo.Marca.ToUpper());
                             cmd.Parameters.AddWithValue("_Modelo", modelo.Modelo.ToUpper());
@@ -230,7 +230,7 @@ namespace Inventario.Implement
                             }
                             else
                             {
-                                resultadoMensaje = $"No se encontró el escáner con número de inventario '{modelo.NoImventario}' para actualizar o no hubo cambios.";
+                                resultadoMensaje = $"No se encontró el escáner con número de inventario '{modelo.No_Imventario}' para actualizar o no hubo cambios.";
                             }
                         } // cmd se dispone aquí.
                     } // conn se cierra y dispone aquí.
@@ -254,7 +254,7 @@ namespace Inventario.Implement
 
         public string insert(MScanner modelo)
         {
-            if (string.IsNullOrWhiteSpace(modelo.NoImventario))
+            if (string.IsNullOrWhiteSpace(modelo.No_Imventario))
             {
                 return "Error: El número de inventario del escáner no puede estar vacío para la inserción.";
             }
@@ -277,7 +277,7 @@ namespace Inventario.Implement
                             // Agregar parámetros de forma segura
                             // Los nombres de los parámetros deben coincidir con los del SP en MySQL
                             cmd.Parameters.AddWithValue("_Cod_Empleado", modelo.Cod_Emple);
-                            cmd.Parameters.AddWithValue("_No_Inventario", modelo.NoImventario.ToUpper());
+                            cmd.Parameters.AddWithValue("_No_Inventario", modelo.No_Imventario.ToUpper());
                             cmd.Parameters.AddWithValue("_Marca", modelo.Marca.ToUpper());
                             cmd.Parameters.AddWithValue("_Modelo", modelo.Modelo.ToUpper());
                             cmd.Parameters.AddWithValue("_Serie", modelo.Serie.ToUpper());
@@ -303,7 +303,7 @@ namespace Inventario.Implement
             {
                 if (ex.Number == 1062) // Código de error para entrada duplicada (Duplicate entry for primary key)
                 {
-                    mensaje = $"Error de duplicado: El número de inventario '{modelo.NoImventario}' ya existe. Por favor, ingrese uno diferente.";
+                    mensaje = $"Error de duplicado: El número de inventario '{modelo.No_Imventario}' ya existe. Por favor, ingrese uno diferente.";
                 }
                 else
                 {
