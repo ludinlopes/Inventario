@@ -39,17 +39,40 @@ namespace Inventario.Controllers
         }
 
 
-        public IActionResult Insert(MMonitor b)
+
+
+
+
+
+
+
+        [HttpPost]
+        public IActionResult Insert([FromBody] MMonitor b)
         {
 
-            ImMonitor compu = new ImMonitor();
+            ImMonitor monitor = new ImMonitor();
             MMonitor c = new MMonitor();
             c = b;
-            c.RespuestaSql = compu.insert(b);
+            c.RespuestaSql = monitor.insert(b);
+            MInvListado inv = new MInvListado();
 
-            return RedirectToAction("Nuevo", "Monitor", c);
+            var g = c.RespuestaSql;
 
+
+            return Ok(g);
         }
+
+        //public IActionResult Insert(MMonitor b)
+        //{
+
+        //    ImMonitor compu = new ImMonitor();
+        //    MMonitor c = new MMonitor();
+        //    c = b;
+        //    c.RespuestaSql = compu.insert(b);
+
+        //    return RedirectToAction("Nuevo", "Monitor", c);
+
+        //}
 
 
         [HttpGet]
@@ -57,7 +80,12 @@ namespace Inventario.Controllers
         {
 
             MMonitor b = new MMonitor();
+            var h = new ConsultasDB();
+            b.No_Inventario = h.getNewNoInv("MON", HttpContext.Session.GetString("Sucursal"));
 
+            var c = new ImEmpleado();
+
+            b.Empleados = c.getEmpleados();
             return PartialView("_Nuevo", b);
         }
 

@@ -39,16 +39,33 @@ namespace Inventario.Controllers
         }
 
 
-        public IActionResult Insert(MImpresora b)
+        //public IActionResult Insert(MImpresora b)
+        //{
+
+        //    ImImpresora compu = new ImImpresora();
+        //    MImpresora c = new MImpresora();
+        //    c = b;
+        //    c.RespuestaSql = compu.insert(b);
+
+        //    return RedirectToAction("Nuevo", "Impresora", c);
+
+        //}
+
+
+        [HttpPost]
+        public IActionResult Insert([FromBody] MImpresora b)
         {
 
-            ImImpresora compu = new ImImpresora();
+            ImImpresora Impresora = new ImImpresora();
             MImpresora c = new MImpresora();
             c = b;
-            c.RespuestaSql = compu.insert(b);
+            c.RespuestaSql = Impresora.insert(b);
+            MInvListado inv = new MInvListado();
 
-            return RedirectToAction("Nuevo", "Impresora", c);
+            var g = c.RespuestaSql;
 
+
+            return Ok(g);
         }
 
 
@@ -57,6 +74,12 @@ namespace Inventario.Controllers
         {
 
             MImpresora b = new MImpresora();
+            var h = new ConsultasDB();
+            b.No_Inventario = h.getNewNoInv("IMP", HttpContext.Session.GetString("Sucursal"));
+
+            var c = new ImEmpleado();
+
+            b.Empleados = c.getEmpleados();
             return PartialView("_Nuevo", b);
         }
 

@@ -373,7 +373,7 @@ namespace Inventario.Implement
 
                             if (rowsAffected > 0)
                             {
-                                mensaje = "Inserción de empleado exitosa.";
+                                mensaje = "Guardado exitosamente";
                             }
                             else
                             {

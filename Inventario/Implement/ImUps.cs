@@ -289,7 +289,7 @@ namespace Inventario.Implement
 
                             if (rowsAffected > 0)
                             {
-                                mensaje = "Inserción de UPS exitosa.";
+                                mensaje = "Guardado exitosamente";
                             }
                             else
                             {

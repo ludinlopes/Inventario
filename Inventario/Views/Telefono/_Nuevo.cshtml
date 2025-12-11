@@ -15,7 +15,7 @@
     <h4 class="mb-4 text-dark text-center">Registro de Nuevo Activo: Teléfono Fijo</h4>
 
     @* La acción del formulario se ajusta para el controlador de TelefonosFijos *@
-    <form id="formulario-telefonofijo" method="post" action="/TelefonosFijos/Guardar" data-ajax="true">
+    <form id="formulario" data-ajax="true">
 
         <div class="row g-4">
 
@@ -55,7 +55,7 @@
                                 <div class="row g-3">
                                     <div class="col-md-4">
                                         <label for="noInventario" class="form-label">No. Inventario</label>
-                                        <input type="text" class="form-control" id="noInventario" name="NoInventario" required>
+                                        <input type="text" class="form-control" id="noInventario" name="No_Inventario" value="@Model.No_Inventario" required>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="marca" class="form-label">Marca</label>
@@ -65,14 +65,25 @@
                                         <label for="modelo" class="form-label">Modelo</label>
                                         <input type="text" class="form-control" id="modelo" name="Modelo" required>
                                     </div>
+
+                                    <div class="col-md-6">
+                                        <label for="serie" class="form-label">No. de Serie</label>
+                                        <input type="text" class="form-control" id="serie" name="Serie" required>
+                                        
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <label for="tipoDisco" class="form-label">Tipo de Conexión</label>
+                                        <select class="form-select" id="tipoDisco" name="Tipo" value="@Model.Tipo" required>
+                                            <option value="" disabled selected>Seleccionar</option>
+                                            <option value="Alambrico">Alambrico</option>
+                                            <option value="Inalambrico">Inalambrico</option>
+                                        </select>
+                                    </div>
                                 </div>
 
-                                @* No. de Serie (Usando 'Serie' como identificador único en lugar de IMEI) *@
-                                <div class="mb-3 mt-3">
-                                    <label for="serie" class="form-label">No. de Serie</label>
-                                    <input type="text" class="form-control" id="serie" name="Serie" required>
-                                    <small class="form-text text-muted">Identificador único del equipo fijo.</small>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -118,8 +129,8 @@
             </button>
 
             @* Botón Guardar (Funciona como Submit del formulario) *@
-            <button type="submit" class="btn btn-primary" aria-label="Guardar formulario">
-                <i class="bi bi-telephone-fill"></i> Guardar
+            <button type="button" class="btn btn-primary ms-lg-2" onclick="Save()" aria-label="Guardar formulario">
+                <i class="bi bi-hdd-fill"></i> Guardar
             </button>
 
         </div>

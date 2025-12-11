@@ -39,16 +39,34 @@ namespace Inventario.Controllers
         }
 
 
-        public IActionResult Insert (MUps b)
+        //public IActionResult Insert (MUps b)
+        //{
+
+        //    ImUps compu = new ImUps();
+        //    MUps c = new MUps();
+        //    c = b;
+        //    c.RespuestaSql = compu.insertUps(b);
+            
+        //    return RedirectToAction("Nuevo", "UPS",c);
+
+        //}
+
+
+
+        [HttpPost]
+        public IActionResult Insert([FromBody] MUps b)
         {
 
-            ImUps compu = new ImUps();
+            ImUps Ups = new ImUps();
             MUps c = new MUps();
             c = b;
-            c.RespuestaSql = compu.insertUps(b);
-            
-            return RedirectToAction("Nuevo", "UPS",c);
+            c.RespuestaSql = Ups.insertUps(b);
+            MInvListado inv = new MInvListado();
 
+            var g = c.RespuestaSql;
+
+
+            return Ok(g);
         }
 
 

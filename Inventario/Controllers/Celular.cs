@@ -38,16 +38,33 @@ namespace Inventario.Controllers
         }
 
 
-        public IActionResult Insert(MCelular b)
+        //public IActionResult Insert(MCelular b)
+        //{
+
+        //    ImCelular compu = new ImCelular();
+        //    MCelular c = new MCelular();
+        //    c = b;
+        //    c.RespuestaSql = compu.insert(b); ;
+
+        //    return RedirectToAction("Nuevo", "Celular", c);
+
+        //}
+
+
+        [HttpPost]
+        public IActionResult Insert([FromBody] MCelular b)
         {
 
-            ImCelular compu = new ImCelular();
+            ImCelular Celular = new ImCelular();
             MCelular c = new MCelular();
             c = b;
-            c.RespuestaSql = compu.insert(b); ;
+            c.RespuestaSql = Celular.insert(b);
+            MInvListado inv = new MInvListado();
 
-            return RedirectToAction("Nuevo", "Celular", c);
+            var g = c.RespuestaSql;
 
+
+            return Ok(g);
         }
 
 

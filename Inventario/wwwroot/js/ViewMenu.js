@@ -141,7 +141,7 @@ async function getFetch(url1) {
 
 
 async function Save() {
-    const form = document.getElementById('formulario-computadora');
+    const form = document.getElementById('formulario');
     const resultado = 'prueba de funcion'
     if (!form) {
         console.error('No se encontró el formulario con el ID "formulario-computadora".');

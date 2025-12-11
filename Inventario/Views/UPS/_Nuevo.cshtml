@@ -90,7 +90,7 @@
     <h4 class="mb-4 text-dark text-center">Registro de Nuevo Activo: UPS (Sistema de Alimentación Ininterrumpida)</h4>
 
     @* La acción del formulario se ajusta para el controlador de UPS *@
-    <form id="formulario-ups" method="post" action="/UPS/Guardar" data-ajax="true">
+    <form id="formulario" data-ajax="true">
 
         <div class="row g-4">
 
@@ -130,7 +130,7 @@
                                 <div class="row g-3">
                                     <div class="col-md-4">
                                         <label for="noInventario" class="form-label">No. Inventario</label>
-                                        <input type="text" class="form-control" id="noInventario" name="NoInventario" value="@Model.No_Inventario" readonly required>
+                                        <input type="text" class="form-control" id="noInventario" name="No_Inventario" value="@Model.No_Inventario" readonly required>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="marca" class="form-label">Marca</label>
@@ -199,8 +199,8 @@
             </button>
 
             @* Botón Guardar (Funciona como Submit del formulario) *@
-            <button type="submit" class="btn btn-warning text-dark" aria-label="Guardar formulario">
-                <i class="bi bi-battery-full"></i> Guardar
+            <button type="button" class="btn btn-primary ms-lg-2" onclick="Save()" aria-label="Guardar formulario">
+                <i class="bi bi-hdd-fill"></i> Guardar
             </button>
 
         </div>

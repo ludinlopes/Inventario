@@ -40,16 +40,34 @@ namespace Inventario.Controllers
         }
 
 
-        public IActionResult Insert(MTelefono b)
+        //public IActionResult Insert(MTelefono b)
+        //{
+
+        //    ImTelefono compu = new ImTelefono();
+        //    MTelefono c = new MTelefono();
+        //    c = b;
+        //    c.RespuestaSql = compu.insertTelefono(b);
+
+        //    return RedirectToAction("Nuevo", "Telefono", c);
+
+        //}
+
+
+
+        [HttpPost]
+        public IActionResult Insert([FromBody] MTelefono b)
         {
 
-            ImTelefono compu = new ImTelefono();
+            ImTelefono Telefono = new ImTelefono();
             MTelefono c = new MTelefono();
             c = b;
-            c.RespuestaSql = compu.insertTelefono(b);
+            c.RespuestaSql = Telefono.insertTelefono(b);
+            MInvListado inv = new MInvListado();
 
-            return RedirectToAction("Nuevo", "Telefono", c);
+            var g = c.RespuestaSql;
 
+
+            return Ok(g);
         }
 
 
@@ -59,7 +77,12 @@ namespace Inventario.Controllers
         {
 
             MTelefono b = new MTelefono();
+            var h = new ConsultasDB();
+            b.No_Inventario = h.getNewNoInv("TEL", HttpContext.Session.GetString("Sucursal"));
 
+            var c = new ImEmpleado();
+
+            b.Empleados = c.getEmpleados();
             return PartialView("_Nuevo", b);
         }
 

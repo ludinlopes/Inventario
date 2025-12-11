@@ -19,7 +19,7 @@
     <h4 class="mb-4 text-dark text-center">Registro de Nuevo Activo: Celular</h4>
 
     @* La acción del formulario se ajusta para el controlador de Celulares *@
-    <form id="formulario-celular" method="post" action="/Celulares/Guardar" data-ajax="true">
+    <form id="formulario"  data-ajax="true">
 
         <div class="row g-4">
 
@@ -59,7 +59,7 @@
                                 <div class="row g-3">
                                     <div class="col-md-4">
                                         <label for="noInventario" class="form-label">No. Inventario</label>
-                                        <input type="text" class="form-control" id="noInventario" name="NoInventario" required>
+                                        <input type="text" class="form-control" id="noInventario" name="No_Inventario" value="@Model.No_Inventario" required>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="marca" class="form-label">Marca</label>
@@ -74,7 +74,7 @@
                                 @* IMEI *@
                                 <div class="mb-3 mt-3">
                                     <label for="imei" class="form-label">IMEI</label>
-                                    <input type="text" class="form-control" id="imei" name="IMEI" placeholder="15 dígitos" required>
+                                    <input type="text" class="form-control" id="Imei" name="Imei" value="@Model.Imei" placeholder="15 dígitos" required>
                                     <small class="form-text text-muted">Número de identidad internacional del equipo móvil.</small>
                                 </div>
                             </div>
@@ -122,8 +122,8 @@
             </button>
 
             @* Botón Guardar (Funciona como Submit del formulario) *@
-            <button type="submit" class="btn btn-success" aria-label="Guardar formulario">
-                <i class="bi bi-phone-fill"></i> Guardar
+            <button type="button" class="btn btn-primary ms-lg-2" onclick="Save()" aria-label="Guardar formulario">
+                <i class="bi bi-hdd-fill"></i> Guardar
             </button>
 
         </div>

@@ -280,6 +280,7 @@ namespace Inventario.Implement
                             // Agregar parámetros de forma segura
                             // Los nombres de los parámetros deben coincidir con los del SP en MySQL
                             cmd.Parameters.AddWithValue("_Cod_Empleado", modelo.Cod_Emple);
+                            cmd.Parameters.AddWithValue("_No_Inventario", modelo.No_Inventario.ToUpper());
                             cmd.Parameters.AddWithValue("_Marca", modelo.Marca.ToUpper());
                             cmd.Parameters.AddWithValue("_Modelo", modelo.Modelo.ToUpper());
                             cmd.Parameters.AddWithValue("_IMEI", modelo.Imei.ToUpper());
@@ -291,7 +292,7 @@ namespace Inventario.Implement
 
                             if (rowsAffected > 0)
                             {
-                                mensaje = "Inserción de tablet exitosa.";
+                                mensaje = "Guardado exitosamente";
                             }
                             else
                             {

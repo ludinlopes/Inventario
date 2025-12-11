@@ -4,7 +4,7 @@
     <h4 class="mb-4 text-primary">Registro de Nuevo Activo: Computadora</h4>
 
     @* El atributo "data-ajax" aquí es un placeholder para la lógica de envío AJAX. *@
-    <form id="formulario-computadora" method="post" action="/Computadoras/Guardar" data-ajax="true">
+    <form id="formulario" data-ajax="true">
 
         <div class="row g-3">
 
@@ -47,7 +47,7 @@
 
                             <div class="col-md-4">
                                 <label for="noInventario" class="form-label">No. Inventario</label>
-                                <input type="text" class="form-control" id="noInventario" name="NoInventario" required>
+                                <input type="text" class="form-control" id="noInventario" name="No_Inventario" value="@Model.No_Inventario" required>
                             </div>
                             <div class="col-md-4">
                                 <label for="marca" class="form-label">Marca</label>
@@ -108,8 +108,8 @@
             </button>
 
             @* Botón Guardar (Funciona como Submit del formulario) *@
-            <button type="submit" class="btn btn-primary" aria-label="Guardar formulario">
-                <i class="bi bi-save"></i> Guardar
+            <button type="button" class="btn btn-primary ms-lg-2" onclick="Save()" aria-label="Guardar formulario">
+                <i class="bi bi-hdd-fill"></i> Guardar
             </button>
 
         </div>

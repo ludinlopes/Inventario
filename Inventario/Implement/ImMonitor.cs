@@ -291,7 +291,7 @@ namespace Inventario.Implement
 
                             if (rowsAffected > 0)
                             {
-                                mensaje = "Inserción de monitor exitosa.";
+                                mensaje = "Guardado exitosamente";
                             }
                             else
                             {

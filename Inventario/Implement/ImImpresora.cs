@@ -295,7 +295,7 @@ namespace Inventario.Implement
 
                             if (rowsAffected > 0)
                             {
-                                mensaje = "Inserción de impresora exitosa.";
+                                mensaje = "Guardado exitosamente";
                             }
                             else
                             {

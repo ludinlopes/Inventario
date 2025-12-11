@@ -288,6 +288,7 @@ namespace Inventario.Implement
 
                             // Agregamos parámetros de forma segura
                             cmd.Parameters.AddWithValue("_Cod_Empleado", modelo.Cod_Emple);
+                            cmd.Parameters.AddWithValue("_No_Inventario", modelo.No_Inventario.ToUpper());
                             cmd.Parameters.AddWithValue("_Marca", modelo.Marca.ToUpper());
                             cmd.Parameters.AddWithValue("_Modelo", modelo.Modelo.ToUpper());
                             cmd.Parameters.AddWithValue("_IMEI", modelo.Imei.ToUpper());
@@ -298,7 +299,7 @@ namespace Inventario.Implement
                             int rowsAffected = cmd.ExecuteNonQuery();
                             if (rowsAffected > 0)
                             {
-                                mensaje = "Inserción exitosa.";
+                                mensaje = "Guardado exitosamente";
                             }
                             else
                             {
