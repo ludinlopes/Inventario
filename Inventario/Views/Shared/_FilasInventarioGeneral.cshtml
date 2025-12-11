@@ -77,14 +77,18 @@
                             <i class="fas fa-eye"></i>
                         </a>
 
-                        <a asp-action="viewItemEditIt"
+                        @* <a asp-action="viewItemEditIt"
                            asp-controller="Articulo"
                            asp-route-idItem="@item.No_Inventario"
                            asp-route-Tipo="@item.Tipo"
                            class="btn btn-sm btn-outline-warning"
                            title="Editar">
                             <i class="fas fa-edit"></i>
-                        </a>
+                        </a> *@
+                        @* <button class="btn btn-sm btn-outline-warning" onclick="EditarItem(@item.No_Inventario)"> <i class="fas fa-edit"></i></button> *@
+                        <button class="btn btn-sm btn-outline-warning" onclick="EditarItem('@item.No_Inventario')">
+                            <i class="fas fa-edit"></i>
+                        </button>
                     </td>
                 </tr>
             }

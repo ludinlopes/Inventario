@@ -178,7 +178,10 @@ async function Save() {
             form.reset();
             
         }
-        document.getElementById("noInventario").value = await getFetch(`/${tipoVista}/GetNewNoInv`);
+        if (tipoVista !== "Empleado") {
+            document.getElementById("noInventario").value = await getFetch(`/${tipoVista}/GetNewNoInv`);
+        }
+        
         
 
 
@@ -194,3 +197,12 @@ async function Save() {
 
 }
 
+
+
+
+//////////////////////////////Editar Item///////////////////////////////////
+async function EditarItem(NoInventario) {
+    contenedor.innerHTML = await getFetch(`/${tipoVista}/GetEditItemView?noInventario=${NoInventario}`);
+    // Mostramos el modal
+    modal1.classList.add('mostrar');
+}

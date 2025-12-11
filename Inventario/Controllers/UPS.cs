@@ -83,8 +83,20 @@ namespace Inventario.Controllers
             b.Empleados = c.getEmpleados();
             return PartialView("_Nuevo", b);
         }
+        //GetEditItemView
 
 
+        [HttpGet]
+        public IActionResult GetEditItemView(string noInventario)
+        {
+
+            ImUps ups = new ImUps();
+            MUps b = ups.getUpsByNoInv(noInventario);
+            var c = new ImEmpleado();
+            b.Empleados = c.getEmpleados();
+            return PartialView("_Nuevo", b);
+
+        }
 
         [HttpGet]
         public IActionResult GetNewNoInv()
