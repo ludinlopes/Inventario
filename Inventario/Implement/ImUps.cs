@@ -6,7 +6,7 @@ namespace Inventario.Implement
     public class ImUps
     {
         private Conexion cn;
-        public MUps getEmple(string NoInv)
+        public MUps getImpresoraByNoInv(string NoInv)
         {
             cn = new Conexion();
             MySqlDataReader mySqlDataReader;

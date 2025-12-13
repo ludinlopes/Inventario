@@ -1,4 +1,4 @@
-﻿@model MTelefono
+﻿@model Inventario.Models.MTelefono 
 
 
 
@@ -59,26 +59,42 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="marca" class="form-label">Marca</label>
-                                        <input type="text" class="form-control" id="marca" name="Marca" required>
+                                        <input type="text" class="form-control" id="marca" name="Marca" value="@Model.Marca" required>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="modelo" class="form-label">Modelo</label>
-                                        <input type="text" class="form-control" id="modelo" name="Modelo" required>
+                                        <input type="text" class="form-control" id="modelo" name="Modelo" value="@Model.Modelo" required>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label for="serie" class="form-label">No. de Serie</label>
-                                        <input type="text" class="form-control" id="serie" name="Serie" required>
-                                        
+                                        <input type="text" class="form-control" id="serie" name="Serie" value="@Model.Serie" required>
+
                                     </div>
 
 
                                     <div class="col-md-6">
                                         <label for="tipoDisco" class="form-label">Tipo de Conexión</label>
                                         <select class="form-select" id="tipoDisco" name="Tipo" value="@Model.Tipo" required>
-                                            <option value="" disabled selected>Seleccionar</option>
-                                            <option value="Alambrico">Alambrico</option>
-                                            <option value="Inalambrico">Inalambrico</option>
+                                            @if (Model.Tipo == "ALAMBRICO")
+                                            {
+                                                <option value="" disabled >Seleccionar</option>
+                                                <option value="Alambrico" selected>Alambrico</option>
+                                                <option value="Inalambrico">Inalambrico</option>
+                                            }
+                                            else if (Model.Tipo == "INALAMBRICO")
+                                            {
+                                                <option value="" disabled >Seleccionar</option>
+                                                <option value="Alambrico">Alambrico</option>
+                                                <option value="Inalambrico" selected>Inalambrico</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="" disabled selected>Seleccionar</option>
+                                                <option value="Alambrico">Alambrico</option>
+                                                <option value="Inalambrico">Inalambrico</option>
+                                            }
+                                            
                                         </select>
                                     </div>
                                 </div>
@@ -97,20 +113,51 @@
 
                     <div class="col-md-4">
                         <label for="estado" class="form-label">Estado</label>
-                        <select class="form-select" id="estado" name="Estado" value="@Model.Estado" required>
-                            <option value="" disabled selected>Seleccione un estado</option>
-                            <option value="A">Activo</option>
-                            <option value="I">Inactivo</option>
+                        <select class="form-select" id="estado" name="Estado" required>
+                            @if (Model.Estado == "A")
+                            {
+                                <option value="" disabled>Seleccione un estado</option>
+                                <option value="A" selected>Activo</option>
+                                <option value="I">Inactivo</option>
+                            }
+                            else if (Model.Estado == "I")
+                            {
+                                <option value="" disabled>Seleccione un estado</option>
+                                <option value="A">Activo</option>
+                                <option value="I" selected>Inactivo</option>
+                            }
+                            else
+                            {
+                                <option value="" disabled selected>Seleccione un estado</option>
+                                <option value="A">Activo</option>
+                                <option value="I">Inactivo</option>
+                            }
                         </select>
                     </div>
 
 
                     <div class="col-md-4">
                         <label for="condicion" class="form-label">Condición</label>
-                        <select class="form-select" id="condicion" name="Condicion" value="@Model.Condicion" required>
-                            <option value="" disabled selected>Seleccione la condición</option>
-                            <option value="B">Buen Estado</option>
-                            <option value="M">Mal Estado</option>
+                        <select class="form-select" id="condicion" name="Condicion" required>
+                            @if (Model.Condicion == "B")
+                            {
+                                <option value="">Seleccione la condición</option>
+                                <option value="B" selected>Buen Estado</option>
+                                <option value="M">Mal Estado</option>
+                            }
+                            else if (Model.Condicion == "M")
+                            {
+                                <option value="" disabled>Seleccione la condición</option>
+                                <option value="B">Buen Estado</option>
+                                <option value="M" selected>Mal Estado</option>
+                            }
+                            else
+                            {
+                                <option value="" disabled selected>Seleccione la condición</option>
+                                <option value="B">Buen Estado</option>
+                                <option value="M">Mal Estado</option>
+                            }
+
                         </select>
                     </div>
                 </div>
@@ -129,7 +176,7 @@
             </button>
 
             @* Botón Guardar (Funciona como Submit del formulario) *@
-            <button type="button" class="btn btn-primary ms-lg-2" onclick="Save()" aria-label="Guardar formulario">
+            <button type="button" class="btn btn-primary ms-lg-2" onclick="@ViewBag.accionTel" aria-label="Guardar formulario">
                 <i class="bi bi-hdd-fill"></i> Guardar
             </button>
 

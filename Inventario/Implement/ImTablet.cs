@@ -7,7 +7,7 @@ namespace Inventario.Implement
     {
 
         private Conexion cn;
-        public MTablet getEmple(string IMEI)
+        public MTablet getImpresoraByNoInv(string IMEI)
         {
             cn = new Conexion();
             MySqlDataReader mySqlDataReader;
@@ -170,6 +170,7 @@ namespace Inventario.Implement
                                 if (reader.Read()) // Si se encuentra un registro
                                 {
                                     tablet.Cod_Emple = reader.GetInt32("Cod_Empleado").ToString();
+                                    tablet.No_Inventario = reader.GetString("No_Inventario");
                                     tablet.Nombre = reader.GetString("Nombre"); // Asumo que el SP une con Empleado para obtener el nombre
                                     tablet.Marca = reader.GetString("Marca");
                                     tablet.Modelo = reader.GetString("Modelo");

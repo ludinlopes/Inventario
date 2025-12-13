@@ -18,15 +18,28 @@ namespace Inventario.Controllers
         }
 
 
-        public IActionResult Actualizar(MTablet b)
+        //public IActionResult Actualizar(MTablet b)
+        //{
+
+        //    ImTablet compu = new ImTablet();
+
+        //    string a = compu.setTablet(b);
+        //    MRespuestaDB resp = new MRespuestaDB();
+        //    resp.respuesta = a;
+        //    return View(resp);
+        //}
+
+
+
+        [HttpPost]
+        public IActionResult Update([FromBody] MTablet b)
         {
 
             ImTablet compu = new ImTablet();
-
             string a = compu.setTablet(b);
             MRespuestaDB resp = new MRespuestaDB();
             resp.respuesta = a;
-            return View(resp);
+            return Ok(resp.respuesta);
         }
 
         public IActionResult Nuevo(MTablet b)
@@ -77,11 +90,25 @@ namespace Inventario.Controllers
             b.No_Inventario = h.getNewNoInv("TAB", HttpContext.Session.GetString("Sucursal"));
 
             var c = new ImEmpleado();
-
+            ViewBag.accionTab = "Save()";
             b.Empleados = c.getEmpleados();
             return PartialView("_Nuevo", b);
         }
 
+
+
+        [HttpGet]
+        public IActionResult GetEditItemView(string noInventario)
+        {
+
+            ImTablet tablet = new ImTablet();
+            MTablet b = tablet.getTabletByIMEI(noInventario);
+            var c = new ImEmpleado();
+            b.Empleados = c.getEmpleados();
+            ViewBag.accionTab = "Update()";
+            return PartialView("_Nuevo", b);
+
+        }
 
 
         [HttpGet]

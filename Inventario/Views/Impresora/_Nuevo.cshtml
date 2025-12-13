@@ -64,26 +64,62 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="marca" class="form-label">Marca</label>
-                                <input type="text" class="form-control" id="marca" name="Marca" required>
+                                <input type="text" class="form-control" id="marca" name="Marca" value="@Model.Marca" required>
                             </div>
                             <div class="col-md-4">
                                 <label for="modelo" class="form-label">Modelo</label>
-                                <input type="text" class="form-control" id="modelo" name="Modelo" required>
+                                <input type="text" class="form-control" id="modelo" name="Modelo" value="@Model.Modelo" required>
                             </div>
 
 
                             <div class="col-md-6">
                                 <label for="serie" class="form-label">Serie</label>
-                                <input type="text" class="form-control" id="serie" name="Serie" required>
+                                <input type="text" class="form-control" id="serie" name="Serie" value="@Model.Serie" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="tipo" class="form-label">Tipo</label>
                                 <select class="form-select" id="tipo" name="Tipo" required>
-                                    <option value="" disabled selected>Seleccionar Tipo</option>
-                                    <option value="Laser">Láser Monocromática</option>
-                                    <option value="ColorLaser">Láser Color</option>
-                                    <option value="Inkjet">Inyección de Tinta</option>
-                                    <option value="Matriz">Matriz de Punto</option>
+                                    @if (Model.Tipo == "TONER")
+                                    {
+                                        <option value="" disabled >Seleccionar Tipo</option>
+                                        <option value="TONER" selected>Láser Monocromática</option>
+                                        <option value="TINTA">Inyección de Tinta</option>
+                                        <option value="MATRICIAL">Matriz de Punto</option>
+                                        <option value="TERMICA">Transferencia Termica</option>
+                                    }
+                                    else if (Model.Tipo == "TINTA")
+                                    {
+                                        <option value="" disabled >Seleccionar Tipo</option>
+                                        <option value="TONER">Láser Monocromática</option>
+                                        <option value="TINTA" selected>Inyección de Tinta</option>
+                                        <option value="MATRICIAL">Matriz de Punto</option>
+                                        <option value="TERMICA">Transferencia Termica</option>
+                                    }
+                                    else if (Model.Tipo == "MATRICIAL")
+                                    {
+                                        <option value="" disabled >Seleccionar Tipo</option>
+                                        <option value="TONER">Láser Monocromática</option>
+                                        <option value="TINTA">Inyección de Tinta</option>
+                                        <option value="MATRICIAL" selected>Matriz de Punto</option>
+                                        <option value="TERMICA">Transferencia Termica</option>
+                                    }
+                                    else if (Model.Tipo == "TERMICA")
+                                    {
+                                        <option value="" disabled>Seleccionar Tipo</option>
+                                        <option value="TONER">Láser Monocromática</option>
+                                        <option value="TINTA">Inyección de Tinta</option>
+                                        <option value="MATRICIAL" >Matriz de Punto</option>
+                                        <option value="TERMICA" selected>Transferencia Termica</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="" disabled selected>Seleccionar Tipo</option>
+                                        <option value="TONER">Láser Monocromática</option>
+                                        <option value="TINTA">Inyección de Tinta</option>
+                                        <option value="MATRICIAL">Matriz de Punto</option>
+                                        <option value="TERMICA">Transferencia Termica</option>
+                                    }
+                                    
                                 </select>
                             </div>
 
@@ -100,20 +136,51 @@
 
                     <div class="col-md-4">
                         <label for="estado" class="form-label">Estado</label>
-                        <select class="form-select" id="estado" name="Estado" value="@Model.Estado" required>
-                            <option value="" disabled selected>Seleccione un estado</option>
-                            <option value="A">Activo</option>
-                            <option value="I">Inactivo</option>
+                        <select class="form-select" id="estado" name="Estado" required>
+                            @if (Model.Estado == "A")
+                            {
+                                <option value="" disabled>Seleccione un estado</option>
+                                <option value="A" selected>ACTIVO</option>
+                                <option value="I">INACTIVO</option>
+                            }
+                            else if (Model.Estado == "I")
+                            {
+                                <option value="" disabled>Seleccione un estado</option>
+                                <option value="A">ACTIVO</option>
+                                <option value="I" selected>INACTIVO</option>
+                            }
+                            else
+                            {
+                                <option value="" disabled selected>Seleccione un estado</option>
+                                <option value="A">ACTIVO</option>
+                                <option value="I">INACTIVO</option>
+                            }
                         </select>
                     </div>
 
 
                     <div class="col-md-4">
                         <label for="condicion" class="form-label">Condición</label>
-                        <select class="form-select" id="condicion" name="Condicion" value="@Model.Condicion" required>
-                            <option value="" disabled selected>Seleccione la condición</option>
-                            <option value="B">Buen Estado</option>
-                            <option value="M">Mal Estado</option>
+                        <select class="form-select" id="condicion" name="Condicion" required>
+                            @if (Model.Condicion == "B")
+                            {
+                                <option value="">Seleccione la condición</option>
+                                <option value="B" selected>Buen Estado</option>
+                                <option value="M">Mal Estado</option>
+                            }
+                            else if (Model.Condicion == "M")
+                            {
+                                <option value="" disabled>Seleccione la condición</option>
+                                <option value="B">Buen Estado</option>
+                                <option value="M" selected>Mal Estado</option>
+                            }
+                            else
+                            {
+                                <option value="" disabled selected>Seleccione la condición</option>
+                                <option value="B">Buen Estado</option>
+                                <option value="M">Mal Estado</option>
+                            }
+
                         </select>
                     </div>
                 </div>
@@ -132,7 +199,7 @@
             </button>
 
             @* Botón Guardar (Funciona como Submit del formulario) *@
-            <button type="button" class="btn btn-primary ms-lg-2" onclick="Save()" aria-label="Guardar formulario">
+            <button type="button" class="btn btn-primary ms-lg-2" onclick="@ViewBag.accionImp" aria-label="Guardar formulario">
                 <i class="bi bi-hdd-fill"></i> Guardar
             </button>
 

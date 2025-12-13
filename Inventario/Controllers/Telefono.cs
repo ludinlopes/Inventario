@@ -19,16 +19,16 @@ namespace Inventario.Controllers
         }
 
 
-        public IActionResult Actualizar(MTelefono b)
-        {
+        //public IActionResult Actualizar(MTelefono b)
+        //{
 
-            ImTelefono compu = new ImTelefono();
+        //    ImTelefono compu = new ImTelefono();
 
-            string a = compu.setTelefono(b);
-            MRespuestaDB resp = new MRespuestaDB();
-            resp.respuesta = a;
-            return View(resp);
-        }
+        //    string a = compu.setTelefono(b);
+        //    MRespuestaDB resp = new MRespuestaDB();
+        //    resp.respuesta = a;
+        //    return View(resp);
+        //}
 
         public IActionResult Nuevo(MTelefono b)
         {
@@ -38,6 +38,20 @@ namespace Inventario.Controllers
             b.Empleados = c.getEmpleados();
             return View(b);
         }
+
+        [HttpPost]
+        public IActionResult Update([FromBody] MTelefono b)
+        {
+
+            ImTelefono compu = new ImTelefono();
+            string a = compu.setTelefono(b);
+            MRespuestaDB resp = new MRespuestaDB();
+            resp.respuesta = a;
+            return Ok(resp.respuesta);
+
+        }
+
+        
 
 
         //public IActionResult Insert(MTelefono b)
@@ -76,14 +90,29 @@ namespace Inventario.Controllers
         public IActionResult GetNewItemView()
         {
 
+
             MTelefono b = new MTelefono();
             var h = new ConsultasDB();
             b.No_Inventario = h.getNewNoInv("TEL", HttpContext.Session.GetString("Sucursal"));
-
             var c = new ImEmpleado();
-
             b.Empleados = c.getEmpleados();
+            ViewBag.accionTel = "Save()";
             return PartialView("_Nuevo", b);
+        }
+
+
+
+        [HttpGet]
+        public IActionResult GetEditItemView(string noInventario)
+        {
+
+            ImTelefono telefono = new ImTelefono();
+            MTelefono b = telefono.getTelefonoByCodEmple(noInventario);
+            var c = new ImEmpleado();
+            b.Empleados = c.getEmpleados();
+            ViewBag.accionTel = "Update()";
+            return PartialView("_Nuevo", b);
+
         }
 
 

@@ -18,15 +18,28 @@ namespace Inventario.Controllers
         }
 
 
-        public IActionResult Actualizar(MEmpleado b)
+        //public IActionResult Actualizar(MEmpleado b)
+        //{
+
+        //    ImEmpleado compu = new ImEmpleado();
+
+        //    string a = compu.setEmpleado(b);
+        //    MRespuestaDB resp = new MRespuestaDB();
+        //    resp.respuesta = a;
+        //    return View(resp);
+        //}
+
+
+
+        [HttpPost]
+        public IActionResult Update([FromBody] MEmpleado b)
         {
 
             ImEmpleado compu = new ImEmpleado();
-
             string a = compu.setEmpleado(b);
             MRespuestaDB resp = new MRespuestaDB();
             resp.respuesta = a;
-            return View(resp);
+            return Ok(resp.respuesta);
         }
 
         public IActionResult Nuevo(MEmpleado b)
@@ -87,9 +100,25 @@ namespace Inventario.Controllers
 
             MEmpleado b = new MEmpleado();
             var c = new ImEmpleado();
-
+            ViewBag.accionEmp = "Save()";
             b.Empleados = c.getEmpleados();
             return PartialView("_Nuevo", b);
+
+        }
+
+
+
+        [HttpGet]
+        public IActionResult GetEditItemView(string noInventario)
+        {
+
+            ImEmpleado Empleado = new ImEmpleado();
+            MEmpleado b = Empleado.getEmple(noInventario);
+            var c = new ImEmpleado();
+            b.Empleados = c.getEmpleados();
+            ViewBag.accionEmp = "Update()";
+            return PartialView("_Nuevo", b);
+            //return Ok(b.Nombre);
         }
     }
 }

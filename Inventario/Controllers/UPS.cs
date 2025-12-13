@@ -2,6 +2,7 @@
 using Inventario.Implement;
 using Inventario.Models;
 using Microsoft.AspNetCore.Mvc;
+using Mysqlx;
 
 namespace Inventario.Controllers
 {
@@ -18,16 +19,7 @@ namespace Inventario.Controllers
         }
 
 
-        public IActionResult Actualizar(MUps b)
-        {
-
-            ImUps compu = new ImUps();
-
-            string a = compu.setUps(b);
-            MRespuestaDB resp = new MRespuestaDB();
-            resp.respuesta = a;
-            return View(resp);
-        }
+        
 
         public IActionResult Nuevo(MUps b)
         {
@@ -81,6 +73,7 @@ namespace Inventario.Controllers
             var c = new ImEmpleado();
 
             b.Empleados = c.getEmpleados();
+            ViewBag.accionUps = "Save()";
             return PartialView("_Nuevo", b);
         }
         //GetEditItemView
@@ -94,7 +87,36 @@ namespace Inventario.Controllers
             MUps b = ups.getUpsByNoInv(noInventario);
             var c = new ImEmpleado();
             b.Empleados = c.getEmpleados();
+            ViewBag.accionUps = "Update()";
             return PartialView("_Nuevo", b);
+
+        }
+
+
+
+
+        //public IActionResult Actualizar(MUps b)
+        //{
+
+        //    ImUps compu = new ImUps();
+
+        //    string a = compu.setUps(b);
+        //    MRespuestaDB resp = new MRespuestaDB();
+        //    resp.respuesta = a;
+        //    return View(resp);
+        //}
+
+
+        [HttpPost]
+        public IActionResult Update([FromBody] MUps b)
+        {
+
+            ImUps UPS = new ImUps();
+            MRespuestaDB resp = new MRespuestaDB();
+
+            string a = UPS.setUps(b);
+            resp.respuesta = a;
+            return Ok(resp.respuesta);
 
         }
 

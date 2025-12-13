@@ -206,3 +206,58 @@ async function EditarItem(NoInventario) {
     // Mostramos el modal
     modal1.classList.add('mostrar');
 }
+
+
+
+
+async function Update() {
+    const form = document.getElementById('formulario');
+    const resultado = 'prueba de funcion'
+    if (!form) {
+        console.error('No se encontró el formulario con el ID "formulario-computadora".');
+        return;
+    }
+
+    const formData = new FormData(form);
+
+    const dataToSend = {};
+    for (let [key, value] of formData.entries()) {
+        dataToSend[key] = value;
+    }
+
+
+
+
+    try {
+        const response = await fetch(`/${tipoVista}/Update`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dataToSend)
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Error de servidor (${response.status}): ${errorText || 'Sin mensaje de error'}`);
+        }
+
+        const resultText = await response.text();
+        alert(resultText);
+  
+
+
+    } catch (error) {
+        console.error('Fallo en la carga:', error);
+
+        alert(`Fallo en la carga: ${error.message}`);
+
+    }
+
+
+
+}
+
+
+
+

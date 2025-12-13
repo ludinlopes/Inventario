@@ -149,10 +149,10 @@
                                         <input type="text" class="form-control" id="serie" name="Serie" value="@Model.Serie" required>
                                         <small class="form-text text-muted">Identificador único del equipo.</small>
                                     </div>
-                                    <div class="col-md-6">
+                                    @* <div class="col-md-6">
                                         <label for="capacidad" class="form-label">Capacidad (KVA)</label>
                                         <input type="number" step="0.1" class="form-control" id="capacidad" name="Capacidad" placeholder="Ej: 1.5" required>
-                                    </div>
+                                    </div> *@
                                 </div>
                             </div>
                         </div>
@@ -167,20 +167,48 @@
 
                     <div class="col-md-4">
                         <label for="estado" class="form-label">Estado</label>
-                        <select class="form-select" id="estado" name="Estado" value="@Model.Estado" required>
+                        <select class="form-select" id="estado" name="Estado"  required>
+                            @if(Model.Estado == "A"){
+                            <option value="" disabled >Seleccione un estado</option>
+                                <option value="A" selected>Activo</option>
+                            <option value="I">Inactivo</option>
+                            }
+                            else if (Model.Estado == "I")
+                            {
+                            <option value="" disabled >Seleccione un estado</option>
+                            <option value="A">Activo</option>
+                                <option value="I" selected>Inactivo</option>
+                            } else {
                             <option value="" disabled selected>Seleccione un estado</option>
                             <option value="A">Activo</option>
                             <option value="I">Inactivo</option>
+                            }
                         </select>
                     </div>
 
 
                     <div class="col-md-4">
                         <label for="condicion" class="form-label">Condición</label>
-                        <select class="form-select" id="condicion" name="Condicion" value="@Model.Condicion" required>
-                            <option value="" disabled selected>Seleccione la condición</option>
-                            <option value="B">Buen Estado</option>
-                            <option value="M">Mal Estado</option>
+                        <select class="form-select" id="condicion" name="Condicion"  required>
+                            @if (Model.Condicion == "B")
+                            {
+                                <option value="">Seleccione la condición</option>
+                                <option value="B" selected>Buen Estado</option>
+                                <option value="M" >Mal Estado</option>
+                            }
+                            else if (Model.Condicion == "M")
+                            {
+                                <option value="" disabled>Seleccione la condición</option>
+                                <option value="B" >Buen Estado</option>
+                                <option value="M" selected>Mal Estado</option>
+                            }
+							else
+							{
+                                <option value="" disabled selected>Seleccione la condición</option>
+								<option value="B">Buen Estado</option>
+								<option value="M">Mal Estado</option>
+							}
+                            
                         </select>
                     </div>
                 </div>
@@ -199,7 +227,7 @@
             </button>
 
             @* Botón Guardar (Funciona como Submit del formulario) *@
-            <button type="button" class="btn btn-primary ms-lg-2" onclick="Save()" aria-label="Guardar formulario">
+            <button type="button" class="btn btn-primary ms-lg-2" onclick="@ViewBag.accionUps" aria-label="Guardar formulario">
                 <i class="bi bi-hdd-fill"></i> Guardar
             </button>
 

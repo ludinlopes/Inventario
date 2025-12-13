@@ -7,7 +7,7 @@ namespace Inventario.Implement
     {
 
         private Conexion cn;
-        public MImpresora getEmple(string NoInv)
+        public MImpresora getImpresoraByNoInv(string NoInv)
         {
             cn = new Conexion();
             MySqlDataReader mySqlDataReader;
@@ -145,7 +145,7 @@ namespace Inventario.Implement
         // Cada método creará y gestionará su propia instancia de Conexion
         // dentro de un bloque 'using'.
 
-        public MImpresora getEmple(string NoInv) // Renombrado a getImpresoraByNoInv para mayor claridad
+        public MImpresora getImpresoraByNoInv(string NoInv) // Renombrado a getImpresoraByNoInv para mayor claridad
         {
             MImpresora imp = new MImpresora();
             // Asumo que 'getImpresoras' es un procedimiento almacenado que acepta No_Inventario

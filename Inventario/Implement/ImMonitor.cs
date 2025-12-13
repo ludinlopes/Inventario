@@ -6,7 +6,7 @@ namespace Inventario.Implement
     public class ImMonitor
     {
         private Conexion cn;
-        public MMonitor getEmple(string NoInv)
+        public MMonitor getImpresoraByNoInv(string NoInv)
         {
             cn = new Conexion();
             MySqlDataReader mySqlDataReader;

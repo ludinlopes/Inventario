@@ -7,7 +7,7 @@ namespace Inventario.Implement
     {
 
         private Conexion cn;
-        public MScanner getEmple(string NoInv)
+        public MScanner getImpresoraByNoInv(string NoInv)
         {
             cn = new Conexion();
             MySqlDataReader mySqlDataReader;

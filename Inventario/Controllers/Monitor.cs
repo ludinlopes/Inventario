@@ -18,15 +18,28 @@ namespace Inventario.Controllers
         }
 
 
-        public IActionResult Actualizar(MMonitor b)
+        //public IActionResult Actualizar(MMonitor b)
+        //{
+
+        //    ImMonitor compu = new ImMonitor();
+
+        //    string a = compu.setMonitor(b);
+        //    MRespuestaDB resp = new MRespuestaDB();
+        //    resp.respuesta = a;
+        //    return View(resp);
+        //}
+
+
+
+        [HttpPost]
+        public IActionResult Update([FromBody] MMonitor b)
         {
 
             ImMonitor compu = new ImMonitor();
-
             string a = compu.setMonitor(b);
             MRespuestaDB resp = new MRespuestaDB();
             resp.respuesta = a;
-            return View(resp);
+            return Ok(resp.respuesta);
         }
 
         public IActionResult Nuevo(MMonitor b)
@@ -84,11 +97,25 @@ namespace Inventario.Controllers
             b.No_Inventario = h.getNewNoInv("MON", HttpContext.Session.GetString("Sucursal"));
 
             var c = new ImEmpleado();
-
+            ViewBag.accionMon = "Save()";
             b.Empleados = c.getEmpleados();
             return PartialView("_Nuevo", b);
         }
 
+
+
+        [HttpGet]
+        public IActionResult GetEditItemView(string noInventario)
+        {
+
+            ImMonitor Monitor = new ImMonitor();
+            MMonitor b = Monitor.getMonitorByNoInv(noInventario);
+            var c = new ImEmpleado();
+            b.Empleados = c.getEmpleados();
+            ViewBag.accionMon = "Update()";
+            return PartialView("_Nuevo", b);
+
+        }
 
 
         [HttpGet]

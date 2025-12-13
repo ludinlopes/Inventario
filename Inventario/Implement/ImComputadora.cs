@@ -10,7 +10,7 @@ namespace Inventario.Implement
     {
         private Conexion? cn;
 
-        public MComputadora getEmple(string noInv)
+        public MComputadora getImpresoraByNoInv(string noInv)
         {
             cn = new Conexion();
             MySqlDataReader mySqlDataReader;
@@ -63,7 +63,7 @@ namespace Inventario.Implement
         */
     public class ImComputadora
     {
-        public MComputadora getEmple(string noInv)
+        public MComputadora getComputadoraByNoInv(string noInv)
         {
             MComputadora compu = new MComputadora();
             string consulta = $"CALL getComputadora('{noInv}');";

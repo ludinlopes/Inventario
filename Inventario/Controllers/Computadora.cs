@@ -16,21 +16,35 @@ namespace Inventario.Controllers
 
             ImComputadora emple = new ImComputadora();
 
-            MComputadora a = emple.getEmple(b);
+            MComputadora a = emple.getComputadoraByNoInv(b);
             var c = new ImEmpleado();
             a.Empleados = c.getEmpleados();
             return View(a);
         }
 
-        public IActionResult Actualizar(MComputadora b)
-        {
+        //public IActionResult Actualizar(MComputadora b)
+        //{
             
-            ImComputadora compu = new ImComputadora();
+        //    ImComputadora compu = new ImComputadora();
 
+        //    string a = compu.setComputadora(b);
+        //    MRespuestaDB resp = new MRespuestaDB();
+        //    resp.respuesta = a;
+        //    return View(resp);
+        //}
+
+
+
+
+        [HttpPost]
+        public IActionResult Update([FromBody] MComputadora b)
+        {
+
+            ImComputadora compu = new ImComputadora();
             string a = compu.setComputadora(b);
             MRespuestaDB resp = new MRespuestaDB();
             resp.respuesta = a;
-            return View(resp);
+            return Ok(resp.respuesta);
         }
 
 
@@ -76,11 +90,29 @@ namespace Inventario.Controllers
             b.No_Inventario = h.getNewNoInv("CPU", HttpContext.Session.GetString("Sucursal"));
 
             var c = new ImEmpleado();
-
+            ViewBag.accionCom = "Save()";
             b.Empleados = c.getEmpleados();
 
             return PartialView("_Nuevo", b);
         }
+
+
+
+        [HttpGet]
+        public IActionResult GetEditItemView(string noInventario)
+        {
+
+            ImComputadora Computadora = new ImComputadora();
+            MComputadora b = Computadora.getComputadoraByNoInv(noInventario);
+            var c = new ImEmpleado();
+            b.Empleados = c.getEmpleados();
+            ViewBag.accionCom = "Update()";
+            return PartialView("_Nuevo", b);
+
+        }
+
+
+
 
         [HttpPost]
         public IActionResult Insert([FromBody] MComputadora b)

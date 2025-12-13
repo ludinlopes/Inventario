@@ -63,11 +63,11 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="marca" class="form-label">Marca</label>
-                                        <input type="text" class="form-control" id="marca" name="Marca" required>
+                                        <input type="text" class="form-control" id="marca" name="Marca" value="@Model.Marca" required>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="modelo" class="form-label">Modelo</label>
-                                        <input type="text" class="form-control" id="modelo" name="Modelo" required>
+                                        <input type="text" class="form-control" id="modelo" name="Modelo" value="@Model.Modelo" required>
                                     </div>
                                 </div>
 
@@ -90,20 +90,51 @@
 
                     <div class="col-md-4">
                         <label for="estado" class="form-label">Estado</label>
-                        <select class="form-select" id="estado" name="Estado" value="@Model.Estado" required>
-                            <option value="" disabled selected>Seleccione un estado</option>
-                            <option value="A">Activo</option>
-                            <option value="I">Inactivo</option>
+                        <select class="form-select" id="estado" name="Estado"  required>
+                            @if (Model.Estado == "A")
+                            {
+                                <option value="" disabled>Seleccione un estado</option>
+                                <option value="A" selected>Activo</option>
+                                <option value="I">Inactivo</option>
+                            }
+                            else if (Model.Estado == "I")
+                            {
+                                <option value="" disabled>Seleccione un estado</option>
+                                <option value="A">Activo</option>
+                                <option value="I" selected>Inactivo</option>
+                            }
+                            else
+                            {
+                                <option value="" disabled selected>Seleccione un estado</option>
+                                <option value="A">Activo</option>
+                                <option value="I">Inactivo</option>
+                            }
                         </select>
                     </div>
 
 
                     <div class="col-md-4">
                         <label for="condicion" class="form-label">Condición</label>
-                        <select class="form-select" id="condicion" name="Condicion" value="@Model.Condicion" required>
-                            <option value="" disabled selected>Seleccione la condición</option>
-                            <option value="B">Buen Estado</option>
-                            <option value="M">Mal Estado</option>
+                        <select class="form-select" id="condicion" name="Condicion"  required>
+                            @if (Model.Condicion == "B")
+                            {
+                                <option value="">Seleccione la condición</option>
+                                <option value="B" selected>Buen Estado</option>
+                                <option value="M">Mal Estado</option>
+                            }
+                            else if (Model.Condicion == "M")
+                            {
+                                <option value="" disabled>Seleccione la condición</option>
+                                <option value="B">Buen Estado</option>
+                                <option value="M" selected>Mal Estado</option>
+                            }
+                            else
+                            {
+                                <option value="" disabled selected>Seleccione la condición</option>
+                                <option value="B">Buen Estado</option>
+                                <option value="M">Mal Estado</option>
+                            }
+
                         </select>
                     </div>
                 </div>
@@ -122,7 +153,7 @@
             </button>
 
             @* Botón Guardar (Funciona como Submit del formulario) *@
-            <button type="button" class="btn btn-primary ms-lg-2" onclick="Save()" aria-label="Guardar formulario">
+            <button type="button" class="btn btn-primary ms-lg-2" onclick="@ViewBag.accionTab" aria-label="Guardar formulario">
                 <i class="bi bi-hdd-fill"></i> Guardar
             </button>
 

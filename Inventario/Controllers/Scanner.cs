@@ -77,9 +77,24 @@ namespace Inventario.Controllers
             b.No_Inventario = h.getNewNoInv("SCN", HttpContext.Session.GetString("Sucursal"));
 
             var c = new ImEmpleado();
-
+            ViewBag.accionScn = "Save()";
             b.Empleados = c.getEmpleados();
             return PartialView("_Nuevo", b);
+        }
+
+
+
+        [HttpGet]
+        public IActionResult GetEditItemView(string noInventario)
+        {
+
+            ImScanner Scanner = new ImScanner();
+            MScanner b = Scanner.getScannerByNoInv(noInventario);
+            var c = new ImEmpleado();
+            b.Empleados = c.getEmpleados();
+            ViewBag.accionScn = "Update()";
+            return PartialView("_Nuevo", b);
+
         }
 
 

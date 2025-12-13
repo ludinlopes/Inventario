@@ -7,7 +7,7 @@ namespace Inventario.Implement
     public class ImTelefono
     {
         private Conexion cn;
-        public MTelefono getEmple(string CodEmple)
+        public MTelefono getImpresoraByNoInv(string CodEmple)
         {
             cn = new Conexion();
             MySqlDataReader mySqlDataReader;

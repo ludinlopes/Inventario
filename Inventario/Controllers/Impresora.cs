@@ -11,7 +11,7 @@ namespace Inventario.Controllers
         {
             ImImpresora imp = new ImImpresora();
 
-            MImpresora a = imp.getEmple(b);
+            MImpresora a = imp.getImpresoraByNoInv(b);
             var c = new ImEmpleado();
             a.Empleados = c.getEmpleados();
             return View(a);
@@ -27,6 +27,17 @@ namespace Inventario.Controllers
             MRespuestaDB resp = new MRespuestaDB();
             resp.respuesta = a;
             return View(resp);
+        }
+
+        [HttpPost]
+        public IActionResult Update([FromBody] MImpresora b)
+        {
+
+            ImImpresora compu = new ImImpresora();
+            string a = compu.setImpresora(b);
+            MRespuestaDB resp = new MRespuestaDB();
+            resp.respuesta = a;
+            return Ok(resp.respuesta);
         }
 
         public IActionResult Nuevo(MImpresora b)
@@ -78,9 +89,24 @@ namespace Inventario.Controllers
             b.No_Inventario = h.getNewNoInv("IMP", HttpContext.Session.GetString("Sucursal"));
 
             var c = new ImEmpleado();
-
+            ViewBag.accionImp = "Save()";
             b.Empleados = c.getEmpleados();
             return PartialView("_Nuevo", b);
+        }
+
+
+
+        [HttpGet]
+        public IActionResult GetEditItemView(string noInventario)
+        {
+
+            ImImpresora Impresora = new ImImpresora();
+            MImpresora b = Impresora.getImpresoraByNoInv(noInventario);
+            var c = new ImEmpleado();
+            b.Empleados = c.getEmpleados();
+            ViewBag.accionImp = "Update()";
+            return PartialView("_Nuevo", b);
+
         }
 
 

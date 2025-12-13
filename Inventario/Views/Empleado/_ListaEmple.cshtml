@@ -38,13 +38,16 @@
                                 <i class="fas fa-eye"></i>
                             </a>
 
-                            <a asp-action="Editar"
+                            @* <a asp-action="Editar"
                                asp-controller="Empleado"
                                asp-route-b="@item.Cod_Emple"
                                class="btn btn-sm btn-outline-warning"
                                title="Editar">
                                 <i class="fas fa-edit"></i>
-                            </a>
+                            </a> *@
+                        <button class="btn btn-sm btn-outline-warning" onclick="EditarItem('@item.Cod_Emple')">
+                            <i class="fas fa-edit"></i>
+                        </button>
                         </td>
                     </tr>
                 }
