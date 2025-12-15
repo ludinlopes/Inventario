@@ -18,15 +18,26 @@ namespace Inventario.Controllers
         }
 
 
-        public IActionResult Actualizar(MScanner b)
+        //public IActionResult Actualizar(MScanner b)
+        //{
+
+        //    ImScanner compu = new ImScanner();
+
+        //    string a = compu.setScanner(b);
+        //    MRespuestaDB resp = new MRespuestaDB();
+        //    resp.respuesta = a;
+        //    return View(resp);
+        //}
+        [HttpPost]
+        public IActionResult Update([FromBody] MScanner b)
         {
 
             ImScanner compu = new ImScanner();
-
             string a = compu.setScanner(b);
             MRespuestaDB resp = new MRespuestaDB();
             resp.respuesta = a;
-            return View(resp);
+            return Ok(resp.respuesta);
+
         }
 
         public IActionResult Nuevo(MScanner b)
