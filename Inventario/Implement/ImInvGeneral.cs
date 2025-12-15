@@ -298,43 +298,53 @@ namespace Inventario.Implement
         //    // --- FIN de la parte que pediste mantener tal cual ---
         //}
 
-        public List<MListItems> getListInv(String Suc)
+        public List<MListItems> getListInv(String Suc, string Tipo)
         {
-            Suc = "1"; // Temporalmente forzado a "1" para pruebas
+            //Suc = "1"; // Temporalmente forzado a "1" para pruebas
+            
             var inv = new List<MListItems>();
+            //string procedimiento; // SOLO EL NOMBRE DEL PROCEDIMIENTO
             string procedimiento = "getListItems"; // SOLO EL NOMBRE DEL PROCEDIMIENTO
+            
 
+            if (Tipo == "Todo") {
+                Tipo = "";
+            }
             try
             {
                 using (Conexion cn = new Conexion())
-                using (MySqlConnection conn = cn.GetConnection())
                 {
-                    conn.Open();
-
-                    using (MySqlCommand mySqlCommand = new MySqlCommand(procedimiento, conn))
+                    using (MySqlConnection conn = cn.GetConnection())
                     {
-                        mySqlCommand.CommandType = CommandType.StoredProcedure;
+                        conn.Open();
 
-                        // *** AÑADIR EL PARÁMETRO QUE PASA EL VALOR DE 'Suc' ***
-                        // Asegúrate de que "@p_filtro" coincida con el nombre del parámetro en MySQL.
-                        mySqlCommand.Parameters.AddWithValue("sucursal", Suc);
-
-                        using (MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader())
+                        using (MySqlCommand mySqlCommand = new MySqlCommand(procedimiento, conn))
                         {
-                            while (mySqlDataReader.Read())
+                            mySqlCommand.CommandType = CommandType.StoredProcedure;
+
+                            // *** AÑADIR EL PARÁMETRO QUE PASA EL VALOR DE 'Suc' ***
+                            // Asegúrate de que "@p_filtro" coincida con el nombre del parámetro en MySQL.
+
+                            mySqlCommand.Parameters.AddWithValue("sucursal", Suc);
+                            mySqlCommand.Parameters.AddWithValue("Tipo", Tipo);
+
+                            using (MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader())
                             {
-                                var minv = new MListItems();
+                                while (mySqlDataReader.Read())
+                                {
+                                    var minv = new MListItems();
 
-                                // Nota: Se recomienda añadir manejo de NULLs aquí (IsDBNull)
-                                minv.Tipo = mySqlDataReader.GetString("Tipo");
-                                minv.No_Inventario = mySqlDataReader.GetString("No_Inventario");
-                                minv.Serie = mySqlDataReader.GetString("Serie");
-                                minv.Modelo = mySqlDataReader.GetString("Modelo");
-                                minv.Nombre = mySqlDataReader.GetString("Nombre");
-                                minv.Area = mySqlDataReader.GetString("Area");
-                                minv.Estado = mySqlDataReader.GetString("Estado");
+                                    // Nota: Se recomienda añadir manejo de NULLs aquí (IsDBNull)
+                                    minv.Tipo = mySqlDataReader.GetString("Tipo");
+                                    minv.No_Inventario = mySqlDataReader.GetString("No_Inventario");
+                                    minv.Serie = mySqlDataReader.GetString("Serie");
+                                    minv.Modelo = mySqlDataReader.GetString("Modelo");
+                                    minv.Nombre = mySqlDataReader.GetString("Nombre");
+                                    minv.Area = mySqlDataReader.GetString("Area");
+                                    minv.Estado = mySqlDataReader.GetString("Estado");
 
-                                inv.Add(minv);
+                                    inv.Add(minv);
+                                }
                             }
                         }
                     }

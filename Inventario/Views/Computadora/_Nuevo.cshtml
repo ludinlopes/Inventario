@@ -1,0 +1,356 @@
+﻿@model Inventario.Models.MComputadora
+
+<div class="container-fluid py-3">
+
+
+    @* action="/Computadoras/Guardar"  data-ajax="true" *@
+    @* method="post" action="/Computadora/Insert" *@
+    <form id="formulario" >
+        <h4 class="mb-4 text-primary text-center">Registro Detallado de Activo: Computadora</h4>
+
+        @* Contenedor para mostrar mensajes de éxito o error después del submit *@
+        <div id="messageContainer" class="mb-3">
+            @* Aquí se mostrarán los mensajes dinámicos de la respuesta del servidor. *@
+        </div>
+
+
+        <div class="row g-4">
+
+            @* === SECCIÓN 1: INFORMACIÓN BÁSICA Y EMPLEADO === *@
+            <div class="col-lg-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-primary text-white">
+                        Datos del Empleado / Inventario
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            @* Código y Nombre de Empleado (Columna 1) *@
+                            <div class="col-12">
+                                <label for="codigoEmpleado" class="form-label">Código de Empleado</label>
+
+                                <input type="text" class="form-control" id="codigoEmpleado" name="Cod_Emple" value="@Model.Cod_Emple" readonly placeholder="Cargar con el selector" required>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="nombreEmpleado" class="form-label">Nombre de Empleado</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="nombreEmpleado" name="Nombre" value="@Model.Nombre"  readonly  placeholder="Seleccione un empleado" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="btnSeleccionarEmpleado" onclick="abrirModal()" aria-label="Abrir selector de empleado">
+                                        <i class="bi bi-person-fill"></i> Seleccionar
+                                    </button>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <label for="noInventario" class="form-label">No. Inventario</label>
+                                <input type="text" class="form-control" id="noInventario" name="No_Inventario" value="@Model.No_Inventario" readonly required>
+
+                            </div>
+                            <div class="col-md-6">
+                                <label for="tipo" class="form-label">Tipo</label>
+                                <select class="form-select" id="tipo" name="Tipo" value="@Model.Tipo" required>
+                                    @if (Model.Tipo == "ESCRITORIO")
+                                    {
+                                        <option value="" disabled >Seleccionar</option>
+                                        <option value="ESCRITORIO" selected>ESCRITORIO</option>
+                                        <option value="LAPTOP">LAPTOP</option>
+                                    }
+                                    else if (Model.Tipo == "LAPTOP")
+                                    {
+                                        <option value="" disabled >Seleccionar</option>
+                                        <option value="ESCRITORIO">ESCRITORIO</option>
+                                        <option value="LAPTOP" selected>LAPTOP</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="" disabled selected>Seleccionar</option>
+                                        <option value="ESCRITORIO">ESCRITORIO</option>
+                                        <option value="LAPTOP">LAPTOP</option>
+                                    }
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-success text-white">
+                        Especificaciones de Hardware
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+
+                            <div class="col-md-4">
+                                <label for="marca" class="form-label">Marca</label>
+                                <input type="text" class="form-control" id="marca" name="Marca" value="@Model.Marca" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="modelo" class="form-label">Modelo</label>
+                                <input type="text" class="form-control" id="modelo" name="Modelo" value="@Model.Modelo" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="serie" class="form-label">Serie</label>
+                                <input type="text" class="form-control" id="serie" name="Serie" value="@Model.Serie" required>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <label for="procesador" class="form-label">Procesador</label>
+                                <input type="text" class="form-control" id="procesador" name="Procesador" value="@Model.Procesador" placeholder="Ej: Core i7" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="generacion" class="form-label">Generación</label>
+                                <input type="text" class="form-control" id="generacion" name="Generacion" value="@Model.Generacion" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="ram" class="form-label">RAM (GB)</label>
+                                <input type="number" class="form-control" id="ram" name="Ram" min="1" value="@Model.Ram" required>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <label for="tipoDisco" class="form-label">Tipo de Disco</label>
+                                <select class="form-select" id="tipoDisco" name="TipoDisco" value="@Model.TipoDisco" required>
+                                    @if (Model.TipoDisco == "HDD")
+                                    {
+                                        <option value="" disabled >Seleccionar</option>
+                                        <option value="HDD" selected>HDD (Mecánico)</option>
+                                        <option value="SSD">SSD (Sólido)</option>
+                                        <option value="NVME">NVMe (Alta Velocidad)</option>
+                                    }
+                                    else if (Model.TipoDisco == "SSD")
+                                    {
+                                        <option value="" disabled >Seleccionar</option>
+                                        <option value="HDD">HDD (Mecánico)</option>
+                                        <option value="SSD" selected>SSD (Sólido)</option>
+                                        <option value="NVME">NVMe (Alta Velocidad)</option>
+                                    }
+                                    else if (Model.TipoDisco == "NVME")
+                                    {
+                                        <option value="" disabled >Seleccionar</option>
+                                        <option value="HDD">HDD (Mecánico)</option>
+                                        <option value="SSD">SSD (Sólido)</option>
+                                        <option value="NVME" selected>NVMe (Alta Velocidad)</option>
+                                    } else
+                                    {
+                                        <option value="" disabled selected>Seleccionar</option>
+                                        <option value="HDD">HDD (Mecánico)</option>
+                                        <option value="SSD">SSD (Sólido)</option>
+                                        <option value="NVME">NVMe (Alta Velocidad)</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="capacidadDisco" class="form-label">Capacidad de Disco (GB)</label>
+                                <input type="number" class="form-control" id="capacidadDisco" name="CapacidadDisco" value="@Model.CapacidadDisco" min="100" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-info text-white">
+                        Red, Periféricos y Credenciales
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+
+                            <div class="col-md-3">
+                                <label for="macAddress" class="form-label">Mac Address</label>
+                                <input type="text" class="form-control" id="macAddress" name="MacAddress" value="@Model.MacAddress" placeholder="XX:XX:XX:XX:XX:XX" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="noIP" class="form-label">No. IP</label>
+                                <input type="text" class="form-control" id="noIP" name="NoIp" value="@Model.NoIp" placeholder="Ej: 192.168.1.10" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="nombrePC" class="form-label">Nombre PC</label>
+                                <input type="text" class="form-control" id="nombrePC" name="NombrePc" value="@Model.NombrePc" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="dominio" class="form-label">Dominio</label>
+                                <input type="text" class="form-control" id="dominio" name="Dominio" value="@Model.Dominio" placeholder="Ej: corp.local" required>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <label for="teclado" class="form-label">Teclado</label>
+                                <select class="form-select" id="teclado" name="Teclado" value="@Model.Teclado" required>
+                                    @if (Model.Teclado == "USB")
+                                    {
+                                        <option value="" disabled >Seleccionar</option>
+                                        <option value="USB" selected>USB</option>
+                                        <option value="Wireless">Inalámbrico</option>
+                                        <option value="Integrated">Integrado (Laptop)</option>
+                                        <option value="N/A">NO APLICA</option>
+                                    }
+                                    else if (Model.Teclado == "WIRELESS")
+                                    {
+                                        <option value="" disabled selected>Seleccionar</option>
+                                        <option value="USB">USB</option>
+                                        <option value="Wireless" selected>Inalámbrico</option>
+                                        <option value="Integrated">Integrado (Laptop)</option>
+                                        <option value="N/A">NO APLICA</option>
+                                    }
+                                    else if (Model.Teclado == "INTEGRATED")
+                                    {
+                                        <option value="" disabled selected>Seleccionar</option>
+                                        <option value="USB">USB</option>
+                                        <option value="Wireless">Inalámbrico</option>
+                                        <option value="Integrated" selected>Integrado (Laptop)</option>
+                                        <option value="N/A">NO APLICA</option>
+                                    }
+                                    else if (Model.Teclado == "N/A")
+                                    {
+                                        <option value="" disabled >Seleccionar</option>
+                                        <option value="USB">USB</option>
+                                        <option value="Wireless">Inalámbrico</option>
+                                        <option value="Integrated" >Integrado (Laptop)</option>
+                                        <option value="N/A" selected>NO APLICA</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="" disabled selected>Seleccionar</option>
+                                        <option value="USB">USB</option>
+                                        <option value="Wireless">Inalámbrico</option>
+                                        <option value="Integrated">Integrado (Laptop)</option>
+                                        <option value="N/A">NO APLICA</option>
+                                    }
+
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="mouse" class="form-label">Mouse</label>
+                                <select class="form-select" id="mouse" name="Mouse" value="@Model.Mouse" required>
+                                    @if (Model.Mouse == "USB")
+                                    {
+                                        <option value="" disabled >Seleccionar</option>
+                                        <option value="USB" selected>USB</option>
+                                        <option value="Wireless">Inalámbrico</option>
+                                        <option value="N/A">NO APLICA</option>
+                                    }
+                                    else if (Model.Mouse == "WIRELESS")
+                                    {
+                                        <option value="" disabled >Seleccionar</option>
+                                        <option value="USB">USB</option>
+                                        <option value="Wireless" selected>Inalámbrico</option>
+                                        <option value="N/A">NO APLICA</option>
+                                    }
+                                    else if (Model.Mouse == "N/A")
+                                    {
+                                        <option value="" disabled >Seleccionar</option>
+                                        <option value="USB">USB</option>
+                                        <option value="Wireless">Inalámbrico</option>
+                                        <option value="N/A" selected>NO APLICA</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="" disabled selected>Seleccionar</option>
+                                        <option value="USB">USB</option>
+                                        <option value="Wireless">Inalámbrico</option>
+                                        <option value="N/A">NO APLICA</option>
+                                    }
+                                </select>
+                            </div>
+
+
+                            <div class="col-md-2">
+                                <label for="usuario" class="form-label">Usuario</label>
+                                <input type="text" class="form-control" id="usuario" name="Usuario" value="@Model.Usuario" required>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="contrasena" class="form-label">Contraseña</label>
+                                <input type="text" class="form-control" id="contrasena" name="Contra" value="@Model.Contra" placeholder="Contraseña de Admin/Local" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-12">
+                <div class="row g-3 justify-content-center">
+
+
+                    <div class="col-md-4">
+                        <label for="estado" class="form-label">Estado</label>
+                        <select class="form-select" id="estado" name="Estado"  required>
+                            @if (Model.Estado == "A")
+                            {
+                                <option value="" disabled>Seleccione un estado</option>
+                                <option value="A" selected>Activo</option>
+                                <option value="I">Inactivo</option>
+                            }
+                            else if (Model.Estado == "I")
+                            {
+                                <option value="" disabled>Seleccione un estado</option>
+                                <option value="A">Activo</option>
+                                <option value="I" selected>Inactivo</option>
+                            }
+                            else
+                            {
+                                <option value="" disabled selected>Seleccione un estado</option>
+                                <option value="A">Activo</option>
+                                <option value="I">Inactivo</option>
+                            }
+                        </select>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <label for="condicion" class="form-label">Condición</label>
+                        <select class="form-select" id="condicion" name="Condicion"  required>
+                            @if (Model.Condicion == "B")
+                            {
+                                <option value="">Seleccione la condición</option>
+                                <option value="B" selected>Buen Estado</option>
+                                <option value="M">Mal Estado</option>
+                            }
+                            else if (Model.Condicion == "M")
+                            {
+                                <option value="" disabled>Seleccione la condición</option>
+                                <option value="B">Buen Estado</option>
+                                <option value="M" selected>Mal Estado</option>
+                            }
+                            else
+                            {
+                                <option value="" disabled selected>Seleccione la condición</option>
+                                <option value="B">Buen Estado</option>
+                                <option value="M">Mal Estado</option>
+                            }
+
+                        </select>
+                    </div>
+                </div>
+            </div> 
+
+        </div> 
+        <br>
+        <div class="d-flex justify-content-end gap-2">
+            
+
+            @* Botón Cancelar (Cierra el modal, debe estar vinculado a la función JS cerrarModal) *@
+            <button type="button" class="btn btn-secondary ms-lg-0" onclick="cerrarModal()" aria-label="Cancelar y cerrar modal">
+                <i class="bi bi-x-circle"></i> Cancelar
+            </button>
+
+            @* Botón Guardar (Funciona como Submit del formulario) *@
+            <button type="button" class="btn btn-primary ms-lg-2" aria-label="Guardar formulario" onclick="@ViewBag.accionCom">
+                <i class="bi bi-hdd-fill"></i> Guardar
+            </button>
+
+        </div>
+
+    </form>
+</div>
+
+
+

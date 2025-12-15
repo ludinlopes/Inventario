@@ -7,7 +7,7 @@ namespace Inventario.Implement
     {
 
         private Conexion cn;
-        public MTablet getEmple(string IMEI)
+        public MTablet getImpresoraByNoInv(string IMEI)
         {
             cn = new Conexion();
             MySqlDataReader mySqlDataReader;
@@ -149,7 +149,7 @@ namespace Inventario.Implement
         {
             MTablet tablet = new MTablet();
             // Nombre del procedimiento almacenado para obtener una tablet por su IMEI
-            string procedimiento = "GetTabletByIMEI"; // Sugerencia de nombre
+            string procedimiento = "GetTablet"; // Sugerencia de nombre
 
             try
             {
@@ -163,13 +163,14 @@ namespace Inventario.Implement
                         {
                             cmd.CommandType = CommandType.StoredProcedure;
                             // Añadimos el parámetro para el procedimiento almacenado
-                            cmd.Parameters.AddWithValue("_IMEI", IMEI);
+                            cmd.Parameters.AddWithValue("IMEI", IMEI);
 
                             using (MySqlDataReader reader = cmd.ExecuteReader())
                             {
                                 if (reader.Read()) // Si se encuentra un registro
                                 {
                                     tablet.Cod_Emple = reader.GetInt32("Cod_Empleado").ToString();
+                                    tablet.No_Inventario = reader.GetString("No_Inventario");
                                     tablet.Nombre = reader.GetString("Nombre"); // Asumo que el SP une con Empleado para obtener el nombre
                                     tablet.Marca = reader.GetString("Marca");
                                     tablet.Modelo = reader.GetString("Modelo");
@@ -280,6 +281,7 @@ namespace Inventario.Implement
                             // Agregar parámetros de forma segura
                             // Los nombres de los parámetros deben coincidir con los del SP en MySQL
                             cmd.Parameters.AddWithValue("_Cod_Empleado", modelo.Cod_Emple);
+                            cmd.Parameters.AddWithValue("_No_Inventario", modelo.No_Inventario.ToUpper());
                             cmd.Parameters.AddWithValue("_Marca", modelo.Marca.ToUpper());
                             cmd.Parameters.AddWithValue("_Modelo", modelo.Modelo.ToUpper());
                             cmd.Parameters.AddWithValue("_IMEI", modelo.Imei.ToUpper());
@@ -291,7 +293,7 @@ namespace Inventario.Implement
 
                             if (rowsAffected > 0)
                             {
-                                mensaje = "Inserción de tablet exitosa.";
+                                mensaje = "Guardado exitosamente";
                             }
                             else
                             {

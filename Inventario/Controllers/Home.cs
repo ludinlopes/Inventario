@@ -59,30 +59,30 @@ namespace Inventario.Controllers
 
 
         public IActionResult Menu() {
-            string sucursal = HttpContext.Session.GetString("Sucursal");
-            if (sucursal == "RZ")
-            {
-                sucursal = "Ricza";
-            }
-            else if (sucursal == "INM")
-            {
-                sucursal = "Inmepro";
-            }
-            else if (sucursal == "SC")
-            {
-                sucursal = "Servicocinas";
-            }
-            else if (sucursal == "FES")
-            {
-                sucursal = "FES";
-            }
+            string sucursal = HttpContext.Session.GetString("SucursalNombre");
+            //if (sucursal == "RZ")
+            //{
+            //    sucursal = "Ricza";
+            //}
+            //else if (sucursal == "INM")
+            //{
+            //    sucursal = "Inmepro";
+            //}
+            //else if (sucursal == "SC")
+            //{
+            //    sucursal = "Servicocinas";
+            //}
+            //else if (sucursal == "FES")
+            //{
+            //    sucursal = "FES";
+            //}
             ViewBag.Sucursal = sucursal;
 
             return View(); 
         }
         public IActionResult Home_()
         {
-            string sucursal = HttpContext.Session.GetString("Sucursal");
+            string sucursal = HttpContext.Session.GetString("SucursalNombre");
             MDocument a = new MDocument
             {
                 controlador = "Home",
@@ -90,22 +90,22 @@ namespace Inventario.Controllers
                 Empleado = "chequed",
                 Texto = "prueba"
             };
-
-            if (sucursal == "RZ")
-            {
-                a.Sucursal = "Ricza";
-            }else if (sucursal == "INM")
-            {
-                a.Sucursal = "Inmepro";
-            }
-            else if (sucursal == "SC")
-            {
-                a.Sucursal = "Servicocinas";
-            }
-            else if (sucursal == "FES")
-            {
-                a.Sucursal = "FES";
-            }
+            a.Sucursal = sucursal;
+            //if (sucursal == "RZ")
+            //{
+            //    a.Sucursal = "Ricza";
+            //}else if (sucursal == "INM")
+            //{
+            //    a.Sucursal = "Inmepro";
+            //}
+            //else if (sucursal == "SC")
+            //{
+            //    a.Sucursal = "Servicocinas";
+            //}
+            //else if (sucursal == "FES")
+            //{
+            //    a.Sucursal = "FES";
+            //}
 
             return View(a);
         }
@@ -140,22 +140,17 @@ namespace Inventario.Controllers
         public IActionResult MenuInv_()
         {
             var cn = new ImInvGeneral();
+                        
+            String Id = HttpContext.Session.GetString("SucursalID");
+                        
+            var a = cn.getListInv(Id, "Todo");
 
-            // 1. OBTENER LOS DATOS REALES DE LA BASE DE DATOS
-            // 'a' es una lista (List<MListItems>) con los datos.
-            var a = cn.getListInv("1");
-
-            // 2. CREAR EL MODELO CONTENEDOR PARA LA VISTA
             var o = new MInvListado();
 
-            // 3. ASIGNAR LA LISTA COMPLETA DIRECTAMENTE
-            // Asignamos la lista 'a' a la propiedad 'Items' del modelo 'o'.
             o.Items = a;
 
-            // 4. Se retorna la vista con el modelo 'o' lleno.
             return View(o);
 
-            // Nota: Eliminamos todo el código de prueba (la declaración de 'i' y la asignación manual de propiedades)
         }
 
 
@@ -184,7 +179,7 @@ namespace Inventario.Controllers
             else if (fav_language == "Computadora")
             {
                 
-                return RedirectToAction("editar", "Computadoras", new { b = Texto });
+                return RedirectToAction("editar", "Computadora", new { b = Texto });
             }
 
 
@@ -265,11 +260,11 @@ namespace Inventario.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetFilasGeneral(string sucursal)
+        public IActionResult GetFilasGeneral(string sucursal, string tipo)
         {
             // 1. Usar tu método existente para obtener los datos
             var cn = new ImInvGeneral();
-            var items = cn.getListInv(sucursal); // Usa la lógica que ya tienes
+            var items = cn.getListInv(sucursal,tipo); // Usa la lógica que ya tienes
 
             // 2. Devolver una vista parcial con el modelo
             // La vista parcial solo contendrá el ciclo @foreach

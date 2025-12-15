@@ -1,0 +1,162 @@
+﻿@model MCelular
+
+
+
+
+
+
+@* Este es un formulario de vista parcial diseñado con Bootstrap 5 para el registro de Celulares.
+    Está optimizado para ser cargado dentro de un modal y es completamente responsivo.
+
+    *** ⚠️ IMPORTANTE ⚠️: Las referencias a Bootstrap CSS y JS deben estar cargadas
+    en el archivo de diseño principal (_Layout.cshtml) para que las clases funcionen. ***
+*@
+
+<div class="container-fluid py-3">
+    <h4 class="mb-4 text-dark text-center">Registro de Nuevo Activo: Celular</h4>
+
+    @* La acción del formulario se ajusta para el controlador de Celulares *@
+    <form id="formulario" data-ajax="true">
+
+        <div class="row g-4">
+
+            @* === SECCIÓN PRINCIPAL: EMPLEADO Y DETALLES DEL TELÉFONO === *@
+            <div class="col-12">
+                <div class="card shadow-lg h-100 border-success">
+                    <div class="card-header bg-success text-white">
+                        Información Esencial del Activo
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+
+                            @* --- Columna Izquierda: Empleado --- *@
+                            <div class="col-lg-6 border-end">
+                                <h6 class="text-success mb-3">Asignación de Empleado</h6>
+
+                                <div class="col-12">
+                                    <label for="codigoEmpleado" class="form-label">Código de Empleado</label>
+                                    <input type="text" class="form-control" id="codigoEmpleado" name="Cod_Emple" value="@Model.Cod_Emple" readonly placeholder="Cargar con el selector" required>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="nombreEmpleado" class="form-label">Nombre de Empleado</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="nombreEmpleado" name="Nombre" value="@Model.Nombre" readonly placeholder="Seleccione un empleado" required>
+                                        <button class="btn btn-outline-secondary" type="button" id="btnSeleccionarEmpleado" onclick="abrirModal()" aria-label="Abrir selector de empleado">
+                                            <i class="bi bi-person-fill"></i> Seleccionar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @* --- Columna Derecha: Detalles del Teléfono --- *@
+                            <div class="col-lg-6">
+                                <h6 class="text-success mb-3">Detalles del Dispositivo</h6>
+
+                                @* Marca, Modelo *@
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label for="noInventario" class="form-label">No. Inventario</label>
+                                        <input type="text" class="form-control" id="noInventario" name="No_Inventario" value="@Model.No_Inventario" readonly required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="marca" class="form-label">Marca</label>
+                                        <input type="text" class="form-control" id="marca" name="Marca" value="@Model.Marca" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="modelo" class="form-label">Modelo</label>
+                                        <input type="text" class="form-control" id="modelo" name="Modelo" value="@Model.Modelo" required>
+                                    </div>
+                                </div>
+
+                                @* IMEI *@
+                                <div class="mb-3 mt-3">
+                                    <label for="imei" class="form-label">IMEI</label>
+                                    <input type="text" class="form-control" id="Imei" name="Imei" value="@Model.Imei" placeholder="15 dígitos" required>
+                                    <small class="form-text text-muted">Número de identidad internacional del equipo móvil.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @* === SECCIÓN 2: ESTADO Y CONDICIÓN (Fila Completa) === *@
+            <div class="col-12">
+                <div class="row g-3 justify-content-center">
+
+
+                    <div class="col-md-4">
+                        <label for="estado" class="form-label">Estado</label>
+                        <select class="form-select" id="estado" name="Estado" required>
+                            @if (Model.Estado == "A")
+                            {
+                                <option value="" disabled>Seleccione un estado</option>
+                                <option value="A" selected>Activo</option>
+                                <option value="I">Inactivo</option>
+                            }
+                            else if (Model.Estado == "I")
+                            {
+                                <option value="" disabled>Seleccione un estado</option>
+                                <option value="A">Activo</option>
+                                <option value="I" selected>Inactivo</option>
+                            }
+                            else
+                            {
+                                <option value="" disabled selected>Seleccione un estado</option>
+                                <option value="A">Activo</option>
+                                <option value="I">Inactivo</option>
+                            }
+                        </select>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <label for="condicion" class="form-label">Condición</label>
+                        <select class="form-select" id="condicion" name="Condicion" value="@Model.Condicion" required>
+                            @if (Model.Condicion == "B")
+                            {
+                                <option value="">Seleccione la condición</option>
+                                <option value="B" selected>Buen Estado</option>
+                                <option value="M">Mal Estado</option>
+                            }
+                            else if (Model.Condicion == "M")
+                            {
+                                <option value="" disabled>Seleccione la condición</option>
+                                <option value="B">Buen Estado</option>
+                                <option value="M" selected>Mal Estado</option>
+                            }
+                            else
+                            {
+                                <option value="" disabled selected>Seleccione la condición</option>
+                                <option value="B">Buen Estado</option>
+                                <option value="M">Mal Estado</option>
+                            }
+                                
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div> @* Fin de row g-4 (Contenedor principal) *@
+
+        <hr class="my-5">
+
+        @* Botones de Acción (Alineación a la Derecha) *@
+        <div class="d-flex justify-content-end gap-2">
+
+            @* Botón Cancelar (Cierra el modal, debe estar vinculado a la función JS cerrarModal) *@
+            <button type="button" class="btn btn-secondary" onclick="cerrarModal()" aria-label="Cancelar y cerrar modal">
+                <i class="bi bi-x-circle"></i> Cancelar
+            </button>
+
+            @* Botón Guardar (Funciona como Submit del formulario) *@
+            <button type="button" class="btn btn-primary ms-lg-2"  aria-label="Guardar formulario" onclick="@ViewBag.accionCel">
+                <i class="bi bi-hdd-fill"></i> Guardar
+            </button>
+
+        </div>
+
+    </form>
+</div>

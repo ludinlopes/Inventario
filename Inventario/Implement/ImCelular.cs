@@ -6,7 +6,7 @@ namespace Inventario.Implement
     public class ImCelular
     {
         private Conexion cn;
-        public MCelular getEmple(string IMEI)
+        public MCelular getImpresoraByNoInv(string IMEI)
         {
             cn = new Conexion();
             MySqlDataReader mySqlDataReader;
@@ -143,7 +143,7 @@ namespace Inventario.Implement
         // Cada método creará y gestionará su propia instancia de Conexion
         // dentro de un bloque 'using', lo que es más seguro y eficiente.
 
-        public MCelular getEmple(string IMEI)
+        public MCelular getCelularByImei(string IMEI)
         {
             MCelular cel = new MCelular();
             string consulta = $"CALL getCelulares('{IMEI}')"; // Usando procedimiento almacenado
@@ -171,6 +171,7 @@ namespace Inventario.Implement
                                     int cod = mySqlDataReader.GetInt32("Cod_Empleado");
                                     cel.Cod_Emple = cod.ToString();
                                     cel.Nombre = mySqlDataReader.GetString("Nombre");
+                                    cel.No_Inventario = mySqlDataReader.GetString("No_Inventario");
                                     cel.Marca = mySqlDataReader.GetString("Marca");
                                     cel.Modelo = mySqlDataReader.GetString("Modelo");
                                     cel.Imei = mySqlDataReader.GetString("IMEI");
@@ -184,7 +185,7 @@ namespace Inventario.Implement
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error en getEmple: {ex.Message}");
+                Console.WriteLine($"Error en getImpresoraByNoInv: {ex.Message}");
                 // Puedes optar por lanzar la excepción o devolver un objeto MCelular con un indicador de error.
                 // Por ahora, solo logueamos el error y devolvemos el objeto parcialmente llenado (o vacío si el error fue al inicio).
             }
@@ -288,6 +289,7 @@ namespace Inventario.Implement
 
                             // Agregamos parámetros de forma segura
                             cmd.Parameters.AddWithValue("_Cod_Empleado", modelo.Cod_Emple);
+                            cmd.Parameters.AddWithValue("_No_Inventario", modelo.No_Inventario.ToUpper());
                             cmd.Parameters.AddWithValue("_Marca", modelo.Marca.ToUpper());
                             cmd.Parameters.AddWithValue("_Modelo", modelo.Modelo.ToUpper());
                             cmd.Parameters.AddWithValue("_IMEI", modelo.Imei.ToUpper());
@@ -298,7 +300,7 @@ namespace Inventario.Implement
                             int rowsAffected = cmd.ExecuteNonQuery();
                             if (rowsAffected > 0)
                             {
-                                mensaje = "Inserción exitosa.";
+                                mensaje = "Guardado exitosamente";
                             }
                             else
                             {

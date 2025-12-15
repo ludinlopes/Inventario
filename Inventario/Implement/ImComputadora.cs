@@ -10,14 +10,14 @@ namespace Inventario.Implement
     {
         private Conexion? cn;
 
-        public MComputadora getEmple(string noInv)
+        public MComputadora getImpresoraByNoInv(string noInv)
         {
             cn = new Conexion();
             MySqlDataReader mySqlDataReader;
             MComputadora compu = new MComputadora();
             MySqlDataReader DR = null;
             string consulta = $"CALL getComputadora('{noInv}');";
-            //SELECT * FROM Computadoras WHERE No_Inventario = '{noInv}'";
+            //SELECT * FROM Computadora WHERE No_Inventario = '{noInv}'";
             MySqlCommand mySqlCommand = new MySqlCommand(consulta);
             mySqlCommand.Connection = cn.OpenConnection();
             //mySqlCommand.Connection.Open();
@@ -63,7 +63,7 @@ namespace Inventario.Implement
         */
     public class ImComputadora
     {
-        public MComputadora getEmple(string noInv)
+        public MComputadora getComputadoraByNoInv(string noInv)
         {
             MComputadora compu = new MComputadora();
             string consulta = $"CALL getComputadora('{noInv}');";
@@ -231,7 +231,7 @@ namespace Inventario.Implement
                             cmd.Parameters.AddWithValue("_Fecha_Actualizacion", DateTime.Now);
 
                             cmd.ExecuteNonQuery();
-                            mensaje = "Inserción exitosa";
+                            mensaje = "Guardado exitosamente";
                         } // cmd (MySqlCommand) se dispone aquí
                     } // conn (MySqlConnection) se cierra y dispone aquí
                 } // cn (Conexion) se dispone aquí, lo que garantiza el cierre de la MySqlConnection interna
@@ -240,7 +240,8 @@ namespace Inventario.Implement
             {
                 if (ex.Number == 1062)
                 {
-                    mensaje = $"Error de duplicado: La serie '{modelo.Serie}' ya existe. Por favor, ingrese una serie diferente.";
+                    //mensaje = $"Error de duplicado: El No Inventario '{modelo.No_Inventario}' o la serie '{modelo.Serie}' ya existe. Por favor, ingrese un dato diferente.";
+                    mensaje = $"Fallo al guardar: El activo no se pudo registrar porque el No.Inventario '{modelo.No_Inventario}' o la Serie '{modelo.Serie}' ya existen en la base de datos.";
                     Console.WriteLine($"Error MySql (1062): {ex.Message}");
                 }
                 else

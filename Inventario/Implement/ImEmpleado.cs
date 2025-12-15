@@ -51,7 +51,7 @@ namespace Inventario.Implement
             return emple;
 
         }
-        public MEmpleado getEmple(string codEmple) 
+        public MEmpleado getImpresoraByNoInv(string codEmple) 
         {
             cn = new Conexion();
             MySqlDataReader mySqlDataReader;
@@ -184,6 +184,7 @@ namespace Inventario.Implement
 
         public List<MEmpleado> getEmpleados()
         {
+
             var emple = new List<MEmpleado>();
             string consulta = "SELECT Cod_Empleado, Nombre, Area, Estado, Sucursal FROM Empleado"; // Consulta directa
 
@@ -232,7 +233,7 @@ namespace Inventario.Implement
         public MEmpleado getEmple(string codEmple)
         {
             MEmpleado emple = new MEmpleado();
-            string procedimiento = "GetEmpleadoByCod"; // Sugerencia: usar un procedimiento almacenado
+            string procedimiento = "getEmpleadoByCod"; // Sugerencia: usar un procedimiento almacenado
 
             try
             {
@@ -251,7 +252,7 @@ namespace Inventario.Implement
                             mySqlCommand.CommandType = CommandType.StoredProcedure; // Si usas SP
 
                             // Agrega el parámetro para el código de empleado
-                            mySqlCommand.Parameters.AddWithValue("_Cod_Empleado", codEmple); // Asumo que el SP espera '_Cod_Empleado'
+                            mySqlCommand.Parameters.AddWithValue("p_Cod_Empleado", codEmple); // Asumo que el SP espera '_Cod_Empleado'
 
                             // Envuelve el MySqlDataReader en un 'using'.
                             using (MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader())
@@ -372,7 +373,7 @@ namespace Inventario.Implement
 
                             if (rowsAffected > 0)
                             {
-                                mensaje = "Inserción de empleado exitosa.";
+                                mensaje = "Guardado exitosamente";
                             }
                             else
                             {

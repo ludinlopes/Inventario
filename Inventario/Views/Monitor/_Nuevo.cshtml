@@ -1,0 +1,152 @@
+﻿@model Inventario.Models.MMonitor
+
+<div class="container-fluid py-3">
+    <h4 class="mb-4 text-primary">Registro de Nuevo Activo: Computadora</h4>
+
+    @* El atributo "data-ajax" aquí es un placeholder para la lógica de envío AJAX. *@
+    @* action="/Computadoras/Guardar" *@
+    <form id="formulario">
+
+        <div class="row g-3">
+
+            @* Sección de Empleado (Columna 1) *@
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-light text-dark">
+                        Información del Empleado
+                    </div>
+                    <div class="card-body">
+
+                        <div class="col-12">
+                            <label for="codigoEmpleado" class="form-label">Código de Empleado</label>
+                            <input type="text" class="form-control" id="codigoEmpleado" name="Cod_Emple" value="@Model.Cod_Emple" readonly placeholder="Cargar con el selector" required>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="nombreEmpleado" class="form-label">Nombre de Empleado</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="nombreEmpleado" name="Nombre" value="@Model.Nombre" readonly placeholder="Seleccione un empleado" required>
+                                <button class="btn btn-outline-secondary" type="button" id="btnSeleccionarEmpleado" onclick="abrirModal()" aria-label="Abrir selector de empleado">
+                                    <i class="bi bi-person-fill"></i> Seleccionar
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            @* Sección de Activo (Columna 2) *@
+
+
+            <div class="col-lg-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-info text-white">
+                        Detalles de la Impresora
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+
+
+                            <div class="col-md-4">
+                                <label for="noInventario" class="form-label">No. Inventario</label>
+                                <input type="text" class="form-control" id="noInventario" name="No_Inventario" value="@Model.No_Inventario" readonly required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="marca" class="form-label">Marca</label>
+                                <input type="text" class="form-control" id="marca" name="Marca" value="@Model.Marca" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="modelo" class="form-label">Modelo</label>
+                                <input type="text" class="form-control" id="modelo" name="Modelo" value="@Model.Modelo" required>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <label for="serie" class="form-label">Serie</label>
+                                <input type="text" class="form-control" id="serie" name="Serie" value="@Model.Serie" required>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @* Fila para Estado y Condición *@
+            <div class="col-12">
+                <div class="row g-3 justify-content-center">
+
+
+                    <div class="col-md-4">
+                        <label for="estado" class="form-label">Estado</label>
+                        <select class="form-select" id="estado" name="Estado"  required>
+                            @if (Model.Estado == "A")
+                            {
+                                <option value="" disabled>Seleccione un estado</option>
+                                <option value="A" selected>Activo</option>
+                                <option value="I">Inactivo</option>
+                            }
+                            else if (Model.Estado == "I")
+                            {
+                                <option value="" disabled>Seleccione un estado</option>
+                                <option value="A">Activo</option>
+                                <option value="I" selected>Inactivo</option>
+                            }
+                            else
+                            {
+                                <option value="" disabled selected>Seleccione un estado</option>
+                                <option value="A">Activo</option>
+                                <option value="I">Inactivo</option>
+                            }
+                        </select>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <label for="condicion" class="form-label">Condición</label>
+                        <select class="form-select" id="condicion" name="Condicion"  required>
+                            @if (Model.Condicion == "B")
+                            {
+                                <option value="">Seleccione la condición</option>
+                                <option value="B" selected>Buen Estado</option>
+                                <option value="M">Mal Estado</option>
+                            }
+                            else if (Model.Condicion == "M")
+                            {
+                                <option value="" disabled>Seleccione la condición</option>
+                                <option value="B">Buen Estado</option>
+                                <option value="M" selected>Mal Estado</option>
+                            }
+                            else
+                            {
+                                <option value="" disabled selected>Seleccione la condición</option>
+                                <option value="B">Buen Estado</option>
+                                <option value="M">Mal Estado</option>
+                            }
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div> @* Fin de row g-3 *@
+
+        <hr class="my-4">
+
+        @* Botones de Acción (Alineación a la Derecha) *@
+        <div class="d-flex justify-content-end gap-2">
+
+            @* Botón Cancelar (Cierra el modal, debe estar vinculado a la función JS cerrarModal) *@
+            <button type="button" class="btn btn-secondary" onclick="cerrarModal()" aria-label="Cancelar y cerrar modal">
+                Cancelar
+            </button>
+
+            @* Botón Guardar (Funciona como Submit del formulario) *@
+            <button type="button" class="btn btn-primary" onclick="@ViewBag.accionMon" aria-label="Guardar formulario">
+                <i class="bi bi-save"></i> Guardar
+            </button>
+
+        </div>
+
+    </form>
+</div>

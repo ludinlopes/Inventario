@@ -14,7 +14,7 @@
     @{
         var httpContext = HttpContextAccessor.HttpContext;
         // CAMBIO CLAVE: Leer directamente la clave "SucursalNombre"
-        string sucursalNombre = httpContext?.Session?.GetString("SucursalNombre");
+        string sucursalNombre = httpContext.Session.GetString("SucursalNombre");
 
         // Si no hay sesión, puedes asignar un valor por defecto
         if (string.IsNullOrEmpty(sucursalNombre))

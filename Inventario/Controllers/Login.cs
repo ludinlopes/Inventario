@@ -41,7 +41,6 @@ namespace Inventario.Controllers
         {
             HttpContext.Session.SetString("Sucursal", Sucursal);
             string sucursal = HttpContext.Session.GetString("Sucursal");
-            // Primero, autentica al usuario (la lógica original)
             var a = new ImLogin();
             var b = a.getUsuario(Usuario, Contraseña);
 
@@ -53,14 +52,8 @@ namespace Inventario.Controllers
 
                 if (sucursalInfo != null)
                 {
-                    // GUARDA EL ID , la Abrev EN LA SESIÓN y EL NOMBRE
-                    // 1. El ID de la sucursal
-                    HttpContext.Session.SetInt32("SucursalID", sucursalInfo.ID);
-
-                    // 2. La abreviatura de la sucursal
+                    HttpContext.Session.SetString("SucursalID", sucursalInfo.ID);
                     HttpContext.Session.SetString("SucursalAbrev", sucursalInfo.Abrev);
-
-                    // 3. ¡EL NOMBRE COMPLETO DE LA SUCURSAL!
                     HttpContext.Session.SetString("SucursalNombre", sucursalInfo.Nombre);
                 }
 
@@ -68,41 +61,9 @@ namespace Inventario.Controllers
             }
             else
             {
-                Console.WriteLine("Hola");
                 return RedirectToAction("VLogin", "Login");
             }
         }
     }
 }
 
-
-using Inventario.Implement;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Inventario.Controllers
-{
-    public class Login : Controller
-    {
-        public IActionResult VLogin()
-        {
-
-            return View();
-        }
-
-        public IActionResult Acceso(string Usuario, string Contraseña, string Sucursal)
-        {
-            HttpContext.Session.SetString("Sucursal EJEM", Sucursal);
-            var a = new ImLogin();
-            var b = a.getUsuario(Usuario, Contraseña);
-            if (b == true)
-            {
-                return RedirectToAction("Home_", "Home");
-            }
-            else
-            {
-                return RedirectToAction("VLogin", "Login");
-            }
-
-        }
-    }
-}

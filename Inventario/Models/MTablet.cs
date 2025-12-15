@@ -2,6 +2,7 @@
 {
     public class MTablet
     {
+        public string? No_Inventario { get; set; }
         public string Cod_Emple { get; set; }
         public string Nombre { get; set; }
         public string Marca { get; set; }

@@ -10,33 +10,42 @@ public class ImSucursales
         var sucursales = new List<MSucursales>();
         string procedimiento = "GetSucursalesActivas";
 
-        using (Conexion cn = new Conexion())
+        try
         {
-            using (MySqlConnection conn = cn.GetConnection())
+            using (Conexion cn = new Conexion())
             {
-                conn.Open();
-
-                using (MySqlCommand cmd = new MySqlCommand(procedimiento, conn))
+                using (MySqlConnection conn = cn.GetConnection())
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    conn.Open();
 
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    using (MySqlCommand cmd = new MySqlCommand(procedimiento, conn))
                     {
-                        while (reader.Read())
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
-                            sucursales.Add(new MSucursales
+                            while (reader.Read())
                             {
-                                ID = reader.GetInt32("id"),
-                                Nombre = reader.GetString("nombre"),
-                                Abrev = reader.GetString("abrev"),
-                                Activa = reader.GetBoolean("activa")
-                            });
+                                sucursales.Add(new MSucursales
+                                {
+                                    ID = reader.GetString("id"),
+                                    Nombre = reader.GetString("nombre"),
+                                    Abrev = reader.GetString("abrev"),
+                                    Activa = reader.GetBoolean("activa")
+                                });
+                            }
                         }
                     }
                 }
-            }
-        } // Si hay un error, una excepción se lanzará desde aquí
-
+            } // Si hay un error, una excepción se lanzará desde aquí
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al intentar iniciar sesión: {ex.Message}");
+            // En un escenario real, podrías registrar este error.
+            sucursales = new List<MSucursales>();
+        }
+        
         return sucursales;
     }
 }

@@ -11,7 +11,7 @@ namespace Inventario.Controllers
         {
             ImImpresora imp = new ImImpresora();
 
-            MImpresora a = imp.getEmple(b);
+            MImpresora a = imp.getImpresoraByNoInv(b);
             var c = new ImEmpleado();
             a.Empleados = c.getEmpleados();
             return View(a);
@@ -29,26 +29,95 @@ namespace Inventario.Controllers
             return View(resp);
         }
 
+        [HttpPost]
+        public IActionResult Update([FromBody] MImpresora b)
+        {
+
+            ImImpresora compu = new ImImpresora();
+            string a = compu.setImpresora(b);
+            MRespuestaDB resp = new MRespuestaDB();
+            resp.respuesta = a;
+            return Ok(resp.respuesta);
+        }
+
         public IActionResult Nuevo(MImpresora b)
         {
             var h = new ConsultasDB();
-            b.NoInventario = h.getNewNoInv("IMP", HttpContext.Session.GetString("Sucursal"));
+            b.No_Inventario = h.getNewNoInv("IMP", HttpContext.Session.GetString("Sucursal"));
             var c = new ImEmpleado();
             b.Empleados = c.getEmpleados();
             return View(b);
         }
 
 
-        public IActionResult Insert(MImpresora b)
+        //public IActionResult Insert(MImpresora b)
+        //{
+
+        //    ImImpresora compu = new ImImpresora();
+        //    MImpresora c = new MImpresora();
+        //    c = b;
+        //    c.RespuestaSql = compu.insert(b);
+
+        //    return RedirectToAction("Nuevo", "Impresora", c);
+
+        //}
+
+
+        [HttpPost]
+        public IActionResult Insert([FromBody] MImpresora b)
         {
 
-            ImImpresora compu = new ImImpresora();
+            ImImpresora Impresora = new ImImpresora();
             MImpresora c = new MImpresora();
             c = b;
-            c.RespuestaSql = compu.insert(b);
+            c.RespuestaSql = Impresora.insert(b);
+            MInvListado inv = new MInvListado();
 
-            return RedirectToAction("Nuevo", "Impresora", c);
+            var g = c.RespuestaSql;
 
+
+            return Ok(g);
+        }
+
+
+        [HttpGet]
+        public IActionResult GetNewItemView()
+        {
+
+            MImpresora b = new MImpresora();
+            var h = new ConsultasDB();
+            b.No_Inventario = h.getNewNoInv("IMP", HttpContext.Session.GetString("Sucursal"));
+
+            var c = new ImEmpleado();
+            ViewBag.accionImp = "Save()";
+            b.Empleados = c.getEmpleados();
+            return PartialView("_Nuevo", b);
+        }
+
+
+
+        [HttpGet]
+        public IActionResult GetEditItemView(string noInventario)
+        {
+
+            ImImpresora Impresora = new ImImpresora();
+            MImpresora b = Impresora.getImpresoraByNoInv(noInventario);
+            var c = new ImEmpleado();
+            b.Empleados = c.getEmpleados();
+            ViewBag.accionImp = "Update()";
+            return PartialView("_Nuevo", b);
+
+        }
+
+
+
+        [HttpGet]
+        public IActionResult GetNewNoInv()
+        {
+            var h = new ConsultasDB();
+            var b = h.getNewNoInv("IMP", HttpContext.Session.GetString("Sucursal"));
+
+            return Ok(b);
         }
     }
 }

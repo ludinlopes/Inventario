@@ -1,0 +1,69 @@
+﻿@model MEmpleado
+
+
+<div class="modal-header bg-primary text-white">
+    <h5 class="modal-title" id="NuevoEmpleadoModalLabel">
+        <i class="fas fa-user-plus me-2"></i> Registro de Nuevo Empleado
+    </h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+</div>
+
+<div class="modal-body">
+    <form id="formulario">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="CodEmpleado" class="form-label">Código Empleado</label>
+                <input type="number" class="form-control" id="CodEmpleado" name="Cod_Emple" value="@Model.Cod_Emple" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="Nombre" class="form-label">Nombre Completo</label>
+                <input type="text" class="form-control" id="Nombre" name="Nombre" value="@Model.Nombre" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="Area" class="form-label">Área/Departamento</label>
+                <input type="text" class="form-control" id="Area" name="Area" value="@Model.Area" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="Sucursal" class="form-label">Sucursal</label>
+                <input type="text" class="form-control" id="Sucursal" name="Sucursal" value="@Model.Sucursal" required>
+            </div>
+
+            <div class="col-12">
+                <label for="Estado" class="form-label">Estado</label>
+                <select class="form-select" id="Estado" name="Estado" required>
+                    @if (Model.Estado == "A")
+                    {
+                        <option value="" disabled>Seleccione un estado</option>
+                        <option value="A" selected>Activo</option>
+                        <option value="I">Inactivo</option>
+                    }
+                    else if (Model.Estado == "I")
+                    {
+                        <option value="" disabled>Seleccione un estado</option>
+                        <option value="A">Activo</option>
+                        <option value="I" selected>Inactivo</option>
+                    }
+                    else
+                    {
+                        <option value="" disabled selected>Seleccione un estado</option>
+                        <option value="A">Activo</option>
+                        <option value="I">Inactivo</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" onclick="cerrarModal()" data-bs-dismiss="modal">
+        <i class="fas fa-times me-1"></i> Cancelar
+    </button>
+
+    <button type="button" class="btn btn-primary" onclick="@ViewBag.accionEmp">
+        <i class="fas fa-save me-1"></i> Guardar
+    </button>
+</div>
