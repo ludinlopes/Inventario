@@ -203,6 +203,11 @@ async function Save() {
 //////////////////////////////Editar Item///////////////////////////////////
 async function EditarItem(NoInventario) {
     contenedor.innerHTML = await getFetch(`/${tipoVista}/GetEditItemView?noInventario=${NoInventario}`);
+    if (tipoVista == "Tablet" || tipoVista == "Celular") {
+        const inputImei = document.getElementById('Imei');
+        inputImei.readOnly = true;
+    }
+
     // Mostramos el modal
     modal1.classList.add('mostrar');
 }

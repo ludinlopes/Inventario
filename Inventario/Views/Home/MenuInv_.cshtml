@@ -304,7 +304,7 @@
                                 <th>Ubicación</th>
                                 <th>Estado</th>
                                 <th>Asignado a</th>
-                                <th>Acciones</th>
+                                @* <th>Acciones</th> *@
                             </tr>
                         </thead>
                         <tbody id="asset-list">
@@ -322,7 +322,7 @@
                                     <td>@item.Area</td>
                                     <td>@item.Estado</td>
                                     <td>@item.Nombre</td>
-                                    <td>
+                                    @* <td>
                                         <a asp-action="Detalle"
                                            asp-controller="Inventario"
                                            asp-route-noInventario="@item.No_Inventario"
@@ -339,7 +339,7 @@
                                            title="Editar">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                    </td>
+                                    </td> *@
                                 </tr>
 								contador++;
                             }

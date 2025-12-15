@@ -1,11 +1,11 @@
 ﻿@model MTablet
 
 
-<div class="encabezado">
+@* <div class="encabezado">
     <h1>Nueva Tablet</h1>
     <h2>@Model.RespuestaSql</h2>
 </div>
-
+ *@
 
 
 @* Este es un formulario de vista parcial diseñado con Bootstrap 5 para el registro de Celulares.
@@ -16,7 +16,7 @@
 *@
 
 <div class="container-fluid py-3">
-    <h4 class="mb-4 text-dark text-center">Registro de Nuevo Activo: Celular</h4>
+    <h4 class="mb-4 text-dark text-center">Registro de Nuevo Activo: Tablet</h4>
 
     @* La acción del formulario se ajusta para el controlador de Celulares *@
     <form id="formulario"  data-ajax="true">
@@ -59,7 +59,7 @@
                                 <div class="row g-3">
                                     <div class="col-md-4">
                                         <label for="noInventario" class="form-label">No. Inventario</label>
-                                        <input type="text" class="form-control" id="noInventario" name="No_Inventario" value="@Model.No_Inventario" required>
+                                        <input type="text" class="form-control" id="noInventario" name="No_Inventario" value="@Model.No_Inventario"  readonly required>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="marca" class="form-label">Marca</label>
