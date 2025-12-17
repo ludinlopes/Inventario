@@ -206,6 +206,9 @@ async function EditarItem(NoInventario) {
     if (tipoVista == "Tablet" || tipoVista == "Celular") {
         const inputImei = document.getElementById('Imei');
         inputImei.readOnly = true;
+    } else if (tipoVista == "Empleado") {
+        const inputCodigoEmple = document.getElementById('CodEmpleado');
+        inputCodigoEmple.readOnly = true;
     }
 
     // Mostramos el modal

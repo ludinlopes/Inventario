@@ -264,6 +264,8 @@ namespace Inventario.Implement
                                     emple.Area = mySqlDataReader.GetString("Area");
                                     emple.Estado = mySqlDataReader.GetString("Estado");
                                     emple.Sucursal = mySqlDataReader.GetString("Sucursal");
+                                    emple.Nombre_Sucursal = mySqlDataReader.GetString("Nombre_Sucursal");
+                                    
                                 }
                             } // mySqlDataReader se cierra y se dispone aquí.
                         } // mySqlCommand se cierra y se dispone aquí.

@@ -4,39 +4,46 @@
 }
 
 
-    <h4 class="mb-3 text-secondary">Listado de Activos <span class="badge bg-info" id="asset-count">@Model.Empleados.Count</span></h4>
-    <div class="table-responsive table-scroll-vertical">
-        <table class="table table-hover data-table align-middle">
-            <thead class="table-light">
-                <tr>
-                    <th>#</th>
-                    <th>Código</th>
-                    <th>Nombre</th>
-                    <th>Área</th>
-                    <th>Estado</th>
-                    <th>Sucursal</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="asset-list">
+<h4 class="mb-3 text-secondary">Listado de Activos <span class="badge bg-info" id="asset-count">@Model.Empleados.Count</span></h4>
+<div class="table-responsive table-scroll-vertical">
+    <table class="table table-hover data-table align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>#</th>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Área</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="asset-list">
 
-                @foreach (var item in Model.Empleados) // Nota: Model ya es la lista de items
-                {
-                    <tr>
-                        <td>@(contador++)</td>
-                        <td>@item.Cod_Emple</td>
-                        <td>@item.Nombre</td>
-                        <td>@item.Area</td>
-                        <td>@item.Estado</td>
-                        <td>@item.Sucursal</td>
+            @foreach (var item in Model.Empleados) // Nota: Model ya es la lista de items
+            {
+                <tr>
+                    <td>@(contador++)</td>
+                    <td>@item.Cod_Emple</td>
+                    <td>@item.Nombre</td>
+                    <td>@item.Area</td>
+                    @if (item.Estado == "A")
+                    {
+                        <td>ACTIVO</td>
+                    }
+                    else
+                    {
+                        <td>INACTIVO</td>
+                    }
+
+                        @* <td>@item.Sucursal</td> *@
                         <td>
-                            <a asp-action="Detalle"
+                            @* <a asp-action="Detalle"
                                asp-controller="Inventario"
                                asp-route-noInventario="@item.Cod_Emple"
                                class="btn btn-sm btn-outline-info"
                                title="Ver Detalle">
                                 <i class="fas fa-eye"></i>
-                            </a>
+                            </a> *@
 
                             @* <a asp-action="Editar"
                                asp-controller="Empleado"

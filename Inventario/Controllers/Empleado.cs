@@ -36,6 +36,7 @@ namespace Inventario.Controllers
         {
 
             ImEmpleado compu = new ImEmpleado();
+            b.Sucursal = HttpContext.Session.GetString("SucursalID");
             string a = compu.setEmpleado(b);
             MRespuestaDB resp = new MRespuestaDB();
             resp.respuesta = a;
@@ -67,9 +68,10 @@ namespace Inventario.Controllers
         [HttpPost]
         public IActionResult Insert([FromBody] MEmpleado b)
         {
-
+            b.Sucursal = HttpContext.Session.GetString("SucursalID");
             ImEmpleado Empleado = new ImEmpleado();
             MEmpleado c = new MEmpleado();
+            
             c = b;
             c.RespuestaSql = Empleado.insert(b);
             MInvListado inv = new MInvListado();
@@ -102,6 +104,7 @@ namespace Inventario.Controllers
             var c = new ImEmpleado();
             ViewBag.accionEmp = "Save()";
             b.Empleados = c.getEmpleados();
+            b.Sucursal = HttpContext.Session.GetString("SucursalNombre");
             return PartialView("_Nuevo", b);
 
         }
@@ -116,6 +119,7 @@ namespace Inventario.Controllers
             MEmpleado b = Empleado.getEmple(noInventario);
             var c = new ImEmpleado();
             b.Empleados = c.getEmpleados();
+            b.Sucursal = HttpContext.Session.GetString("SucursalNombre");
             ViewBag.accionEmp = "Update()";
             return PartialView("_Nuevo", b);
             //return Ok(b.Nombre);
