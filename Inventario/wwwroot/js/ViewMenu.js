@@ -269,3 +269,22 @@ async function Update() {
 
 
 
+
+function buscarItem() {
+    var terminoBusqueda = document.getElementById('txtBuscar').value.toLowerCase();
+    var filas = document.querySelectorAll('#asset-list tr');
+    filas.forEach(fila => {
+        const contenidoFila = fila.textContent.toLowerCase();
+        if (contenidoFila.includes(terminoBusqueda)) {
+            fila.style.display = '';
+        } else {
+            fila.style.display = 'none';
+        }
+    });
+}
+
+
+
+
+
+
