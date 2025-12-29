@@ -176,6 +176,8 @@ async function Save() {
         alert(resultText);
         if (resultText.includes('Guardado exitosamente')) {
             form.reset();
+
+            actualizarInventario(SUCURSAL_ID_ACTUAL, tipoVista);
             
         }
         if (tipoVista !== "Empleado") {
@@ -252,6 +254,7 @@ async function Update() {
 
         const resultText = await response.text();
         alert(resultText);
+        actualizarInventario(SUCURSAL_ID_ACTUAL, tipoVista);
   
 
 
