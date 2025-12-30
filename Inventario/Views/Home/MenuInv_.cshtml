@@ -179,7 +179,7 @@
     <div id="main-layout">
         <!-- 1. BARRA DE NAVEGACIÓN LATERAL (SIDEBAR) -->
         <nav id="sidebar">
-            <h4 class="text-white mb-4 border-bottom pb-2">@sucursalNombre</h4>
+            <h4 class="text-white mb-4 border-bottom pb-2">Inventario TI</h4>
 
             <ul class="nav flex-column sidebar-menu">
                 <li class="nav-item">
@@ -278,16 +278,15 @@
             <!-- Panel de Búsqueda y Acciones -->
             <div class="asset-card d-flex justify-content-between align-items-center">
                 <div  style="max-width: 400px;display:flex;">
-                    @* <input type="text" class="form-control" placeholder="Buscar por Serial, Modelo o Empleado..." id="ItemSearch"> *@
-                    <input type="text" id="txtBuscar" class="form-control" placeholder="Buscar por inventario, serie, modelo o nombre...">
-                    <button class="btn btn-primary ms-0" type="button" onclick="buscarItem()"><i class="fas fa-search"></i></button>
+                    <input type="text" class="form-control" placeholder="Buscar por Serial, Modelo o Empleado...">
+                    <button class="btn btn-primary ms-0" type="button"><i class="fas fa-search"></i></button>
                 </div>
 
                 <div>
                     @* <button class="btn btn-outline-secondary me-2" onclick="showFilters()"><i class="fas fa-filter me-1"></i> Filtros Avanzados</button> *@
                     @* <button class="btn btn-success" @* onclick="addNewAsset()" ><i class="fas fa-plus me-1"></i> Nuevo Activo</button> *@
                     
-                    <button class="btn btn-success" id="btnAccion" > <i class="fas fa-plus me-1"></i> Nuevo Activo</button>
+                    <button class="btn btn-success" id="btnAccion"> <i class="fas fa-plus me-1"></i> Nuevo Activo</button>
                     
                     
                     
@@ -298,7 +297,7 @@
             <div class="asset-card" id="asset-card">
                 <h4 class="mb-3 text-secondary">Listado de Activos <span class="badge bg-info" id="asset-count">@Model.Items.Count</span></h4>
                 <div class="table-responsive table-scroll-vertical">
-                    <table class="table table-hover data-table align-middle" id="TblItem">
+                    <table class="table table-hover data-table align-middle">
                         <thead class="table-light">
                             <tr>
                                 <th>#</th>
