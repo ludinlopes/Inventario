@@ -21,7 +21,7 @@
 
             @foreach (var item in Model.Empleados) // Nota: Model ya es la lista de items
             {
-                <tr>
+                <tr title="No. Identificacion - @item.Noidentificacion">
                     <td>@(contador++)</td>
                     <td>@item.Cod_Emple</td>
                     <td>@item.Nombre</td>

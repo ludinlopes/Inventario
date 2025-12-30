@@ -21,7 +21,7 @@ namespace Inventario.Implement
         {
 
             var emple = new List<MEmpleado>();
-            string consulta = "SELECT Cod_Empleado, Nombre, Area, Estado, Sucursal FROM Empleado"; // Consulta directa
+            string consulta = "SELECT Cod_Empleado, Nombre, Area, Estado, Sucursal, Noidentificacion FROM Empleado"; // Consulta directa
 
             try
             {
@@ -49,6 +49,7 @@ namespace Inventario.Implement
                                     g.Area = mySqlDataReader.GetString("Area");
                                     g.Estado = mySqlDataReader.GetString("Estado");
                                     g.Sucursal = mySqlDataReader.GetString("Sucursal");
+                                    g.Noidentificacion = mySqlDataReader.GetString("Noidentificacion");
 
                                     emple.Add(g);
                                 }
@@ -100,7 +101,8 @@ namespace Inventario.Implement
                                     emple.Estado = mySqlDataReader.GetString("Estado");
                                     emple.Sucursal = mySqlDataReader.GetString("Sucursal");
                                     emple.Nombre_Sucursal = mySqlDataReader.GetString("Nombre_Sucursal");
-                                    
+                                    emple.Noidentificacion = mySqlDataReader.GetString("Noidentificacion");
+
                                 }
                             } // mySqlDataReader se cierra y se dispone aquí.
                         } // mySqlCommand se cierra y se dispone aquí.
@@ -145,6 +147,7 @@ namespace Inventario.Implement
                             cmd.Parameters.AddWithValue("_Sucursal", modelo.Sucursal.ToUpper());
                             cmd.Parameters.AddWithValue("_Fecha_Actualizacion", DateTime.Now); // Para CURDATE()
                             cmd.Parameters.AddWithValue("_Cod_Empleado", modelo.Cod_Emple); // Para la cláusula WHERE
+                            cmd.Parameters.AddWithValue("_Noidentificacion", modelo.Noidentificacion.ToUpper());
 
                             int rowsAffected = cmd.ExecuteNonQuery();
 
@@ -205,6 +208,7 @@ namespace Inventario.Implement
                             cmd.Parameters.AddWithValue("_Estado", modelo.Estado.ToUpper());
                             cmd.Parameters.AddWithValue("_Sucursal", modelo.Sucursal.ToUpper());
                             cmd.Parameters.AddWithValue("_Fecha_Actualizacion", DateTime.Now); // Para CURDATE()
+                            cmd.Parameters.AddWithValue("_Noidentificacion", modelo.Noidentificacion.ToUpper());
 
                             int rowsAffected = cmd.ExecuteNonQuery();
 

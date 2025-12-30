@@ -31,6 +31,11 @@
                 <input type="text" class="form-control textupp" id="Sucursal" name="Sucursal" value="@Model.Sucursal" readonly required>
             </div>
 
+            <div class="col-md-6">
+                <label for="Noidentificacion" class="form-label">No. Identificacion Personal</label>
+                <input type="text" class="form-control textupp" id="Noidentificacion" name="Noidentificacion" value="@Model.Noidentificacion" required>
+            </div>
+
             <div class="col-12">
                 <label for="Estado" class="form-label">Estado</label>
                 <select class="form-select" id="Estado" name="Estado" required>
@@ -48,8 +53,8 @@
                     }
                     else
                     {
-                        <option value="" disabled selected>Seleccione un estado</option>
-                        <option value="A">Activo</option>
+                        <option value="" disabled>Seleccione un estado</option>
+                        <option value="A" selected>Activo</option>
                         <option value="I">Inactivo</option>
                     }
                 </select>
