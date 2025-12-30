@@ -76,7 +76,7 @@ document.querySelectorAll('.sidebar-menu .nav-link').forEach(link => {
 
 
 
-async function actualizarInventario  (sucursalID, Tipo)  {
+async function actualizarInventario(sucursalID, Tipo) {
 
 
     assetListBody.innerHTML = '<tr><td colspan="8">Cargando datos...</td></tr>';
@@ -172,24 +172,26 @@ async function Save() {
             throw new Error(`Error de servidor (${response.status}): ${errorText || 'Sin mensaje de error'}`);
         }
 
-        const resultText = await response.text(); 
+        const resultText = await response.text();
         alert(resultText);
         if (resultText.includes('Guardado exitosamente')) {
             form.reset();
-            
+
+            actualizarInventario(SUCURSAL_ID_ACTUAL, tipoVista);
+
         }
         if (tipoVista !== "Empleado") {
             document.getElementById("noInventario").value = await getFetch(`/${tipoVista}/GetNewNoInv`);
         }
-        
-        
+
+
 
 
     } catch (error) {
         console.error('Fallo en la carga:', error);
 
         alert(`Fallo en la carga: ${error.message}`);
-        
+
 
     }
 
@@ -252,7 +254,8 @@ async function Update() {
 
         const resultText = await response.text();
         alert(resultText);
-  
+        actualizarInventario(SUCURSAL_ID_ACTUAL, tipoVista);
+
 
 
     } catch (error) {
@@ -265,6 +268,25 @@ async function Update() {
 
 
 }
+
+
+
+
+
+function buscarItem() {
+    var terminoBusqueda = document.getElementById('txtBuscar').value.toLowerCase();
+    var filas = document.querySelectorAll('#asset-list tr');
+    filas.forEach(fila => {
+        const contenidoFila = fila.textContent.toLowerCase();
+        if (contenidoFila.includes(terminoBusqueda)) {
+            fila.style.display = '';
+        } else {
+            fila.style.display = 'none';
+        }
+    });
+}
+
+
 
 
 
