@@ -2,6 +2,14 @@
 
 const assetListBody = document.getElementById('asset-card');
 
+//////////////////////////Modal en Funcion (Bueno)/////////////////
+
+const boton = document.getElementById('btnAccion');
+const modal1 = document.getElementById('miModal');
+const contenedor = document.getElementById('contenedorTexto');
+const detalles = document.getElementsByName('btdetalle');
+const ediciones = document.getElementsByName('bteditaritem');       
+
 ////////////////////////////////////////////////////////////
 
 // Obtener el modal
@@ -47,7 +55,11 @@ for (var i = 0; i < selectBtns.length; i++) {
 var tipoVista;
 
 function loadView(viewName) {
-    tipoVista = viewName;
+    if (tipoVista === 'Todo') {
+        boton.style.display = 'none';
+    } else {
+        boton.style.display = 'inline';
+    }
 
     /*var idSuc = @sucursalID;*/
     const idSuc = SUCURSAL_ID_ACTUAL;
@@ -56,11 +68,15 @@ function loadView(viewName) {
     /*mainTitle.textContent = `Vista de Inventario: ${viewName.charAt(0).toUpperCase() + viewName.slice(1)}`;*/
     actualizarInventario(idSuc, viewName);
 
+    
+
     // Manejo de la clase activa en el menú
     document.querySelectorAll('.sidebar-menu .nav-link').forEach(link => {
         link.classList.remove('active');
     });
     event.target.classList.add('active');
+    tipoVista = viewName;
+    
 
 }
 
@@ -71,9 +87,6 @@ document.querySelectorAll('.sidebar-menu .nav-link').forEach(link => {
         loadView(this.getAttribute('data-view'));
     });
 });
-
-
-
 
 
 async function actualizarInventario(sucursalID, Tipo) {
@@ -90,6 +103,15 @@ async function actualizarInventario(sucursalID, Tipo) {
 
     assetListBody.innerHTML = await getFetch(url);
 
+    // Ahora que el HTML ya existe en el DOM, podemos buscar los elementos
+    if (Tipo === "Todo") {
+        
+
+        detalles.forEach(el => el.style.display = 'none');
+        ediciones.forEach(el => el.style.display = 'none');
+    }
+
+
 };
 
 
@@ -99,15 +121,11 @@ async function actualizarInventario(sucursalID, Tipo) {
 
 
 
-//////////////////////////Modal en Funcion (Bueno)/////////////////
-
-const boton = document.getElementById('btnAccion');
-const modal1 = document.getElementById('miModal');
-const contenedor = document.getElementById('contenedorTexto');
 
 
 
 boton.addEventListener('click', async function () {
+   
 
     let HTMLContenModal = '';
     contenedor.innerHTML = await getFetch(`/${tipoVista}/GetNewItemView`);
