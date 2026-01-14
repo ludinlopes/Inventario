@@ -57,7 +57,7 @@ namespace Inventario.Controllers
                     HttpContext.Session.SetString("SucursalNombre", sucursalInfo.Nombre);
                 }
 
-                return RedirectToAction("Menu", "Home");
+                return RedirectToAction("MenuInv_", "Home");
             }
             else
             {

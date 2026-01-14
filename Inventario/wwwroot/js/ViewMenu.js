@@ -2,6 +2,14 @@
 
 const assetListBody = document.getElementById('asset-card');
 
+//////////////////////////Modal en Funcion (Bueno)/////////////////
+
+const boton = document.getElementById('btnAccion');
+const modal1 = document.getElementById('miModal');
+const contenedor = document.getElementById('contenedorTexto');
+const detalles = document.getElementsByName('btdetalle');
+const ediciones = document.getElementsByName('bteditaritem');       
+
 ////////////////////////////////////////////////////////////
 
 // Obtener el modal
@@ -47,7 +55,11 @@ for (var i = 0; i < selectBtns.length; i++) {
 var tipoVista;
 
 function loadView(viewName) {
-    tipoVista = viewName;
+    if (tipoVista === 'Todo') {
+        boton.style.display = 'none';
+    } else {
+        boton.style.display = 'inline';
+    }
 
     /*var idSuc = @sucursalID;*/
     const idSuc = SUCURSAL_ID_ACTUAL;
@@ -56,11 +68,15 @@ function loadView(viewName) {
     /*mainTitle.textContent = `Vista de Inventario: ${viewName.charAt(0).toUpperCase() + viewName.slice(1)}`;*/
     actualizarInventario(idSuc, viewName);
 
+    
+
     // Manejo de la clase activa en el menú
     document.querySelectorAll('.sidebar-menu .nav-link').forEach(link => {
         link.classList.remove('active');
     });
     event.target.classList.add('active');
+    tipoVista = viewName;
+    
 
 }
 
@@ -73,10 +89,7 @@ document.querySelectorAll('.sidebar-menu .nav-link').forEach(link => {
 });
 
 
-
-
-
-async function actualizarInventario  (sucursalID, Tipo)  {
+async function actualizarInventario(sucursalID, Tipo) {
 
 
     assetListBody.innerHTML = '<tr><td colspan="8">Cargando datos...</td></tr>';
@@ -90,6 +103,15 @@ async function actualizarInventario  (sucursalID, Tipo)  {
 
     assetListBody.innerHTML = await getFetch(url);
 
+    // Ahora que el HTML ya existe en el DOM, podemos buscar los elementos
+    if (Tipo === "Todo") {
+        
+
+        detalles.forEach(el => el.style.display = 'none');
+        ediciones.forEach(el => el.style.display = 'none');
+    }
+
+
 };
 
 
@@ -99,15 +121,11 @@ async function actualizarInventario  (sucursalID, Tipo)  {
 
 
 
-//////////////////////////Modal en Funcion (Bueno)/////////////////
-
-const boton = document.getElementById('btnAccion');
-const modal1 = document.getElementById('miModal');
-const contenedor = document.getElementById('contenedorTexto');
 
 
 
 boton.addEventListener('click', async function () {
+   
 
     let HTMLContenModal = '';
     contenedor.innerHTML = await getFetch(`/${tipoVista}/GetNewItemView`);
@@ -172,24 +190,26 @@ async function Save() {
             throw new Error(`Error de servidor (${response.status}): ${errorText || 'Sin mensaje de error'}`);
         }
 
-        const resultText = await response.text(); 
+        const resultText = await response.text();
         alert(resultText);
         if (resultText.includes('Guardado exitosamente')) {
             form.reset();
-            
+
+            actualizarInventario(SUCURSAL_ID_ACTUAL, tipoVista);
+
         }
         if (tipoVista !== "Empleado") {
             document.getElementById("noInventario").value = await getFetch(`/${tipoVista}/GetNewNoInv`);
         }
-        
-        
+
+
 
 
     } catch (error) {
         console.error('Fallo en la carga:', error);
 
         alert(`Fallo en la carga: ${error.message}`);
-        
+
 
     }
 
@@ -203,6 +223,14 @@ async function Save() {
 //////////////////////////////Editar Item///////////////////////////////////
 async function EditarItem(NoInventario) {
     contenedor.innerHTML = await getFetch(`/${tipoVista}/GetEditItemView?noInventario=${NoInventario}`);
+    if (tipoVista == "Tablet" || tipoVista == "Celular") {
+        const inputImei = document.getElementById('Imei');
+        inputImei.readOnly = true;
+    } else if (tipoVista == "Empleado") {
+        const inputCodigoEmple = document.getElementById('CodEmpleado');
+        inputCodigoEmple.readOnly = true;
+    }
+
     // Mostramos el modal
     modal1.classList.add('mostrar');
 }
@@ -244,7 +272,8 @@ async function Update() {
 
         const resultText = await response.text();
         alert(resultText);
-  
+        actualizarInventario(SUCURSAL_ID_ACTUAL, tipoVista);
+
 
 
     } catch (error) {
@@ -257,6 +286,25 @@ async function Update() {
 
 
 }
+
+
+
+
+
+function buscarItem() {
+    var terminoBusqueda = document.getElementById('txtBuscar').value.toLowerCase();
+    var filas = document.querySelectorAll('#asset-list tr');
+    filas.forEach(fila => {
+        const contenidoFila = fila.textContent.toLowerCase();
+        if (contenidoFila.includes(terminoBusqueda)) {
+            fila.style.display = '';
+        } else {
+            fila.style.display = 'none';
+        }
+    });
+}
+
+
 
 
 

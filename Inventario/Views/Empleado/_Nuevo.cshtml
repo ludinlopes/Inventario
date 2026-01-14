@@ -3,9 +3,9 @@
 
 <div class="modal-header bg-primary text-white">
     <h5 class="modal-title" id="NuevoEmpleadoModalLabel">
-        <i class="fas fa-user-plus me-2"></i> Registro de Nuevo Empleado
+        <i class="fas fa-user-plus me-2 text-center"></i> Registro de Nuevo Empleado
     </h5>
-    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+    
 </div>
 
 <div class="modal-body">
@@ -18,17 +18,22 @@
 
             <div class="col-md-6">
                 <label for="Nombre" class="form-label">Nombre Completo</label>
-                <input type="text" class="form-control" id="Nombre" name="Nombre" value="@Model.Nombre" required>
+                <input type="text" class="form-control textupp" id="Nombre" name="Nombre" value="@Model.Nombre" required>
             </div>
 
             <div class="col-md-6">
                 <label for="Area" class="form-label">Área/Departamento</label>
-                <input type="text" class="form-control" id="Area" name="Area" value="@Model.Area" required>
+                <input type="text" class="form-control textupp" id="Area" name="Area" value="@Model.Area" required>
             </div>
 
             <div class="col-md-6">
                 <label for="Sucursal" class="form-label">Sucursal</label>
-                <input type="text" class="form-control" id="Sucursal" name="Sucursal" value="@Model.Sucursal" required>
+                <input type="text" class="form-control textupp" id="Sucursal" name="Sucursal" value="@Model.Sucursal" readonly required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="Noidentificacion" class="form-label">No. Identificacion Personal</label>
+                <input type="text" class="form-control textupp" id="Noidentificacion" name="Noidentificacion" value="@Model.Noidentificacion" required>
             </div>
 
             <div class="col-12">
@@ -48,8 +53,8 @@
                     }
                     else
                     {
-                        <option value="" disabled selected>Seleccione un estado</option>
-                        <option value="A">Activo</option>
+                        <option value="" disabled>Seleccione un estado</option>
+                        <option value="A" selected>Activo</option>
                         <option value="I">Inactivo</option>
                     }
                 </select>

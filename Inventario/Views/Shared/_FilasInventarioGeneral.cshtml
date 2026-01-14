@@ -3,40 +3,6 @@
     int contador = 1;
 }
 
-@* @foreach (var item in Model) // Nota: Model ya es la lista de items
-{
-    <tr>
-        <td>@(contador++)</td>
-        <td>@item.Tipo</td>
-        <td>@item.No_Inventario</td>
-        <td>@item.Serie</td>
-        <td>@item.Modelo</td>
-        <td>@item.Area</td>
-        <td>@item.Estado</td>
-        <td>@item.Nombre</td>
-        <td>
-            <a asp-action="Detalle"
-               asp-controller="Inventario"
-               asp-route-noInventario="@item.No_Inventario"
-               class="btn btn-sm btn-outline-info"
-               title="Ver Detalle">
-                <i class="fas fa-eye"></i>
-            </a>
-
-            <a asp-action="viewItemEditIt"
-               asp-controller="Articulo"
-               asp-route-idItem="@item.No_Inventario"
-               asp-route-Tipo="@item.Tipo"
-               class="btn btn-sm btn-outline-warning"
-               title="Editar">
-                <i class="fas fa-edit"></i>
-            </a>
-        </td>
-    </tr>
-} *@
-
-
-
 
 
 <h4 class="mb-3 text-secondary">Listado de Activos <span class="badge bg-info" id="asset-count">@Model.Count</span></h4>
@@ -45,7 +11,6 @@
         <thead class="table-light">
             <tr>
                 <th>#</th>
-                <th>Tipo</th>
                 <th>No. Inventario</th>
                 <th>Serial</th>
                 <th>Modelo</th>
@@ -61,20 +26,29 @@
             {
                 <tr>
                     <td>@(contador++)</td>
-                    <td>@item.Tipo</td>
                     <td>@item.No_Inventario</td>
                     <td>@item.Serie</td>
                     <td>@item.Modelo</td>
                     <td>@item.Area</td>
-                    <td>@item.Estado</td>
+                    @if (item.Estado == "A")
+                    {
+                        <td>ACTIVO</td>
+                    }
+                    else
+                    {
+                        <td>INACTIVO</td>
+                    }
+                    
                     <td>@item.Nombre</td>
                     <td>
                         <a asp-action="Detalle"
                            asp-controller="Inventario"
                            asp-route-noInventario="@item.No_Inventario"
                            class="btn btn-sm btn-outline-info"
-                           title="Ver Detalle">
-                            <i class="fas fa-eye"></i>
+                           title="Ver Detalle"
+                           name="btdetalle">
+                            <i class="fa-solid fa-print"></i>
+                            @* <i class="fas fa-eye"></i> *@
                         </a>
 
                         @* <a asp-action="viewItemEditIt"
@@ -86,7 +60,7 @@
                             <i class="fas fa-edit"></i>
                         </a> *@
                         @* <button class="btn btn-sm btn-outline-warning" onclick="EditarItem(@item.No_Inventario)"> <i class="fas fa-edit"></i></button> *@
-                        <button class="btn btn-sm btn-outline-warning" onclick="EditarItem('@item.No_Inventario')">
+                        <button name="bteditaritem" class="btn btn-sm btn-outline-warning"  onclick="EditarItem('@item.No_Inventario')">
                             <i class="fas fa-edit"></i>
                         </button>
                     </td>

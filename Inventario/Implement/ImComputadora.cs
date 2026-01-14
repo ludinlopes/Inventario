@@ -6,61 +6,7 @@ using System.Drawing;
 namespace Inventario.Implement
 {
 
-    /* public class ImComputadora
-    {
-        private Conexion? cn;
-
-        public MComputadora getImpresoraByNoInv(string noInv)
-        {
-            cn = new Conexion();
-            MySqlDataReader mySqlDataReader;
-            MComputadora compu = new MComputadora();
-            MySqlDataReader DR = null;
-            string consulta = $"CALL getComputadora('{noInv}');";
-            //SELECT * FROM Computadora WHERE No_Inventario = '{noInv}'";
-            MySqlCommand mySqlCommand = new MySqlCommand(consulta);
-            mySqlCommand.Connection = cn.OpenConnection();
-            //mySqlCommand.Connection.Open();
-            if (mySqlCommand.Connection != null)
-            {
-               
-                mySqlDataReader = mySqlCommand.ExecuteReader();
-
-                while (mySqlDataReader.Read())
-                {
-                    /////////////////////llenado de modelo/////////////////////////////////////////////
-                    int no = mySqlDataReader.GetInt32("Cod_Empleado");
-                    compu.Cod_Emple = no.ToString();
-                    compu.Nombre = mySqlDataReader.GetString("Nombre");
-                    compu.No_Inventario = mySqlDataReader.GetString("No_Inventario");
-                    compu.Tipo = mySqlDataReader.GetString("Tipo");
-                    compu.Marca = mySqlDataReader.GetString("Marca");
-                    compu.Modelo = mySqlDataReader.GetString("Modelo");
-                    compu.Serie = mySqlDataReader.GetString("Serie");
-                    compu.Procesador = mySqlDataReader.GetString("Procesador");
-                    compu.Generacion = mySqlDataReader.GetString("Generacion");
-                    compu.TipoDisco = mySqlDataReader.GetString("Tipo_Disco");
-                    compu.CapacidadDisco = mySqlDataReader.GetString("Capacidad_Disco");
-                    compu.Ram = mySqlDataReader.GetString("Ram");
-                    compu.MacAddress = mySqlDataReader.GetString("Mac_Address");
-                    compu.NoIp = mySqlDataReader.GetString("No_IP");
-                    compu.Teclado = mySqlDataReader.GetString("Teclado");
-                    compu.Mouse = mySqlDataReader.GetString("Mouse");
-                    compu.NombrePc = mySqlDataReader.GetString("NombrePc");
-                    compu.Dominio = mySqlDataReader.GetString("Dominio");
-                    compu.Usuario = mySqlDataReader.GetString("Usuario");
-                    compu.Contra = mySqlDataReader.GetString("Contra");
-                    compu.Estado = mySqlDataReader.GetString("Estado");
-                    compu.Condicion = mySqlDataReader.GetString("Condicion");
-
-                    ////////////////////////////////////////////////////////////////////////////////////////////
-                }
-                mySqlCommand.Connection.Close();
-            }
-            return compu;
-        }
-
-        */
+   
     public class ImComputadora
     {
         public MComputadora getComputadoraByNoInv(string noInv)
@@ -170,7 +116,7 @@ namespace Inventario.Implement
                             cmd.Parameters.AddWithValue("_Fecha_Actualizacion", DateTime.Now);
 
                             int rowsAffected = cmd.ExecuteNonQuery();
-                            mensaje = $"Filas afectadas: {rowsAffected}";
+                            mensaje = $"Guardado exitosamente";
                             
                         } // cmd (MySqlCommand) se dispone 
                         Console.WriteLine($"Estado de la conexión antes de abrir: {conn.State}");

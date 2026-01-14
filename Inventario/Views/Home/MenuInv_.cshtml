@@ -1,5 +1,4 @@
-﻿
-@using Inventario.ConexionDB.Consultas
+﻿@using Inventario.ConexionDB.Consultas
 @using Inventario.Implement
 @using Microsoft.AspNetCore.Http
 
@@ -15,10 +14,10 @@
 
     int contador = 1;
 
-	MComputadora b = new MComputadora();
+    MComputadora b = new MComputadora();
     var c = new ImEmpleado();
     b.Empleados = c.getEmpleados();
-    
+
 }
 <!DOCTYPE html>
 <html lang="es">
@@ -55,7 +54,7 @@
         /* Estilo para habilitar el scroll vertical en el listado de activos */
         .table-scroll-vertical {
             /* Define la altura máxima que ocupará la tabla antes de hacer scroll.
-               Ajusta este valor según el diseño de tu página (ej. 400px, 50vh, etc.). */
+                       Ajusta este valor según el diseño de tu página (ej. 400px, 50vh, etc.). */
             max-height: 400px;
             /* Habilita el scroll vertical cuando el contenido supera max-height */
             overflow-y: auto;
@@ -100,9 +99,9 @@
             vertical-align: middle;
         }
 
-
-
-
+        .textupp{
+            text-transform: uppercase;
+        }
         /*//////////////////////////Modal de prueba//////////////////////////////////*/
 
         /* CSS personalizado para mover el botón de cierre (X) a la izquierda */
@@ -123,7 +122,7 @@
                 margin-left: auto; /* Mueve el título a la derecha */
             }
 
-            /*/////////////////////Modal Funcional(Bueno)///////////////////////////////////*/
+        /*/////////////////////Modal Funcional(Bueno)///////////////////////////////////*/
         .modal-fondo {
             display: none; /* Oculto inicialmente */
             position: fixed;
@@ -138,13 +137,13 @@
 
         /* 2. La caja blanca del modal */
         /* .modal-caja {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            width: 300px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        } */
+                    background-color: white;
+                    padding: 20px;
+                    border-radius: 8px;
+                    width: 300px;
+                    text-align: center;
+                    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+                } */
 
         /* Clase para mostrar el modal (usada por JS) */
         .mostrar {
@@ -165,7 +164,6 @@
             overflow-y: auto;
             /* Opcional: Para evitar que aparezca una barra de desplazamiento horizontal no deseada */
             overflow-x: hidden;
-            
         }
         /*////////////////////////////////////////////////////////*/
     </style>
@@ -175,7 +173,7 @@
     <div id="main-layout">
         <!-- 1. BARRA DE NAVEGACIÓN LATERAL (SIDEBAR) -->
         <nav id="sidebar">
-            <h4 class="text-white mb-4 border-bottom pb-2">Inventario TI</h4>
+            <h4 class="text-white mb-4 border-bottom pb-2">@sucursalNombre</h4>
 
             <ul class="nav flex-column sidebar-menu">
                 <li class="nav-item">
@@ -188,11 +186,11 @@
                         <i class="fas fa-user-tag me-2"></i> Asignación (Empleados)
                     </a>
                 </li>
-                <li class="nav-item">
+                @* <li class="nav-item">
                     <a class="nav-link" href="#" data-view="alerts">
                         <i class="fas fa-bell me-2"></i> Alertas y Mantenimiento
                     </a>
-                </li>
+                </li> *@
 
                 <h6 class="text-secondary mt-4 mb-2 ps-3 text-uppercase">Categorías</h6>
                 <li class="nav-item">
@@ -273,19 +271,20 @@
 
             <!-- Panel de Búsqueda y Acciones -->
             <div class="asset-card d-flex justify-content-between align-items-center">
-                <div  style="max-width: 400px;display:flex;">
-                    <input type="text" class="form-control" placeholder="Buscar por Serial, Modelo o Empleado...">
-                    <button class="btn btn-primary ms-0" type="button"><i class="fas fa-search"></i></button>
+                <div style="max-width: 400px;display:flex;">
+                    @* <input type="text" class="form-control" placeholder="Buscar por Serial, Modelo o Empleado..." id="ItemSearch"> *@
+                    <input type="text" id="txtBuscar" class="form-control" placeholder="Buscar por inventario, serie, modelo o nombre...">
+                    <button class="btn btn-primary ms-0" type="button" onclick="buscarItem()"><i class="fas fa-search"></i></button>
                 </div>
 
                 <div>
                     @* <button class="btn btn-outline-secondary me-2" onclick="showFilters()"><i class="fas fa-filter me-1"></i> Filtros Avanzados</button> *@
                     @* <button class="btn btn-success" @* onclick="addNewAsset()" ><i class="fas fa-plus me-1"></i> Nuevo Activo</button> *@
-                    
-                    <button class="btn btn-success" id="btnAccion"> <i class="fas fa-plus me-1"></i> Nuevo Activo</button>
-                    
-                    
-                    
+
+                    <button class="btn btn-success" id="btnAccion"  style="display:none;" > <i class="fas fa-plus me-1"></i> Nuevo Activo</button>
+
+
+
                 </div>
             </div>
 
@@ -293,36 +292,41 @@
             <div class="asset-card" id="asset-card">
                 <h4 class="mb-3 text-secondary">Listado de Activos <span class="badge bg-info" id="asset-count">@Model.Items.Count</span></h4>
                 <div class="table-responsive table-scroll-vertical">
-                    <table class="table table-hover data-table align-middle">
+                    <table class="table table-hover data-table align-middle" id="TblItem">
                         <thead class="table-light">
                             <tr>
                                 <th>#</th>
-                                <th>Tipo</th>
                                 <th>No. Inventario</th>
                                 <th>Serial</th>
                                 <th>Modelo</th>
                                 <th>Ubicación</th>
                                 <th>Estado</th>
                                 <th>Asignado a</th>
-                                <th>Acciones</th>
+                                @* <th>Acciones</th> *@
                             </tr>
                         </thead>
                         <tbody id="asset-list">
-                            
+
                             @foreach (var item in Model.Items)
                             {
-                                
-                               
+
+
                                 <tr>
                                     <td>@contador</td>
-                                    <td>@item.Tipo</td>
                                     <td>@item.No_Inventario</td>
                                     <td>@item.Serie</td>
                                     <td>@item.Modelo</td>
                                     <td>@item.Area</td>
-                                    <td>@item.Estado</td>
+                                    @if (item.Estado == "A")
+                                    {
+                                        <td>ACTIVO</td>
+                                    }
+                                    else
+                                    {
+                                        <td>INACTIVO</td>
+                                    }
                                     <td>@item.Nombre</td>
-                                    <td>
+                                    @* <td>
                                         <a asp-action="Detalle"
                                            asp-controller="Inventario"
                                            asp-route-noInventario="@item.No_Inventario"
@@ -339,11 +343,11 @@
                                            title="Editar">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                    </td>
+                                    </td> *@
                                 </tr>
-								contador++;
+                                contador++;
                             }
-                            
+
                         </tbody>
                     </table>
                 </div>
@@ -365,14 +369,14 @@
 
 
 
-    
+
     @* ////////////////////////////Diseño de modal Bueno////////////////////////////////// *@
     <div id="miModal" class="modal-fondo ">
         <div class="modal-caja ">
             <div id="contenedorTexto"></div>
 
             <br>
-            
+
         </div>
     </div>
 
@@ -381,7 +385,7 @@
     @* ////////////////////////////Diseño de modal Empleados////////////////////////////////// *@
 
     <!-- El Popup -->
-     @* <div id="myModal" class="modal"> 
+    @* <div id="myModal" class="modal"> 
     <div class="modal" id="myModal" tabindex="1000" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -454,7 +458,7 @@
         </div>
     </div>
 
- 
+
 
 
     <script>
@@ -463,7 +467,7 @@
     </script>
 
     <script src="~/js/ViewMenu.js"></script>
-    
+
 
 </body>
 </html>

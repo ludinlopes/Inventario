@@ -13,7 +13,7 @@
 *@
 
 <div class="container-fluid py-3">
-    <h4 class="mb-4 text-dark text-center">Registro de Nuevo Activo: Celular</h4>
+    <h4 class="mb-4 text-secondary text-center">Registro de Nuevo Activo: Celular</h4>
 
     @* La acción del formulario se ajusta para el controlador de Celulares *@
     <form id="formulario" data-ajax="true">
@@ -22,8 +22,8 @@
 
             @* === SECCIÓN PRINCIPAL: EMPLEADO Y DETALLES DEL TELÉFONO === *@
             <div class="col-12">
-                <div class="card shadow-lg h-100 border-success">
-                    <div class="card-header bg-success text-white">
+                <div class="card shadow-sm h-100 border-primary">
+                    <div class="card-header bg-primary text-white">
                         Información Esencial del Activo
                     </div>
                     <div class="card-body">
@@ -31,7 +31,7 @@
 
                             @* --- Columna Izquierda: Empleado --- *@
                             <div class="col-lg-6 border-end">
-                                <h6 class="text-success mb-3">Asignación de Empleado</h6>
+                                <h6 class="text-secondary mb-3">Asignación de Empleado</h6>
 
                                 <div class="col-12">
                                     <label for="codigoEmpleado" class="form-label">Código de Empleado</label>
@@ -51,28 +51,28 @@
 
                             @* --- Columna Derecha: Detalles del Teléfono --- *@
                             <div class="col-lg-6">
-                                <h6 class="text-success mb-3">Detalles del Dispositivo</h6>
+                                <h6 class="text-secondary mb-3">Detalles del Dispositivo</h6>
 
                                 @* Marca, Modelo *@
                                 <div class="row g-3">
                                     <div class="col-md-4">
                                         <label for="noInventario" class="form-label">No. Inventario</label>
-                                        <input type="text" class="form-control" id="noInventario" name="No_Inventario" value="@Model.No_Inventario" readonly required>
+                                        <input type="text" class="form-control textupp" id="noInventario" name="No_Inventario" value="@Model.No_Inventario" readonly required>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="marca" class="form-label">Marca</label>
-                                        <input type="text" class="form-control" id="marca" name="Marca" value="@Model.Marca" required>
+                                        <input type="text" class="form-control textupp" id="marca" name="Marca" value="@Model.Marca" required>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="modelo" class="form-label">Modelo</label>
-                                        <input type="text" class="form-control" id="modelo" name="Modelo" value="@Model.Modelo" required>
+                                        <input type="text" class="form-control textupp" id="modelo" name="Modelo" value="@Model.Modelo" required>
                                     </div>
                                 </div>
 
                                 @* IMEI *@
                                 <div class="mb-3 mt-3">
                                     <label for="imei" class="form-label">IMEI</label>
-                                    <input type="text" class="form-control" id="Imei" name="Imei" value="@Model.Imei" placeholder="15 dígitos" required>
+                                    <input type="text" class="form-control" id="Imei" name="Imei" value="@Model.Imei" placeholder="15 dígitos"  required>
                                     <small class="form-text text-muted">Número de identidad internacional del equipo móvil.</small>
                                 </div>
                             </div>
