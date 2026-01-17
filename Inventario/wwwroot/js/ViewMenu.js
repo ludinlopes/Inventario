@@ -12,6 +12,25 @@ const ediciones = document.getElementsByName('bteditaritem');
 
 ////////////////////////////////////////////////////////////
 
+
+////////////////////Modal Observaciones///////////////////////
+
+const modal2 = document.getElementById('modalImpresion');
+var span2 = document.getElementById("btn-close2");
+var span3 = document.getElementById("btn-close3");
+function abrirModalImpresion(codigo) {
+    console.log("Código recibido para impresión:", codigo);
+    modal2.style.display = "block";
+}
+
+span2.onclick = function () {
+    modal2.style.display = "none";
+}
+span3.onclick = function () {
+    modal2.style.display = "none";
+}
+///////////////////////////////////////////////////////////
+
 // Obtener el modal
 var modal = document.getElementById("myModal");
 

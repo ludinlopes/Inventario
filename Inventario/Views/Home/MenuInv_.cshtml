@@ -459,7 +459,37 @@
     </div>
 
 
+@*    ///////////////// Modal observaciones////////////// *@
 
+
+    <div class="modal" id="modalImpresion" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Imprimir Entrega</h5>
+                    <button type="button" class="btn-close" id="btn-close2" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="hiddenCodigoInventario" />
+                    <div class="mb-3">
+                        <label class="form-label">Observaciones para el documento:</label>
+                        <textarea id="txtObservaciones" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div id="contenedorPreview" style="display:none;">
+                        <h6>Vista Previa:</h6>
+                        <iframe id="pdfPreview" style="width:100%; height:400px;" frameborder="0"></iframe>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-close3">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="generarDocumento()">Generar y Mostrar PDF</button>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+}
+    @*    /////////////////////////////// *@
 
     <script>
         // Define esta variable globalmente en tu vista, antes de cargar ViewMenu.js
