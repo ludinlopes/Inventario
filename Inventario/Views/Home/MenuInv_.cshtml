@@ -242,7 +242,7 @@
             <h2 class="mb-4 text-dark">Inventario General de Activos</h2>
 
             <!-- Indicadores Clave (KPIs) -->
-            <div class="row mb-4">
+           @*  <div class="row mb-4">
                 <div class="col-md-3">
                     <div class="p-3 bg-white border rounded shadow-sm text-center">
                         <h5 class="text-primary">Total Activos</h5>
@@ -267,7 +267,7 @@
                         <p class="fs-3 fw-bold" id="kpi-maintenance">12</p>
                     </div>
                 </div>
-            </div>
+            </div> *@
 
             <!-- Panel de Búsqueda y Acciones -->
             <div class="asset-card d-flex justify-content-between align-items-center">
@@ -482,13 +482,13 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-close3">Cerrar</button>
-                    <button type="button" class="btn btn-primary" onclick="generarDocumento()">Generar y Mostrar PDF</button>
+                    <button type="button" class="btn btn-primary" onclick="procesarPdf()">Generar y Mostrar PDF</button>
                 </div>
                 <br>
             </div>
         </div>
     </div>
-}
+
     @*    /////////////////////////////// *@
 
     <script>

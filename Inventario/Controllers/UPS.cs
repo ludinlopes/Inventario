@@ -3,6 +3,13 @@ using Inventario.Implement;
 using Inventario.Models;
 using Microsoft.AspNetCore.Mvc;
 using Mysqlx;
+using System.Reflection.Metadata;
+
+
+
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
 
 namespace Inventario.Controllers
 {
@@ -128,5 +135,48 @@ namespace Inventario.Controllers
 
             return Ok(b);
         }
-    }
+
+
+
+
+
+        [HttpGet]
+        public IActionResult GenerarPdfEntrega(string codigo, string observaciones)
+        {
+            // 1. Aquí simularías traer los datos de tu base de datos
+            // var item = _db.Inventario.First(x => x.Codigo == codigo);
+
+            // 2. Crear el PDF
+            var documento = QuestPDF.Fluent.Document.Create(container =>
+            {
+                container.Page(page =>
+                {
+                    page.Margin(1, Unit.Centimetre);
+                    page.Header().Text("COMPROBANTE DE ENTREGA").FontSize(20).SemiBold().FontColor(Colors.Blue.Medium);
+
+                    page.Content().PaddingVertical(10).Column(col =>
+                    {
+                        col.Item().Text($"Código de Inventario: {codigo}").Bold();
+                        col.Item().Text($"Fecha: {DateTime.Now:dd/MM/yyyy}");
+                        col.Item().PaddingTop(10).LineHorizontal(1);
+
+                        col.Item().PaddingTop(10).Text("Observaciones del Técnico:").Underline();
+                        col.Item().Text(observaciones ?? "Sin observaciones.");
+
+                        col.Item().PaddingTop(50).AlignRight().Text("_______________________");
+                        col.Item().AlignRight().PaddingRight(20).Text("Firma de Recibido");
+                    });
+                });
+            });
+
+            byte[] pdfBytes = documento.GeneratePdf();
+
+            // Devolvemos el archivo como un stream para que el JS lo reciba
+            return File(pdfBytes, "application/pdf");
+        }
+    
+
+
+
+}
 }

@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using QuestPDF.Infrastructure;
 
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
+        QuestPDF.Settings.License = LicenseType.Community;
         services.AddControllersWithViews();
         services.AddHttpContextAccessor(); // Registrar IHttpContextAccessor
         services.AddSession(); // Agregar soporte para sesiones
