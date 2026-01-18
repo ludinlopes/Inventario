@@ -345,21 +345,21 @@ function buscarItem() {
 
 // Inicializamos el modal de Bootstrap
 const modalElement = document.getElementById('modalImpresion');
-const bootstrapModal = new bootstrap.Modal(modalElement);
+//const bootstrapModal = new bootstrap.Modal(modalElement);
 
-// Función para abrir el modal desde la tabla
-function abrirModal(codigo) {
-    // 1. Asignar el código al campo oculto
-    document.getElementById('hiddenCodigoInventario').value = codigo;
+//// Función para abrir el modal desde la tabla
+//function abrirModal(codigo) {
+//    // 1. Asignar el código al campo oculto
+//    document.getElementById('hiddenCodigoInventario').value = codigo;
 
-    // 2. Limpiar campos previos
-    document.getElementById('txtObservaciones').value = "";
-    document.getElementById('contenedorPreview').style.display = "none";
-    document.getElementById('pdfPreview').src = "";
+//    // 2. Limpiar campos previos
+//    document.getElementById('txtObservaciones').value = "";
+//    document.getElementById('contenedorPreview').style.display = "none";
+//    document.getElementById('pdfPreview').src = "";
 
-    // 3. Mostrar modal
-    bootstrapModal.show();
-}
+//    // 3. Mostrar modal
+//    bootstrapModal.show();
+//}
 
 // Función principal para generar el PDF
 async function procesarPdf() {
