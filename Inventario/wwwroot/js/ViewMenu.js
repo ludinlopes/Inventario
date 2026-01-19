@@ -29,6 +29,7 @@ var span3 = document.getElementById("btn-close3");
 function abrirModalImpresion(codigo) {
     console.log("Código recibido para impresión:", codigo, tipoVista);
     ItemCode = codigo;
+    document.getElementById('Obser').style.display = "block";
     modal2.style.display = "block";
 }
 
@@ -36,6 +37,7 @@ span2.onclick = function () {
     const iframe = document.getElementById('pdfPreview');
     iframe.src = "";
     document.getElementById('txtObservaciones').value = "";
+    
     document.getElementById('contenedorPreview').style.display = "none";
     modal2.style.display = "none";
 }
@@ -400,6 +402,7 @@ async function procesarPdf() {
 
         // Mostrar el contenedor de la vista previa
         document.getElementById('contenedorPreview').style.display = "block";
+        document.getElementById('Obser').style.display = "none";
 
     } catch (error) {
         console.error("Error:", error);
