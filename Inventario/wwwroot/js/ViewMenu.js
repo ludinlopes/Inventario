@@ -33,9 +33,17 @@ function abrirModalImpresion(codigo) {
 }
 
 span2.onclick = function () {
+    const iframe = document.getElementById('pdfPreview');
+    iframe.src = "";
+    document.getElementById('txtObservaciones').value = "";
+    document.getElementById('contenedorPreview').style.display = "none";
     modal2.style.display = "none";
 }
 span3.onclick = function () {
+    const iframe = document.getElementById('pdfPreview');
+    iframe.src = "";
+    document.getElementById('txtObservaciones').value = "";
+    document.getElementById('contenedorPreview').style.display = "none";
     modal2.style.display = "none";
 }
 ///////////////////////////////////////////////////////////
@@ -374,7 +382,7 @@ async function procesarPdf() {
     try {
         // LLAMADA AL BACKEND 
         // Nota: Asegúrate que la ruta sea /NombreControlador/GenerarPdfEntrega
-        const url = `/UPS/GenerarPdfEntrega?codigo=${codigo}&observaciones=${encodeURIComponent(observaciones)}`;
+        const url = `/${tipoVista}/GenerarPdfEntrega?codigo=${codigo}&observaciones=${encodeURIComponent(observaciones)}`;
 
         const response = await fetch(url);
 
