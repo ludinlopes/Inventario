@@ -384,7 +384,7 @@ async function procesarPdf() {
     try {
         // LLAMADA AL BACKEND 
         // Nota: Asegúrate que la ruta sea /NombreControlador/GenerarPdfEntrega
-        const url = `/${tipoVista}/GenerarPdfEntrega?codigo=${codigo}&observaciones=${encodeURIComponent(observaciones)}`;
+        const url = `/${tipoVista}/GenerarPdfEntrega?codigo=${ItemCode}&observaciones=${encodeURIComponent(observaciones)}`;
 
         const response = await fetch(url);
 
