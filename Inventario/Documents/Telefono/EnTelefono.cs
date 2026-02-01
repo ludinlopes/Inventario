@@ -3,11 +3,10 @@ using Inventario.Models;
 using Microsoft.AspNetCore.Mvc;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
-using QuestPDF.Infrastructure;
 
-namespace Inventario.Documents.Tablet
+namespace Inventario.Documents.Telefono
 {
-    public class EnTablet : Controller
+    public class EnTelefono : Controller
     {
         public IActionResult PdfEntrega(string codigo, string observaciones, string sucursal)
         {
@@ -18,7 +17,7 @@ namespace Inventario.Documents.Tablet
             ImEmpleado emple = new ImEmpleado();
             MEmpleado empleado = emple.getEmple(item.Cod_Emple);
 
-            // 2. Generación del documento (Réplica exacta del Word/Imagen)
+            // 2. Generación del documento (Réplica exacta del formato Ricza S.A.)
             var documento = QuestPDF.Fluent.Document.Create(container =>
             {
                 container.Page(page =>
@@ -27,7 +26,7 @@ namespace Inventario.Documents.Tablet
                     page.Margin(35);
                     page.DefaultTextStyle(x => x.FontSize(10).FontFamily(Fonts.Verdana));
 
-                    // --- ENCABEZADO: Títulos y Tabla de Control ---
+                    // --- ENCABEZADO: Títulos y Tabla de Control (Respetando IT-FOR-TEL-02) ---
                     page.Header().Column(header =>
                     {
                         header.Item().AlignCenter().Column(col =>
@@ -53,14 +52,12 @@ namespace Inventario.Documents.Tablet
                             table.Cell().Border(0.5f).Padding(2).Text("Fecha de Emisión:").Bold().FontSize(8);
                             table.Cell().Border(0.5f).Padding(2).Text("Página:").Bold().FontSize(8);
 
-                            // Fila 2: Valores
-                            table.Cell().Border(0.5f).Padding(2).Text("IT-FOR-TAB-02").FontSize(9);
+                            // Fila 2: Valores específicos para TELÉFONO
+                            table.Cell().Border(0.5f).Padding(2).Text("IT-FOR-TEL-02").FontSize(9);
                             table.Cell().Border(0.5f).Padding(2).Text("01").FontSize(9);
                             table.Cell().Border(0.5f).Padding(2).Text("26/01/2026").FontSize(9);
                             table.Cell().Border(0.5f).Padding(2).Text(x => { x.CurrentPageNumber(); x.Span(" de "); x.TotalPages(); });
                         });
-
-                        //header.Item().PaddingVertical(5).LineHorizontal(1f).Color(Colors.Grey.Medium);
                     });
 
                     page.Content().PaddingVertical(10).Column(column =>
@@ -82,44 +79,51 @@ namespace Inventario.Documents.Tablet
                             });
                         });
 
-                        // --- 2. IDENTIFICACIÓN DEL ACTIVO ---
+                        // --- 2. IDENTIFICACIÓN DEL ACTIVO (TELÉFONO) ---
                         column.Item().PaddingTop(15).Text("2. IDENTIFICACIÓN DEL ACTIVO (TRAZABILIDAD ISO)").Bold();
-                        column.Item().PaddingTop(5).Text("Se hace entrega del dispositivo móvil tipo Tablet con las siguientes especificaciones:");
+                        column.Item().PaddingTop(5).Text("En cumplimiento con el control de recursos de comunicación, se hace entrega del siguiente equipo telefónico:");
 
                         column.Item().PaddingLeft(15).Column(c =>
                         {
+                            c.Item().PaddingTop(5).Row(row => {
+                                row.ConstantItem(15).AlignCenter().Text("•");
+                                row.RelativeItem().Text(t => { t.Span("Descripción: ").Bold(); t.Span("Teléfono de Oficina"); });
+                            });
                             c.Item().PaddingTop(5).Row(row => {
                                 row.ConstantItem(15).AlignCenter().Text("•");
                                 row.RelativeItem().Text(t => { t.Span("Marca: ").Bold(); t.Span(item?.Marca ?? "__________________________ "); t.Span("Modelo: ").Bold(); t.Span(item?.Modelo ?? "_________________________"); });
                             });
                             c.Item().PaddingTop(5).Row(row => {
                                 row.ConstantItem(15).AlignCenter().Text("•");
-                                row.RelativeItem().Text(t => { t.Span("Capacidad (GB): ").Bold(); t.Span("_________________ "); t.Span("Color: ").Bold(); t.Span("__________________________"); });
+                                row.RelativeItem().Text(t => { t.Span("Tipo: ").Bold(); t.Span("( ) Fijo con cable  ( ) Inalámbrico  ( ) IP / Digital"); });
                             });
                             c.Item().PaddingTop(5).Row(row => {
                                 row.ConstantItem(15).AlignCenter().Text("•");
-                                row.RelativeItem().Text(t => { t.Span("Número de Serie: ").Bold(); t.Span(item?.Serie ?? "__________________ "); t.Span("No. de Inventario: ").Bold(); t.Span("________________"); });
+                                row.RelativeItem().Text(t => {
+                                    t.Span("Extensión Asignada: ").Bold(); t.Span("______________ ");
+                                    t.Span("Número de Serie: ").Bold(); t.Span(item?.Serie ?? "__________________ ");
+                                });
                             });
                             c.Item().PaddingTop(5).Row(row => {
                                 row.ConstantItem(15).AlignCenter().Text("•");
-                                row.RelativeItem().Text(t => { t.Span("Accesorios incluidos: ").Bold(); t.Span("( ) Cubierta Protectora (Case) ( ) Cargador y Cable USB ( ) Lápiz Óptico (Stylus)"); });
+                                row.RelativeItem().Text(t => { t.Span("No. de Inventario: ").Bold(); t.Span( "________________"); });
                             });
                         });
 
-                        // --- 3. TÉRMINOS DE USO ---
+                        // --- 3. TÉRMINOS DE USO Y PRESERVACIÓN (TELÉFONO) ---
                         column.Item().PaddingTop(15).Text("3. TÉRMINOS DE USO Y PRESERVACIÓN (Cláusula de Protección de Activos)").Bold();
-                        column.Item().PaddingTop(5).Text("El colaborador acepta la responsabilidad del dispositivo y se compromete a cumplir las siguientes normas de preservación:");
+                        column.Item().PaddingTop(5).Text("Para garantizar la continuidad de la comunicación institucional y la integridad del equipo, el usuario acepta las siguientes normas:");
 
                         column.Item().PaddingLeft(15).Column(list => {
-                            list.Item().PaddingTop(3).Text(t => { t.Span("• Protección Física: ").Bold(); t.Span("Es obligatorio mantener el dispositivo dentro de su estuche o funda protectora en todo momento. Se debe evitar colocar objetos pesados sobre la pantalla."); });
-                            list.Item().PaddingTop(3).Text(t => { t.Span("• Seguridad de Acceso: ").Bold(); t.Span("El usuario debe configurar un método de bloqueo (PIN o Biometría). En caso de usar cuentas personales o corporativas para la descarga de apps, estas deben ser cerradas al devolver el equipo."); });
-                            list.Item().PaddingTop(3).Text(t => { t.Span("• Cuidado de Batería: ").Bold(); t.Span("No dejar el dispositivo expuesto a altas temperaturas (dentro de vehículos, bajo el sol, etc.) y utilizar únicamente el cargador original provisto por IT."); });
-                            list.Item().PaddingTop(3).Text(t => { t.Span("• Extravío o Robo: ").Bold(); t.Span("En caso de pérdida o robo, el colaborador debe reportarlo inmediatamente al departamento de IT para realizar el bloqueo remoto y proceder con la denuncia legal correspondiente."); });
+                            list.Item().PaddingTop(3).Text(t => { t.Span("• Manejo Físico: ").Bold(); t.Span("Evitar tirones excesivos en el cable espiral (en modelos fijos) y asegurar que el equipo no esté expuesto a líquidos o humedad."); });
+                            list.Item().PaddingTop(3).Text(t => { t.Span("• Cuidado de Batería (Inalámbricos): ").Bold(); t.Span("En equipos inalámbricos, el usuario se compromete a colocar el terminal en su base de carga al finalizar la jornada para preservar la vida útil de la batería."); });
+                            list.Item().PaddingTop(3).Text(t => { t.Span("• Uso de Teclado: ").Bold(); t.Span("No presionar las teclas con objetos punzantes o lapiceros que puedan dañar la membrana o borrar la señalética de los botones."); });
+                            list.Item().PaddingTop(3).Text(t => { t.Span("• Configuración: ").Bold(); t.Span("Queda prohibido alterar la configuración técnica de la extensión o desarmar el equipo sin autorización previa del departamento de IT."); });
                         });
 
                         // --- 4. DECLARACIÓN DE CONFORMIDAD ---
                         column.Item().PaddingTop(15).Text("4. DECLARACIÓN DE CONFORMIDAD").Bold();
-                        column.Item().Text("El receptor manifiesta que recibe la Tablet en perfecto estado estético (sin rayones en pantalla ni golpes) y funcional. Se compromete a devolver el equipo libre de bloqueos de cuenta (iCloud/Google) al finalizar su asignación.");
+                        column.Item().Text("El receptor manifiesta que recibe el equipo funcionando correctamente (tono, audio y teclado) y con sus respectivos accesorios (eliminador de voltaje, base o cables). Se hace responsable de su custodia y buen uso.");
 
                         // --- 5. FIRMAS DE ACEPTACIÓN ---
                         column.Item().PaddingTop(20).Text("5. FIRMAS DE ACEPTACIÓN").Bold();
@@ -156,7 +160,7 @@ namespace Inventario.Documents.Tablet
             });
 
             byte[] pdfBytes = documento.GeneratePdf();
-            return File(pdfBytes, "application/pdf", $"Acta_Tablet_{codigo}.pdf");
+            return File(pdfBytes, "application/pdf", $"Acta_Telefono_{codigo}.pdf");
         }
     }
 }

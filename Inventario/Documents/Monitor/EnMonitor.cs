@@ -3,11 +3,10 @@ using Inventario.Models;
 using Microsoft.AspNetCore.Mvc;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
-using QuestPDF.Infrastructure;
 
-namespace Inventario.Documents.Tablet
+namespace Inventario.Documents.Monitor
 {
-    public class EnTablet : Controller
+    public class EnMonitor : Controller
     {
         public IActionResult PdfEntrega(string codigo, string observaciones, string sucursal)
         {
@@ -139,7 +138,7 @@ namespace Inventario.Documents.Tablet
                             table.Cell().Column(f => {
                                 f.Item().AlignCenter().Text("Recibe (Usuario):").Bold();
                                 f.Item().PaddingTop(30).Text("f. __________________________");
-                                f.Item().Text($"DPI/Identificación: { "________________"}");
+                                f.Item().Text($"DPI/Identificación: {"________________"}");
                             });
                         });
                     });

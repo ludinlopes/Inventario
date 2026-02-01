@@ -1,4 +1,6 @@
 ﻿using Inventario.ConexionDB.Consultas;
+using Inventario.Documents.Impresora;
+using Inventario.Documents.Telefono;
 using Inventario.Implement;
 using Inventario.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -118,6 +120,18 @@ namespace Inventario.Controllers
             var b = h.getNewNoInv("IMP", HttpContext.Session.GetString("Sucursal"));
 
             return Ok(b);
+        }
+
+
+
+        [HttpGet]
+
+        public IActionResult GenerarPdfEntrega(string codigo, string observaciones)
+        {
+            EnImpresora entrega = new EnImpresora();
+            var pdfBytes = entrega.PdfEntrega(codigo, observaciones, HttpContext.Session.GetString("SucursalNombre"));
+
+            return (pdfBytes);
         }
     }
 }
