@@ -1,4 +1,6 @@
 ﻿using Inventario.ConexionDB.Consultas;
+using Inventario.Documents.Scanner;
+using Inventario.Documents.Tablet;
 using Inventario.Implement;
 using Inventario.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -117,6 +119,18 @@ namespace Inventario.Controllers
             var b = h.getNewNoInv("SCN", HttpContext.Session.GetString("Sucursal"));
 
             return Ok(b);
+        }
+
+
+
+        [HttpGet]
+
+        public IActionResult GenerarPdfEntrega(string codigo, string observaciones)
+        {
+            EnScanner entrega = new EnScanner();
+            var pdfBytes = entrega.PdfEntrega(codigo, observaciones, HttpContext.Session.GetString("SucursalNombre"));
+
+            return (pdfBytes);
         }
     }
 }

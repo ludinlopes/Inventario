@@ -3,6 +3,15 @@ using Inventario.Implement;
 using Inventario.Models;
 using Microsoft.AspNetCore.Mvc;
 using Mysqlx;
+using System.Reflection.Metadata;
+
+
+
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
+using Inventario.Documents.Tablet;
+using Inventario.Documents.UPS;
 
 namespace Inventario.Controllers
 {
@@ -128,5 +137,22 @@ namespace Inventario.Controllers
 
             return Ok(b);
         }
+
+
+
+
+        [HttpGet]
+
+        public IActionResult GenerarPdfEntrega(string codigo, string observaciones)
+        {
+            EnUPS entrega = new EnUPS();
+            var pdfBytes = entrega.PdfEntrega(codigo, observaciones, HttpContext.Session.GetString("SucursalNombre"));
+
+            return (pdfBytes);
+        }
+
+
+
+
     }
 }

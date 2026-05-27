@@ -1,5 +1,13 @@
 ﻿
 
+/////////////////////////Variables Globales//////////////////////
+var tipoVista;
+var ItemCode;
+/////////////////////////////////////////////////////////////////
+
+
+
+
 const assetListBody = document.getElementById('asset-card');
 
 //////////////////////////Modal en Funcion (Bueno)/////////////////
@@ -11,6 +19,36 @@ const detalles = document.getElementsByName('btdetalle');
 const ediciones = document.getElementsByName('bteditaritem');       
 
 ////////////////////////////////////////////////////////////
+
+
+////////////////////Modal Observaciones///////////////////////
+
+const modal2 = document.getElementById('modalImpresion');
+var span2 = document.getElementById("btn-close2");
+var span3 = document.getElementById("btn-close3");
+function abrirModalImpresion(codigo) {
+    console.log("Código recibido para impresión:", codigo, tipoVista);
+    ItemCode = codigo;
+    document.getElementById('Obser').style.display = "block";
+    modal2.style.display = "block";
+}
+
+span2.onclick = function () {
+    const iframe = document.getElementById('pdfPreview');
+    iframe.src = "";
+    document.getElementById('txtObservaciones').value = "";
+    
+    document.getElementById('contenedorPreview').style.display = "none";
+    modal2.style.display = "none";
+}
+span3.onclick = function () {
+    const iframe = document.getElementById('pdfPreview');
+    iframe.src = "";
+    document.getElementById('txtObservaciones').value = "";
+    document.getElementById('contenedorPreview').style.display = "none";
+    modal2.style.display = "none";
+}
+///////////////////////////////////////////////////////////
 
 // Obtener el modal
 var modal = document.getElementById("myModal");
@@ -52,7 +90,7 @@ for (var i = 0; i < selectBtns.length; i++) {
 }
 ///////////////////////////////////////////////////////////
 
-var tipoVista;
+
 
 function loadView(viewName) {
     if (tipoVista === 'Todo') {
@@ -238,6 +276,12 @@ async function EditarItem(NoInventario) {
 
 
 
+
+
+
+
+
+
 async function Update() {
     const form = document.getElementById('formulario');
     const resultado = 'prueba de funcion'
@@ -305,7 +349,67 @@ function buscarItem() {
 }
 
 
+////////////////////////////impresion de pdf///////////////////////////////////
 
 
 
+// Inicializamos el modal de Bootstrap
+const modalElement = document.getElementById('modalImpresion');
+//const bootstrapModal = new bootstrap.Modal(modalElement);
 
+//// Función para abrir el modal desde la tabla
+//function abrirModal(codigo) {
+//    // 1. Asignar el código al campo oculto
+//    document.getElementById('hiddenCodigoInventario').value = codigo;
+
+//    // 2. Limpiar campos previos
+//    document.getElementById('txtObservaciones').value = "";
+//    document.getElementById('contenedorPreview').style.display = "none";
+//    document.getElementById('pdfPreview').src = "";
+
+//    // 3. Mostrar modal
+//    bootstrapModal.show();
+//}
+
+// Función principal para generar el PDF
+async function procesarPdf() {
+    const codigo = document.getElementById('hiddenCodigoInventario').value;
+    const observaciones = document.getElementById('txtObservaciones').value;
+    const btnGenerar = event.target; // El botón "Generar y Mostrar PDF"
+
+    // Bloqueo visual de carga
+    btnGenerar.disabled = true;
+    btnGenerar.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Generando...';
+
+    try {
+        // LLAMADA AL BACKEND 
+        // Nota: Asegúrate que la ruta sea /NombreControlador/GenerarPdfEntrega
+        const url = `/${tipoVista}/GenerarPdfEntrega?codigo=${ItemCode}&observaciones=${encodeURIComponent(observaciones)}`;
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error("Error en la respuesta del servidor");
+        }
+
+        // Convertir la respuesta a un objeto URL para el iframe
+        const blob = await response.blob();
+        const pdfUrl = URL.createObjectURL(blob);
+
+        // Mostrar en el iframe
+        const iframe = document.getElementById('pdfPreview');
+        iframe.src = pdfUrl;
+
+        // Mostrar el contenedor de la vista previa
+        document.getElementById('contenedorPreview').style.display = "block";
+        document.getElementById('Obser').style.display = "none";
+
+    } catch (error) {
+        console.error("Error:", error);
+        alert("No se pudo generar el documento: " + error.message);
+    } finally {
+        // Restaurar botón
+        btnGenerar.disabled = false;
+        btnGenerar.innerHTML = "Generar y Mostrar PDF";
+    }
+}

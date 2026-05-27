@@ -1,18 +1,24 @@
 ﻿using Inventario.ConexionDB.Consultas;
+using Inventario.Documents.Entregas;
 using Inventario.Implement;
 using Inventario.Models;
 using Microsoft.AspNetCore.Mvc;
 using Mysqlx;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
 using System;
+
 
 namespace Inventario.Controllers
 {
     public class Computadora : Controller
     {
-        
+
         
         public IActionResult Editar(string b)
         {
+            
 
             ImComputadora emple = new ImComputadora();
 
@@ -141,17 +147,26 @@ namespace Inventario.Controllers
         }
 
 
+        ///////////////////Documento Entrega PDF///////////////////////
+        [HttpGet]
 
+        public IActionResult GenerarPdfEntrega(string codigo, string observaciones)
+        {
+            Laptop_Compu entrega = new Laptop_Compu();
+            var pdfBytes = entrega.PdfEntrega(codigo, observaciones, HttpContext.Session.GetString("SucursalNombre"));
 
-
-
-
-
-
-
-
+            return (pdfBytes);
         }
+
+
+
+
+
+
+
+
     }
+}
 
 
 

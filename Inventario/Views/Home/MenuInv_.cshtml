@@ -242,7 +242,7 @@
             <h2 class="mb-4 text-dark">Inventario General de Activos</h2>
 
             <!-- Indicadores Clave (KPIs) -->
-            <div class="row mb-4">
+           @*  <div class="row mb-4">
                 <div class="col-md-3">
                     <div class="p-3 bg-white border rounded shadow-sm text-center">
                         <h5 class="text-primary">Total Activos</h5>
@@ -267,7 +267,7 @@
                         <p class="fs-3 fw-bold" id="kpi-maintenance">12</p>
                     </div>
                 </div>
-            </div>
+            </div> *@
 
             <!-- Panel de Búsqueda y Acciones -->
             <div class="asset-card d-flex justify-content-between align-items-center">
@@ -361,15 +361,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
     @* ////////////////////////////Diseño de modal Bueno////////////////////////////////// *@
     <div id="miModal" class="modal-fondo ">
         <div class="modal-caja ">
@@ -384,30 +375,6 @@
 
     @* ////////////////////////////Diseño de modal Empleados////////////////////////////////// *@
 
-    <!-- El Popup -->
-    @* <div id="myModal" class="modal"> 
-    <div class="modal" id="myModal" tabindex="1000" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Seleccionar Empleado</h2>
-            <table id="empleadosTable">
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Acción</th>
-                </tr>
-                <!-- Iterar sobre los empleados del modelo -->
-                @foreach (var empleado in b.Empleados)
-                {
-                    <tr>
-                        <td>@empleado.Cod_Emple</td>
-                        <td>@empleado.Nombre</td>
-                        <td><button class="selectEmpleadoBtn" data-cod-emple="@empleado.Cod_Emple" data-nombre="@empleado.Nombre">Seleccionar</button></td>
-                    </tr>
-                }
-            </table>
-        </div>
-    </div> *@
 
 
 
@@ -459,7 +426,37 @@
     </div>
 
 
+@*    ///////////////// Modal observaciones////////////// *@
 
+
+    <div class="modal" id="modalImpresion" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Imprimir Entrega</h5>
+                    <button type="button" class="btn-close" id="btn-close2" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="hiddenCodigoInventario" />
+                    <div class="mb-3" id="Obser">
+                        <label class="form-label">Observaciones para el documento:</label>
+                        <textarea id="txtObservaciones" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div id="contenedorPreview" style="display:none;">
+                        <h6>Vista Previa:</h6>
+                        <iframe id="pdfPreview" style="width:100%; height:400px;" frameborder="0"></iframe>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-close3">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="procesarPdf()">Generar y Mostrar PDF</button>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    @*    /////////////////////////////// *@
 
     <script>
         // Define esta variable globalmente en tu vista, antes de cargar ViewMenu.js
