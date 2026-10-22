@@ -51,7 +51,7 @@ public class Conexion
         }
     }
 }*/
-
+/*
 using System;
 using MySql.Data.MySqlClient;
 using System.Data; // Añadido: Importante para ConnectionState
@@ -149,5 +149,58 @@ public class Conexion : IDisposable // ¡Aquí le decimos que implementa IDispos
             Console.WriteLine(ex.Message);
             return false;
         }
+    }
+}*/
+
+
+using System;
+using MySql.Data.MySqlClient;
+using System.Data;
+
+public class Conexion : IDisposable
+{
+    // Las credenciales siguen aquí por ahora (idealmente deberían ir en variables de entorno)
+    private readonly string connectionString;
+
+    // Constructor
+    public Conexion()
+    {
+        string server = "be64rlwrk8w-mysql.services.clever-cloud.com";
+        string database = "be64rlwsmzynyxdwrk8w";
+        string uid = "uhr5sob5aywl7btt";
+        string password = "kT0rcQZXejpOVHlmyz4d";
+
+        connectionString = $"DataSource={server};DATABASE={database};User Id={uid};Password={password}";
+    }
+
+    /// <summary>
+    /// Crea y retorna una NUEVA instancia de conexión lista para usarse.
+    /// Ya no reutiliza un único objeto global, evitando conflictos de hilos y bloqueos.
+    /// </summary>
+    public MySqlConnection GetConnection()
+    {
+        return new MySqlConnection(connectionString);
+    }
+
+    // --- Implementación de IDisposable para limpiar recursos globales si la clase misma se desecha ---
+
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            // Si la clase manejaba recursos internos persistentes, se liberarían aquí.
+            // Como ahora las conexiones son locales y efímeras, ya no es necesario cerrar un objeto global.
+        }
+    }
+
+    ~Conexion()
+    {
+        Dispose(false);
     }
 }
